@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python 工具鏈演進史</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #f7b731;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 2rem 1rem;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { border-bottom: 2px solid var(--accent); padding-bottom: .5rem; }
+  h2 { margin-top: 2.5rem; color: var(--accent); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  pre.mermaid { background: transparent; margin: 0; }
+  pre.mermaid svg { display: block; }
+
+  .zoombar {
+    display: flex; align-items: center; gap: .5rem;
+    justify-content: flex-end; margin-bottom: .8rem;
+    flex-wrap: wrap;
+  }
+  .zoombar button {
+    background: #1f2733; color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: .1rem .75rem; cursor: pointer; font-size: 1.05rem; line-height: 1.6;
+  }
+  .zoombar button:hover { border-color: var(--accent); }
+  .zoombar .pct {
+    min-width: 4.2rem; text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .zoombar input[type=range] { width: 150px; accent-color: var(--accent); cursor: pointer; }
+  .zoombar .hint { color: var(--muted); font-size: .8rem; margin-right: auto; }
+  .zoomview { overflow: auto; }
+
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid var(--border); padding: .6rem .9rem; text-align: left; }
+  th { background: #1f2733; }
+  tr:nth-child(even) td { background: #131920; }
+  .muted { color: var(--muted); }
+  strong { color: var(--accent); }
+  code { background: #1f2733; padding: .1rem .35rem; border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Python 工具鏈演進史：從 easy_install 到 uv</h1>
+  <p class="muted">二十年來工具一支支疊上去，每支解決一個痛點；uv 把它們全部收編成一支。</p>
+
+  <h2>演進時間軸</h2>
+  <div class="card">
+    <pre class="mermaid" data-zoom="1">
+flowchart TB
+    subgraph E1["🪨 蠻荒時代"]
+        a1["<b>2004</b>　setuptools + easy_install<br/><i>能裝、難移除、無隔離</i>"]
+    end
+    subgraph E2["🧩 各自為政"]
+        a2["<b>2008</b>　pip 成為標準安裝器"]
+        a3["<b>2011</b>　virtualenv／venv 專案隔離"]
+        a4["<b>2012</b>　pyenv 管理 Python 版本"]
+        a5["<b>2013</b>　conda 資料科學圈自成一國"]
+        a2 --> a3 --> a4 --> a5
+    end
+    subgraph E3["🔧 整合嘗試"]
+        a6["<b>2016</b>　pyproject.toml 標準誕生"]
+        a7["<b>2017</b>　pipenv（Pipfile.lock）"]
+        a8["<b>2018</b>　poetry（一支工具管專案）"]
+        a6 --> a7 --> a8
+    end
+    subgraph E4["🦀 Rust 革命"]
+        a9["<b>2023</b>　ruff 爆紅（Astral，Rust 重寫）"]
+        a10["<b>2024</b>　uv 發布：取代 pip+venv+pyenv+pipx"]
+        a11["<b>2025</b>　社群大遷移，uv 成新專案預設"]
+        a9 --> a10 --> a11
+    end
+    a1 --> a2
+    a5 --> a6
+    a8 --> a9
+    style a10 fill:#3d2f00,stroke:#f7b731,stroke-width:2px
+    </pre>
+  </div>
+
+  <h2>五支工具 → 一支 uv</h2>
+  <div class="card">
+    <pre class="mermaid" data-zoom="1">
+flowchart LR
+    subgraph old["傳統做法（要學 4-5 支工具）"]
+        pyenv["pyenv<br/>Python 版本"]
+        venv["venv<br/>環境隔離"]
+        pip["pip<br/>裝套件"]
+        pipx["pipx<br/>全域工具"]
+        req["requirements.txt<br/>（沒有真正的 lock）"]
+    end
+    uv["uv<br/>一支收編全部<br/>快 10-100 倍<br/>pyproject.toml + uv.lock"]
+    pyenv --> uv
+    venv --> uv
+    pip --> uv
+    pipx --> uv
+    req --> uv
+    </pre>
+  </div>
+
+  <h2>Q：uv 是裝在專案資料夾，還是 C 槽（OS 系統層）？</h2>
+  <p><strong>A：uv 本體裝在系統（使用者目錄），但它管的環境在各專案裡。</strong>三層分開看：</p>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>東西</th><th>位置</th><th>裝幾次</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>uv 工具本體</strong></td><td><code>C:\Users\你\.local\bin\uv.exe</code>（使用者目錄，非專案）</td><td>一次，全機共用</td></tr>
+        <tr><td><strong>Python 直譯器</strong></td><td><code>C:\Users\你\AppData\Local\uv\</code>（中央倉庫）</td><td>每個版本一次，所有專案共用</td></tr>
+        <tr><td><strong>各專案套件環境</strong></td><td><code>專案資料夾\.venv\</code>（跟著專案走）</td><td>每個專案自己一個</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <pre class="mermaid" data-zoom="1">
+flowchart TB
+    uv["uv 本體（全域，裝一次）<br/>C:\Users\你\.local\bin"]
+    cache["中央倉庫<br/>Python 3.12 / 3.13、套件快取<br/>C:\Users\你\AppData\Local\uv"]
+    a["專案A\.venv"]
+    b["專案B\.venv"]
+    c["專案C\.venv"]
+    uv --> cache
+    cache -->|連結，非複製| a
+    cache -->|連結，非複製| b
+    cache -->|連結，非複製| c
+    </pre>
+  </div>
+  <p>重點：</p>
+  <ul>
+    <li><code>.venv</code> 裡的套件是從中央快取<strong>連結</strong>過來的，十個專案用同一套件，磁碟只存一份——這是 uv 快又省空間的原因之一</li>
+    <li>刪掉專案資料夾 = 環境跟著乾淨消失，不留垃圾在系統裡（傳統 pip 全域安裝的老毛病）</li>
+    <li>類比：uv 本體 ≈ node/npm 裝一次；<code>.venv</code> ≈ 各專案的 <code>node_modules</code>；中央快取 ≈ pnpm 的全域 store</li>
+  </ul>
+
+  <h2>每個時代解決的痛點</h2>
+  <div class="card">
+    <table>
+      <thead>
+        <tr><th>年代</th><th>工具</th><th>解決的痛</th><th>留下的痛</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2004</td><td>setuptools</td><td>有辦法裝套件了</td><td>移除困難、版本衝突</td></tr>
+        <tr><td>2008</td><td>pip</td><td>標準化安裝/移除</td><td>專案之間互相污染</td></tr>
+        <tr><td>2011</td><td>venv</td><td>專案隔離</td><td>要手動建、手動啟用，新手大坑</td></tr>
+        <tr><td>2012</td><td>pyenv</td><td>多 Python 版本共存</td><td>又多一支工具要學</td></tr>
+        <tr><td>2017</td><td>pipenv / poetry</td><td>lock 檔、整合體驗</td><td>慢、互不相容、沒統一</td></tr>
+        <tr><td>2024</td><td><strong>uv</strong></td><td><strong>以上全部，且極快</strong></td><td class="muted">（生態仍在遷移中）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: "dark",
+    themeVariables: { fontSize: "16px" },
+    flowchart: { useMaxWidth: false, htmlLabels: true, nodeSpacing: 40, rankSpacing: 45, wrappingWidth: 600 }
+  });
+  await mermaid.run();
+
+  const MIN = 0.4, MAX = 4;
+
+  document.querySelectorAll("pre.mermaid").forEach(pre => {
+    const svg = pre.querySelector("svg");
+    if (!svg) return;
+    svg.style.maxWidth = "none";
+
+    const card = pre.parentElement;
+    const view = document.createElement("div");
+    view.className = "zoomview";
+    card.insertBefore(view, pre);
+    view.appendChild(pre);
+
+    const bar = document.createElement("div");
+    bar.className = "zoombar";
+    bar.innerHTML = `<span class="hint">Ctrl + 滾輪也可縮放</span>`;
+    const minus = document.createElement("button"); minus.textContent = "−"; minus.title = "縮小";
+    const slider = document.createElement("input");
+    slider.type = "range"; slider.min = MIN * 100; slider.max = MAX * 100; slider.step = 5;
+    const pct = document.createElement("button"); pct.className = "pct"; pct.title = "點擊重設";
+    const plus = document.createElement("button"); plus.textContent = "＋"; plus.title = "放大";
+    bar.append(minus, slider, plus, pct);
+    card.insertBefore(bar, view);
+
+    const initial = parseFloat(pre.dataset.zoom || "1");
+    let scale = initial;
+
+    const apply = () => {
+      scale = Math.min(MAX, Math.max(MIN, scale));
+      // zoom 會實際重排版面：文字等比放大，容器高度自動跟著變
+      pre.style.zoom = scale;
+      pct.textContent = Math.round(scale * 100) + "%";
+      slider.value = Math.round(scale * 100);
+    };
+
+    minus.onclick = () => { scale /= 1.25; apply(); };
+    plus.onclick  = () => { scale *= 1.25; apply(); };
+    pct.onclick   = () => { scale = initial; apply(); };
+    slider.oninput = () => { scale = slider.value / 100; apply(); };
+    view.addEventListener("wheel", e => {
+      if (!e.ctrlKey) return;
+      e.preventDefault();
+      scale *= e.deltaY < 0 ? 1.1 : 1 / 1.1;
+      apply();
+    }, { passive: false });
+
+    apply();
+  });
+</script>
+</body>
+</html>
