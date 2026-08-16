@@ -62,6 +62,17 @@
   .muted { color: var(--muted); }
   strong { color: var(--accent); }
   code { background: #1f2733; padding: .1rem .35rem; border-radius: 4px; }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .85rem;
+    line-height: 1.8;
+  }
+  footer a { color: #58a6ff; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -157,6 +168,19 @@ flowchart TB
     <li>刪掉專案資料夾 = 環境跟著乾淨消失，不留垃圾在系統裡（傳統 pip 全域安裝的老毛病）</li>
     <li>類比：uv 本體 ≈ node/npm 裝一次；<code>.venv</code> ≈ 各專案的 <code>node_modules</code>；中央快取 ≈ pnpm 的全域 store</li>
   </ul>
+
+  <footer>
+    <p>
+      本頁由 <a href="https://github.com/mango-pool">mango-pool</a> 維護，是個人 AI 學習歷程的筆記之一。<br>
+      最後更新：2026-08-16　·
+      <a href="https://github.com/mango-pool/mango-pool.github.io">原始碼</a>　·
+      <a href="./">回首頁</a>
+    </p>
+    <p>
+      內容為學習整理，可能隨工具演進而過時；技術細節請以
+      <a href="https://docs.astral.sh/uv/">uv 官方文件</a>為準。
+    </p>
+  </footer>
 
 </div>
 
