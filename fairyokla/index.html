@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>科技仙姑實驗室 ｜ 仙姑行不行</title>
+<style>
+  :root{
+    --ink:        #07080d;
+    --ink-2:      #0c0e17;
+    --ink-3:      #11141f;
+    --ivory:      #ece7dc;
+    --muted:      #8e91a3;
+    --line:       #232838;
+    --jade:       #56e0c0;
+    --cinnabar:   #e2573f;
+    --gold:       #d9a441;
+
+    --serif: "Noto Serif TC","Source Han Serif TC","思源宋體","Songti TC","宋體-繁","PMingLiU",serif;
+    --sans:  "Noto Sans TC","PingFang TC","Microsoft JhengHei","微軟正黑體",sans-serif;
+    --mono:  "JetBrains Mono","IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--ink);
+    color:var(--ivory);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ── 靈光：背景氣場 ───────────────────────────── */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(60rem 40rem at 78% -10%, rgba(86,224,192,.13), transparent 60%),
+      radial-gradient(45rem 35rem at 8% 12%,  rgba(226,87,63,.10),  transparent 62%),
+      radial-gradient(50rem 50rem at 50% 118%, rgba(217,164,65,.08), transparent 60%);
+  }
+  /* 顆粒 */
+  body::after{
+    content:"";
+    position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.28;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  .wrap{position:relative; z-index:2}
+
+  /* ── 版面 ───────────────────────────────────── */
+  .shell{max-width:1140px; margin:0 auto; padding:0 clamp(20px,5vw,64px)}
+
+  /* ── 頁首 ───────────────────────────────────── */
+  /* 固定橫幅：跟著垂直捲動吸附在最上方 */
+  header.top{
+    position:sticky; top:0; z-index:50;
+    border-bottom:1px solid var(--line);
+    background:rgba(7,8,13,.78);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    backdrop-filter:blur(14px) saturate(140%);
+    transition:padding .35s ease, box-shadow .35s ease, background .35s ease;
+  }
+  header.top.stuck{
+    background:rgba(7,8,13,.92);
+    box-shadow:0 18px 40px -30px rgba(0,0,0,1);
+  }
+  .top-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:24px; padding-top:14px; padding-bottom:14px;
+    transition:padding .35s ease;
+  }
+  header.top.stuck .top-inner{padding-top:9px; padding-bottom:9px}
+
+  /* 吸附列文字標誌：呼應橫幅的燙金字 */
+  .brand{
+    display:flex; align-items:baseline; gap:12px; flex:none;
+    text-decoration:none; white-space:nowrap;
+  }
+  .brand .mark{
+    font-family:var(--serif); font-weight:600;
+    font-size:20px; letter-spacing:.16em; line-height:1.2;
+    background:linear-gradient(100deg,#d9b167,#f4e3bc 46%,#c39a45);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    transition:font-size .35s ease;
+  }
+  .brand .sub{
+    font-family:var(--mono); font-size:10px; letter-spacing:.22em;
+    color:var(--muted); transition:opacity .35s ease;
+  }
+  .brand:hover .sub{color:var(--jade)}
+  header.top.stuck .brand .mark{font-size:17px}
+  header.top.stuck .brand .sub{opacity:0}
+
+  .top nav{display:flex; gap:26px; font-family:var(--mono); font-size:11.5px; letter-spacing:.2em}
+  .top nav a{color:var(--muted); text-decoration:none; transition:color .3s}
+  .top nav a:hover{color:var(--jade)}
+
+  /* ── 主視覺 ─────────────────────────────────── */
+  .hero{
+    padding:clamp(44px,7vw,84px) 0 clamp(48px,8vw,84px);
+  }
+  .kicker{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.42em;
+    color:var(--gold); text-transform:uppercase; margin-bottom:26px;
+  }
+  .kicker span{color:var(--muted)}
+  h1{
+    font-family:var(--serif); font-weight:600;
+    font-size:clamp(46px,9vw,104px); line-height:1.02;
+    letter-spacing:.02em; margin-bottom:4px;
+  }
+  h1 .glow{
+    color:transparent;
+    background:linear-gradient(102deg,var(--jade),#a9f3e0 42%,var(--gold));
+    -webkit-background-clip:text; background-clip:text;
+    text-shadow:none;
+    filter:drop-shadow(0 0 26px rgba(86,224,192,.28));
+  }
+  .tagline{
+    font-family:var(--serif); font-size:clamp(19px,2.4vw,27px);
+    color:#cfcabd; margin-top:26px; max-width:24em; line-height:1.75;
+  }
+  .tagline em{font-style:normal; color:var(--cinnabar)}
+
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:38px}
+
+  /* 頁面最上方的滿版頻道橫幅：四邊羽化，融進深色頁面 */
+  .hero-banner{
+    position:relative; line-height:0; margin:0;
+    -webkit-mask-image:
+      linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),
+      linear-gradient(180deg,#000 62%,transparent);
+    mask-image:
+      linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent),
+      linear-gradient(180deg,#000 62%,transparent);
+    -webkit-mask-composite:source-in;
+    mask-composite:intersect;
+  }
+  .hero-banner img{
+    width:100%; height:auto; max-height:clamp(110px,18vw,230px);
+    object-fit:cover; object-position:55% 46%; display:block;
+    filter:brightness(.94) contrast(1.03) saturate(1.04);
+  }
+  /* 上緣壓暗，讓吸附列與圖面之間不出現硬邊 */
+  .hero-banner::after{
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(180deg,rgba(7,8,13,.42),transparent 32%);
+  }
+
+  .chip{
+    font-family:var(--mono); font-size:11px; letter-spacing:.16em;
+    padding:7px 14px; border:1px solid var(--line); border-radius:999px;
+    color:var(--muted); background:rgba(255,255,255,.015);
+    transition:border-color .3s, color .3s, transform .3s;
+  }
+  .chip:hover{border-color:var(--jade); color:var(--jade); transform:translateY(-2px)}
+
+  /* ── 區塊 ───────────────────────────────────── */
+  section{padding:clamp(44px,7vw,80px) 0; border-top:1px solid var(--line); scroll-margin-top:76px}
+  .sec-head{display:flex; align-items:baseline; gap:18px; margin-bottom:34px; flex-wrap:wrap}
+  .sec-num{font-family:var(--mono); font-size:11px; letter-spacing:.3em; color:var(--cinnabar)}
+  h2{font-family:var(--serif); font-weight:600; font-size:clamp(26px,3.6vw,38px); letter-spacing:.06em}
+  .sec-en{font-family:var(--mono); font-size:11px; letter-spacing:.26em; color:var(--muted); text-transform:uppercase}
+
+  .prose{max-width:62ch; font-size:16.5px; color:#c9c5bb}
+  .prose p + p{margin-top:1.35em}
+  .prose strong{color:var(--ivory); font-weight:600}
+
+  blockquote{
+    margin:40px 0; padding:26px 30px;
+    border-left:2px solid var(--gold);
+    background:linear-gradient(90deg,rgba(217,164,65,.07),transparent 70%);
+    font-family:var(--serif); font-size:clamp(20px,2.6vw,28px);
+    line-height:1.7; color:#f0ead9;
+  }
+  blockquote cite{
+    display:block; margin-top:16px; font-family:var(--sans); font-style:normal;
+    font-size:14px; letter-spacing:.06em; line-height:1.7; color:var(--gold);
+  }
+
+  /* ── 主持人 ─────────────────────────────────── */
+  .cast{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px}
+  .card{
+    position:relative; padding:30px 28px 32px;
+    background:linear-gradient(160deg,var(--ink-2),var(--ink-3));
+    border:1px solid var(--line); border-radius:2px;
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), border-color .45s, box-shadow .45s;
+    overflow:hidden;
+  }
+  .card::after{
+    content:""; position:absolute; inset:auto -40% -60% -40%; height:120px;
+    background:radial-gradient(closest-side,rgba(86,224,192,.22),transparent);
+    opacity:0; transition:opacity .5s;
+  }
+  .card:hover{transform:translateY(-6px); border-color:#39465e; box-shadow:0 22px 50px -28px rgba(0,0,0,.9)}
+  .card:hover::after{opacity:1}
+  .card .role{font-family:var(--mono); font-size:10.5px; letter-spacing:.3em; color:var(--gold); text-transform:uppercase}
+  .card h3{font-family:var(--serif); font-size:30px; font-weight:600; margin:12px 0 14px; letter-spacing:.05em}
+  .card h3 small{font-size:14px; color:var(--muted); letter-spacing:.1em; margin-left:8px; font-family:var(--mono)}
+  .card p{font-size:15px; color:#b5b2ab; line-height:1.85}
+
+  /* ── 資訊表 ─────────────────────────────────── */
+  .facts{border-top:1px solid var(--line)}
+  .fact{
+    display:grid; grid-template-columns:150px 1fr; gap:20px;
+    padding:20px 4px; border-bottom:1px solid var(--line);
+    align-items:baseline; transition:background .35s;
+  }
+  .fact:hover{background:rgba(255,255,255,.018)}
+  .fact dt{font-family:var(--mono); font-size:11px; letter-spacing:.24em; color:var(--muted); text-transform:uppercase}
+  .fact dd{font-size:16px; color:var(--ivory)}
+  .fact dd .note{display:block; font-size:13px; color:var(--muted); margin-top:4px}
+
+  a.link{
+    color:var(--jade); text-decoration:none; position:relative;
+    padding-bottom:2px; word-break:break-all;
+  }
+  a.link::after{
+    content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+    background:var(--jade); transform:scaleX(0); transform-origin:right;
+    transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  a.link:hover::after{transform:scaleX(1); transform-origin:left}
+
+  .cta{
+    display:inline-flex; align-items:center; gap:12px; margin-top:44px;
+    padding:15px 30px; border:1px solid var(--jade); border-radius:999px;
+    font-family:var(--mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--jade); text-decoration:none; background:rgba(86,224,192,.05);
+    transition:background .35s, color .35s, box-shadow .35s, transform .35s;
+  }
+  .cta:hover{
+    background:var(--jade); color:var(--ink); transform:translateY(-2px);
+    box-shadow:0 0 40px -6px rgba(86,224,192,.55);
+  }
+  .cta span{font-size:15px; line-height:1}
+
+  footer{
+    border-top:1px solid var(--line); padding:36px 0 60px;
+    display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--muted);
+  }
+
+  /* ── 進場動畫 ───────────────────────────────── */
+  .rise{opacity:0; transform:translateY(22px); animation:rise .95s cubic-bezier(.2,.8,.2,1) forwards}
+  @keyframes rise{to{opacity:1; transform:none}}
+  .d1{animation-delay:.05s} .d2{animation-delay:.18s} .d3{animation-delay:.32s}
+  .d4{animation-delay:.46s} .d5{animation-delay:.6s}  .d6{animation-delay:.74s}
+  @media (prefers-reduced-motion:reduce){
+    .rise{animation:none; opacity:1; transform:none}
+  }
+
+  @media (max-width:820px){
+    .top-inner{padding-top:10px; padding-bottom:10px; gap:14px}
+    .top nav{gap:14px; font-size:10.5px; letter-spacing:.1em}
+    .fact{grid-template-columns:1fr; gap:4px}
+  }
+  @media (max-width:640px){
+    .brand .sub{display:none}
+  }
+  @media (max-width:520px){
+    .brand .mark{font-size:17px; letter-spacing:.1em}
+    header.top.stuck .brand .mark{font-size:15px}
+    .top nav{gap:11px; font-size:10px; letter-spacing:.02em}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top" id="topbar">
+    <div class="shell top-inner">
+      <a class="brand" href="https://www.youtube.com/@fairyokla" target="_blank" rel="noopener">
+        <span class="mark">仙姑行不行</span>
+        <span class="sub">人生大小事 仙姑說沒事</span>
+      </a>
+      <nav>
+        <a href="#about">說明</a>
+        <a href="#cast">主持人</a>
+        <a href="#info">更多資訊</a>
+      </nav>
+    </div>
+  </header>
+
+  <figure class="hero-banner">
+    <img src="img/channels4_banner.jpg" alt="仙姑行不行頻道橫幅：Alice 與 SuSu">
+  </figure>
+
+<div class="shell">
+
+  <!-- 主視覺 -->
+  <div class="hero">
+    <div>
+      <div class="kicker rise d1">Podcast <span>／</span> 台灣 <span>／</span> Since 2015</div>
+      <h1 class="rise d2">科技<span class="glow">仙姑</span><br>實驗室</h1>
+      <p class="tagline rise d3">
+        科技業的通靈少女版。<br>
+        白天寫程式，下班後<em>問神明</em>。
+      </p>
+      <div class="chips rise d4">
+        <span class="chip">通靈 / 靈性</span>
+        <span class="chip">科技業日常</span>
+        <span class="chip">諮詢案例</span>
+        <span class="chip">輕鬆對談</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 說明 -->
+  <section id="about">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2>頻道說明</h2>
+      <span class="sec-en">About the show</span>
+    </div>
+
+    <div class="prose">
+      <p>
+        科技業的通靈少女版。在全球知名科技公司任職的 <strong>Alice</strong>，
+        下班後的斜槓人生卻是一位<strong>通靈仙姑</strong>，這項天賦讓 Alice 幫助很多人。
+      </p>
+      <p>
+        「所有事情的發生都非偶然」，了解源頭起因，自然對當下世界的種種就能釋懷。
+        人生的賽道很長，一個念頭的改變就有無限生機。
+      </p>
+      <p>
+        透過麻瓜女 <strong>SuSu</strong> 訪談科技仙姑 Alice 的諮詢案例，
+        想跟大家談談這世的關卡可以怎麼解？
+        2 位科技業上班的女生以輕鬆對談，讓你了解通靈世界的奇幻大小事。
+      </p>
+    </div>
+
+    <blockquote>
+      所有事情的發生都非偶然。
+      <cite>—— 歡迎你來到「仙姑行不行」的異想世界！</cite>
+    </blockquote>
+  </section>
+
+  <!-- 主持人 -->
+  <section id="cast">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2>兩個聲音</h2>
+      <span class="sec-en">The hosts</span>
+    </div>
+
+    <div class="cast">
+      <article class="card">
+        <div class="role">仙姑 · Medium</div>
+        <h3>Alice<small>科技仙姑</small></h3>
+        <p>
+          任職於全球知名科技公司，下班後的斜槓身分是一位通靈仙姑。
+          以天賦替人解讀源頭起因，在節目中分享實際的諮詢案例。
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="role">麻瓜 · Muggle</div>
+        <h3>SuSu<small>提問者</small></h3>
+        <p>
+          同樣在科技業上班的麻瓜女，站在完全不懂靈界的視角發問，
+          把讀者心裡的「這到底行不行？」一句句問出來。
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 更多資訊 -->
+  <section id="info">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>更多資訊</h2>
+      <span class="sec-en">Channel info</span>
+    </div>
+
+    <dl class="facts">
+      <div class="fact">
+        <dt>頻道名稱</dt>
+        <dd>科技仙姑實驗室<span class="note">節目名稱：仙姑行不行</span></dd>
+      </div>
+      <div class="fact">
+        <dt>YouTube</dt>
+        <dd><a class="link" href="https://www.youtube.com/@fairyokla" target="_blank" rel="noopener">www.youtube.com/@fairyokla</a></dd>
+      </div>
+      <div class="fact">
+        <dt>電子郵件</dt>
+        <dd>未公開<span class="note">請至 YouTube 頻道「簡介」頁點擊「查看電子郵件地址」取得</span></dd>
+      </div>
+      <div class="fact">
+        <dt>地區</dt>
+        <dd>台灣</dd>
+      </div>
+      <div class="fact">
+        <dt>加入日期</dt>
+        <dd>2015 年 7 月 7 日</dd>
+      </div>
+    </dl>
+
+    <a class="cta" href="https://www.youtube.com/@fairyokla" target="_blank" rel="noopener">
+      前往頻道 <span>↗</span>
+    </a>
+  </section>
+
+  <footer>
+    <div>科技仙姑實驗室 ／ 仙姑行不行</div>
+    <div>異想世界 · 台灣</div>
+  </footer>
+
+</div>
+</div>
+
+<script>
+  /* 捲動超過一段距離後，橫幅縮小並加深底色 */
+  (function(){
+    var bar = document.getElementById('topbar'), ticking = false;
+    function update(){
+      bar.classList.toggle('stuck', window.scrollY > 24);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ ticking = true; requestAnimationFrame(update); }
+    }, {passive:true});
+    update();
+  })();
+</script>
+</body>
+</html>
