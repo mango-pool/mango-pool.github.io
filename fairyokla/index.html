@@ -205,6 +205,36 @@
   .card h3 small{font-size:14px; color:var(--muted); letter-spacing:.1em; margin-left:8px; font-family:var(--mono)}
   .card p{font-size:15px; color:#b5b2ab; line-height:1.85}
 
+  /* ── 單集筆記卡 ─────────────────────────────── */
+  .ep-card{
+    display:flex; align-items:center; gap:clamp(16px,3vw,28px); flex-wrap:wrap;
+    padding:clamp(20px,3vw,28px); border-radius:3px; text-decoration:none;
+    border:1px solid var(--line);
+    background:linear-gradient(150deg,var(--ink-2),var(--ink-3));
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), border-color .45s, box-shadow .45s;
+  }
+  .ep-card:hover{
+    transform:translateY(-4px); border-color:#39465e;
+    box-shadow:0 24px 52px -30px rgba(0,0,0,.95);
+  }
+  .ep-no{
+    font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--gold);
+    border:1px solid rgba(217,164,65,.4); border-radius:3px; padding:6px 10px; flex:none;
+    align-self:flex-start;
+  }
+  .ep-main{flex:1; min-width:240px}
+  .ep-title{
+    display:block; font-family:var(--serif); font-size:clamp(18px,2.4vw,23px);
+    font-weight:600; letter-spacing:.03em; color:var(--ivory); line-height:1.4;
+  }
+  .ep-desc{display:block; margin-top:8px; font-size:14px; color:var(--muted); line-height:1.75}
+  .ep-go{
+    font-family:var(--mono); font-size:11px; letter-spacing:.18em; color:var(--jade);
+    border:1px solid rgba(86,224,192,.35); border-radius:999px; padding:9px 16px; flex:none;
+    transition:background .35s, color .35s;
+  }
+  .ep-card:hover .ep-go{background:var(--jade); color:var(--ink)}
+
   /* ── 資訊表 ─────────────────────────────────── */
   .facts{border-top:1px solid var(--line)}
   .fact{
@@ -283,6 +313,7 @@
       <nav>
         <a href="#about">說明</a>
         <a href="#cast">主持人</a>
+        <a href="#notes">單集筆記</a>
         <a href="#info">更多資訊</a>
       </nav>
     </div>
@@ -371,10 +402,31 @@
     </div>
   </section>
 
+  <!-- 單集筆記 -->
+  <section id="notes">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2>單集筆記</h2>
+      <span class="sec-en">Episode maps</span>
+    </div>
+
+    <a class="ep-card" href="youtube/001-mindmap.html">
+      <span class="ep-no">EP 001</span>
+      <span class="ep-main">
+        <span class="ep-title">泰國阿飄半夜叫仙姑起床 — 曼谷奇遇記</span>
+        <span class="ep-desc">
+          仙姑在曼谷遇上兩間鬧鬼住宿、四面佛的還願規矩，以及想吃雞腿的泰國土地公。
+          互動心智圖，7 主題 / 84 個重點。
+        </span>
+      </span>
+      <span class="ep-go">開啟心智圖 ↗</span>
+    </a>
+  </section>
+
   <!-- 更多資訊 -->
   <section id="info">
     <div class="sec-head">
-      <span class="sec-num">03</span>
+      <span class="sec-num">04</span>
       <h2>更多資訊</h2>
       <span class="sec-en">Channel info</span>
     </div>

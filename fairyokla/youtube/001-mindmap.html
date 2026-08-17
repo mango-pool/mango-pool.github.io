@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP001 曼谷奇遇記 · 心智圖</title>
+<style>
+  :root{
+    --ink:#07080d; --ink-2:#0c0e17; --ink-3:#12151f; --ink-4:#171b28;
+    --ivory:#ece7dc; --muted:#8e91a3; --dim:#5f6274; --line:#242a3a;
+    --gold:#d9a441;
+    --serif:"Noto Serif TC","Source Han Serif TC","思源宋體","Songti TC","PMingLiU",serif;
+    --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei","微軟正黑體",sans-serif;
+    --mono:"JetBrains Mono","IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--ink); color:var(--ivory); font-family:var(--sans);
+    font-size:15px; line-height:1.7; -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  button{font:inherit; color:inherit; background:none; border:none; cursor:pointer}
+
+  .app{display:flex; flex-direction:column; height:100%}
+
+  /* ── 頁首 ───────────────────────────────── */
+  .bar{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:12px clamp(14px,2.5vw,26px); border-bottom:1px solid var(--line);
+    background:rgba(7,8,13,.92); z-index:20; flex:none;
+  }
+  .bar-id{display:flex; align-items:baseline; gap:12px; min-width:0}
+  .bar-id .ep{
+    font-family:var(--mono); font-size:10px; letter-spacing:.2em; color:var(--gold);
+    border:1px solid rgba(217,164,65,.4); border-radius:3px; padding:3px 7px; flex:none;
+  }
+  .bar-id .name{
+    font-family:var(--serif); font-size:17px; font-weight:600; letter-spacing:.04em;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .bar-id .show{font-family:var(--mono); font-size:10px; letter-spacing:.2em; color:var(--dim)}
+  .tools{display:flex; align-items:center; gap:7px; flex:none}
+  .tool{
+    width:31px; height:31px; border:1px solid var(--line); border-radius:5px;
+    display:grid; place-items:center; color:var(--muted); font-size:14px;
+    transition:border-color .25s, color .25s, background .25s;
+  }
+  .tool.wide{width:auto; padding:0 12px; font-family:var(--mono); font-size:10.5px;
+    letter-spacing:.14em; text-decoration:none; height:31px}
+  .tool:hover{border-color:#3d4658; color:var(--ivory); background:rgba(255,255,255,.04)}
+  .tool.yt{color:#e5b4b4; border-color:rgba(226,87,63,.42)}
+  .tool.yt:hover{color:#fff; border-color:#e2573f; background:rgba(226,87,63,.16)}
+
+  /* ── 主體 ───────────────────────────────── */
+  .main{flex:1; display:flex; min-height:0}
+
+  /* 畫布 */
+  .canvas-wrap{
+    position:relative; flex:1; min-width:0; overflow:hidden;
+    cursor:grab; touch-action:none;
+    background:
+      radial-gradient(46rem 34rem at 30% 20%,rgba(86,224,192,.07),transparent 60%),
+      radial-gradient(40rem 32rem at 78% 82%,rgba(226,87,63,.06),transparent 62%);
+  }
+  .canvas-wrap.drag{cursor:grabbing}
+  .canvas-wrap::after{   /* 顆粒 */
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.22;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  .stage{position:absolute; left:0; top:0; transform-origin:0 0}
+  .stage.anim{transition:transform .55s cubic-bezier(.22,.8,.24,1)}
+  .links{position:absolute; left:0; top:0; overflow:visible; pointer-events:none}
+  .links path{fill:none; transition:stroke-opacity .35s, stroke-width .35s}
+
+  /* 節點 */
+  .n{
+    position:absolute; border-radius:7px; text-align:left;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s,
+               opacity .3s, background .3s;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .n:focus-visible{outline:2px solid var(--c); outline-offset:3px}
+
+  .n-hub{
+    align-items:center; text-align:center; gap:7px;
+    border:1px solid rgba(217,164,65,.45);
+    background:linear-gradient(150deg,rgba(217,164,65,.18),rgba(12,14,23,.94));
+    box-shadow:0 26px 60px -34px #000, inset 0 0 40px rgba(217,164,65,.06);
+    cursor:default;
+  }
+  .n-hub .t{font-family:var(--serif); font-size:21px; font-weight:600; letter-spacing:.06em}
+  .n-hub .s{font-family:var(--mono); font-size:9.5px; letter-spacing:.24em; color:var(--gold)}
+
+  .n-branch{
+    padding:9px 14px; gap:3px;
+    border:1px solid var(--c); background:var(--cs);
+    box-shadow:0 14px 34px -26px #000;
+  }
+  .n-branch .no{font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; color:var(--c)}
+  .n-branch .t{font-family:var(--serif); font-size:16.5px; font-weight:600; letter-spacing:.04em;
+    line-height:1.35}
+  .n-branch:hover{transform:translateY(-2px); box-shadow:0 0 30px -12px var(--c)}
+
+  /* 子節點預設收合，選取主幹後才展開 */
+  .n-leaf{
+    padding:7px 12px; gap:2px; font-size:13.5px; line-height:1.45;
+    border:1px solid var(--line); background:rgba(18,21,31,.86); color:#c9c5bc;
+    border-left:2px solid var(--c);
+    opacity:0; pointer-events:none;
+    transform:translateX(var(--dx,-16px)) scale(.94);
+  }
+  .n-leaf.kin{opacity:1; pointer-events:auto; transform:none}
+  .n-leaf .cnt{font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; color:var(--dim)}
+  .n-leaf.kin:hover{border-color:#3d4658; border-left-color:var(--c); color:var(--ivory);
+    transform:translateY(-1px)}
+
+  .stage.has-sel .n-branch:not(.on):not(.kin){opacity:.26}
+  /* 收合狀態下，主幹提示可展開 */
+  .n-branch::after{
+    content:"＋"; position:absolute; top:50%; transform:translateY(-50%);
+    font-family:var(--mono); font-size:11px; color:var(--c); opacity:.5;
+    transition:opacity .3s;
+  }
+  .n-branch.side-R::after{right:-19px}
+  .n-branch.side-L::after{left:-19px}
+  .n-branch.on::after{opacity:0}
+  .n-branch.on{box-shadow:0 0 34px -10px var(--c); border-width:1px;
+    background:linear-gradient(150deg,var(--cs),rgba(12,14,23,.9))}
+  .n-leaf.on{color:var(--ivory); border-color:var(--c); background:var(--cs)}
+
+  /* ── 詳情面板 ───────────────────────────── */
+  .panel{
+    width:min(430px,38vw); flex:none; border-left:1px solid var(--line);
+    background:linear-gradient(180deg,var(--ink-2),var(--ink));
+    display:flex; flex-direction:column; min-height:0;
+  }
+  .p-head{padding:20px clamp(16px,2vw,26px) 16px; border-bottom:1px solid var(--line); flex:none}
+  .p-eyebrow{font-family:var(--mono); font-size:9.5px; letter-spacing:.26em; color:var(--c,var(--muted));
+    text-transform:uppercase}
+  .p-title{font-family:var(--serif); font-size:23px; font-weight:600; letter-spacing:.04em;
+    margin-top:8px; line-height:1.3}
+  .p-desc{font-size:13.5px; color:var(--muted); margin-top:7px}
+  .p-body{flex:1; overflow-y:auto; padding:6px clamp(16px,2vw,26px) 46px; scroll-behavior:smooth}
+  .p-body::-webkit-scrollbar{width:9px}
+  .p-body::-webkit-scrollbar-thumb{background:#20263a; border-radius:9px; border:3px solid var(--ink-2)}
+
+  .grp{padding:20px 0 4px; border-bottom:1px solid var(--line); scroll-margin-top:8px}
+  .grp:last-child{border-bottom:none}
+  .grp-t{
+    display:flex; align-items:center; gap:9px; font-size:14.5px; font-weight:600;
+    color:var(--ivory); margin-bottom:10px;
+  }
+  .grp-t i{width:5px; height:5px; border-radius:50%; background:var(--c); flex:none;
+    box-shadow:0 0 10px var(--c)}
+  .grp.on .grp-t{color:var(--c)}
+  .grp ul{list-style:none}
+  .grp li{position:relative; padding:5px 0 5px 20px; font-size:14px; color:#bdbab2; line-height:1.75}
+  .grp li::before{
+    content:""; position:absolute; left:4px; top:15px; width:5px; height:1px; background:var(--c);
+    opacity:.75;
+  }
+  .grp.check li::before{
+    content:"✓"; left:0; top:5px; width:auto; height:auto; background:none;
+    font-size:11px; color:var(--c); opacity:.9;
+  }
+  .grp li em{font-style:normal; color:var(--ivory); font-weight:600}
+
+  /* 總覽（未選取時） */
+  .ov-lede{font-size:14px; color:#bdbab2; padding:18px 0 6px}
+  .ov-list{list-style:none; padding:6px 0 0}
+  .ov-list li{margin:7px 0}
+  .ov-btn{
+    display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+    padding:11px 13px; border:1px solid var(--line); border-radius:6px;
+    background:rgba(255,255,255,.015); transition:border-color .25s, background .25s, transform .25s;
+  }
+  .ov-btn:hover{border-color:var(--c); background:var(--cs); transform:translateX(3px)}
+  .ov-btn .no{font-family:var(--mono); font-size:10px; letter-spacing:.16em; color:var(--c); flex:none}
+  .ov-btn .t{font-size:14px; font-weight:600}
+  .ov-btn .c{margin-left:auto; font-family:var(--mono); font-size:9.5px; color:var(--dim); flex:none}
+  .ov-meta{
+    margin-top:22px; padding-top:16px; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:10px; letter-spacing:.14em; color:var(--dim); line-height:2;
+  }
+  .back{
+    font-family:var(--mono); font-size:10px; letter-spacing:.18em; color:var(--muted);
+    display:inline-flex; align-items:center; gap:7px; margin-bottom:14px;
+  }
+  .back:hover{color:var(--gold)}
+
+  /* 影片來源 */
+  .src{
+    display:flex; align-items:center; gap:13px; margin-top:20px; padding:13px 15px;
+    border:1px solid rgba(226,87,63,.3); border-radius:7px; text-decoration:none;
+    background:linear-gradient(100deg,rgba(226,87,63,.09),transparent 78%);
+    transition:border-color .3s, background .3s, transform .3s;
+  }
+  .src:hover{border-color:#e2573f; background:rgba(226,87,63,.14); transform:translateY(-2px)}
+  .src .ico{
+    width:30px; height:30px; flex:none; border-radius:50%; display:grid; place-items:center;
+    background:rgba(226,87,63,.18); color:#f0a494; font-size:11px;
+  }
+  .src .txt{display:flex; flex-direction:column; line-height:1.5; min-width:0}
+  .src .txt b{font-size:13px; color:var(--ivory); letter-spacing:.02em}
+  .src .txt{font-family:var(--mono); font-size:10px; letter-spacing:.04em; color:var(--dim);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .src .go{margin-left:auto; color:var(--muted); font-size:12px; flex:none}
+
+  .hintbar{
+    position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+    font-family:var(--mono); font-size:9.5px; letter-spacing:.18em; color:#4c5064;
+    pointer-events:none; white-space:nowrap;
+  }
+
+  /* ── 手機 ───────────────────────────────── */
+  @media (max-width:900px){
+    .main{flex-direction:column}
+    .canvas-wrap{flex:none; height:46vh; min-height:280px}
+    .panel{width:100%; border-left:none; border-top:1px solid var(--line); flex:1}
+    .bar-id .show{display:none}
+    .p-title{font-size:20px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="bar">
+    <div class="bar-id">
+      <span class="ep">EP 001</span>
+      <span class="name">泰國阿飄半夜叫仙姑起床 — 曼谷奇遇記</span>
+      <span class="show">仙姑行不行</span>
+    </div>
+    <div class="tools">
+      <a class="tool wide yt" href="https://www.youtube.com/watch?v=vt2R8XwV21g"
+         target="_blank" rel="noopener" title="在 YouTube 觀看本集">▶ 看影片</a>
+      <a class="tool wide" href="../index.html" title="回頻道介紹頁">介紹頁</a>
+      <button class="tool" id="zin"  title="放大">＋</button>
+      <button class="tool" id="zout" title="縮小">−</button>
+      <button class="tool wide" id="fit" title="重置視圖">重置</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="canvas-wrap" id="wrap">
+      <div class="stage" id="stage">
+        <svg class="links" id="links"></svg>
+      </div>
+      <div class="hintbar">點主幹展開分支 · 拖曳平移 · 滾輪縮放</div>
+    </div>
+
+    <aside class="panel">
+      <div class="p-head" id="phead"></div>
+      <div class="p-body" id="pbody"></div>
+    </aside>
+  </div>
+
+</div>
+
+<script>
+/* ────────────────────────────────────────────
+   資料：整理自 EP001 逐字稿
+   ──────────────────────────────────────────── */
+const TOPICS = [
+  {
+    no:'01', title:'跨國通靈', desc:'能力不受國界影響', color:'#56e0c0', side:'R',
+    groups:[
+      {t:'在國外與在台灣一模一樣', items:[
+        '與神明、阿飄溝通靠的是<em>意識感知</em>，沒有語言問題',
+        '在泰國感受到的程度，與在台灣同等'
+      ]},
+      {t:'阿飄樣貌隨當地信仰顯化', items:[
+        '台灣、日本、泰國 —— 長相其實差不多',
+        '美國屬西方宗教體系，會出現<em>吸血鬼</em>',
+        '案例：處理美國住宅的一尊雕像，裡面真的有無形的吸血鬼'
+      ]}
+    ]
+  },
+  {
+    no:'02', title:'第一晚：半夜被叫醒', desc:'曼谷公寓民宿的第一次接觸', color:'#e2573f', side:'R',
+    groups:[
+      {t:'發生經過', items:[
+        '凌晨兩、三點，<em>心臟部位劇痛、有點喘</em>而驚醒',
+        '醒來立刻感應到房內有 5–6 位阿飄，帶頭是一名較兇的男性',
+        '對方質問：為什麼會進來這邊？',
+        '回答「與朋友來旅遊，住三天就走」後，對方表示知道了'
+      ]},
+      {t:'為什麼一進門沒察覺', items:[
+        '祂們一開始都<em>藏在鏡子、櫃子裡面</em>',
+        '不是隨處站著，所以看環境時完全沒發現',
+        '直到第一晚睡覺時才現身接觸'
+      ]},
+      {t:'結果與現場條件', items:[
+        '溝通後兩天相安無事，同行朋友全程睡得很好',
+        '住宿型態：Airbnb 訂的公寓式民宿，兩房一廳一廚、兩套衛浴',
+        '麻瓜視角：一般人只會以為自己心臟出問題、突然變喘',
+        '阿飄能感知到「你察覺得到祂」，就像一般人對話一樣'
+      ]}
+    ]
+  },
+  {
+    no:'03', title:'飯店防飄自保指南', desc:'全集最實用的一段，出國前先看', color:'#d9a441', side:'R',
+    check:true,
+    groups:[
+      {t:'① 選房：避開容易聚陰的位置', items:[
+        '不選<em>邊間</em>（最左、最右）—— 靠外側，外面的容易進來',
+        '不選<em>樓梯旁、逃生口旁</em> —— 少人走動，阿飄聚集後容易跑進房間',
+        'Check-in 時就主動請櫃檯安排中間的房間'
+      ]},
+      {t:'② 進房：先打招呼再入住', items:[
+        '開門前先<em>敲門</em>幾下 —— 這是在跟阿飄打招呼',
+        '進門後<em>沖馬桶、開一下水</em>，讓祂們知道有人來了',
+        '枕頭、棉被<em>大力拍一拍、抖一抖</em>，請躺在床上的退到別處'
+      ]},
+      {t:'③ 淨化空間', items:[
+        '精油香氛機、薰香 ＝ 拿香把房間淨一淨的概念，確實有作用',
+        '作用是「告知」而非驅趕：我在淨化，入住期間請勿打擾',
+        '識相的眾生通常就不打擾，調皮的仍可能故意來弄你'
+      ]},
+      {t:'④ 睡覺時', items:[
+        '留一盞小燈增加陽氣；怕太亮就<em>把廁所門關上、裡面燈開著</em>',
+        '有燈才看得到環境，真的被惡作劇時比較能應變',
+        '床頭放主神經典（仙姑帶的是《觀世音菩薩普門品》）',
+        '飯店聖經<em>被翻開</em> → 之前可能有干擾；<em>合著</em> → 相安無事'
+      ]},
+      {t:'⑤ 真的遇到狀況', items:[
+        '默唸聖號：南無大慈大悲觀世音菩薩／南無阿彌陀佛',
+        '<em>裝作沒事</em> —— 你不理祂，祂就不理你',
+        '陰陽水：白色杯子裝三分滿冷開水，再加三分滿熱水',
+        '杯上寫一個「佛」字、一個「萬」字，放在床頭邊',
+        '覺得房內很怪，可以拿那杯水往周圍灑一灑'
+      ]},
+      {t:'⑥ 隨身法器', items:[
+        '水晶：增加磁場、起淨化功效，不同水晶功效不同',
+        '佛珠：用來持念聖號',
+        '出國前求一只平安符隨身'
+      ]}
+    ]
+  },
+  {
+    no:'04', title:'第二晚：200 多位眾生', desc:'全集最震撼的一夜', color:'#9d8ce0', side:'R',
+    groups:[
+      {t:'現場', items:[
+        '與朋友分開住，兩人住一間樓中樓房間',
+        '下午兩點多進去時還不覺得怎麼樣',
+        '晚上睡前一感應：整間房裡有 <em>200 多位阿飄</em>',
+        '房間大小約台灣十幾坪'
+      ]},
+      {t:'身體反應', items:[
+        '入住後開始<em>上吐下瀉、頭暈、腸胃極度不適</em>',
+        '隔天早上起床仍頭暈、腸胃不舒服，之後才逐漸好轉'
+      ]},
+      {t:'處置：溝通共處，而非驅趕', items:[
+        '數量實在太多，也有點無力一一超渡',
+        '那些眾生表示已經在這裡住很久了，不好意思把人家趕走',
+        '協議：「我就住一天，我睡我的床鋪，不會對你們做什麼」',
+        '最後與 200 多位眾生一起睡到隔天早上'
+      ]},
+      {t:'結論', items:[
+        '不是泰國阿飄比較多，是這一間剛好特別多'
+      ]}
+    ]
+  },
+  {
+    no:'05', title:'四面佛的還願規矩', desc:'許了願一定要還，兩個真實案例', color:'#5fb4e8', side:'L',
+    groups:[
+      {t:'核心原則', items:[
+        '拜了<em>一定要還願</em>，做不到就不要輕易拜',
+        '不能像路過土地公廟那樣，什麼都沒準備就合十亂許',
+        '不論願望是否實現，約定時間到了都要還願',
+        '四面佛特別在意信眾的禮數與承諾',
+        '仙姑此行<em>只去看、沒有拜</em>'
+      ]},
+      {t:'案例 A：同事的太太', items:[
+        '經過台灣分身（台北長春路、松江路）什麼都沒帶就隨意一拜',
+        '祈求改善父親記憶力退化的狀況',
+        '隔天起身體極度不適，開車送小孩上學途中<em>差點被車撞</em>',
+        '感應結果：因為不懂禮數、隨便亂拜',
+        '化解：備水果鮮花重新拜、誠心道歉，並承諾半年後還願'
+      ]},
+      {t:'案例 B：疫情前許願的朋友', items:[
+        '疫情爆發後完全忘記還願，運勢<em>衰到一個不行</em>',
+        '在公司被主管當成眼中釘，連續盯罵一個多月',
+        '第三次提起不順時，仙姑靈感一動才問出未還願這件事',
+        '先到台北長春路的四面佛還願，狀況隨即好轉',
+        '這趟專程陪同回泰國補辦還願'
+      ]},
+      {t:'實務建議', items:[
+        '在泰國遇到四面佛，最好<em>純心打聲招呼、不許願</em>',
+        '折衷：許願當下講明「日後在台灣哪一尊四面佛還願」，是被允許的',
+        '對照：台灣、中國、韓國、日本的神佛通常不這麼計較'
+      ]}
+    ]
+  },
+  {
+    no:'06', title:'想吃雞腿的土地公', desc:'曼谷旅行社的進宅委託', color:'#a8d06a', side:'L',
+    groups:[
+      {t:'委託內容', items:[
+        '台灣人在曼谷開的旅行社，請仙姑做<em>進宅、看風水</em>',
+        '疫情前僅憑家中與公司的土地公照片就先感應',
+        '當時人在台灣就感應到「他們的土地公想要吃雞腿」',
+        '這次趁行程親自過去看還有沒有其他需求'
+      ]},
+      {t:'為什麼神明想吃葷', items:[
+        '神明會受<em>當地文化</em>影響而有不同需求',
+        '泰國許多土地公生前也是凡人，往生後因修行才受封',
+        '因此仍留有生前想吃肉、懷念雞腿味道的習性',
+        '對照：台灣地基主也有吃素／指名要雞腿之分'
+      ]},
+      {t:'神像', items:[
+        '造型與台灣的土地公一模一樣'
+      ]}
+    ]
+  },
+  {
+    no:'07', title:'出國的代價', desc:'跟著回家的那些眾生', color:'#e881a8', side:'L',
+    groups:[
+      {t:'每趟旅行都會「帶人回來」', items:[
+        '每次出國回來，身上都跟著很多眾生',
+        '光是去一趟綠島，就曾跟回<em>一、兩百個</em>',
+        '原因：祂們知道仙姑有能力，不想一直在外面當孤魂野鬼'
+      ]},
+      {t:'回程處理', items:[
+        '一路持誦<em>大悲咒</em>',
+        '或用一些法門引導，幫助祂們順利度化、去投胎'
+      ]},
+      {t:'結語', items:[
+        '雖然真的很累，還是很想出國',
+        '主持人祝福：這次可別再帶阿飄回來了'
+      ]}
+    ]
+  }
+];
+
+/* ────────────────────────────────────────────
+   版面計算
+   ──────────────────────────────────────────── */
+const HUB_W=200, HUB_H=86;
+const BR_W=210, BR_H=58;
+const LF_W=214, LF_H=42, LF_GAP=11;
+const GAP_HB=118, GAP_BL=86, BR_GAP=30, PAD=60;
+
+const stage=document.getElementById('stage');
+const links=document.getElementById('links');
+const wrap=document.getElementById('wrap');
+const nodes=[];           // {el, x, y, w, h}
+let W=0, H=0, sel=null;
+
+function blockH(t){ return Math.max(BR_H, t.groups.length*(LF_H+LF_GAP)-LF_GAP); }
+
+function build(){
+  const sides={R:TOPICS.filter(t=>t.side==='R'), L:TOPICS.filter(t=>t.side==='L')};
+  const hOf=list=>list.reduce((s,t)=>s+blockH(t),0)+BR_GAP*(list.length-1);
+  const contentH=Math.max(hOf(sides.R),hOf(sides.L));
+
+  H=contentH+PAD*2;
+  W=(HUB_W/2+GAP_HB+BR_W+GAP_BL+LF_W+PAD)*2;
+  const hubX=W/2-HUB_W/2, hubY=H/2-HUB_H/2;
+
+  stage.style.width=W+'px'; stage.style.height=H+'px';
+  links.setAttribute('width',W); links.setAttribute('height',H);
+  links.setAttribute('viewBox',`0 0 ${W} ${H}`);
+
+  // 中心
+  const hub=el('div','n n-hub',`<span class="s">EP 001 · BANGKOK</span><span class="t">曼谷奇遇記</span>`);
+  place(hub,hubX,hubY,HUB_W,HUB_H,null,'hub');
+
+  const cx=W/2, cy=H/2, paths=[];
+
+  ['R','L'].forEach(side=>{
+    const list=sides[side], dir=side==='R'?1:-1;
+    let y=cy-hOf(list)/2;
+
+    list.forEach(t=>{
+      const bh=blockH(t), bcy=y+bh/2;
+      const bx=side==='R' ? cx+HUB_W/2+GAP_HB : cx-HUB_W/2-GAP_HB-BR_W;
+      const by=bcy-BR_H/2;
+
+      const b=el('button','n n-branch side-'+side,
+        `<span class="no">${t.no}</span><span class="t">${t.title}</span>`);
+      b.style.setProperty('--c',t.color);
+      b.style.setProperty('--cs',hexa(t.color,.10));
+      b.dataset.topic=t.no;
+      place(b,bx,by,BR_W,BR_H,t.no,'branch');
+
+      paths.push(curve(
+        side==='R'?cx+HUB_W/2:cx-HUB_W/2, cy,
+        side==='R'?bx:bx+BR_W, bcy, t.color, 1.8, t.no, null));
+
+      // 子節點
+      let ly=bcy-(t.groups.length*(LF_H+LF_GAP)-LF_GAP)/2;
+      t.groups.forEach((g,gi)=>{
+        const lx=side==='R' ? bx+BR_W+GAP_BL : bx-GAP_BL-LF_W;
+        const l=el('button','n n-leaf',
+          `<span>${g.t}</span><span class="cnt">${g.items.length} 項</span>`);
+        l.style.setProperty('--c',t.color);
+        l.style.setProperty('--cs',hexa(t.color,.13));
+        l.style.setProperty('--dx',(side==='R'?-16:16)+'px');
+        l.dataset.topic=t.no; l.dataset.group=gi;
+        place(l,lx,ly,LF_W,LF_H,t.no,'leaf');
+
+        paths.push(curve(
+          side==='R'?bx+BR_W:bx, bcy,
+          side==='R'?lx:lx+LF_W, ly+LF_H/2, t.color, 1.1, t.no, gi));
+
+        ly+=LF_H+LF_GAP;
+      });
+
+      y+=bh+BR_GAP;
+    });
+  });
+
+  links.innerHTML=paths.join('');
+}
+
+function el(tag,cls,html){
+  const e=document.createElement(tag); e.className=cls; e.innerHTML=html;
+  if(tag==='button') e.type='button';
+  stage.appendChild(e); return e;
+}
+function place(e,x,y,w,h,topic,kind){
+  e.style.left=x+'px'; e.style.top=y+'px'; e.style.width=w+'px'; e.style.height=h+'px';
+  nodes.push({el:e,x:x,y:y,w:w,h:h,topic:topic,kind:kind});
+}
+function curve(x1,y1,x2,y2,color,w,topic,group){
+  const dx=(x2-x1)*.45;
+  return `<path d="M${x1},${y1} C${x1+dx},${y1} ${x2-dx},${y2} ${x2},${y2}" stroke="${color}"
+    stroke-width="${w}" stroke-opacity=".42" data-topic="${topic}"
+    data-group="${group===null?'':group}"></path>`;
+}
+function hexa(hex,a){
+  const n=parseInt(hex.slice(1),16);
+  return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;
+}
+
+/* ────────────────────────────────────────────
+   視圖：平移與縮放
+   ──────────────────────────────────────────── */
+let scale=1, ox=0, oy=0, animT=null;
+
+function apply(){ stage.style.transform=`translate(${ox}px,${oy}px) scale(${scale})`; }
+
+/* 只把「目前看得到的節點」納入取景範圍：收合時＝中心＋七主幹，展開時再加該分支的子節點 */
+function viewBox(no){
+  const vis=nodes.filter(n=> n.kind!=='leaf' || n.topic===no );
+  const pad=46;
+  return {
+    x:Math.min(...vis.map(n=>n.x))-pad,
+    y:Math.min(...vis.map(n=>n.y))-pad,
+    w:Math.max(...vis.map(n=>n.x+n.w))-Math.min(...vis.map(n=>n.x))+pad*2,
+    h:Math.max(...vis.map(n=>n.y+n.h))-Math.min(...vis.map(n=>n.y))+pad*2
+  };
+}
+function fitTo(no,animate){
+  const r=wrap.getBoundingClientRect(), b=viewBox(no);
+  scale=Math.min(r.width/b.w, r.height/b.h, 1.25);
+  ox=(r.width-b.w*scale)/2-b.x*scale;
+  oy=(r.height-b.h*scale)/2-b.y*scale;
+  if(animate){
+    stage.classList.add('anim');
+    clearTimeout(animT);
+    animT=setTimeout(()=>stage.classList.remove('anim'),620);
+  }
+  apply();
+}
+function fit(){ fitTo(sel,false); }
+function zoom(f,px,py){
+  stage.classList.remove('anim');
+  const r=wrap.getBoundingClientRect();
+  const cxp=(px??r.width/2), cyp=(py??r.height/2);
+  const ns=Math.min(2.2,Math.max(.25,scale*f));
+  ox=cxp-(cxp-ox)*(ns/scale); oy=cyp-(cyp-oy)*(ns/scale);
+  scale=ns; apply();
+}
+document.getElementById('zin').onclick =()=>zoom(1.2);
+document.getElementById('zout').onclick=()=>zoom(1/1.2);
+document.getElementById('fit').onclick =()=>select(null);
+
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const r=wrap.getBoundingClientRect();
+  zoom(e.deltaY<0?1.12:1/1.12, e.clientX-r.left, e.clientY-r.top);
+},{passive:false});
+
+let dragging=false, sx=0, sy=0, moved=0;
+wrap.addEventListener('pointerdown',e=>{
+  if(e.target.closest('.n-branch,.n-leaf')) return;
+  stage.classList.remove('anim');
+  dragging=true; moved=0; sx=e.clientX-ox; sy=e.clientY-oy;
+  wrap.classList.add('drag'); wrap.setPointerCapture(e.pointerId);
+});
+wrap.addEventListener('pointermove',e=>{
+  if(!dragging) return;
+  const nx=e.clientX-sx, ny=e.clientY-sy;
+  moved+=Math.abs(nx-ox)+Math.abs(ny-oy);
+  ox=nx; oy=ny; apply();
+});
+wrap.addEventListener('pointerup',e=>{
+  if(dragging && moved<4 && !e.target.closest('.n')) select(null);
+  dragging=false; wrap.classList.remove('drag');
+});
+
+/* ────────────────────────────────────────────
+   選取與面板
+   ──────────────────────────────────────────── */
+const phead=document.getElementById('phead'), pbody=document.getElementById('pbody');
+
+function select(no,group){
+  sel=no;
+  stage.classList.toggle('has-sel',!!no);
+  stage.querySelectorAll('.n-branch,.n-leaf').forEach(n=>{
+    const mine=n.dataset.topic===no;
+    n.classList.toggle('kin',mine);
+    n.classList.toggle('on',mine &&
+      ((n.classList.contains('n-branch') && group===undefined) ||
+       (n.classList.contains('n-leaf') && String(group)===n.dataset.group)));
+  });
+  links.querySelectorAll('path').forEach(p=>{
+    const isLeaf=p.dataset.group!=='';
+    const mine=p.dataset.topic===no;
+    p.setAttribute('stroke-opacity',
+      isLeaf ? (mine?'.9':'0') : (no ? (mine?'.95':'.12') : '.45'));
+    p.setAttribute('stroke-width', mine ? (isLeaf?1.4:2.6) : (isLeaf?1.1:1.8));
+  });
+  fitTo(no,true);
+  no ? renderTopic(no,group) : renderOverview();
+}
+
+function renderOverview(){
+  phead.style.removeProperty('--c');
+  phead.innerHTML=`
+    <div class="p-eyebrow">Episode Map · 7 主題 / 25 段 / 84 重點</div>
+    <div class="p-title">曼谷奇遇記</div>
+    <div class="p-desc">主持：叔叔（麻瓜）× 愛麗絲　來賓：仙姑（曼谷連線．五天行程）</div>`;
+  pbody.innerHTML=`
+    <p class="ov-lede">
+      仙姑趁新年假期到曼谷，五天內遇上兩間鬧鬼住宿、談了四面佛的還願規矩，
+      還接了一件泰國土地公想吃雞腿的委託。點左側任一分支看細節。
+    </p>
+    <ul class="ov-list">${TOPICS.map(t=>`
+      <li><button class="ov-btn" data-topic="${t.no}"
+            style="--c:${t.color};--cs:${hexa(t.color,.1)}">
+        <span class="no">${t.no}</span>
+        <span class="t">${t.title}</span>
+        <span class="c">${t.groups.reduce((s,g)=>s+g.items.length,0)} 重點</span>
+      </button></li>`).join('')}
+    </ul>
+    <div class="ov-meta">
+      最實用：03 飯店防飄自保指南<br>
+      最震撼：04 與 200 多位眾生同房
+    </div>
+    <a class="src" href="https://www.youtube.com/watch?v=vt2R8XwV21g" target="_blank" rel="noopener">
+      <span class="ico">▶</span>
+      <span class="txt">
+        <b>影片來源</b>
+        youtube.com/watch?v=vt2R8XwV21g
+      </span>
+      <span class="go">↗</span>
+    </a>`;
+}
+
+function renderTopic(no,group){
+  const t=TOPICS.find(x=>x.no===no);
+  phead.style.setProperty('--c',t.color);
+  phead.innerHTML=`
+    <div class="p-eyebrow">分支 ${t.no} · ${t.groups.length} 段 ·
+      ${t.groups.reduce((s,g)=>s+g.items.length,0)} 重點</div>
+    <div class="p-title">${t.title}</div>
+    <div class="p-desc">${t.desc}</div>`;
+  pbody.innerHTML=`<button class="back" id="back">← 回總覽</button>` +
+    t.groups.map((g,i)=>`
+      <section class="grp ${t.check?'check':''} ${String(group)===String(i)?'on':''}"
+               id="g${i}" style="--c:${t.color}">
+        <h3 class="grp-t"><i></i>${g.t}</h3>
+        <ul>${g.items.map(x=>`<li>${x}</li>`).join('')}</ul>
+      </section>`).join('');
+  pbody.scrollTop=0;
+  if(group!==undefined){
+    const g=document.getElementById('g'+group);
+    if(g) setTimeout(()=>g.scrollIntoView({block:'start'}),60);
+  }
+}
+
+document.addEventListener('click',e=>{
+  const nd=e.target.closest('.n-branch,.n-leaf,.ov-btn');
+  if(nd){
+    const no=nd.dataset.topic;
+    select(no, nd.dataset.group!==undefined ? Number(nd.dataset.group) : undefined);
+    return;
+  }
+  if(e.target.closest('#back')) select(null);
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') select(null); });
+
+/* 啟動：預設收合，只顯示中心與七條主幹 */
+build();
+select(null);
+window.addEventListener('resize',fit);
+</script>
+</body>
+</html>

@@ -172,8 +172,17 @@
 <pre><code>仙姑行不行/
 ├── index.html                  對外介紹頁（原 readme.html）
 ├── readme.html                 本文件：開發記事
-└── img/
-    └── channels4_banner.jpg    YouTube 頻道橫幅（2560×424）</code></pre>
+├── img/
+│   └── channels4_banner.jpg    YouTube 頻道橫幅（2560×424）
+└── youtube/
+    ├── 001-mindmap.html        EP001 互動心智圖（對外）
+    ├── 001 …曼谷奇遇記.txt      逐字稿（原始素材，不發佈）
+    └── 001 …曼谷奇遇記.mp3      音檔（55 MB，不發佈）</code></pre>
+      <p>
+        <code>youtube/</code> 底下只有 <code>001-mindmap.html</code> 會同步到站台，
+        逐字稿與音檔留在本機。心智圖以 <code>../index.html</code> 連回介紹頁，
+        本機與線上路徑一致。
+      </p>
       <p>
         圖片以相對路徑 <code>img/channels4_banner.jpg</code> 引用，整個資料夾搬移不會斷連結。
       </p>
@@ -300,6 +309,13 @@ git push</code></pre>
     <section id="log">
       <div class="sec-head"><span class="sec-num">07</span><h2>變更紀錄</h2></div>
       <ul class="log">
+        <li>
+          <b>2026-08-17 · EP001 心智圖</b>
+          依逐字稿建立互動心智圖：中心＋七主幹左右展開、SVG 貝茲連線、
+          子節點預設收合（點主幹才展開並自動取景）、右側詳情面板、附影片來源連結。
+          介紹頁新增「單集筆記」區塊連過去。
+          <br>第一版是縮排大綱，評審後改為「圖導覽＋詳情面板」的雙欄結構。
+        </li>
         <li>
           <b>2026-08-17 · 部署</b>
           readme.html 轉為 index.html 作為對外頁面；記事另存為 readme.html；
