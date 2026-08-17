@@ -628,10 +628,17 @@ function select(no,group){
   no ? renderTopic(no,group) : renderOverview();
 }
 
+/* 統計直接由資料算出，避免數字寫死後與內容不符 */
+const STAT={
+  topics:TOPICS.length,
+  groups:TOPICS.reduce((s,t)=>s+t.groups.length,0),
+  items:TOPICS.reduce((s,t)=>s+t.groups.reduce((n,g)=>n+g.items.length,0),0)
+};
+
 function renderOverview(){
   phead.style.removeProperty('--c');
   phead.innerHTML=`
-    <div class="p-eyebrow">Episode Map · 7 主題 / 25 段 / 84 重點</div>
+    <div class="p-eyebrow">Episode Map · ${STAT.topics} 主題 / ${STAT.groups} 段 / ${STAT.items} 重點</div>
     <div class="p-title">曼谷奇遇記</div>
     <div class="p-desc">主持：叔叔（麻瓜）× 愛麗絲　來賓：仙姑（曼谷連線．五天行程）</div>`;
   pbody.innerHTML=`
