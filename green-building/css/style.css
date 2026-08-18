@@ -1,0 +1,123 @@
+:root{
+  --brand:#004B87; --ink:#333; --line:#c9d6e3; --bg:#eef4fa;
+  --pro:#5CB85C; --con:#D9534F; --muted:#777;
+}
+*{box-sizing:border-box;}
+body{margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft JhengHei","Noto Sans TC",sans-serif;}
+
+.topbar{background:var(--brand); color:#fff; padding:10px 20px;
+  display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
+.topbar span:first-child{font-weight:700; font-size:1.05em;}
+.topbar .sub{font-size:.82em; opacity:.85;}
+
+.stage{display:flex; gap:16px; align-items:flex-start;
+  padding:16px; max-width:1220px; margin:0 auto;}
+
+/* ── 選單 ───────────────────────────── */
+.col-left{display:flex; flex-direction:column; gap:14px; width:225px; flex:0 0 auto;}
+.menu{background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+.menu-title{background:var(--brand); color:#fff; font-size:.8em; font-weight:700;
+  padding:7px 10px; display:flex; justify-content:space-between; align-items:center;}
+.menu-item{display:block; width:100%; text-align:left; background:#fff; border:0;
+  border-top:1px solid #eef1f4; padding:7px 11px; font-size:.85em; cursor:pointer;
+  color:#13395c; font-family:inherit;}
+.menu-item:hover{background:#eef4fa;}
+.menu-item.selected{background:var(--pro); color:#fff; font-weight:700;}
+/* 複選部位（額外設備）：前面加勾選框，暗示可以同時選好幾個 */
+.menu-item.multi::before{content:"☐ "; opacity:.55;}
+.menu-item.multi.selected::before{content:"☑ "; opacity:1;}
+
+/* ── 中間：房子 + 資訊框 ─────────────────── */
+.col-center{flex:1; display:flex; flex-direction:column; align-items:center; gap:12px; min-width:0;}
+.house-wrap{width:100%; background:#fff; border:1px solid var(--line); border-radius:8px; padding:6px;
+  position:relative;}   /* 放大鏡以此為定位基準 */
+
+/* ── 放大鏡 ─────────────────────────────
+   原圖 2612px 顯示成約 703px（縮小 3.72×），所以放大 3× 仍在原生解析度內，
+   看到的是真實細節而不是模糊的放大。*/
+.lens{position:absolute; width:220px; height:220px; border-radius:50%; overflow:hidden;
+  border:3px solid #fff; box-shadow:0 2px 10px rgba(0,0,0,.35), 0 0 0 1px rgba(0,0,0,.25);
+  pointer-events:none; z-index:20;}
+.lens[hidden]{display:none;}
+.lens-inner{position:absolute; line-height:0;}
+.lens-inner img{position:absolute; top:0; left:0; width:100%; height:auto; display:block;}
+.lens-inner img[hidden]{display:none;}
+
+.lens-toggle{position:absolute; right:14px; top:14px; z-index:25;
+  background:rgba(255,255,255,.9); border:1px solid var(--line); border-radius:14px;
+  padding:3px 11px; font-size:.78em; font-family:inherit; color:#13395c; cursor:pointer;}
+.lens-toggle:hover{background:#fff;}
+.lens-toggle.off{opacity:.5;}
+
+/* 擬真圖層堆疊：所有圖同尺寸、疊在同一位置 */
+/* aspect-ratio 固定容器高度，換圖時版面不跳動 */
+.house-photo{position:relative; width:100%; line-height:0; aspect-ratio:2612/1632;}
+.house-photo .layer{position:absolute; top:0; left:0; width:100%; height:auto; display:block;}
+#img-base{z-index:0;}   /* 背景空地 */
+#img-house{z-index:1;}  /* 房子主體 */
+#img-wall{z-index:2;}   /* 外牆材質 */
+#img-roof{z-index:3;}   /* 屋頂 */
+/* 額外設備為複選，每項各一層，z-index 由 game.js 設為 4 以上 */
+.house-photo .layer[hidden]{display:none;}
+
+/* 提醒訊息（紅字） */
+.info-name.warn{color:var(--con);}
+/* 主要建材未選時，屋頂與額外設備選單呈停用樣式 */
+.menu.locked{opacity:.55;}
+.menu.locked .menu-item{cursor:not-allowed;}
+/* 前置條件未滿足的單項（屋頂未選時的太陽能板、採光井） */
+.menu-item.need-unmet{opacity:.5; cursor:not-allowed;}
+
+.info{width:100%; background:#fff; border:1px solid var(--line); border-radius:10px;
+  padding:11px 15px; min-height:78px;}
+.info-name{font-weight:700; color:#13395c; font-size:1.02em; margin-bottom:7px;}
+.tok{display:inline-block; color:#fff; font-weight:700; font-size:.78em;
+  padding:2px 9px; border-radius:11px; margin:2px 4px 2px 0;}
+.tok.pro{background:var(--pro);} .tok.con{background:var(--con);}
+.muted{color:var(--muted); font-size:.86em;}
+
+/* ── 整棟房子累計：比例條 ＋ 性質標籤 ───────── */
+.house-sum{width:100%; background:#fff; border:1px solid var(--line);
+  border-radius:10px; padding:9px 15px 12px;}
+.sum-title{font-size:.78em; color:var(--muted);}
+.sum-head{display:flex; justify-content:space-between; align-items:baseline; margin:3px 0 5px;}
+.sum-pro{font-size:.85em; color:var(--pro); font-weight:700;}
+.sum-con{font-size:.85em; color:var(--con); font-weight:700;}
+/* 綠紅各佔 pros/(pros+cons)，不需要理論上限，所以沒有刻度不一致的問題 */
+.ratio{display:flex; height:14px; border-radius:7px; overflow:hidden; background:#dfe6ee;}
+.ratio > div{transition:width .35s ease;}
+.ratio-pro{background:var(--pro);}
+.ratio-con{background:var(--con);}
+.tok-row{margin-top:7px;}
+
+/* ── 右側 ──────────────────────────── */
+.col-achv{width:215px; flex:0 0 auto;}
+
+.achv-box{background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+.count{font-weight:700; font-size:.95em; opacity:.9;}
+/* 一列成就 = 標題列 ＋（未達成時）條件標籤列，兩層由上而下堆疊 */
+.achv{display:block; padding:6px 10px; border-top:1px solid #eef1f4; font-size:.8em; color:#8a8a8a;}
+.achv.got{color:#13395c; background:#f2faf2;}
+.achv-head{display:flex; align-items:flex-start; gap:7px;}
+.achv-ic{flex:0 0 auto; font-size:1em;}
+.achv-name{display:flex; flex-direction:column; line-height:1.35; flex:1; min-width:0;}
+/* 還差幾項 */
+.achv-count{flex:0 0 auto; font-size:.92em; color:#9aa6b2; white-space:nowrap;}
+/* 條件標籤：綠底＝已滿足，灰框＝還沒 */
+/* 不縮排：215px 的欄寬下，縮排會讓標籤多換一行、整欄高出約 9% */
+.achv-cond{display:flex; flex-wrap:wrap; gap:4px; margin:5px 0 1px;}
+.cond{border:1px solid var(--line); border-radius:9px; padding:1px 6px;
+  font-size:.92em; color:#8794a2; background:#fff;}
+.cond.met{background:#eaf6ea; border-color:#a8d8a8; color:#3f8a3f; font-weight:700;}
+.cond.plain{border:0; padding:1px 0; background:transparent;}
+.achv.got .achv-name{font-weight:700;}
+.achv-en{font-size:.85em; opacity:.7;}
+.achv .tag{background:#e8a33d; color:#fff; font-size:.72em; padding:0 5px;
+  border-radius:8px; margin-left:3px; font-weight:700;}
+.achv.tbd{opacity:.72;}
+
+@media(max-width:1080px){
+  .stage{flex-direction:column; align-items:stretch;}
+  .col-left,.col-achv{width:auto;}
+}

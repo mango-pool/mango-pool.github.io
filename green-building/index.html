@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>綠建築換皮小遊戲</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <span>綠建築換皮 — Game Play</span>
+  <span class="sub">汶萊大學 · noreena 節能減碳房屋改造遊戲</span>
+</header>
+
+<main class="stage">
+
+  <!-- 左側：主建材 → 屋頂 → 額外設備 -->
+  <aside class="col-left">
+    <div class="menu" id="menu-wall"></div>
+    <div class="menu" id="menu-roof"></div>
+    <div class="menu" id="menu-extra"></div>
+  </aside>
+
+  <!-- 中間：房子 + 資訊框 -->
+  <section class="col-center">
+    <div class="house-wrap">
+      <!-- 擬真圖層堆疊（z-index 由下而上）
+           0 背景空地 base.webp（永遠顯示）
+           1 房子主體 base house.webp（選了主要建材才顯示）
+           2 外牆材質
+           3 屋頂
+           ── 以下額外設備可複選，每項各佔一層，由 game.js 依 data.js 順序動態產生 ──
+           4 太陽能板
+           5 採光井+通風扇
+           6 採光落地窗
+           7 區域電網（屋外儲能櫃，離鏡頭最近，疊在最上層） -->
+      <div class="house-photo" id="house-photo" hidden>
+        <img class="layer" id="img-base"  src="img/base.webp" alt="">
+        <img class="layer" id="img-house" src="img/base_house.webp" alt="" hidden>
+        <img class="layer" id="img-wall"  alt="" hidden>
+        <img class="layer" id="img-roof"  alt="" hidden>
+      </div>
+
+      <!-- 放大鏡：鏡片內是同一份圖層堆疊的複本（由 game.js 於每次重繪時同步），
+           所以換了建材、加了新部件，鏡片裡都會自動跟著變，不必另外維護。
+           必須放在 .house-photo 外面 —— 放裡面複製 innerHTML 會遞迴複製到自己。 -->
+      <div class="lens" id="lens" hidden><div class="lens-inner" id="lens-inner"></div></div>
+
+      <button class="lens-toggle" id="lens-toggle" type="button" title="開啟／關閉放大鏡">🔍 <span id="lens-hint">放大鏡</span></button>
+
+    </div>
+
+    <!-- 中央資訊框：最近點選的那一個建材 -->
+    <div class="info">
+      <div class="info-name" id="info-name">—</div>
+      <div class="info-tokens" id="info-tokens"></div>
+    </div>
+
+    <!-- 整棟房子累計：比例條 ＋ 性質標籤（重複的以 ×N 表示）
+         緊接在「這個建材」下方，同樣的標籤語言、只是換成全屋範圍 -->
+    <div class="house-sum">
+      <div class="sum-title">整棟房子</div>
+      <div class="sum-head">
+        <span class="sum-pro">好處 <b id="num-pros">0</b></span>
+        <span class="sum-con">壞處 <b id="num-cons">0</b></span>
+      </div>
+      <div class="ratio">
+        <div class="ratio-pro" id="ratio-pros"></div>
+        <div class="ratio-con" id="ratio-cons"></div>
+      </div>
+      <div class="sum-toks" id="sum-toks"></div>
+    </div>
+  </section>
+
+  <!-- 最右：成就 -->
+  <aside class="col-achv">
+    <div class="achv-box">
+      <div class="menu-title">🏆 成就 <span id="achv-count" class="count">0 / 0</span></div>
+      <div id="achv-list"></div>
+    </div>
+  </aside>
+
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/achievements.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
