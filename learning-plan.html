@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 個月 AI 學習計劃</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #f7b731;
+    --done: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, "Microsoft JhengHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 2rem 1rem;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { border-bottom: 2px solid var(--accent); padding-bottom: .5rem; }
+  h2 { margin-top: 2.5rem; color: var(--accent); }
+  h3 { margin-top: 1.8rem; font-size: 1.02rem; color: var(--text); }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 2.2rem 0; }
+  blockquote {
+    background: var(--card); border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0; margin: 1.2rem 0; padding: .9rem 1.2rem;
+    color: var(--muted);
+  }
+  blockquote p { margin: .25rem 0; }
+  table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; }
+  th, td { border: 1px solid var(--border); padding: .55rem .9rem; text-align: left; }
+  th { background: #1f2733; }
+  tr:nth-child(even) td { background: #131920; }
+  code { background: #1f2733; padding: .1rem .35rem; border-radius: 4px; }
+  strong { color: var(--accent); }
+  a { color: #58a6ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  /* 待辦清單：把 Markdown 的 - [ ] / - [x] 換成看得懂的方框 */
+  ul.task { list-style: none; padding-left: .2rem; }
+  ul.task li { padding-left: 1.6rem; text-indent: -1.6rem; }
+  .box { color: var(--muted); margin-right: .5rem; }
+  .box.on { color: var(--done); }
+  li.done { color: var(--muted); }
+  footer {
+    margin-top: 3.5rem; padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: .85rem; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>AI 學習計劃(5 個月實戰路線)</h1>
+<blockquote>
+<p>建立日期:2026-08-16
+學習者:有多語言開發經驗的工程師(.NET / TS 等),Python 需速成
+投入:每週 12–15 小時
+目標:① 作品集 4 個 AI 專案 ② 一個上線的真實產品 ③ 全程 $0 部署成本</p>
+</blockquote>
+<hr />
+<h2>總覽</h2>
+<table>
+<thead>
+<tr>
+<th>週次</th>
+<th>階段</th>
+<th>產出</th>
+<th>狀態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W1–2</td>
+<td>階段 0:Python 速成 + 環境建置</td>
+<td>練習小工具</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>W3–6</td>
+<td>專案 1:LLM CLI 工具(API 基礎)</td>
+<td>作品集 #1</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>W7–11</td>
+<td>專案 2:RAG 知識庫應用</td>
+<td>作品集 #2</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>W12–16</td>
+<td>專案 3:Agent 應用</td>
+<td>作品集 #3</td>
+<td>⬜</td>
+</tr>
+<tr>
+<td>W17–22</td>
+<td>專案 4:真實產品 MVP → 上線</td>
+<td>你的產品 🚀</td>
+<td>⬜</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三條並行線</strong>(貫穿全程):</p>
+<ul>
+<li><strong>AI 工具流</strong>(每週 ~1h):日常開發全程使用 Claude Code / Copilot,累積個人提示詞庫</li>
+<li><strong>學理深水區</strong>(選修,每週 ~2h):Karpathy《Neural Networks: Zero to Hero》,從反向傳播親手做到 GPT</li>
+<li><strong>作品集包裝</strong>(每專案收尾 ~2h):README + 線上 demo + 一篇短文</li>
+</ul>
+<p><strong>已完成里程碑</strong>:</p>
+<ul>
+<li>✅ 2026-08-16 GitHub Pages 作品集首頁上線:https://mango-pool.github.io/(repo:<code>mango-pool.github.io</code>)</li>
+</ul>
+<hr />
+<h2>部署策略($0 方案)</h2>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>平台</th>
+<th>備註</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作品集首頁</td>
+<td>GitHub Pages</td>
+<td>已上線,之後把 index.html 長成作品集</td>
+</tr>
+<tr>
+<td>專案 1(CLI)</td>
+<td>不需網站</td>
+<td>GitHub repo + README + asciinema 終端機錄影</td>
+</tr>
+<tr>
+<td>專案 2、3(RAG / Agent)</td>
+<td>Hugging Face Spaces</td>
+<td>跑 Python(Gradio/Streamlit),API key 放 Space secrets</td>
+</tr>
+<tr>
+<td>專案 4(產品)</td>
+<td>Render / Fly.io 免費層</td>
+<td>有真實流量再考慮付費</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ 鐵則:<strong>API key 永遠不進前端、不進 git</strong>。用環境變數 + secrets 管理。</p>
+<hr />
+<h2>階段 0:Python 速成 + 環境建置(W1–2)</h2>
+<p><strong>目標</strong>:以現有多語言經驗快速對映 Python 慣用法,建好之後五個月的開發環境。</p>
+<h3>實作</h3>
+<ul class="task">
+<li><span class="box">☐</span>安裝 <code>uv</code>(Python 版本 + 套件管理,一支工具搞定)</li>
+<li><span class="box">☐</span>Python 核心速成(對照你熟的語言學):型別提示、dataclass、comprehension、context manager、async/await、例外處理</li>
+<li><span class="box">☐</span>專案結構慣例:<code>pyproject.toml</code>、虛擬環境、<code>ruff</code>(lint/format)、<code>pytest</code></li>
+<li><span class="box">☐</span>練習:寫一個小 CLI(如批次改檔名、csv 統計),用 Claude Code 輔助但<strong>逐行看懂</strong></li>
+</ul>
+<h3>必修學理(~3h)</h3>
+<ul class="task">
+<li><span class="box">☐</span>3Blue1Brown〈But what is a GPT?〉+〈Attention in transformers〉(視覺化直覺)</li>
+<li><span class="box">☐</span>Karpathy〈Intro to Large Language Models〉演講(1h,建立全局觀)</li>
+</ul>
+<h3>完成定義</h3>
+<p>練習 CLI 放上 GitHub(repo + README),能口頭解釋「LLM 是在做 next-token prediction」給朋友聽。</p>
+<hr />
+<h2>專案 1:LLM CLI 工具(W3–6)</h2>
+<p><strong>題目建議</strong>:終端機文件助手——餵它檔案,可翻譯/摘要/改寫,支援串流輸出。</p>
+<h3>技術清單</h3>
+<ul class="task">
+<li><span class="box">☐</span>Claude API / OpenAI API:訊息結構、system prompt、多輪對話</li>
+<li><span class="box">☐</span>串流輸出(streaming)</li>
+<li><span class="box">☐</span>結構化輸出(JSON mode / tool schema)</li>
+<li><span class="box">☐</span>Function calling 初體驗</li>
+<li><span class="box">☐</span>Token 計算與成本估算(做一個 <code>--cost</code> 旗標顯示本次花費)</li>
+<li><span class="box">☐</span>錯誤處理:rate limit、重試、超時</li>
+</ul>
+<h3>必修學理(~4h)</h3>
+<ul class="task">
+<li><span class="box">☐</span>Tokenization 是什麼(為何 LLM 數不清 strawberry 有幾個 r)</li>
+<li><span class="box">☐</span>取樣參數:temperature、top-p 實驗(同一 prompt 跑 10 次觀察)</li>
+<li><span class="box">☐</span>Prompt engineering 原則(Anthropic prompt engineering 文件)</li>
+</ul>
+<h3>深水區(選修)</h3>
+<ul class="task">
+<li><span class="box">☐</span>Karpathy〈Let's build the GPT Tokenizer〉</li>
+</ul>
+<h3>完成定義</h3>
+<p>GitHub repo + README(含安裝/使用說明)+ asciinema 錄影 demo + 短文一篇(學到什麼)。</p>
+<hr />
+<h2>專案 2:RAG 知識庫應用(W7–11)</h2>
+<p><strong>題目建議</strong>:把自己的技術筆記/某領域文件變成可問答的知識庫 Web 應用。</p>
+<h3>技術清單</h3>
+<ul class="task">
+<li><span class="box">☐</span>Embedding API、向量相似度(cosine)</li>
+<li><span class="box">☐</span>向量資料庫(chromadb 或 sqlite-vec 起步)</li>
+<li><span class="box">☐</span>Chunking 策略:大小、重疊、按結構切</li>
+<li><span class="box">☐</span>檢索 → 增強 → 生成的完整管線</li>
+<li><span class="box">☐</span>引用來源(回答附出處)</li>
+<li><span class="box">☐</span>檢索品質評估:準備 20 題測試集,量測命中率</li>
+<li><span class="box">☐</span>進階(時間允許):hybrid search、reranking</li>
+<li><span class="box">☐</span>UI:Gradio 或 Streamlit,部署到 Hugging Face Spaces</li>
+</ul>
+<h3>必修學理(~5h)</h3>
+<ul class="task">
+<li><span class="box">☐</span>Embedding 原理與向量空間直覺</li>
+<li><span class="box">☐</span>為什麼需要 RAG(context 窗口、幻覺、知識時效)</li>
+<li><span class="box">☐</span>檢索評估指標:precision / recall / MRR</li>
+<li><span class="box">☐</span>DeepLearning.AI 短課程(RAG 相關,免費,挑一門)</li>
+</ul>
+<h3>完成定義</h3>
+<p>Hugging Face Spaces 上可公開試玩 + repo + README(含架構圖與評估數據)+ 短文。</p>
+<hr />
+<h2>專案 3:Agent 應用(W12–16)</h2>
+<p><strong>題目建議</strong>:能自主完成多步驟任務的助理(如:研究一個主題→彙整→產報告;或查 API→分析→行動)。</p>
+<h3>技術清單</h3>
+<ul class="task">
+<li><span class="box">☐</span>Agent loop:LLM 決策 → 執行工具 → 觀察結果 → 再決策</li>
+<li><span class="box">☐</span>工具設計:schema 定義、錯誤回饋給模型</li>
+<li><span class="box">☐</span>MCP(Model Context Protocol)概念與實作一個簡單 MCP server</li>
+<li><span class="box">☐</span>多步驟規劃與中間狀態管理</li>
+<li><span class="box">☐</span>Guardrails:預算上限、迴圈上限、危險操作確認</li>
+<li><span class="box">☐</span>Agent 評估:任務成功率測試集</li>
+</ul>
+<h3>必修學理(~4h)</h3>
+<ul class="task">
+<li><span class="box">☐</span>Anthropic〈Building Effective Agents〉(何時該用 workflow、何時才用 agent)</li>
+<li><span class="box">☐</span>ReAct 論文(讀 blog 導讀版即可)</li>
+<li><span class="box">☐</span>工具呼叫的底層:模型輸出的其實是文字,執行是你的程式做的</li>
+</ul>
+<h3>完成定義</h3>
+<p>Hugging Face Spaces demo + repo + README + 短文。</p>
+<p>⚠️ <strong>W12 起</strong>:開一個 <code>產品點子.md</code>,記錄日常撞到的痛點,W17 從中選產品題目。</p>
+<hr />
+<h2>專案 4:真實產品 MVP → 上線(W17–22)</h2>
+<p><strong>題目</strong>:從 <code>產品點子.md</code> 挑一個<strong>你自己真的會用</strong>的痛點。前三個專案的技術任意組合。</p>
+<h3>里程碑</h3>
+<ul class="task">
+<li><span class="box">☐</span>W17:定題,寫一頁 spec(解決誰的什麼問題、MVP 範圍、成功指標)</li>
+<li><span class="box">☐</span>W18–20:MVP 開發(砍功能,只留核心路徑)</li>
+<li><span class="box">☐</span>W21:部署上線 + 找 5 個真人試用,收集回饋</li>
+<li><span class="box">☐</span>W22:迭代一輪 + 寫上線覆盤文</li>
+</ul>
+<h3>必修學理(~4h)</h3>
+<ul class="task">
+<li><span class="box">☐</span>LLMOps 基礎:線上監控、成本控制、錯誤追蹤</li>
+<li><span class="box">☐</span>線上評估:怎麼知道改 prompt 之後變好還是變壞</li>
+<li><span class="box">☐</span>安全:prompt injection 防護、輸出過濾、使用量限制</li>
+</ul>
+<h3>完成定義</h3>
+<p>公開網址 + 至少 5 個真實使用者用過 + 覆盤文。</p>
+<hr />
+<h2>每週儀式(週日 30 分鐘)</h2>
+<ol>
+<li>本週實際投入時數?產出了什麼(commit / demo / 筆記)?</li>
+<li>對照本階段檢核表,打勾進度</li>
+<li>寫下週的 3 個具體目標(小到一定做得完)</li>
+<li>卡住超過 2 小時的問題 → 記下來,問 AI 或社群</li>
+</ol>
+<p><strong>彈性規則</strong>:每階段最多延 1 週;但不允許跳過「完成定義」直接進下一階段。</p>
+<hr />
+<h2>資源總表</h2>
+<table>
+<thead>
+<tr>
+<th>類型</th>
+<th>資源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>視覺化直覺</td>
+<td>3Blue1Brown Neural Networks 系列(YouTube)</td>
+</tr>
+<tr>
+<td>全局觀</td>
+<td>Karpathy〈Intro to LLMs〉演講</td>
+</tr>
+<tr>
+<td>深水區</td>
+<td>Karpathy《Neural Networks: Zero to Hero》系列</td>
+</tr>
+<tr>
+<td>Prompt</td>
+<td>Anthropic Prompt Engineering 文件</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>Anthropic〈Building Effective Agents〉</td>
+</tr>
+<tr>
+<td>短課程</td>
+<td>DeepLearning.AI short courses(免費)</td>
+</tr>
+<tr>
+<td>API 文件</td>
+<td>docs.anthropic.com、platform.openai.com</td>
+</tr>
+<tr>
+<td>部署</td>
+<td>Hugging Face Spaces 文件、GitHub Pages 文件</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>作品集連結(隨進度更新)</h2>
+<ul>
+<li>首頁:https://mango-pool.github.io/</li>
+<li>專案 1:(待補)</li>
+<li>專案 2:(待補)</li>
+<li>專案 3:(待補)</li>
+<li>產品:(待補)</li>
+</ul>
+  <footer>
+    由 <code>learning-plan.md</code> 產生（<code>render-learning-plan.py</code>）—— 請編輯 .md 而非本檔。<br>
+    <a href="./">← 回首頁</a>
+  </footer>
+</div>
+</body>
+</html>
