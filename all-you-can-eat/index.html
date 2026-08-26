@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All You Can Eat</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 版面說明：#stage 是 2048×1536 的固定舞台，所有帶 .at 的元素都由
+     js/ui.js 的 applyLayout() 依 js/layout.js（從 Unity 場景抽出的座標）
+     設定 left/top/width/height，CSS 只負責外觀。 -->
+<div id="stage">
+
+  <!-- 開場：Logo 三秒後自動進入選地區 -->
+  <section class="screen screen--on" id="screen-start">
+    <img class="at logo" id="logo" src="img/Logo.png" alt="All You Can Eat">
+    <p class="at txt t-uc annotation" id="start-hint" data-t="annotation"></p>
+  </section>
+
+  <!-- 選地區：台灣 / 汶萊 / 俄羅斯 -->
+  <section class="screen" id="screen-variant">
+    <h2 class="at txt t-uc" id="variant-title" data-t="whichPlace"></h2>
+    <button class="at variant" id="variant-tw" data-variant="tw">
+      <img src="img/Button_TW.png" alt=""><span data-t="taiwan"></span></button>
+    <button class="at variant" id="variant-bn" data-variant="bn">
+      <img src="img/Button_BN.png" alt=""><span data-t="brunei"></span></button>
+    <button class="at variant" id="variant-ru" data-variant="ru">
+      <img src="img/Button_RU.png" alt=""><span data-t="russia"></span></button>
+  </section>
+
+  <!-- 輸入玩家：最多 4 位，至少 2 位 -->
+  <section class="screen" id="screen-players">
+    <p class="at txt t-uc" id="players-title" data-t="enterName"></p>
+    <p class="at txt t-uc" id="players-min" data-t="min"></p>
+    <div id="player-inputs"></div>
+    <button class="at btn t-mc" id="btn-start-game" data-t="startGame"></button>
+  </section>
+
+  <!-- 遊戲主畫面 -->
+  <section class="screen" id="screen-game">
+    <div class="game-layer" id="game-layer">
+      <img class="at plate-bg" id="plate-bg" src="img/bg_sm.png" alt="">
+      <div id="meal-headers">
+        <img class="at meal-header" data-meal="breakfast" src="img/cards/Breakfast.png" alt="">
+        <img class="at meal-header" data-meal="lunch" src="img/cards/Lunch.png" alt="">
+        <img class="at meal-header" data-meal="dinner" src="img/cards/Dinner.png" alt="">
+      </div>
+      <div id="table-cards"></div>
+      <img class="at plate-img" id="plate-img" alt="">
+      <!-- #tokens 是一個 0×0 的原點，對齊盤子圖中心；盤子格位座標即以盤心為原點 -->
+      <div class="tokens" id="tokens"></div>
+      <div class="at stomach" id="stomach">
+        <div class="stomach-mask"><img src="img/stomach.png" alt=""></div>
+        <img class="stomach-border" src="img/stomach_2.png" alt="">
+      </div>
+      <span class="at txt t-uc" id="stomach-left"></span>
+      <span class="at txt t-ul" id="stomach-max"></span>
+      <div id="players"></div>
+      <span class="at txt t-ul" id="active-player"></span>
+      <span class="at txt t-ul choose" id="choose-txt"></span>
+      <button class="at btn action t-mc" id="btn-eat" data-action="eat" data-t="eat"></button>
+      <button class="at btn action t-mc" id="btn-digest" data-action="digest" data-t="digest"></button>
+      <button class="at btn action t-mc" id="btn-balance" data-action="balance" data-t="balance"></button>
+      <button class="at btn t-mc" id="btn-next" data-t="next"></button>
+      <div class="bonus-tokens" id="bonus-tokens" hidden></div>
+      <p class="at txt t-ul final-hint" id="final-hint" hidden></p>
+      <div class="at big-card" id="big-card" hidden></div>
+    </div>
+  </section>
+
+  <!-- 結算 -->
+  <section class="screen" id="screen-results">
+    <img class="at result-bg" id="result-bg" src="img/bg_sm.png" alt="">
+    <h2 class="at txt t-uc" id="results-title" data-t="results"></h2>
+    <span class="at txt t-uc" id="head-cuisine" data-t="cuisine"></span>
+    <span class="at txt t-uc" id="head-undig" data-t="undig"></span>
+    <span class="at txt t-uc" id="head-score" data-t="score"></span>
+    <img class="at result-line" id="result-line" src="img/line.png" alt="">
+    <div id="result-rows"></div>
+    <button class="at btn t-mc" id="btn-rematch" data-t="rematch"></button>
+    <button class="at btn t-mc" id="btn-newgame" data-t="newgame"></button>
+  </section>
+
+  <!-- 右上角常駐：語言、音效、回首頁 -->
+  <div class="settings" id="settings">
+    <div id="lang-btns"></div>
+    <button class="at icon-btn" id="btn-sound"><img src="img/Sound.png" alt=""></button>
+    <button class="at icon-btn" id="btn-home" hidden><img src="img/Home.png" alt=""></button>
+  </div>
+
+</div>
+
+<script src="js/cards.js"></script>
+<script src="js/lang.js"></script>
+<script src="js/plates.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/rules.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/anim.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

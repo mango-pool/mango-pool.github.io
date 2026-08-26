@@ -1,0 +1,153 @@
+/* ── 舞台：沿用原版 2048×1536 座標系，整層等比縮放 ────────── */
+/* 版面規則：帶 .at 的元素一律 position:absolute + translate(-50%,-50%)，
+   實際 left/top/width/height 由 js/ui.js 的 applyLayout() 依 js/layout.js
+   （tools/extract-scene.js 從 startScene.unity 抽出的舞台座標）寫入。
+   本檔只負責外觀（字型、顏色、背景圖、對齊方式），不寫死格位座標。 */
+@font-face { font-family: "AYCE-EN"; src: url("../fonts/English.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "AYCE-CH"; src: url("../fonts/Chinese.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "AYCE-RU"; src: url("../fonts/Russian.woff2") format("woff2"); font-display: swap; }
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%; overflow: hidden;
+  background: #d8ecf5 url("../img/background.png") center/cover no-repeat;
+}
+body { font-family: "AYCE-EN", sans-serif; color: #323232; }
+body[data-lang="ch"] { font-family: "AYCE-CH", sans-serif; }
+body[data-lang="ru"] { font-family: "AYCE-RU", sans-serif; }
+
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 2048px; height: 1536px;
+  transform-origin: 50% 50%;      /* 實際 scale 由 UI.fitStage() 設定 */
+}
+
+.screen { position: absolute; inset: 0; display: none; }
+.screen--on { display: block; }
+.game-layer { position: absolute; inset: 0; }
+
+/* 版面基礎：座標由 applyLayout() 填入，這裡只定錨點與繪製順序 */
+.at { position: absolute; transform: translate(-50%, -50%); }
+img.at, .at img { display: block; }
+/* .at / .t-* 會指定 display，會蓋掉 [hidden] 內建的 display:none，必須補回來 */
+[hidden] { display: none !important; }
+
+/* 文字盒：原版 Unity Text 的對齊方式
+   t-ul = UpperLeft、t-uc = UpperCenter、t-ur = UpperRight、t-mc = MiddleCenter */
+.txt { margin: 0; line-height: 1.15; white-space: pre-line; }
+.t-ul, .t-uc, .t-ur, .t-mc { display: flex; }
+.t-ul { align-items: flex-start; justify-content: flex-start; }
+.t-uc { align-items: flex-start; justify-content: center; text-align: center; }
+.t-ur { align-items: flex-start; justify-content: flex-end; text-align: right; }
+.t-mc { align-items: center; justify-content: center; text-align: center; }
+
+/* ── 按鈕 ──────────────────────────────────────────────── */
+.btn {
+  background: url("../img/btn_bg.png") center/100% 100% no-repeat;
+  border: 0; color: #4b3e19; font: inherit; cursor: pointer; padding: 0;
+}
+.btn[disabled] { background-image: url("../img/btnGray_bg.png"); color: #b9b9b9; cursor: default; }
+
+/* ── 開場 ──────────────────────────────────────────────── */
+.annotation { color: #323232; }
+
+/* ── 選地區：按鈕底圖就是 Button_XX.png，文字疊在右半邊 ─────── */
+.variant { border: 0; background: none; padding: 0; cursor: pointer; }
+.variant img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.variant span {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: #323232; font: inherit;
+}
+
+/* ── 輸入玩家 ───────────────────────────────────────────── */
+/* 輸入框疊在標籤那串底線上，所以本身透明無框（同原版 InputField 的外觀） */
+#player-inputs input {
+  position: absolute; transform: translate(-50%, -50%);
+  border: 0; background: none; padding: 0;
+  font-family: inherit; color: #323232; text-align: center;
+}
+#player-inputs input:focus { outline: 0; }
+
+/* ── 遊戲畫面 ───────────────────────────────────────────── */
+.plate-bg, .result-bg { opacity: .85; }
+
+.card { border: 0; background: none; padding: 0; cursor: pointer; }
+.card > img.card-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card[disabled] { filter: grayscale(.55) brightness(1.08); cursor: default; }
+.card .card-country, .card .card-meal {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; line-height: 1.1;
+}
+
+/* 代幣：#tokens 是對齊盤心的 0×0 原點，代幣以盤心為原點擺放 */
+.tokens { position: absolute; width: 0; height: 0; }
+.token {
+  position: absolute; transform: translate(-50%, -50%);
+  padding: 0; border: 0; background: none; cursor: pointer;
+}
+.token img { width: 100%; height: 100%; display: block; }
+.token--flying { pointer-events: none; z-index: 5; }
+
+/* 胃容量計量條：stomach.png 是填色、stomach_2.png 是外框，
+   --fill（0～1）由 UI.renderStomach 設定，由下往上露出填色 */
+.stomach { pointer-events: none; }
+.stomach .stomach-mask {
+  position: absolute; inset: 0; overflow: hidden;
+  clip-path: inset(calc((1 - var(--fill, 0)) * 100%) 0 0 0);
+}
+.stomach img { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* 吃超過一半時原版把填色乘上 (0.9,0.4,0.4)，這裡用濾鏡把粉紅壓成紅 #e56666 */
+.stomach--full .stomach-mask img { filter: saturate(2.4) brightness(.86) hue-rotate(-6deg); }
+
+.choose { color: #4b3e19; }
+.final-hint { color: #b02727; }
+
+/* 玩家區：每位玩家一個 0×0 原點，內部元素相對它擺放 */
+.player { position: absolute; width: 0; height: 0; }
+.player-bg { position: absolute; transform: translate(-50%, -50%); opacity: .8; }
+.player-name, .player-score {
+  position: absolute; transform: translate(-50%, -50%); display: flex;
+}
+.player-name { align-items: flex-start; justify-content: flex-start; }
+.player-score { align-items: flex-start; justify-content: center; }
+.player--active .player-name { text-decoration: underline; }
+.player .star { position: absolute; transform: translate(-50%, -50%); }
+.bonus-mini {
+  position: absolute; transform: translate(-50%, -50%);
+  padding: 0; border: 0; background: none; cursor: pointer;
+}
+.bonus-mini img { width: 100%; height: 100%; display: block; }
+
+/* bonus 代幣面板（Nutrition boost / Power of vegan） */
+.bonus-tokens { position: absolute; inset: 0; }
+
+/* 揭示大卡 */
+.big-card { cursor: pointer; z-index: 10; }
+.big-card img { width: 100%; height: 100%; display: block; }
+.big-card-name, .big-card-desc {
+  position: absolute; left: 0; width: 100%; text-align: center; color: #323232;
+}
+.big-card-name { top: 4%; font-size: 56px; }
+.big-card-desc { bottom: 4%; font-size: 34px; padding: 0 6%; }
+
+/* ── 結算 ──────────────────────────────────────────────── */
+.result-row { position: absolute; width: 0; height: 0; }
+.result-row span {
+  position: absolute; transform: translate(-50%, -50%); display: flex;
+  align-items: flex-start; justify-content: center;
+}
+.result-row .res-name { justify-content: flex-start; }
+.result-row .crown { position: absolute; transform: translate(-50%, -50%); }
+
+/* ── 右上角常駐設定 ─────────────────────────────────────── */
+.settings { position: absolute; inset: 0; pointer-events: none; }
+.settings > * { pointer-events: auto; }
+.icon-btn { border: 0; background: none; padding: 0; cursor: pointer; }
+.icon-btn img { width: 100%; height: 100%; display: block; }
+#lang-btns button {
+  position: absolute; transform: translate(-50%, -50%);
+  border: 0; background: none; padding: 0; cursor: pointer;
+  font-family: inherit; color: #323232;
+}
+#lang-btns button.lang--on { color: #b02727; }
