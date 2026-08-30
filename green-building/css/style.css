@@ -15,7 +15,26 @@ body{margin:0; background:var(--bg); color:var(--ink);
   padding:16px; max-width:1220px; margin:0 auto;}
 
 /* ── 選單 ───────────────────────────── */
-.col-left{display:flex; flex-direction:column; gap:14px; width:225px; flex:0 0 auto;}
+/* 左欄：六個部位的選單 ＋ 送出設計。
+   整欄 sticky，選單區自己內部捲動 —— 21 種建材一次攤開會有 27 列，
+   讓它撐長整頁的話，中間的房子與送出設計按鈕都會被推到看不見的地方。 */
+.col-left{display:flex; flex-direction:column; gap:12px; width:242px; flex:0 0 auto;
+  position:sticky; top:12px;}
+/* 高度上限扣掉頁首、外距與底下的送出按鈕，
+   讓「送出設計」在任何捲動位置都留在畫面內 */
+.menus{display:flex; flex-direction:column; gap:14px; max-height:calc(100vh - 160px);
+  overflow-y:auto; overscroll-behavior:contain; padding-right:4px; min-height:0;}
+/* 沒有這一行，flex 會把六個選單壓扁塞進固定高度裡，反而捲不動 */
+.menus > .menu{flex:0 0 auto;}
+/* 捲軸做細一點，才不會跟選單搶視覺重量 */
+.menus::-webkit-scrollbar{width:8px;}
+.menus::-webkit-scrollbar-thumb{background:#c3d2e0; border-radius:4px;}
+.menus::-webkit-scrollbar-thumb:hover{background:#a8bccd;}
+.menus::-webkit-scrollbar-track{background:transparent;}
+/* 沒有圖層的部位（間隔牆／層板／地板）在標題右邊掛一個提示 */
+.menu-title{gap:6px;}
+.menu-tag{flex:0 0 auto; font-size:.82em; font-weight:400; opacity:.75;
+  border:1px solid rgba(255,255,255,.5); border-radius:8px; padding:0 5px; white-space:nowrap;}
 .menu{background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
 .menu-title{background:var(--brand); color:#fff; font-size:.8em; font-weight:700;
   padding:7px 10px; display:flex; justify-content:space-between; align-items:center;}
@@ -24,7 +43,7 @@ body{margin:0; background:var(--bg); color:var(--ink);
   color:#13395c; font-family:inherit;}
 .menu-item:hover{background:#eef4fa;}
 .menu-item.selected{background:var(--pro); color:#fff; font-weight:700;}
-/* 複選部位（額外設備）：前面加勾選框，暗示可以同時選好幾個 */
+/* 複選部位（加裝設備系統）：前面加勾選框，暗示可以同時選好幾個 */
 .menu-item.multi::before{content:"☐ "; opacity:.55;}
 .menu-item.multi.selected::before{content:"☑ "; opacity:1;}
 
@@ -56,14 +75,14 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .house-photo .layer{position:absolute; top:0; left:0; width:100%; height:auto; display:block;}
 #img-base{z-index:0;}   /* 背景空地 */
 #img-house{z-index:1;}  /* 房子主體 */
-#img-wall{z-index:2;}   /* 外牆材質 */
-#img-roof{z-index:3;}   /* 屋頂 */
-/* 額外設備為複選，每項各一層，z-index 由 game.js 設為 4 以上 */
+/* 其餘圖層的 z-index 由 game.js 依 data.js 的 layer 欄位動態設定：
+   2 地板 → 3 間隔牆 → 4 承重牆 → 5 屋頂 → 6+ 加裝設備系統。
+   地板與間隔牆是室內構造，必須疊在承重牆之下。 */
 .house-photo .layer[hidden]{display:none;}
 
 /* 提醒訊息（紅字） */
 .info-name.warn{color:var(--con);}
-/* 主要建材未選時，屋頂與額外設備選單呈停用樣式 */
+/* 承重牆未選時，其餘選單呈停用樣式 */
 .menu.locked{opacity:.55;}
 .menu.locked .menu-item{cursor:not-allowed;}
 /* 前置條件未滿足的單項（屋頂未選時的太陽能板、採光井） */
@@ -76,12 +95,17 @@ body{margin:0; background:var(--bg); color:var(--ink);
   padding:2px 9px; border-radius:11px; margin:2px 4px 2px 0;}
 .tok.pro{background:var(--pro);} .tok.con{background:var(--con);}
 .muted{color:var(--muted); font-size:.86em;}
+/* 試算表附的材質特性說明 */
+.info-desc{margin:8px 0 0; font-size:.84em; line-height:1.65; color:#5a6672;}
 
 /* ── 整棟房子累計：比例條 ＋ 性質標籤 ───────── */
 .house-sum{width:100%; background:#fff; border:1px solid var(--line);
   border-radius:10px; padding:9px 15px 12px;}
 .sum-title{font-size:.78em; color:var(--muted);}
-.sum-head{display:flex; justify-content:space-between; align-items:baseline; margin:3px 0 5px;}
+.sum-head{display:flex; justify-content:space-between; align-items:baseline; margin:3px 0 5px; gap:10px;}
+/* 完成度：成就條件藏起來、五芒星又移到第二頁之後，
+   這是第一頁僅剩的「還沒做完」訊號，所以擺在最顯眼的左上 */
+.sum-progress{font-size:.85em; color:#13395c; font-weight:700;}
 .sum-pro{font-size:.85em; color:var(--pro); font-weight:700;}
 .sum-con{font-size:.85em; color:var(--con); font-weight:700;}
 /* 綠紅各佔 pros/(pros+cons)，不需要理論上限，所以沒有刻度不一致的問題 */
@@ -91,33 +115,130 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .ratio-con{background:var(--con);}
 .tok-row{margin-top:7px;}
 
-/* ── 右側 ──────────────────────────── */
-.col-achv{width:215px; flex:0 0 auto;}
-
 .achv-box{background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
 .count{font-weight:700; font-size:.95em; opacity:.9;}
-/* 一列成就 = 標題列 ＋（未達成時）條件標籤列，兩層由上而下堆疊 */
+/* 一列成就 = 圖示 ＋ 名稱。
+   刻意不顯示解鎖條件 —— 成就名稱就是玩家唯一的提示，靠自己聯想。 */
 .achv{display:block; padding:6px 10px; border-top:1px solid #eef1f4; font-size:.8em; color:#8a8a8a;}
 .achv.got{color:#13395c; background:#f2faf2;}
+/* 本次新解鎖：金色高亮，讓玩家一眼看出這一棟做對了什麼 */
+.achv.fresh{background:#fff8e8; box-shadow:inset 3px 0 0 #e8a33d;}
 .achv-head{display:flex; align-items:flex-start; gap:7px;}
 .achv-ic{flex:0 0 auto; font-size:1em;}
 .achv-name{display:flex; flex-direction:column; line-height:1.35; flex:1; min-width:0;}
-/* 還差幾項 */
-.achv-count{flex:0 0 auto; font-size:.92em; color:#9aa6b2; white-space:nowrap;}
-/* 條件標籤：綠底＝已滿足，灰框＝還沒 */
-/* 不縮排：215px 的欄寬下，縮排會讓標籤多換一行、整欄高出約 9% */
-.achv-cond{display:flex; flex-wrap:wrap; gap:4px; margin:5px 0 1px;}
-.cond{border:1px solid var(--line); border-radius:9px; padding:1px 6px;
-  font-size:.92em; color:#8794a2; background:#fff;}
-.cond.met{background:#eaf6ea; border-color:#a8d8a8; color:#3f8a3f; font-weight:700;}
-.cond.plain{border:0; padding:1px 0; background:transparent;}
 .achv.got .achv-name{font-weight:700;}
 .achv-en{font-size:.85em; opacity:.7;}
-.achv .tag{background:#e8a33d; color:#fff; font-size:.72em; padding:0 5px;
-  border-radius:8px; margin-left:3px; font-weight:700;}
-.achv.tbd{opacity:.72;}
+/* 「✨ 這一棟新解鎖 N 項」標頭；沒有新解鎖時轉為灰底的說明句 */
+.achv-newhead{background:#e8a33d; color:#fff; font-size:.78em; font-weight:700;
+  padding:5px 10px;}
+.achv-newhead.none{background:#f0f3f6; color:var(--muted); font-weight:400;}
 
 @media(max-width:1080px){
   .stage{flex-direction:column; align-items:stretch;}
-  .col-left,.col-achv{width:auto;}
+  /* 窄畫面改成上下排列，sticky 與高度限制都取消，讓選單整段攤開 */
+  .col-left{width:auto; position:static; max-height:none;}
+  .menus{overflow-y:visible;}
+}
+
+/* ── 兩頁式流程 ───────────────────────────
+   第一頁「送出設計」→ 第二頁「再蓋一棟」。
+   兩個 <main> 切 hidden 即可，不需要路由。 */
+main.stage[hidden]{display:none;}
+
+/* 送出設計：擺在左欄選單下方，寬度略窄於選單、置中，
+   讓它讀起來是「選完之後的下一步」而不是第四個選單 */
+.btn-primary{align-self:center; width:78%; background:var(--brand); color:#fff; border:0;
+  border-radius:12px; padding:12px 10px; font-size:1.12em; font-weight:700;
+  font-family:inherit; cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; gap:2px; margin-top:4px;}
+.btn-primary:hover{background:#0a5c9e;}
+.btn-primary .btn-en{font-size:.62em; font-weight:400; opacity:.8;}
+
+/* ══ 第二頁：結算 ════════════════════════════════════
+   一頁式滑動，上下兩區。版面與配色參考客戶手繪圖
+   doc/img/新增 點陣圖影像.bmp —— 米白底、圓角卡片、綠色編號徽章。 */
+:root{ --cream:#F7F4EC; --green:#2E6B4F; --green-soft:#8FC0A4; }
+
+main.result{max-width:1000px; margin:0 auto; padding:18px 16px 60px;}
+
+/* 一個區域 = 米白圓角容器 */
+.rblock{background:var(--cream); border:1px solid #e3ddcf; border-radius:20px;
+  padding:18px 20px 22px; margin-bottom:6px;}
+.rblock-head{display:flex; align-items:center; margin-bottom:16px;
+  border-left:4px solid var(--green); padding-left:12px;}
+.rblock-head h2{margin:0; font-size:1.25em; color:#23303a;}
+.rblock-head p{margin:2px 0 0; font-size:.85em; color:#6c7a70;}
+/* 兩區之間的向下箭頭，提示還要往下捲 */
+.rblock-arrow{text-align:center; color:var(--green); font-size:1.3em; margin:2px 0 6px;}
+
+.card{background:#fff; border:1px solid #e6e2d6; border-radius:14px; padding:14px 16px;}
+.card-title{font-size:.9em; font-weight:700; color:var(--green);
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+
+/* ── 區域一：房子（寬）＋ 數字卡（窄）─────────── */
+.rblock-body.design{display:flex; gap:14px; align-items:stretch;}
+.design-house{flex:1 1 auto; min-width:0; padding:8px;}
+.design-stats{flex:0 0 210px; display:flex; flex-direction:column; justify-content:center; gap:4px;}
+.design-stats hr{border:0; border-top:1px solid #eceade; width:100%; margin:12px 0;}
+.stat-label{font-size:.85em; color:#6c7a70; font-weight:700;}
+.stat-value{font-size:1.7em; font-weight:700; color:var(--green); line-height:1.25;}
+.stat-value.big{font-size:2.5em;}
+.stat-unit{font-size:.85em; color:#6c7a70;}
+/* 指針落在低碳端時給正回饋 */
+.pill.rank.good{background:#2E6B4F;}
+.pill.rank.none{background:#e8e6dd; color:#8b9490;}
+
+/* ── 區域二：儀表卡 ＋ 五芒星卡 ＋ 成就卡 ───────── */
+.rblock-body.analyse{display:grid; gap:14px;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);}
+.achv-card{grid-column:1 / -1;}   /* 成就佔滿整列，接在兩張卡下面 */
+
+.gauge-card{display:flex; flex-direction:column; align-items:center; text-align:center; gap:2px;}
+.pill{display:inline-block; background:#f1f3ef; color:#4a5a50; border-radius:12px;
+  padding:3px 14px; font-size:.85em; font-weight:700;}
+.pill.rank{background:var(--green); color:#fff; margin-top:12px;}
+
+/* 低 → 高 的顏色帶，指針位置由 game.js 設 left% */
+.gauge{width:100%; max-width:220px; margin-top:14px; position:relative;}
+.gauge-bar{height:11px; border-radius:6px;
+  background:linear-gradient(90deg,#4a9d78 0%,#8dc06a 38%,#e9c463 68%,#d9694f 100%);}
+.gauge-needle{position:absolute; top:-5px; width:3px; height:21px; border-radius:2px;
+  background:#3a4a40; transform:translateX(-50%);}
+.gauge-needle[hidden]{display:none;}
+.gauge-ends{display:flex; justify-content:space-between; font-size:.78em;
+  color:#6c7a70; margin-top:3px;}
+
+/* ── 五芒星 ───────────────────────────── */
+.penta-card{display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.penta-host{width:100%;}
+.penta-svg{width:100%; height:auto; display:block;}
+.penta-ring{fill:none; stroke:#dcd8cb; stroke-width:1;}
+.penta-axis{stroke:#dcd8cb; stroke-width:1;}
+.penta-area{fill:var(--green-soft); fill-opacity:.55; stroke:var(--green); stroke-width:2;
+  stroke-linejoin:round; transition:none;}
+.penta-dot{fill:var(--green);}
+.penta-label{font-size:11.5px; fill:#4a5a50;
+  font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;}
+.penta-note{margin:4px 0 0; font-size:.76em; color:#9aa39c; text-align:center;}
+
+/* ── 成就：不顯示解鎖條件，排成多欄省版面 ─────── */
+.achv-grid{display:grid; gap:0 14px; grid-template-columns:repeat(auto-fill,minmax(215px,1fr));}
+.achv-card .achv{border-top:1px solid #f0eee6;}
+
+/* ── 「再蓋一棟」：方形，捲動時固定在右上角 ────── */
+.btn-square{position:fixed; top:56px; right:18px; z-index:30;
+  width:78px; height:78px; border-radius:16px; border:0;
+  background:var(--brand); color:#fff; font-family:inherit; cursor:pointer;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  box-shadow:0 3px 10px rgba(0,0,0,.22);}
+.btn-square:hover{background:#0a5c9e;}
+.sq-cn{font-size:.92em; font-weight:700; line-height:1.2;}
+.sq-en{font-size:.62em; opacity:.8; line-height:1.15;}
+
+@media(max-width:820px){
+  .rblock-body.design{flex-direction:column;}
+  .design-stats{flex:0 0 auto;}
+  .rblock-body.analyse{grid-template-columns:1fr;}
+  /* 窄畫面：按鈕縮小，避免壓到內容 */
+  .btn-square{width:62px; height:62px; top:52px; right:10px; border-radius:13px;}
 }

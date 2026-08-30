@@ -13,33 +13,33 @@
   <span class="sub">汶萊大學 · noreena 節能減碳房屋改造遊戲</span>
 </header>
 
-<main class="stage">
+<!-- ══ 第一頁：施工 ══════════════════════════════════════
+     選建材 → 看房子 → 送出設計。成就與完整評估都在第二頁，
+     這一頁只給「還沒選完」與「大致好壞」兩種即時回饋。 -->
+<main class="stage" id="page-build">
 
-  <!-- 左側：主建材 → 屋頂 → 額外設備 -->
+  <!-- 左側：選單 ＋ 送出設計 -->
   <aside class="col-left">
-    <div class="menu" id="menu-wall"></div>
-    <div class="menu" id="menu-roof"></div>
-    <div class="menu" id="menu-extra"></div>
+    <!-- 選單由 game.js 依 data.js 的 PARTS 順序自動生成，加部位只要改 data.js -->
+    <div class="menus" id="menus"></div>
+
+    <!-- 送出設計 → 第二頁結算。
+         ⚠️ 不可因為「還沒選任何東西」就停用 —— 全部維持未選擇正是「大地主」的解鎖條件。 -->
+    <button class="btn-primary" id="btn-submit" type="button">
+      送出設計 <span class="btn-en">Submit Design</span>
+    </button>
   </aside>
 
   <!-- 中間：房子 + 資訊框 -->
   <section class="col-center">
     <div class="house-wrap">
       <!-- 擬真圖層堆疊（z-index 由下而上）
-           0 背景空地 base.webp（永遠顯示）
-           1 房子主體 base house.webp（選了主要建材才顯示）
-           2 外牆材質
-           3 屋頂
-           ── 以下額外設備可複選，每項各佔一層，由 game.js 依 data.js 順序動態產生 ──
-           4 太陽能板
-           5 採光井+通風扇
-           6 採光落地窗
-           7 區域電網（屋外儲能櫃，離鏡頭最近，疊在最上層） -->
+           0 基地背景 site.webp（永遠顯示）
+           1 房子主體 base_house.webp（選了門檻部位才顯示）
+           2 以上 ── 各部位圖層由 game.js 依 data.js 的 layer 欄位動態產生 -->
       <div class="house-photo" id="house-photo" hidden>
-        <img class="layer" id="img-base"  src="img/base.webp" alt="">
+        <img class="layer" id="img-base"  src="img/site.webp" alt="">
         <img class="layer" id="img-house" src="img/base_house.webp" alt="" hidden>
-        <img class="layer" id="img-wall"  alt="" hidden>
-        <img class="layer" id="img-roof"  alt="" hidden>
       </div>
 
       <!-- 放大鏡：鏡片內是同一份圖層堆疊的複本（由 game.js 於每次重繪時同步），
@@ -48,7 +48,6 @@
       <div class="lens" id="lens" hidden><div class="lens-inner" id="lens-inner"></div></div>
 
       <button class="lens-toggle" id="lens-toggle" type="button" title="開啟／關閉放大鏡">🔍 <span id="lens-hint">放大鏡</span></button>
-
     </div>
 
     <!-- 中央資訊框：最近點選的那一個建材 -->
@@ -57,34 +56,118 @@
       <div class="info-tokens" id="info-tokens"></div>
     </div>
 
-    <!-- 整棟房子累計：比例條 ＋ 性質標籤（重複的以 ×N 表示）
-         緊接在「這個建材」下方，同樣的標籤語言、只是換成全屋範圍 -->
+    <!-- 簡版即時評估：只給「還有幾個部位沒選」與「大致好壞」。
+         完整的分項標籤與五芒星留到第二頁，才有結算的意義。 -->
     <div class="house-sum">
-      <div class="sum-title">整棟房子</div>
       <div class="sum-head">
-        <span class="sum-pro">好處 <b id="num-pros">0</b></span>
-        <span class="sum-con">壞處 <b id="num-cons">0</b></span>
+        <span class="sum-progress" id="sum-progress">已選 0 / 0 個部位</span>
+        <span>
+          <span class="sum-pro">好處 <b id="num-pros">0</b></span>
+          <span class="sum-con">壞處 <b id="num-cons">0</b></span>
+        </span>
       </div>
       <div class="ratio">
         <div class="ratio-pro" id="ratio-pros"></div>
         <div class="ratio-con" id="ratio-cons"></div>
       </div>
-      <div class="sum-toks" id="sum-toks"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ══ 第二頁：結算 ══════════════════════════════════════
+     一頁式滑動，上下兩區（版面參考 doc/img/新增 點陣圖影像.bmp）：
+       區域一　完成房屋設計 —— 房子 ＋ 總成本／碳足跡
+       區域二　系統分析材料組合 —— 碳足跡儀表 ＋ 五芒星 ＋ 成就
+     「再蓋一棟」是固定在右上角的方形按鈕，捲動時不會跑掉。 -->
+<main class="result" id="page-result" hidden>
+
+  <!-- 捲動時保持在右上角 -->
+  <button class="btn-square" id="btn-restart" type="button" title="清空重來，已解鎖的成就會保留">
+    <span class="sq-cn">再蓋<br>一棟</span>
+    <span class="sq-en">Build<br>Another</span>
+  </button>
+
+  <!-- ── 區域一：完成房屋設計 ───────────────────────── -->
+  <section class="rblock">
+    <header class="rblock-head">
+      <div>
+        <h2>完成房屋設計</h2>
+        <p>打造你的理想永續住宅</p>
+      </div>
+    </header>
+
+    <div class="rblock-body design">
+      <!-- 房子：送出時由 game.js 複製第一頁的圖層堆疊過來，
+           做法與放大鏡相同，不必維護第二套圖層。這裡不掛放大鏡。 -->
+      <div class="card design-house">
+        <div class="house-photo" id="result-photo"></div>
+      </div>
+
+      <!-- 兩個總計數字。數值來源是 252 組合查表，尚未接上（見差異報告 §10-2） -->
+      <div class="card design-stats">
+        <div class="stat">
+          <div class="stat-label">預估總成本</div>
+          <div class="stat-value" id="stat-cost">—</div>
+          <div class="stat-unit" id="stat-cost-unit">—</div>
+        </div>
+        <hr>
+        <div class="stat">
+          <div class="stat-label">預估碳足跡</div>
+          <div class="stat-value" id="stat-carbon">—</div>
+          <div class="stat-unit" id="stat-carbon-unit">—</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 最右：成就 -->
-  <aside class="col-achv">
-    <div class="achv-box">
-      <div class="menu-title">🏆 成就 <span id="achv-count" class="count">0 / 0</span></div>
-      <div id="achv-list"></div>
+  <div class="rblock-arrow">▼</div>
+
+  <!-- ── 區域二：系統分析材料組合 ────────────────────── -->
+  <section class="rblock">
+    <header class="rblock-head">
+      <div>
+        <h2>系統分析材料組合</h2>
+        <p>分析你的設計表現</p>
+      </div>
+    </header>
+
+    <div class="rblock-body analyse">
+      <!-- 碳足跡 ＋ 低／高儀表 ＋ 贏過多少玩家 -->
+      <div class="card gauge-card">
+        <div class="pill">預估碳足跡</div>
+        <div class="stat-value big" id="gauge-carbon">—</div>
+        <div class="stat-unit">kgCO₂e</div>
+        <div class="gauge">
+          <div class="gauge-bar"></div>
+          <div class="gauge-needle" id="gauge-needle" hidden></div>
+          <div class="gauge-ends"><span>低</span><span>高</span></div>
+        </div>
+        <div class="pill rank" id="gauge-rank">待接資料</div>
+      </div>
+
+      <!-- 五芒星：由 penta.js 依 data.js 的 AXES 繪製 -->
+      <div class="card penta-card">
+        <div class="penta-host" id="penta"></div>
+        <p class="penta-note" id="penta-note"></p>
+      </div>
+
+      <!-- 成就：只有名字，沒有解鎖條件 —— 靠玩家自己摸索 -->
+      <div class="card achv-card">
+        <div class="card-title">🏆 成就 <span id="achv-count" class="count">0 / 0</span></div>
+        <div id="achv-new"></div>
+        <div class="achv-grid" id="achv-list"></div>
+      </div>
     </div>
-  </aside>
+  </section>
 
 </main>
 
 <script src="js/data.js"></script>
+<script src="js/combos.js"></script>
 <script src="js/achievements.js"></script>
+<script src="js/penta.js"></script>
 <script src="js/game.js"></script>
 </body>
 </html>
