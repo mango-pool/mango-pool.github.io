@@ -6,8 +6,8 @@
 // 建材欄位：
 //   id / name / en       程式代號與中英文顯示名
 //   img                  擬真圖路徑。留空('')＝這一層不畫。
-//                        間隔牆、層板、地板的素材尚未出圖，先留空；
-//                        日後填上路徑就自動生效，程式完全不用改。
+//                        19 項建材的素材目前皆已到齊；日後若新增材料
+//                        尚未出圖就留空，填上路徑即自動生效，程式不用改。
 //   tokens               五面向 Token（COM / DUR / CST / SUS / OPS × 正負）
 //   co2 / unit / life / price
 //                        試算表的碳排係數／單位／使用年限／原始單價；
@@ -31,25 +31,41 @@ const TOKENS = {
   'OPS+': { text: '後續效益', kind: 'pro' }, 'OPS-': { text: '後續負擔', kind: 'con' },
 };
 
-// PARTS 的排列順序 = 左欄選單由上而下的順序（＝試算表的類別順序）
+// PARTS 的排列順序 = 左欄選單由上而下的順序
 const PARTS = [
   {
-    id: 'wall', name: '承重牆', en: 'Load-bearing Wall',
-    menu: 'Choose load-bearing wall 選擇承重牆',
-    gate: true, layer: 4,
+    id: 'floor', name: '地板', en: 'Flooring',
+    menu: 'Choose flooring 選擇地板',
+    gate: true, layer: 2,
     materials: [
-      { id: 'concrete', name: '混凝土磚', en: 'Concrete Block',
-        img: 'img/wall/concrete_block.webp', tokens: ['DUR+', 'CST+'],
-        co2: 243.78, unit: 'kgCO2e/m3', life: 50, price: 4200,
-        desc: '以水泥、砂與骨材製成的砌塊，質地厚重、耐火且承重穩定；孔隙與接縫需搭配適當的防水與隔熱設計。' },
-      { id: 'brick', name: '紅磚', en: 'Clay Brick / Block',
-        img: 'img/wall/blocks.webp', tokens: ['DUR+'],
-        co2: 473.7, unit: 'kgCO2e/m3', life: 150, price: 15000,
-        desc: '以黏土成形後高溫燒製的砌體，具有良好耐火性與蓄熱性，表面質樸；重量較高，施工需以砂漿逐塊砌築。' },
-      { id: 'clt', name: '交叉層壓木', en: 'CLT',
-        img: 'img/wall/clt.webp', tokens: ['COM+', 'SUS+', 'CST-'],
-        co2: 214.3, unit: 'kgCO2e/m3', life: 60, price: 18500,
-        desc: '將多層實木板以纖維方向交錯膠合而成的結構材，質量較輕、剛性佳且適合預製；木材仍需注意防潮與防火細節。' },
+      { id: 'screed', name: '水泥平舖', en: 'Cement Screed (30mm)',
+        img: 'img/floor/screed.webp', tokens: ['DUR+', 'CST+', 'COM-'],
+        co2: 10.98, unit: 'kgCO2e/m2', life: 50, price: 605,
+        desc: '以水泥砂漿鋪設的整平層，可形成平整、硬實且無明顯接縫的表面；觸感偏冷硬，基層處理不當時可能產生裂紋。' },
+      { id: 'ceramic', name: '陶瓷磚', en: 'Ceramic / Porcelain Tile',
+        img: 'img/floor/ceramic.webp', tokens: ['DUR+', 'CST+', 'COM-'],
+        co2: 15, unit: 'kgCO2e/m2', life: 50, price: 800,
+        desc: '以黏土與礦物原料燒製的硬質板材，耐磨、易清潔且抗潮；表面與縫隙需注意防滑、填縫及局部破損問題。' },
+      { id: 'stone', name: '大理石／花崗石／人造石', en: 'Marble / Granite / Engineered Stone',
+        img: 'img/floor/stone.webp', tokens: ['DUR+', 'CST-', 'COM-'],
+        co2: 3.68, unit: 'kgCO2e/m2', life: 50, price: 4200,
+        desc: '天然石材或礦物與樹脂製成的人造石，質地緻密、紋理鮮明且耐磨；材料較重、腳感冷硬，部分石材需定期封護。' },
+      { id: 'wood', name: '實木／超耐磨／海島型地板', en: 'Solid Wood',
+        img: 'img/floor/wood.webp', tokens: ['COM+', 'SUS+', 'DUR-'],
+        co2: 4.56, unit: 'kgCO2e/m2', life: 25, price: 1500,
+        desc: '包含實木、表面耐磨層地板與多層木質複合板，具有溫潤外觀與較柔和腳感；各類結構不同，但普遍需控制潮濕與刮磨。' },
+      { id: 'pvc', name: '塑膠地板', en: 'PVC / SPC / LVT',
+        img: 'img/floor/pvc.webp', tokens: ['CST+', 'DUR-', 'SUS-'],
+        co2: 22.5, unit: 'kgCO2e/m2', life: 15, price: 605,
+        desc: '以塑膠或石塑複合芯材製成的多層地板，花色多、耐潮且易清潔；腳感、尺寸穩定性與可修復性會隨產品結構而異。' },
+      { id: 'epoxy', name: '自流平地坪', en: 'Epoxy / PU Self-leveling',
+        img: 'img/floor/epoxy.webp', tokens: ['CST+', 'DUR-', 'COM-'],
+        co2: 6, unit: 'kgCO2e/m2', life: 10, price: 1000,
+        desc: '將環氧樹脂或聚氨酯塗料流平成連續地坪，表面無縫、易清潔並可耐磨耐化學品；基層含水與施工品質會影響附著及裂損。' },
+      { id: 'carpet', name: '捲毯／方塊毯／羊毛毯', en: 'Broadloom / Carpet Tile / Wool',
+        img: 'img/floor/carpet.webp', tokens: ['COM+', 'DUR-', 'SUS-'],
+        co2: 24.1, unit: 'kgCO2e/m2', life: 15, price: 1800,
+        desc: '由羊毛或合成纖維表層搭配背材構成，觸感柔軟並能吸音保溫；較易累積灰塵與污漬，方塊毯則可局部拆換。' },
     ]
   },
   {
@@ -72,17 +88,22 @@ const PARTS = [
     ]
   },
   {
-    id: 'slab', name: '層板', en: 'Floor Slab',
-    menu: 'Choose floor slab 選擇層板',
+    id: 'wall', name: '承重牆', en: 'Load-bearing Wall',
+    menu: 'Choose load-bearing wall 選擇承重牆',
+    layer: 4,
     materials: [
-      { id: 'clt', name: '交叉層壓木層板', en: 'CLT Slab',
-        img: '', tokens: ['COM+', 'SUS+', 'CST-'],
-        co2: 3260.1, unit: 'kgCO2e/層', life: 60, price: 281385,
-        desc: '以交叉膠合的實木板構成樓層板，質量較輕、可預製並保留木質表面；接縫、振動、隔音與防潮需在系統設計中處理。' },
-      { id: 'rc', name: '鋼筋混凝土層板', en: 'RC Slab',
-        img: '', tokens: ['DUR+', 'CST+'],
-        co2: 3632, unit: 'kgCO2e/層', life: 60, price: 81315,
-        desc: '由鋼筋承受拉力、混凝土承受壓力的樓板系統，剛性、耐火與蓄熱能力佳；自重較大，通常需要模板與濕式施工。' },
+      { id: 'concrete', name: '混凝土磚', en: 'Concrete Block',
+        img: 'img/wall/concrete_block.webp', tokens: ['DUR+', 'CST+'],
+        co2: 243.78, unit: 'kgCO2e/m3', life: 50, price: 4200,
+        desc: '以水泥、砂與骨材製成的砌塊，質地厚重、耐火且承重穩定；孔隙與接縫需搭配適當的防水與隔熱設計。' },
+      { id: 'brick', name: '紅磚', en: 'Clay Brick / Block',
+        img: 'img/wall/blocks.webp', tokens: ['DUR+'],
+        co2: 473.7, unit: 'kgCO2e/m3', life: 150, price: 15000,
+        desc: '以黏土成形後高溫燒製的砌體，具有良好耐火性與蓄熱性，表面質樸；重量較高，施工需以砂漿逐塊砌築。' },
+      { id: 'clt', name: '交叉層壓木', en: 'CLT',
+        img: 'img/wall/clt.webp', tokens: ['COM+', 'SUS+', 'CST-'],
+        co2: 214.3, unit: 'kgCO2e/m3', life: 60, price: 18500,
+        desc: '將多層實木板以纖維方向交錯膠合而成的結構材，質量較輕、剛性佳且適合預製；木材仍需注意防潮與防火細節。' },
     ]
   },
   {
@@ -98,41 +119,6 @@ const PARTS = [
         img: 'img/roof/metal_roof.webp', tokens: ['DUR+', 'CST+', 'SUS+', 'COM-'],
         co2: 613, unit: 'kgCO2e/件', life: 30, price: 54257,
         desc: '在既有屋頂上方加設輕質金屬覆面，能快速形成耐候外殼並利於排水；金屬導熱與傳聲明顯，需搭配隔熱、隔音與防結露層。' },
-    ]
-  },
-  {
-    id: 'floor', name: '地板', en: 'Flooring',
-    menu: 'Choose flooring 選擇地板',
-    layer: 2,
-    materials: [
-      { id: 'screed', name: '水泥平舖', en: 'Cement Screed (30mm)',
-        img: '', tokens: ['DUR+', 'CST+', 'COM-'],
-        co2: 10.98, unit: 'kgCO2e/m2', life: 50, price: 605,
-        desc: '以水泥砂漿鋪設的整平層，可形成平整、硬實且無明顯接縫的表面；觸感偏冷硬，基層處理不當時可能產生裂紋。' },
-      { id: 'ceramic', name: '陶瓷磚', en: 'Ceramic / Porcelain Tile',
-        img: 'img/floor/ceramic.webp', tokens: ['DUR+', 'CST+', 'COM-'],
-        co2: 15, unit: 'kgCO2e/m2', life: 50, price: 800,
-        desc: '以黏土與礦物原料燒製的硬質板材，耐磨、易清潔且抗潮；表面與縫隙需注意防滑、填縫及局部破損問題。' },
-      { id: 'stone', name: '大理石／花崗石／人造石', en: 'Marble / Granite / Engineered Stone',
-        img: 'img/floor/stone.webp', tokens: ['DUR+', 'CST-', 'COM-'],
-        co2: 3.68, unit: 'kgCO2e/m2', life: 50, price: 4200,
-        desc: '天然石材或礦物與樹脂製成的人造石，質地緻密、紋理鮮明且耐磨；材料較重、腳感冷硬，部分石材需定期封護。' },
-      { id: 'wood', name: '實木／超耐磨／海島型地板', en: 'Solid Wood',
-        img: 'img/floor/wood.webp', tokens: ['COM+', 'SUS+', 'DUR-'],
-        co2: 4.56, unit: 'kgCO2e/m2', life: 25, price: 1500,
-        desc: '包含實木、表面耐磨層地板與多層木質複合板，具有溫潤外觀與較柔和腳感；各類結構不同，但普遍需控制潮濕與刮磨。' },
-      { id: 'pvc', name: '塑膠地板', en: 'PVC / SPC / LVT',
-        img: 'img/floor/pvc.webp', tokens: ['CST+', 'DUR-', 'SUS-'],
-        co2: 22.5, unit: 'kgCO2e/m2', life: 15, price: 605,
-        desc: '以塑膠或石塑複合芯材製成的多層地板，花色多、耐潮且易清潔；腳感、尺寸穩定性與可修復性會隨產品結構而異。' },
-      { id: 'epoxy', name: '自流平地坪', en: 'Epoxy / PU Self-leveling',
-        img: '', tokens: ['CST+', 'DUR-', 'COM-'],
-        co2: 6, unit: 'kgCO2e/m2', life: 10, price: 1000,
-        desc: '將環氧樹脂或聚氨酯塗料流平成連續地坪，表面無縫、易清潔並可耐磨耐化學品；基層含水與施工品質會影響附著及裂損。' },
-      { id: 'carpet', name: '捲毯／方塊毯／羊毛毯', en: 'Broadloom / Carpet Tile / Wool',
-        img: 'img/floor/carpet.webp', tokens: ['COM+', 'DUR-', 'SUS-'],
-        co2: 24.1, unit: 'kgCO2e/m2', life: 15, price: 1800,
-        desc: '由羊毛或合成纖維表層搭配背材構成，觸感柔軟並能吸音保溫；較易累積灰塵與污漬，方塊毯則可局部拆換。' },
     ]
   },
   {
@@ -169,7 +155,7 @@ const PARTS = [
 //   token: 'DUR' → 數全屋 DUR+ 與 DUR- 的淨值
 //   rank:  'co2' → 各部位在「同類別內」的碳排名次（低碳＝高分）再平均
 //
-// ⚠️ 環境影響與經濟性的最終版本應改查 252 組合表的碳排檔位與價格檔位
+// ⚠️ 環境影響與經濟性的最終版本應改查 126 組合表的碳排檔位與價格檔位
 //    （差異報告 §5-2）—— 那才有跨部位相加的物理意義。
 //    碳排在此先用同類別名次，理由與試算表把 CST 定義為「同類別內比價」一致；
 //    加裝設備系統沒有碳排數值，不計入平均。

@@ -5,7 +5,11 @@
 //   第一頁（施工）選建材 → 按「送出設計」→ 第二頁（結算）看評估與成就
 //   → 按「再蓋一棟」→ 回第一頁，選擇清空、但已解鎖的成就保留
 //
-// 成就只在「送出設計」時判定一次，且不顯示解鎖條件 —— 玩家要自己摸索。
+// 成就有兩份，分工不同：
+//   第一頁右欄  這一棟「現在」達成了什麼，每次點選即時重算，不寫入紀錄。
+//               已達成的才攤開解鎖條件，未達成的只有名字 —— 玩家要自己摸索。
+//   第二頁      跨場次「累計」解鎖過什麼，只在送出設計時判定並寫入 localStorage，
+//               一律不顯示解鎖條件。
 
 // 每個部位目前選了哪個建材（由 init() 依 data.js 的 PARTS 建立）
 //   單選部位 → 存字串，null = 未選擇
@@ -20,6 +24,17 @@ let result = null;       // { unlockedNow: Set<成就名> }
 
 // 已解鎖成就的永久紀錄（跨場次累積，「再蓋一棟」不會清掉）
 const SAVE_KEY = 'greenhouse.achievements';
+
+// ── 家具擺設圖層 ──────────────────────────────────────────
+// 不是建材（不列進選單、不算 Token／碳排／造價），純粹是跟著某個部位
+// 一起出現的裝飾。放這裡而不是 data.js —— data.js 由 gen_data.py 依試算表
+// 產生，只放建材。
+//   part  跟著哪個部位：該部位有選任何建材就顯示，清成「未選擇」就收起
+//   z-index 與該部位同層，但 DOM 順序排在後面 → 疊在該層之上、下一層之下
+//   （沙發＝地板 z2 之上、隔間牆 z3 之下，被牆擋住是正確的遮蔽關係）
+const DECOR = [
+  { id: 'sofa', part: 'floor', img: 'img/floor/sofa.webp' },
+];
 
 // 快速查表
 function getPart(partId) { return PARTS.find(p => p.id === partId); }
@@ -152,6 +167,13 @@ function buildLayers() {
       stack.appendChild(makeLayer(`img-${part.id}`, part.layer));
     }
   }
+
+  // 家具擺設接在最後 —— z-index 跟所屬部位相同，靠 DOM 順序壓在該層之上
+  for (const d of DECOR) {
+    const part = getPart(d.part);
+    if (!part || part.layer == null) continue;
+    stack.appendChild(makeLayer(`img-decor-${d.id}`, part.layer, d.img));
+  }
 }
 
 function makeLayer(id, z, src) {
@@ -257,6 +279,7 @@ function renderBuild() {
   renderMenuHighlight();
   renderInfo();
   renderProgress();
+  renderLiveAchievements();
 }
 
 // 有沒有擬真圖可用？（img/site.webp 存在就切到圖片模式）
@@ -278,8 +301,11 @@ function detectPhotoMode() {
 //      素材還沒出圖時 img 留空，該層就不畫，程式不用改。
 function renderHouse() {
   // z1 房子主體：選了門檻部位才出現（未選 → 只剩基地 site.webp）
-  const gate = gatePart();
-  document.getElementById('img-house').hidden = !(gate && hasPick(gate.id));
+  // ★ 這一層目前在 index.html 被註解掉（base_house.webp 暫不引用），
+  //   所以取不到元素是正常的，不是錯誤 —— 把註解拿掉就自動恢復。
+  const gate  = gatePart();
+  const house = document.getElementById('img-house');
+  if (house) house.hidden = !(gate && hasPick(gate.id));
 
   for (const part of PARTS) {
     if (part.layer == null) continue;
@@ -297,6 +323,12 @@ function renderHouse() {
       if (mat && mat.img) { el.src = mat.img; el.hidden = false; }
       else el.hidden = true;
     }
+  }
+
+  // 家具擺設：所屬部位有選東西就跟著出現（例如沙發跟著地板）
+  for (const d of DECOR) {
+    const el = document.getElementById(`img-decor-${d.id}`);
+    if (el) el.hidden = !hasPick(d.part);
   }
 
   syncLens();   // 所有圖層都定案後，才把鏡片內容同步過去
@@ -405,11 +437,11 @@ function paintRatio(t, idPros, idCons, idBarPros, idBarCons) {
 
 // 第一頁的簡版即時評估：完成度 ＋ 好壞比例條
 //   完整的分項標籤留到第二頁，才有結算的意義。
-//   完成度在這裡特別重要 —— 成就條件已經藏起來、五芒星也移到第二頁，
-//   這是第一頁僅剩的「還沒做完」訊號。
+//   完成度在這裡特別重要 —— 五芒星與碳排造價都在第二頁，
+//   這是第一頁唯一的「還沒做完」訊號（右欄的成就講的是達成，不是進度）。
 function renderProgress() {
   const done = PARTS.filter(p => hasPick(p.id)).length;
-  // 估算要五個結構部位都選齊，這件事在第一頁就要講，
+  // 估算要四個結構部位都選齊，這件事在第一頁就要講，
   // 不能等玩家按了送出設計才在結算頁看到「還缺…」
   const missing = COMBO_KEY_PARTS.filter(p => !selection[p]).map(p => getPart(p).name);
   document.getElementById('sum-progress').textContent =
@@ -418,17 +450,69 @@ function renderProgress() {
   paintRatio(tally(), 'num-pros', 'num-cons', 'ratio-pros', 'ratio-cons');
 }
 
+// ── 成就判定（第一頁的即時面板與第二頁的結算共用同一套規則）─────
+//   規則只有兩種：allEmpty ＝ 全部維持未選擇；contains ＝ 全屋包含清單裡每一項
+function achvMet(a, owned) {
+  if (a.rule.allEmpty) return owned.size === 0;
+  if (a.rule.contains) return a.rule.contains.every(x => owned.has(x));
+  return false;
+}
+
+// 把 rule.contains 翻成一顆顆建材標籤。
+//   直接由 rule 生成 → 規則改了、建材改名了，畫面自動跟著改，不會對不上。
+function achvConds(a) {
+  return (a.rule.contains || []).map(key => {
+    const [pid, mid] = key.split(':');
+    const m = getMat(pid, mid);
+    return m ? m.name : `${key}（未實作）`;
+  });
+}
+
+// ── 第一頁：即時成就面板 ───────────────────────────────
+//   看的是「現在這棟房子」，不是歷史紀錄 —— 取消選擇會讓 🏆 變回 🔒，
+//   這正是要的：玩家要能靠左欄的點選看出哪一步湊成了成就。
+//   ★ 只有已達成的那一列才攤開解鎖條件。未達成就攤開等於直接公布答案，
+//     成就就沒得摸索了；達成後才顯示，則是「你是這樣辦到的」的回饋。
+function renderLiveAchievements() {
+  const owned = ownedSet();
+  const list = document.getElementById('live-achv-list');
+  list.innerHTML = '';
+  let met = 0;
+
+  for (const a of ACHIEVEMENTS) {
+    const ok = achvMet(a, owned);
+    if (ok) met++;
+
+    const row = document.createElement('div');
+    row.className = 'achv' + (ok ? ' got' : '');
+    let html =
+      `<div class="achv-head">` +
+      `<span class="achv-ic">${ok ? '🏆' : '🔒'}</span>` +
+      `<span class="achv-name">${a.name}` +
+      (a.en ? `<span class="achv-en">${a.en}</span>` : '') + `</span>` +
+      `</div>`;
+
+    if (ok) {
+      html += a.rule.allEmpty
+        ? `<div class="achv-cond"><span class="cond plain">所有部位都維持「未選擇」</span></div>`
+        : `<div class="achv-cond">` +
+          achvConds(a).map(t => `<span class="cond">${t}</span>`).join('') +
+          `</div>`;
+    }
+
+    row.innerHTML = html;
+    list.appendChild(row);
+  }
+
+  document.getElementById('live-achv-count').textContent =
+    `${met} / ${ACHIEVEMENTS.length}`;
+}
+
 // ── 第二頁：結算 ───────────────────────────────────────
 // 判定成就，與永久紀錄比對算出「本次新解鎖」，然後存回去
 function settle() {
   const owned = ownedSet();
-  const anySelected = owned.size > 0;
-
-  const got = ACHIEVEMENTS.filter(a => {
-    if (a.rule.allEmpty) return !anySelected;
-    if (a.rule.contains) return a.rule.contains.every(x => owned.has(x));
-    return false;
-  }).map(a => a.name);
+  const got = ACHIEVEMENTS.filter(a => achvMet(a, owned)).map(a => a.name);
 
   const before = loadUnlocked();
   const unlockedNow = new Set(got.filter(n => !before.has(n)));
@@ -452,13 +536,14 @@ function saveUnlocked(set) {
 }
 
 // ── 碳排與造價估算 ─────────────────────────────────────
-//   CONTRIB 是每個建材單獨的貢獻量，由 252 組合表反推（總計已驗證為各部位相加）。
-//   所以選幾個部位就算幾個 —— 不必等五個選齊。
-//   五個都選齊時，加總結果等於 COMBOS 裡的總計，誤差 0，
-//   而且才有「檔位」與「排名」可以講（那兩個是相對於 252 種完整組合的位置）。
+//   CONTRIB 是每個建材單獨的貢獻量，由試算表的 252 組反推（總計已驗證為各部位相加）。
+//   所以選幾個部位就算幾個 —— 不必等四個選齊。
+//   四個都選齊時，加總結果等於 COMBOS 裡的總計，誤差 0，
+//   而且才有「檔位」與「排名」可以講（那兩個是相對於 126 種完整組合的位置）。
 //
 //   ⚠️ 一律不含加裝設備系統：試算表沒有那四項的碳排係數與單價（差異報告 §10-2）。
-const COMBO_KEY_PARTS = ['wall', 'partition', 'slab', 'roof', 'floor'];
+// ★ 層板已從遊戲移除；這四個部位就是計分用的完整組合（3×3×2×7 = 126）。
+const COMBO_KEY_PARTS = ['wall', 'partition', 'roof', 'floor'];
 
 function estimate() {
   let co2 = 0, price = 0;
@@ -478,7 +563,7 @@ const fmt = n => Math.round(n).toLocaleString('en-US');
 // 這一組贏過多少比例的可能組合（排序 1 = 最佳）
 const betterThan = rank => Math.round((COMBO_TOTAL - rank) / (COMBO_TOTAL - 1) * 100);
 
-// 數值在儀表上的位置（0% = 252 種組合裡最低，100% = 最高）
+// 數值在儀表上的位置（0% = 126 種組合裡最低，100% = 最高）
 function gaugePct(value, st) {
   const pct = (value - st.min) / (st.max - st.min) * 100;
   return Math.max(0, Math.min(100, pct)).toFixed(1);
@@ -498,7 +583,7 @@ function renderTotals() {
   set('gauge-carbon', fmt(e.co2));
 
   if (e.full) {
-    // 選齊了才有排名 —— 檔位與名次是相對於 252 種完整組合算的
+    // 選齊了才有排名 —— 檔位與名次是相對於 126 種完整組合算的
     const [, , co2Rank, , , priceRank] = e.row;
     set('stat-cost-unit', `贏過 ${betterThan(priceRank)}% 的組合`);
     needle.hidden = false;
@@ -575,7 +660,7 @@ function renderPenta() {
     : AXES.map(ax => ({ label: ax.label, value: null })));
 
   document.getElementById('penta-note').textContent = anyPicked
-    ? '環境影響為同類別碳排名次；正式版改查 252 組合表（§5-2）'
+    ? '環境影響為同類別碳排名次；正式版改查 126 組合表（§5-2）'
     : '這一棟什麼都沒選 —— 一塊空地';
 }
 

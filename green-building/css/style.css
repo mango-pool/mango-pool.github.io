@@ -31,7 +31,7 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .menus::-webkit-scrollbar-thumb{background:#c3d2e0; border-radius:4px;}
 .menus::-webkit-scrollbar-thumb:hover{background:#a8bccd;}
 .menus::-webkit-scrollbar-track{background:transparent;}
-/* 沒有圖層的部位（間隔牆／層板／地板）在標題右邊掛一個提示 */
+/* 沒有圖層的部位（素材尚未出圖）在標題右邊掛一個提示 */
 .menu-title{gap:6px;}
 .menu-tag{flex:0 0 auto; font-size:.82em; font-weight:400; opacity:.75;
   border:1px solid rgba(255,255,255,.5); border-radius:8px; padding:0 5px; white-space:nowrap;}
@@ -115,10 +115,16 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .ratio-con{background:var(--con);}
 .tok-row{margin-top:7px;}
 
+/* ── 右欄：第一頁的即時成就 ──────────── */
+/* 跟左欄一樣 sticky，清單自己內部捲，才不會把中間的房子往下推 */
+.col-achv{width:215px; flex:0 0 auto; position:sticky; top:12px;}
+.col-achv .achv-box{max-height:calc(100vh - 24px); overflow-y:auto;}
+
 .achv-box{background:#fff; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
 .count{font-weight:700; font-size:.95em; opacity:.9;}
 /* 一列成就 = 圖示 ＋ 名稱。
-   刻意不顯示解鎖條件 —— 成就名稱就是玩家唯一的提示，靠自己聯想。 */
+   未達成時刻意不顯示解鎖條件 —— 成就名稱就是玩家唯一的提示，靠自己聯想；
+   達成之後才把條件攤開（.achv-cond），當作「你是這樣辦到的」的回饋。 */
 .achv{display:block; padding:6px 10px; border-top:1px solid #eef1f4; font-size:.8em; color:#8a8a8a;}
 .achv.got{color:#13395c; background:#f2faf2;}
 /* 本次新解鎖：金色高亮，讓玩家一眼看出這一棟做對了什麼 */
@@ -128,6 +134,12 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .achv-name{display:flex; flex-direction:column; line-height:1.35; flex:1; min-width:0;}
 .achv.got .achv-name{font-weight:700;}
 .achv-en{font-size:.85em; opacity:.7;}
+/* 解鎖條件：只在「已達成」的那一列展開 */
+.achv-cond{display:flex; flex-wrap:wrap; gap:4px; margin:5px 0 1px; padding-left:23px;}
+.cond{border:1px solid #a8d8a8; background:#eaf6ea; color:#3f8a3f; border-radius:9px;
+  padding:1px 6px; font-size:.92em;}
+.cond.plain{border:0; padding:1px 0; background:transparent;}
+
 /* 「✨ 這一棟新解鎖 N 項」標頭；沒有新解鎖時轉為灰底的說明句 */
 .achv-newhead{background:#e8a33d; color:#fff; font-size:.78em; font-weight:700;
   padding:5px 10px;}
@@ -138,6 +150,8 @@ body{margin:0; background:var(--bg); color:var(--ink);
   /* 窄畫面改成上下排列，sticky 與高度限制都取消，讓選單整段攤開 */
   .col-left{width:auto; position:static; max-height:none;}
   .menus{overflow-y:visible;}
+  .col-achv{width:auto; position:static;}
+  .col-achv .achv-box{max-height:none; overflow-y:visible;}
 }
 
 /* ── 兩頁式流程 ───────────────────────────

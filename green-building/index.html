@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>綠建築換皮小遊戲</title>
-<link rel="stylesheet" href="css/style.css?v=5cb3f1df">
+<link rel="stylesheet" href="css/style.css?v=554ec2ab">
 </head>
 <body>
 
@@ -14,8 +14,8 @@
 </header>
 
 <!-- ══ 第一頁：施工 ══════════════════════════════════════
-     選建材 → 看房子 → 送出設計。成就與完整評估都在第二頁，
-     這一頁只給「還沒選完」與「大致好壞」兩種即時回饋。 -->
+     選建材 → 看房子 → 送出設計。完整評估（碳排、造價、五芒星）在第二頁，
+     這一頁給三種即時回饋：還沒選完、大致好壞、以及右欄的即時成就。 -->
 <main class="stage" id="page-build">
 
   <!-- 左側：選單 ＋ 送出設計 -->
@@ -35,11 +35,16 @@
     <div class="house-wrap">
       <!-- 擬真圖層堆疊（z-index 由下而上）
            0 基地背景 site.webp（永遠顯示）
-           1 房子主體 base_house.webp（選了門檻部位才顯示）
-           2 以上 ── 各部位圖層由 game.js 依 data.js 的 layer 欄位動態產生 -->
+           1 房子主體 base_house.webp ── 目前停用，見下方註解
+           2 以上 ── 各部位圖層由 game.js 依 data.js 的 layer 欄位動態產生
+           家具擺設（沙發）也由 game.js 的 DECOR 產生，跟地板同層、疊在其上 -->
       <div class="house-photo" id="house-photo" hidden>
         <img class="layer" id="img-base"  src="img/site.webp" alt="">
+        <!-- z1 房子主體 base_house.webp 暫時不引用。
+             圖檔仍留在 img/，要恢復只要把下面這行的註解拿掉即可；
+             game.js 的 renderHouse() 已對這一層做存在性判斷，缺了不會出錯。
         <img class="layer" id="img-house" src="img/base_house.webp" alt="" hidden>
+        -->
       </div>
 
       <!-- 放大鏡：鏡片內是同一份圖層堆疊的複本（由 game.js 於每次重繪時同步），
@@ -74,6 +79,17 @@
 
   </section>
 
+  <!-- 右側：即時成就。與第二頁那份的分工要講清楚 ——
+       這一份看的是「現在這棟房子達成了什麼」，跟著左欄每一次點選即時重算；
+       第二頁那份看的是「跨場次累計解鎖過什麼」，只在送出設計時才寫入紀錄。
+       ★ 達成之後才攤開解鎖條件：沒達成的只有名字，維持「靠玩家自己聯想」的設計。 -->
+  <aside class="col-achv">
+    <div class="achv-box">
+      <div class="menu-title">🏆 這一棟的成就 <span id="live-achv-count" class="count">0 / 0</span></div>
+      <div id="live-achv-list"></div>
+    </div>
+  </aside>
+
 </main>
 
 <!-- ══ 第二頁：結算 ══════════════════════════════════════
@@ -105,7 +121,7 @@
         <div class="house-photo" id="result-photo"></div>
       </div>
 
-      <!-- 兩個總計數字。數值來源是 252 組合查表，尚未接上（見差異報告 §10-2） -->
+      <!-- 兩個總計數字。數值來源是 126 組合查表，尚未接上（見差異報告 §10-2） -->
       <div class="card design-stats">
         <div class="stat">
           <div class="stat-label">預估總成本</div>
@@ -164,10 +180,10 @@
 
 </main>
 
-<script src="js/data.js?v=2c672f51"></script>
-<script src="js/combos.js?v=9edd4bd2"></script>
+<script src="js/data.js?v=fbfe691b"></script>
+<script src="js/combos.js?v=fcf3232f"></script>
 <script src="js/achievements.js?v=d617ce08"></script>
 <script src="js/penta.js?v=a51a0de8"></script>
-<script src="js/game.js?v=260e8339"></script>
+<script src="js/game.js?v=8e32ed00"></script>
 </body>
 </html>
