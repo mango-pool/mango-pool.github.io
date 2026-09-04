@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>草嶺石壁之旅 2天1夜｜搭高鐵遊台灣</title>
+<style>
+  :root{
+    --green-deep:#2f4a36;
+    --green:#4f7a52;
+    --green-light:#dce8d8;
+    --bamboo:#8aa872;
+    --cream:#f6f4ec;
+    --ink:#33352e;
+    --muted:#6f7468;
+    --accent:#b8703e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px 80px;}
+
+  .backbar{max-width:880px;margin:0 auto;padding:14px 20px 0;}
+  .backbar a{color:var(--green-deep);text-decoration:none;font-size:.9rem;}
+  .backbar a:hover{text-decoration:underline;}
+
+  /* Hero */
+  .hero{
+    position:relative;
+    background:linear-gradient(rgba(33,52,38,.55),rgba(33,52,38,.65)),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='120'%3E%3Crect width='40' height='120' fill='%237d9460'/%3E%3Crect x='8' width='6' height='120' fill='%23617a48'/%3E%3Crect x='24' width='6' height='120' fill='%238fa86e'/%3E%3C/svg%3E");
+    color:#fff;
+    padding:70px 20px 60px;
+    text-align:center;
+  }
+  .hero .kicker{
+    letter-spacing:3px;
+    font-size:.8rem;
+    text-transform:uppercase;
+    opacity:.9;
+  }
+  .hero h1{
+    font-size:2.4rem;
+    margin:14px 0 6px;
+    letter-spacing:2px;
+  }
+  .hero .sub{font-size:1rem;opacity:.92;letter-spacing:4px;}
+
+  /* Guide card */
+  .guide{
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+    background:#fff;
+    border-radius:16px;
+    padding:22px 24px;
+    margin:-40px auto 40px;
+    max-width:840px;
+    box-shadow:0 14px 34px rgba(47,74,54,.14);
+    border:1px solid var(--green-light);
+  }
+  .guide .avatar{
+    flex:0 0 64px;height:64px;width:64px;border-radius:50%;
+    background:var(--green-light);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.7rem;
+  }
+  .guide .tag{
+    display:inline-block;
+    background:var(--green);
+    color:#fff;
+    border-radius:20px;
+    padding:2px 14px;
+    font-size:.85rem;
+    margin-bottom:8px;
+  }
+  .guide .name{font-weight:700;}
+  .guide p{color:var(--muted);font-size:.95rem;}
+
+  /* Section title */
+  .section-title{
+    text-align:center;
+    font-size:1.5rem;
+    color:var(--green-deep);
+    margin:10px 0 6px;
+    letter-spacing:2px;
+  }
+  .section-title small{display:block;color:var(--accent);font-size:.85rem;letter-spacing:3px;margin-top:4px;}
+
+  /* Days */
+  .days{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:34px;}
+  @media(max-width:680px){.days{grid-template-columns:1fr;}}
+
+  .day{
+    background:#fff;
+    border-radius:16px;
+    padding:24px 26px 28px;
+    box-shadow:0 8px 22px rgba(47,74,54,.08);
+    border-top:5px solid var(--bamboo);
+  }
+  .day h3{
+    color:var(--green-deep);
+    font-size:1.2rem;
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .day h3 .dot{
+    width:12px;height:12px;border-radius:50%;background:var(--green);
+  }
+  ol.timeline{list-style:none;position:relative;padding-left:24px;}
+  ol.timeline::before{
+    content:"";position:absolute;left:5px;top:6px;bottom:6px;
+    width:2px;background:var(--green-light);
+  }
+  ol.timeline li{
+    position:relative;
+    padding:0 0 16px 6px;
+  }
+  ol.timeline li::before{
+    content:"";position:absolute;left:-23px;top:9px;
+    width:10px;height:10px;border-radius:50%;
+    background:#fff;border:2px solid var(--bamboo);
+  }
+  ol.timeline li:last-child{padding-bottom:0;}
+  .need{
+    color:var(--accent);
+    font-size:.78rem;
+    background:#f6e7da;
+    border-radius:10px;
+    padding:1px 8px;
+    margin-left:6px;
+    white-space:nowrap;
+  }
+
+  /* Note */
+  .note{
+    margin-top:40px;
+    background:var(--green-light);
+    border-radius:14px;
+    padding:20px 24px;
+    font-size:.9rem;
+    color:var(--green-deep);
+  }
+  .note strong{display:block;margin-bottom:6px;}
+
+  footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:36px;letter-spacing:1px;}
+</style>
+</head>
+<body>
+  <div class="backbar"><a href="../index.html">‹ 回探索收藏冊</a></div>
+
+  <header class="hero">
+    <div class="kicker">Discover Taiwan · 06</div>
+    <h1>草嶺石壁之旅</h1>
+    <div class="sub">搭高鐵遊台灣 ｜ 2 天 1 夜</div>
+  </header>
+
+  <div class="wrap">
+    <section class="guide">
+      <div class="avatar">🧑‍🌾</div>
+      <div>
+        <span class="tag">帶路人</span>
+        <span class="name">　賴郁憲</span>
+        <p>石壁休閒農業區發展協會理事長。多年前返鄉投入重振山村,攜手在地農家投入轉型,策動森林療癒活動,逐步翻轉石壁。</p>
+      </div>
+    </section>
+
+    <h2 class="section-title">現在一起出發吧！<small>CAOLING · SHIBI TRIP</small></h2>
+
+    <div class="days">
+      <article class="day">
+        <h3><span class="dot"></span>第 1 日</h3>
+        <ol class="timeline">
+          <li>搭乘高鐵至雲林站,租車前往斗六</li>
+          <li>太平老街散步,小憩仁德咖啡</li>
+          <li>午餐品嘗老街特色小吃蛋飯</li>
+          <li>參訪斗六糖廠竹創基地</li>
+          <li>散步溝壩社區,品味在地小店</li>
+          <li>驅車前往草嶺石壁</li>
+          <li>品嘗在地農家特色晚餐</li>
+          <li>入住當地旅店,沉浸山林夜色</li>
+        </ol>
+      </article>
+
+      <article class="day">
+        <h3><span class="dot"></span>第 2 日</h3>
+        <ol class="timeline">
+          <li>早起健行草嶺石壁森林療癒基地,進行森林療癒或預約聲音療癒</li>
+          <li>山上農家茶席或烘咖啡體驗<span class="need">需預約</span></li>
+          <li>手作料理體驗,品嘗特色午餐<span class="need">需預約</span></li>
+          <li>驅車下山拜訪當地職人、採購伴手禮</li>
+          <li>快樂賦歸</li>
+        </ol>
+      </article>
+    </div>
+
+    <div class="note">
+      <strong>貼心提醒</strong>
+      以上場館、景點的開放時間以公告為主,建議旅客出發前可上網查詢或致電詢問;行程交通以轉乘方便、離車站距離較近者優先,惟旅客仍可依個人需求而定。
+    </div>
+
+    <footer>Discover Taiwan ｜ 搭高鐵遊台灣 · 草嶺石壁</footer>
+  </div>
+</body>
+</html>

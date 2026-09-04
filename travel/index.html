@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>探索收藏冊 ・ 台中 × 台北 私房清單</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4efe6;
+    --card:#fbf8f1;
+    --ink:#20221d;
+    --ink-soft:#5a5b50;
+    --forest:#2f5d4f;   /* 深林綠 */
+    --coral:#c9553d;    /* 暖赭紅 */
+    --gold:#b08428;
+    --line:#d9cfba;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:"Noto Serif TC",serif;font-weight:300;line-height:1.85;
+    background-image:
+      radial-gradient(circle at 20% 30%,rgba(0,0,0,.02) 0 1px,transparent 1px),
+      linear-gradient(180deg,#f6f1e8,#efe8d9);
+    background-size:9px 9px,100% 100%;
+  }
+  ::selection{background:var(--forest);color:var(--paper)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 30px}
+
+  /* 頁首 */
+  .masthead{padding:28px 0 6px;text-align:center;position:relative}
+  .masthead .eyebrow{font-family:"Cormorant Garamond";font-style:italic;font-size:19px;letter-spacing:.3em;color:var(--coral)}
+  .masthead h1{font-weight:900;font-size:clamp(40px,8vw,86px);letter-spacing:.06em;line-height:1;margin:0 0 6px}
+  .masthead .sub{color:var(--ink-soft);font-size:15px;letter-spacing:.35em}
+  .divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:34px 0 10px;color:var(--forest)}
+  .divider::before,.divider::after{content:"";height:1px;width:120px;background:linear-gradient(90deg,transparent,var(--line))}
+  .divider::after{transform:rotate(180deg)}
+  .divider span{font-family:"Cormorant Garamond";font-style:italic;font-size:16px;letter-spacing:.2em}
+
+  /* 篩選 */
+  .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:18px 0 34px}
+  .chip{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
+    font-family:"Noto Serif TC";font-size:13px;letter-spacing:.2em;padding:8px 18px;border-radius:30px;cursor:pointer;transition:.3s}
+  .chip:hover{border-color:var(--forest);color:var(--forest)}
+  .chip.active{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+
+  /* 卡片網格 */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:26px;padding-bottom:80px}
+  .card{background:var(--card);border:1px solid var(--line);position:relative;
+    display:flex;flex-direction:column;overflow:hidden;transition:.45s cubic-bezier(.19,1,.22,1)}
+  .card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -22px rgba(47,93,79,.4);border-color:var(--forest)}
+  .card .top{padding:26px 26px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .card .no{font-family:"Cormorant Garamond";font-style:italic;font-size:34px;color:var(--line);line-height:.8}
+  .badge{font-size:11px;letter-spacing:.18em;padding:5px 12px;border-radius:20px;white-space:nowrap;font-weight:500}
+  .b-cafe{background:rgba(176,132,40,.14);color:var(--gold)}
+  .b-tea{background:rgba(201,85,61,.14);color:var(--coral)}
+  .b-view{background:rgba(47,93,79,.14);color:var(--forest)}
+  .b-us{background:rgba(32,34,29,.1);color:var(--ink)}
+  .b-buffet{background:rgba(176,40,80,.13);color:#a83a5e}
+  .b-rail{background:rgba(40,90,160,.13);color:#2f5f9e}
+  .b-food{background:rgba(140,80,30,.14);color:#8a4a1a}
+  .b-event{background:rgba(120,40,140,.13);color:#7a2f8c}
+  .b-trip{background:rgba(31,111,120,.14);color:#1f6f78}
+
+  .card .body{padding:16px 26px 24px;flex:1;display:flex;flex-direction:column}
+  .card h2{font-weight:700;font-size:25px;letter-spacing:.03em;line-height:1.25}
+  .card .en{font-family:"Cormorant Garamond";font-style:italic;color:var(--ink-soft);font-size:16px;margin-top:2px}
+  .card p{font-size:14.5px;color:var(--ink-soft);margin-top:14px;flex:1}
+  .meta{margin-top:18px;border-top:1px dashed var(--line);padding-top:14px;font-size:13px;color:var(--ink-soft);display:grid;gap:6px}
+  .meta div{display:flex;gap:10px}
+  .meta b{color:var(--forest);font-weight:500;min-width:44px;letter-spacing:.1em}
+  .region{position:absolute;top:0;left:0;background:var(--forest);color:var(--paper);
+    font-size:11px;letter-spacing:.25em;padding:5px 14px;writing-mode:horizontal-tb}
+  .region.tp{background:var(--coral)}
+  .actions{display:flex;gap:10px;margin-top:20px}
+  .actions a{flex:1;text-align:center;text-decoration:none;font-size:13px;letter-spacing:.15em;
+    padding:11px;transition:.3s;border:1px solid var(--ink)}
+  .actions a.solid{background:var(--ink);color:var(--paper)}
+  .actions a.solid:hover{background:var(--forest);border-color:var(--forest)}
+  .actions a.ghost{color:var(--ink)}
+  .actions a.ghost:hover{background:var(--paper);border-color:var(--forest);color:var(--forest)}
+
+  footer{text-align:center;padding:50px 0 60px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:12.5px;letter-spacing:.2em}
+  footer b{font-weight:900;color:var(--ink);letter-spacing:.3em}
+
+  .card.hide{display:none}
+  .reveal{opacity:0;transform:translateY(24px);animation:up .8s forwards}
+  @keyframes up{to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="masthead wrap">
+  <h1>探索收藏冊</h1>
+</header>
+
+<div class="wrap">
+  <div class="filters" id="filters">
+    <button class="chip active" data-f="all">全部</button>
+    <button class="chip" data-f="cafe">咖啡</button>
+    <button class="chip" data-f="tea">下午茶</button>
+    <button class="chip" data-f="view">景點</button>
+    <button class="chip" data-f="us">美式</button>
+    <button class="chip" data-f="buffet">吃到飽</button>
+    <button class="chip" data-f="food">餐廳小吃</button>
+    <button class="chip" data-f="farm">體驗農遊</button>
+    <button class="chip" data-f="event">展覽活動</button>
+    <button class="chip" data-f="rail">台鐵活動</button>
+    <button class="chip" data-f="trip">照著走行程</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <!-- 啡墨 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">01</span><span class="badge b-cafe">咖啡 × 書法</span></div>
+      <div class="body">
+        <h2>啡墨 coffeeink</h2>
+        <div class="en">coffee × ink × soba</div>
+        <p>藏在巷弄老宅裡的咖啡廳，老闆以墨入店、麵條自製。檸檬蕎麥麵、剝皮辣椒雞湯、杜拜開心果巴斯克必點。Google 4.9 星。</p>
+        <div class="meta">
+          <div><b>地址</b><span>五權西六街 82 巷 21 號</span></div>
+          <div><b>時間</b><span>日–四 11–19｜五六 11–20</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區五權西六街82巷21號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/coffeeink2020/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 英老鎮玫瑰茶館 -->
+    <article class="card reveal" data-cat="tea">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">02</span><span class="badge b-tea">英式下午茶</span></div>
+      <div class="body">
+        <h2>英・老鎮玫瑰茶館</h2>
+        <div class="en">Old Country Rose</div>
+        <p>穿越忠信市場才找得到的英式茶館。骨瓷杯具、茶盤皆闆娘從英國親手帶回，配正統英式下午茶與伯爵茶。二樓小閣樓像秘密基地。<b style="color:var(--coral)">須電話預約</b>。</p>
+        <div class="meta">
+          <div><b>地址</b><span>五權西路一段 57 巷 2 弄 7 號</span></div>
+          <div><b>時間</b><span>二–五 12:00–17:00｜低消 NT$200</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區五權西路一段57巷2弄7號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/old_country_rose/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 天際樹 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">03</span><span class="badge b-view">打卡景點</span></div>
+      <div class="body">
+        <h2>突破天際樹</h2>
+        <div class="en">“My love is a tree”</div>
+        <p>爆紅的 7 層樓高小葉南洋杉，樹齡逾 50 年。屋主當年為送太太而種，「我的愛是一棵樹」的暖心故事讓它成了 4.9 星地標。台南安平也有一棵。</p>
+        <div class="meta">
+          <div><b>位置</b><span>五權西五街一處民宅旁</span></div>
+          <div><b>玩法</b><span>順遊啡墨、玫瑰茶館、國美館</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區五權西五街+天際樹" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://news.tvbs.com.tw/local/2967763" target="_blank" rel="noopener">新聞報導</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PATTIE-O DINER -->
+    <article class="card reveal" data-cat="us">
+      <span class="region tp">台北 · 中山</span>
+      <div class="top"><span class="no">04</span><span class="badge b-us">復古美式</span></div>
+      <div class="body">
+        <h2>PATTIE-O DINER</h2>
+        <div class="en">50s American Diner</div>
+        <p>中山赤峰街新開幕，1950 年代復古美式餐廳，門口內裝都超好拍。由麥當勞行政主廚操刀，Smash Burger、南方阿嬤炸雞、牛奶炸雞必點。建成公園正對面。</p>
+        <div class="meta">
+          <div><b>地址</b><span>大同區赤峰街 8 巷 20-1 號</span></div>
+          <div><b>時間</b><span>每日 12:00–21:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=PATTIE-O+DINER+赤峰街8巷20-1號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/pattieo_burgers/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 島語 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 漢神</span>
+      <div class="top"><span class="no">05</span><span class="badge b-buffet">吃到飽</span></div>
+      <div class="body">
+        <h2>島語 Island Buffet</h2>
+        <div class="en">the hardest table in town</div>
+        <p>號稱「全台最難訂 Buffet」插旗台中漢神洲際店（4 樓），500 坪、300 席，全台首創吃到飽戶外用餐區。松葉蟹腳山、九大餐區。<b style="color:#a83a5e">線上訂位常 3 分鐘秒殺</b>。</p>
+        <div class="meta">
+          <div><b>地點</b><span>台中漢神洲際購物廣場 4F</span></div>
+          <div><b>價位</b><span>平午 1490 起（另收 10%）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中漢神洲際購物廣場" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.facebook.com/hilai.island.buffet/" target="_blank" rel="noopener">訂位公告</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台鐵鐵印帳 -->
+    <article class="card reveal" data-cat="rail">
+      <span class="region tp" style="background:#2f5f9e">全台 · 台鐵</span>
+      <div class="top"><span class="no">06</span><span class="badge b-rail">集章活動</span></div>
+      <div class="body">
+        <h2>台鐵鐵印帳</h2>
+        <div class="en">railway stamp book</div>
+        <p>台鐵 × 日本讀賣推出的台版「鐵印帳」。憑鐵印帳＋車票到全台 20 個指定車站蓋鐵印，集滿 10 張換禮品、20 張拿隱藏獎品。NT$499 限量發售。</p>
+        <div class="meta">
+          <div><b>購買</b><span>臺北 / 臺中 / 高雄 / 花蓮 門市</span></div>
+          <div><b>蓋章</b><span>臺北、瑞芳、十分、集集…等 20 站</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.railway.gov.tw/" target="_blank" rel="noopener">台鐵官網</a>
+          <a class="ghost" href="https://www.ettoday.net/news/20250604/2972207.htm" target="_blank" rel="noopener">活動報導</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 臺鐵會員 -->
+    <article class="card reveal" data-cat="rail">
+      <span class="region tp" style="background:#2f5f9e">全台 · 台鐵</span>
+      <div class="top"><span class="no">07</span><span class="badge b-rail">會員服務</span></div>
+      <div class="body">
+        <h2>臺鐵會員</h2>
+        <div class="en">TRA membership</div>
+        <p>免費線上申請的會員制度，享會員點數（消費累點折抵）、分級優惠、訂位媒合與線上查詢。搭配 TR-PASS 環島吃到飽票券使用可一邊玩一邊累點。</p>
+        <div class="meta">
+          <div><b>申請</b><span>官網 / 掃 QR 加入，免費</span></div>
+          <div><b>好康</b><span>點數 · 分級優惠 · 訂位媒合</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://tip.railway.gov.tw/tra-tip-web/tip/tip008/tip821/createPerson" target="_blank" rel="noopener">加入會員</a>
+          <a class="ghost" href="https://www.railway.gov.tw/tra-tip-web/tip/tip003/tip311/view10" target="_blank" rel="noopener">TR-PASS</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 松嶺之星 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#7a6a3c">南投 · 名間</span>
+      <div class="top"><span class="no">08</span><span class="badge b-view">高空地標</span></div>
+      <div class="body">
+        <h2>松嶺之星</h2>
+        <div class="en">Pine Ridge Star</div>
+        <p>南投砸逾 5 億打造的全新地標，塔高 58 公尺、位於八卦山脈最南端松柏嶺。雙螺旋外階梯直上頂端球體 360° 玻璃觀景台，可遠眺八卦台地與中彰投。霧繞高塔超震撼。</p>
+        <div class="meta">
+          <div><b>位置</b><span>南投縣名間鄉松柏嶺</span></div>
+          <div><b>狀態</b><span>主體完工，最快 2026 試營運</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=松嶺之星+南投名間松柏嶺" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://udn.com/news/story/7325/9254838" target="_blank" rel="noopener">新聞報導</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台11線香草農園 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#3f7a5c">花東 · 台11線</span>
+      <div class="top"><span class="no">09</span><span class="badge" style="background:rgba(63,122,92,.15);color:#3f7a5c">食農農遊</span></div>
+      <div class="body">
+        <h2>台11線 香草農園</h2>
+        <div class="en">vanilla &amp; farm education</div>
+        <p>路經台11線（花東海岸公路）的香莢蘭觀光農園，園主一家熱情導覽食農教育。從開花人工授粉到成品香草粉至少要 15 個月，一小罐只賣 NT$400，CP 值超高。走過路過不要錯過！</p>
+        <div class="meta">
+          <div><b>路線</b><span>台11線 花東海岸沿途</span></div>
+          <div><b>備註</b><span>貼文未載明店名，建議現場詢問</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台11線+香草農園" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.taiwantravelmap.com/taiwantravelmap/travel-13549" target="_blank" rel="noopener">台11線資訊</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 沙鹿景觀步道 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 沙鹿</span>
+      <div class="top"><span class="no">10</span><span class="badge b-view">拍照步道</span></div>
+      <div class="body">
+        <h2>沙鹿景觀步道</h2>
+        <div class="en">under the highway</div>
+        <p>國道三號橋下的幾何橋體，搭配步道兩旁綠意，粗獷水泥結構與自然植栽形成鮮明對比，意外成了很有層次的拍攝場景。適合夏日散策、日常散步。</p>
+        <div class="meta">
+          <div><b>位置</b><span>台中沙鹿・國道三號橋下</span></div>
+          <div><b>玩法</b><span>散步拍照，可順遊海線車站</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=沙鹿休閒景觀步道" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台鐵海線慢旅行 -->
+    <article class="card reveal" data-cat="rail">
+      <span class="region tp" style="background:#2f5f9e">台鐵 · 海線</span>
+      <div class="top"><span class="no">11</span><span class="badge b-rail">海線慢旅</span></div>
+      <div class="body">
+        <h2>海線慢旅行</h2>
+        <div class="en">coastal line day trip</div>
+        <p>不開車、一張悠遊卡就能出發！搭台鐵海線總花費約 NT$500 玩一天，串起「海線五寶」歷史木造車站——談文、大山、新埔、日南、追分。適合小資族、熟齡族的自在慢旅。</p>
+        <div class="meta">
+          <div><b>玩法</b><span>悠遊卡直接刷，沿線跳點</span></div>
+          <div><b>亮點</b><span>百年木造車站 · 海線風景</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.easycard.com.tw/use?cls=1506497567&id=1508204269" target="_blank" rel="noopener">悠遊卡搭台鐵</a>
+          <a class="ghost" href="https://www.railway.gov.tw/" target="_blank" rel="noopener">台鐵官網</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台中火車站 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 中區</span>
+      <div class="top"><span class="no">12</span><span class="badge b-view">歷史建築</span></div>
+      <div class="body">
+        <h2>臺中火車站</h2>
+        <div class="en">Taichung Railway Station</div>
+        <p>1917 年落成的紅磚歷史站體，與一旁現代玻璃雨庇新站並存，門口有真人尺寸 Snoopy 雕像，現場設有雙語歷史解說牌。</p>
+        <div class="meta"><div><b>位置</b><span>台中市中區台灣大道一段</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=臺中火車站" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 卓也小屋 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#6b7a3f">苗栗 · 三義</span>
+      <div class="top"><span class="no">13</span><span class="badge" style="background:rgba(107,122,63,.15);color:#5a6934">藍染主題園區</span></div>
+      <div class="body">
+        <h2>卓也小屋・卓也藍染</h2>
+        <div class="en">JoYe Cottage / Indigo Dyeing House</div>
+        <p>藍染主題的木屋休閒園區，逛得到藍染工藝館、蔬食自助餐廳、藍庄咖啡館與染料植物園。招牌是「山嵐吐司」與青黛/甜菜根天然染色霜淇淋（NT$160），還能玩植物槌染 DIY 與親手體驗藍靛染缸。</p>
+        <div class="meta">
+          <div><b>位置</b><span>苗栗130縣道・三義／龍騰斷橋附近</span></div>
+          <div><b>玩法</b><span>蔬食自助餐＋藍染 DIY＋槌染手作</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=卓也小屋+苗栗三義" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 麗寶樂園 Outlets -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 后里</span>
+      <div class="top"><span class="no">14</span><span class="badge b-view">摩天輪地標</span></div>
+      <div class="body">
+        <h2>麗寶樂園 Outlets</h2>
+        <div class="en">Lihpao Land / Outlets</div>
+        <p>藍白色巨型摩天輪是遠遠就能認出的地標，園區內另有 SHOWTIME OUTLETS 購物商場與熊維家族樂園世界 TOKI WORLD，適合傍晚順遊拍夜景。</p>
+        <div class="meta"><div><b>位置</b><span>台中市后里區月眉</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=麗寶樂園Outlets+摩天輪" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 一笈 いち壽司 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region" style="background:#5a5b50">地點未詳</span>
+      <div class="top"><span class="no">15</span><span class="badge b-food">日式壽司</span></div>
+      <div class="body">
+        <h2>一笈 いち壽司 YIJI SUSHI</h2>
+        <div class="en">Yiji Sushi</div>
+        <p>清水混凝土配木格柵的現代日式壽司店，門口有大型石雕。菜單以握壽司、卷壽司、手卷為主，如海老握壽司 $40、鮭魚握壽司 $70。</p>
+        <div class="meta"><div><b>備註</b><span>照片未拍到門牌地址，建議搜尋店名確認地點</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=一笈+いち壽司+YIJI+SUSHI" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台灣花磚博物館 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#8a6f9e">嘉義</span>
+      <div class="top"><span class="no">16</span><span class="badge b-view">古蹟博物館</span></div>
+      <div class="body">
+        <h2>台灣花磚博物館</h2>
+        <div class="en">Taiwan Tile Museum</div>
+        <p>老屋改建的花磚主題博物館，全票 NT$100 可折抵館內消費 NT$50，未滿 7 歲免費，每小時有免費導覽，建議停留 1～1.5 小時。</p>
+        <div class="meta"><div><b>備註</b><span>現場排隊購票入場</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台灣花磚博物館+嘉義" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 逢甲埔里米糕 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">17</span><span class="badge b-food">台式小吃</span></div>
+      <div class="body">
+        <h2>逢甲埔里米糕</h2>
+        <div class="en">Fengjia Puli Rice Cake</div>
+        <p>逢甲夜市周邊的台式米糕小吃，Google Maps 有明確定位，適合逛夜市順路解饞。</p>
+        <div class="meta"><div><b>位置</b><span>台中市西屯區逢甲夜市一帶</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=逢甲埔里米糕" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 檜意森活村 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#8a6f9e">嘉義</span>
+      <div class="top"><span class="no">18</span><span class="badge b-view">日式園區</span></div>
+      <div class="body">
+        <h2>檜意森活村</h2>
+        <div class="en">Hinoki Village</div>
+        <p>林業歷史官舍群改建的日式庭園園區，木造工藝建築林立，老宅內附設下午茶，適合悠閒散步拍照。</p>
+        <div class="meta"><div><b>位置</b><span>嘉義市林森東路一帶</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=檜意森活村+嘉義" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 士林廚房 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region tp">台北 · 士林</span>
+      <div class="top"><span class="no">19</span><span class="badge b-buffet">飯店海鮮饗宴</span></div>
+      <div class="body">
+        <h2>士林廚房</h2>
+        <div class="en">Shilin Kitchen, Marriott Taipei</div>
+        <p>台北萬麗酒店海鮮饗宴升級計畫，平日專屬尊榮位、假日頂級海陸、週末下午茶，主打生猛海鮮吃到飽。</p>
+        <div class="meta"><div><b>位置</b><span>台北萬麗酒店（士林）</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台北萬麗酒店+士林廚房" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2 in one 冰淇淋 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">20</span><span class="badge b-cafe">雪糕專賣</span></div>
+      <div class="body">
+        <h2>2 in one 冰淇淋專賣店</h2>
+        <div class="en">2 in one Ice Cream</div>
+        <p>Google 評分 4.8 星（1,106 則）的雪糕專賣店，位於大墩十四街巷弄內，適合夏日消暑順遊。</p>
+        <div class="meta"><div><b>地址</b><span>台中市南屯區大業里大墩十四街 170 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=2+in+one+冰淇淋專賣店+台中大墩十四街170號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 露營歸樸森活 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#8a6f9e">嘉義 · 番路</span>
+      <div class="top"><span class="no">21</span><span class="badge" style="background:rgba(138,111,158,.15);color:#6b5580">露營體驗</span></div>
+      <div class="body">
+        <h2>露營歸樸森活</h2>
+        <div class="en">Camping Retreat</div>
+        <p>下國道三號約 15 分鐘可達的露營地，提供烹飪器具與美式烤肉爐，傍晚有夕陽景致。</p>
+        <div class="meta"><div><b>地址</b><span>嘉義縣番路鄉下石頭埔 7 鄰 69 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=嘉義縣番路鄉下石頭埔7鄰69號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 光禾作用 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">22</span><span class="badge" style="background:rgba(47,93,79,.15);color:var(--forest)">精品金魚</span></div>
+      <div class="body">
+        <h2>光禾作用</h2>
+        <div class="en">精品金魚體驗（預約制）</div>
+        <p>預約制的精品金魚展售空間，假日建議提前兩天預約，適合喜歡金魚、水族造景的人。</p>
+        <div class="meta">
+          <div><b>地址</b><span>台中市烏日區溪南路二段 388 巷 75 弄 37 號</span></div>
+          <div><b>時間</b><span>13:00–17:30（預約制）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市烏日區溪南路二段388巷75弄37號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 東風東新疆大盤雞 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region" style="background:#9e6b3f">桃園 · 中壢</span>
+      <div class="top"><span class="no">23</span><span class="badge b-food">新疆料理</span></div>
+      <div class="body">
+        <h2>東風東新疆大盤雞（中壢總店）</h2>
+        <div class="en">Xinjiang Big Plate Chicken</div>
+        <p>招牌大盤雞、手工麵條、羊肉串，新疆風味料理總店，假日午晚兩個時段營業。</p>
+        <div class="meta">
+          <div><b>地址</b><span>桃園市中壢區環西路 149 號</span></div>
+          <div><b>時間</b><span>平日 17:00–00:00｜假日 11:00–14:00、17:00–00:00（週一公休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=桃園市中壢區環西路149號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 醉月咖啡 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region tp">新北</span>
+      <div class="top"><span class="no">24</span><span class="badge b-cafe">山林秘境</span></div>
+      <div class="body">
+        <h2>醉月咖啡</h2>
+        <div class="en">Zuiyue Coffee</div>
+        <p>佔地 6000 坪的山林秘境咖啡廳，寵物友善，適合遠離市區喝杯咖啡放空。</p>
+        <div class="meta"><div><b>位置</b><span>新北市山區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=醉月咖啡+新北" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台灣鯛生態創意園區 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#5a5b50">地點未詳</span>
+      <div class="top"><span class="no">25</span><span class="badge" style="background:rgba(47,93,79,.15);color:var(--forest)">生態園區</span></div>
+      <div class="body">
+        <h2>台灣鯛生態創意園區</h2>
+        <div class="en">Tilapia Eco Creative Park</div>
+        <p>入場即附一碗現煮魚湯的生態主題園區，需購票入場，適合親子認識台灣鯛養殖產業。</p>
+        <div class="meta"><div><b>備註</b><span>截圖未標明所在縣市，建議先查證</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台灣鯛生態創意園區" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 有魚日常 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">26</span><span class="badge b-food">鮮魚定食</span></div>
+      <div class="body">
+        <h2>有魚日常</h2>
+        <div class="en">Everyday Fish</div>
+        <p>每日限量鮮魚定食套餐，建議先電話預約，主打新鮮現做的日式定食。</p>
+        <div class="meta">
+          <div><b>地址</b><span>台中市北屯區仁和里敦和一街 68 號</span></div>
+          <div><b>時間</b><span>11:00–15:00｜電話 0921-135-992</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市北屯區仁和里敦和一街68號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 阿香鴨肉飯 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region" style="background:#8a6f9e">嘉義 · 鹿草</span>
+      <div class="top"><span class="no">27</span><span class="badge b-food">招牌鴨肉飯</span></div>
+      <div class="body">
+        <h2>阿香鴨肉飯</h2>
+        <div class="en">A-Xiang Duck Rice</div>
+        <p>嘉義鹿草在地招牌鴨肉飯，社群口碑推薦的道地小吃。</p>
+        <div class="meta"><div><b>位置</b><span>嘉義縣鹿草鄉</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=阿香鴨肉飯+嘉義鹿草" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 砂島 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#c77b3f">屏東 · 恆春</span>
+      <div class="top"><span class="no">28</span><span class="badge b-view">秘境沙灘</span></div>
+      <div class="body">
+        <h2>砂島</h2>
+        <div class="en">Shadao Beach</div>
+        <p>以高達 97% 以上純白貝殼砂聞名的秘境沙灘，入口在「墾點心・戚風蛋糕專賣店」對面小徑。</p>
+        <div class="meta"><div><b>地址</b><span>屏東縣恆春鎮鵝鑾里砂島路 200-5 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=屏東縣恆春鎮鵝鑾里砂島路200-5號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 冰穀咖啡 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">29</span><span class="badge b-cafe">市場內咖啡</span></div>
+      <div class="body">
+        <h2>冰穀咖啡</h2>
+        <div class="en">Bingu Coffee</div>
+        <p>藏在模範市場內，店面前身是超過五十年的五金行。北歐淺焙、自家烘焙手沖咖啡，供應肉桂捲、司康，2022 年落腳於此。</p>
+        <div class="meta"><div><b>位置</b><span>台中市模範市場內</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=冰穀咖啡+台中模範市場" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台灣中心遺址 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#7a6a3c">南投 · 埔里</span>
+      <div class="top"><span class="no">30</span><span class="badge b-view">歷史秘境</span></div>
+      <div class="body">
+        <h2>台灣中心遺址</h2>
+        <div class="en">Center of Taiwan Site</div>
+        <p>百年歷史遺址，靠近牛耳藝術公園，社群標籤稱其擁有特殊「能量場」，是埔里在地的歷史秘境景點。</p>
+        <div class="meta"><div><b>位置</b><span>南投縣埔里鎮，牛耳藝術公園附近</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台灣中心遺址+埔里" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 環湖咖啡 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region" style="background:#9e6b3f">桃園 · 大溪</span>
+      <div class="top"><span class="no">31</span><span class="badge b-cafe">湖景咖啡</span></div>
+      <div class="body">
+        <h2>環湖咖啡</h2>
+        <div class="en">Lakeside Coffee</div>
+        <p>大溪湖畔的玻璃屋座位與吧台座位，湖景視野遼闊，適合悠閒喝咖啡看風景。</p>
+        <div class="meta"><div><b>位置</b><span>桃園市大溪區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=環湖咖啡+桃園大溪" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台灣玻璃館 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#c77b3f">彰化 · 鹿港</span>
+      <div class="top"><span class="no">32</span><span class="badge b-view">玻璃工藝館</span></div>
+      <div class="body">
+        <h2>台灣玻璃館</h2>
+        <div class="en">Taiwan Glass Gallery</div>
+        <p>以玻璃工藝聞名的免費展館，館內餐廳供應水餃配綠色玻璃小湯碗，餐具吃完可整組帶回家做紀念。</p>
+        <div class="meta"><div><b>位置</b><span>彰化縣鹿港鎮</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台灣玻璃館+鹿港" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 寶元紀之丘 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#6b7a3f">苗栗 · 三義</span>
+      <div class="top"><span class="no">33</span><span class="badge" style="background:rgba(107,122,63,.15);color:#5a6934">DIY 果醬</span></div>
+      <div class="body">
+        <h2>寶元紀之丘</h2>
+        <div class="en">Baoyuan Hill</div>
+        <p>山林、茶園、步道與建築交織的園區，提供樹葡萄果醬 DIY 體驗（配方：樹葡萄 500g、萊姆酒 100ml、白糖 150g、檸檬 1 顆、肉桂 1 支、黑胡椒粒 4g）。</p>
+        <div class="meta"><div><b>位置</b><span>苗栗縣三義鄉</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=寶元紀之丘+苗栗三義" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 宜蘭海風號觀光列車 -->
+    <article class="card reveal" data-cat="event">
+      <span class="region" style="background:#3d7a8a">宜蘭</span>
+      <div class="top"><span class="no">34</span><span class="badge b-event">觀光列車</span></div>
+      <div class="body">
+        <h2>宜蘭海風號觀光列車</h2>
+        <div class="en">Sea Breeze Sightseeing Train</div>
+        <p>含單程車票、紀念車票、精緻下午茶／特色餐點，沿途飽覽山海美景。成人（2 歲以上）NT$3,600／人，0–1 歲 NT$99。至雄獅旅遊官網搜尋「海風號觀光列車」報名。</p>
+        <div class="meta"><div><b>報名</b><span>雄獅旅遊官網</span></div></div>
+        <div class="actions">
+          <a class="ghost" href="https://www.google.com/search?q=雄獅旅遊+海風號觀光列車" target="_blank" rel="noopener">搜尋報名頁</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 北投文物館特展 -->
+    <article class="card reveal" data-cat="event">
+      <span class="region tp">台北 · 北投</span>
+      <div class="top"><span class="no">35</span><span class="badge b-event">限期特展</span></div>
+      <div class="body">
+        <h2>北投文物館《百鬼繚亂－妖怪 WORLD》</h2>
+        <div class="en">Yokai World Exhibition</div>
+        <p>展覽期間 2026 年 8 月 1 日至 2027 年 2 月 14 日，於北投文物館展出的妖怪主題特展。</p>
+        <div class="meta"><div><b>展期</b><span>2026/08/01–2027/02/14</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=北投文物館" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 千葉火鍋-大里店 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 大里</span>
+      <div class="top"><span class="no">36</span><span class="badge b-buffet">火鍋吃到飽</span></div>
+      <div class="body">
+        <h2>千葉火鍋－大里店</h2>
+        <div class="en">Chiba Hot Pot</div>
+        <p>吃到飽含鍋物、日興堂大餅、烤串、牛肉湯、各式甜點飲料，還有哈根達斯冰淇淋無限暢飲。</p>
+        <div class="meta"><div><b>位置</b><span>台中市大里區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=千葉火鍋+大里店" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 湯明茶樓 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">37</span><span class="badge b-food">米其林推薦</span></div>
+      <div class="body">
+        <h2>湯明茶樓</h2>
+        <div class="en">Tang Ming Tea House</div>
+        <p>三層樓老宅改建，獲最新米其林推薦的一人套餐版台菜，使用在地茶葉沖泡經典珍珠奶茶，招牌蛋黃芋丸。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西區昇平里昇平街 167 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區昇平街167號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 拉波兒麵包店 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">38</span><span class="badge b-cafe">人氣麵包店</span></div>
+      <div class="body">
+        <h2>拉波兒麵包店</h2>
+        <div class="en">Labor Bakery</div>
+        <p>開業 10 幾年的中清路人氣麵包店，蔥爆多、明太子口味麵包是招牌。</p>
+        <div class="meta"><div><b>位置</b><span>台中市中清路（中國醫附近）</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=拉波兒麵包店+台中中清路" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台中驛鐵道文化園區 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 中區</span>
+      <div class="top"><span class="no">39</span><span class="badge b-view">鐵道文化</span></div>
+      <div class="body">
+        <h2>台中驛鐵道文化園區</h2>
+        <div class="en">Taichung Station Railway Culture Park</div>
+        <p>展示台中鐵道歷史模型與文物，緊鄰台中舊站，適合搭配台中火車站一起走。</p>
+        <div class="meta"><div><b>位置</b><span>台中市中區台中舊站周邊</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中驛鐵道文化園區" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 望古車站 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region tp">新北 · 平溪</span>
+      <div class="top"><span class="no">40</span><span class="badge b-view">秘境車站</span></div>
+      <div class="body">
+        <h2>望古車站・平溪松苑</h2>
+        <div class="en">Wanggu Station</div>
+        <p>平溪線上的無人小站，附近有大型白色狗雕塑造景，是小眾拍照秘境。</p>
+        <div class="meta"><div><b>位置</b><span>新北市平溪區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=望古車站+平溪" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 東卯溪瀑布 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 和平</span>
+      <div class="top"><span class="no">41</span><span class="badge b-view">秘境瀑布</span></div>
+      <div class="body">
+        <h2>東卯溪瀑布</h2>
+        <div class="en">Dongmao Creek Waterfall</div>
+        <p>清澈藍綠色潭水的秘境瀑布，位於台中和平山區，適合夏日戲水消暑。</p>
+        <div class="meta"><div><b>位置</b><span>台中市和平區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=東卯溪瀑布+台中和平" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 食鮮森 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">42</span><span class="badge b-buffet">鐵板燒吃到飽</span></div>
+      <div class="body">
+        <h2>食鮮森</h2>
+        <div class="en">百元鐵板燒吃到飽</div>
+        <p>只要「百元」的鐵板燒吃到飽，含青菜、白飯、冰品甜點、湯品、蛋炒飯、炒麵、雞脛骨、雞皮。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西區東興路三段 6 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區東興路三段6號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 念十六鍋物 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">43</span><span class="badge b-buffet">鍋物吃到飽</span></div>
+      <div class="body">
+        <h2>念十六鍋物</h2>
+        <div class="en">9 種肉品無限吃到飽</div>
+        <p>平日晚餐 NT$458（用餐 90 分鐘），9 種肉品無限吃到飽。限 4 位大人以上同行，需前一天訂位，場次 17:30、19:30。</p>
+        <div class="meta"><div><b>地址</b><span>台中市烏日區光德路 309 號｜04-23378828</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市烏日區光德路309號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 墨妃家京品燒肉 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">44</span><span class="badge b-buffet">宮廷風燒肉</span></div>
+      <div class="body">
+        <h2>墨妃家京品燒肉</h2>
+        <div class="en">宮廷風裝潢燒肉吃到飽</div>
+        <p>宮廷風裝潢的燒肉吃到飽，平日午間吃到飽 NT$296／人（+10% 服務費）。</p>
+        <div class="meta"><div><b>地址</b><span>台中市南屯區黎明路二段 212 號｜04-2380-8208</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市南屯區黎明路二段212號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 埔里觀音瀑布 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#7a6a3c">南投 · 埔里</span>
+      <div class="top"><span class="no">45</span><span class="badge b-view">重新開放瀑布</span></div>
+      <div class="body">
+        <h2>埔里觀音瀑布</h2>
+        <div class="en">Puli Guanyin Waterfall</div>
+        <p>封閉 4 年後於 2026 年 8/11 重新開放。位於台14線埔霧公路約 64 公里處，「埔霧三瀑」之首，共三層，最上層落差達 60 公尺，氣勢磅礡。步道單程約 0.8 公里，來回約 1 小時，沿途樹蔭、木棧道與溪流，輕鬆好走。</p>
+        <div class="meta">
+          <div><b>位置</b><span>南投縣埔里鎮台14線埔霧公路約64公里處</span></div>
+          <div><b>資訊</b><span>免門票入園｜09:00–17:00｜停車 50 元/次（約28格，過馬路注意車流）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=埔里觀音瀑布" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 彌陀之家東林寺 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#3d7a8a">宜蘭 · 冬山</span>
+      <div class="top"><span class="no">46</span><span class="badge b-view">免費景點</span></div>
+      <div class="body">
+        <h2>彌陀之家東林寺</h2>
+        <div class="en">Donglin Temple</div>
+        <p>宜蘭冬山的免費景點，日式禪風寺廟，日式庭園搭配鏡面大殿，氛圍寧靜。</p>
+        <div class="meta"><div><b>位置</b><span>宜蘭縣冬山鄉</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=彌陀之家東林寺+宜蘭冬山" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 陽明山野人花園 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region tp">台北 · 陽明山</span>
+      <div class="top"><span class="no">47</span><span class="badge b-cafe">秘境咖啡館</span></div>
+      <div class="body">
+        <h2>陽明山野人花園 SAVAGE GARDEN</h2>
+        <div class="en">Savage Garden</div>
+        <p>陽明山秘境咖啡館，景觀玻璃屋搭配山景視野，遠離市區的放空首選。</p>
+        <div class="meta"><div><b>位置</b><span>台北市陽明山</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=野人花園+SAVAGE+GARDEN+陽明山" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 浪人企劃波蘭美食 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">48</span><span class="badge b-food">波蘭料理</span></div>
+      <div class="body">
+        <h2>浪人企劃波蘭美食</h2>
+        <div class="en">Polish Cuisine</div>
+        <p>台中少見的波蘭料理餐廳，週末 11:00 起供應早午餐。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西區昇平里昇平街 58 號｜0955-506-147</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區昇平街58號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- G'DAY -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">49</span><span class="badge b-cafe">圖書館咖啡</span></div>
+      <div class="body">
+        <h2>G'DAY</h2>
+        <div class="en">位於圖書館內的咖啡廳</div>
+        <p>藏身圖書館內、不限時、寵物友善，招牌辣奶油培根起司烏龍麵。週一公休。</p>
+        <div class="meta"><div><b>地址</b><span>台中市南區五權南路 100 號｜04-2263-5880</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市南區五權南路100號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台中文學館 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">50</span><span class="badge b-view">文學園區</span></div>
+      <div class="body">
+        <h2>台中文學館</h2>
+        <div class="en">Taichung Literature Museum</div>
+        <p>老日式宿舍群改建的文學主題園區，適合悠閒散步、感受台中的文史氛圍。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西區廣民里樂群街 38 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區樂群街38號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- i-doo Pidè -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">51</span><span class="badge b-food">土耳其料理</span></div>
+      <div class="body">
+        <h2>i-doo Pidè</h2>
+        <div class="en">土耳其餐廳</div>
+        <p>Google 評分 4.9 星（176 則），招牌沙煮咖啡，建議先電話預約。人均約 NT$200–400。</p>
+        <div class="meta"><div><b>位置</b><span>台中市南屯區溝墘里公益路一帶</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=i-doo+Pidè+台中南屯" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 兌宅DOZAI -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">52</span><span class="badge b-cafe">咖啡餐酒館</span></div>
+      <div class="body">
+        <h2>兌宅 DOZAI</h2>
+        <div class="en">Cafe &amp; Bistro</div>
+        <p>咖啡廳兼餐酒館，供應義式燉飯、飲品與甜點，白天咖啡、晚上轉場小酌都適合。</p>
+        <div class="meta"><div><b>位置</b><span>台中市西屯區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=兌宅DOZAI+台中西屯" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 金園中餐廳 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">53</span><span class="badge b-buffet">粵菜港點</span></div>
+      <div class="body">
+        <h2>金園中餐廳</h2>
+        <div class="en">台中金典酒店 15 樓</div>
+        <p>「呷福飽」粵菜港點吃到飽，Google 4.5 星（1,151 則）。平日午餐 $990、晚餐 $1,090；假日午餐 $1,380、晚餐 $1,480（皆加 10% 服務費），限 2 人以上用餐，用餐時間 120 分鐘。</p>
+        <div class="meta"><div><b>位置</b><span>台中金典酒店 15 樓</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中金典酒店+金園中餐廳" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 林家栗園 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#8a6f9e">嘉義 · 中埔</span>
+      <div class="top"><span class="no">54</span><span class="badge" style="background:rgba(138,111,158,.15);color:#6b5580">親子農場</span></div>
+      <div class="body">
+        <h2>林家栗園</h2>
+        <div class="en">2026 栗子季</div>
+        <p>每天營業，現場可走走看栗子樹、觸摸栗蓬、購買新鮮栗子，適合親子農場體驗。</p>
+        <div class="meta"><div><b>位置</b><span>嘉義縣中埔鄉</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=林家栗園+嘉義中埔" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 坂下海灘 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#3d7a8a">宜蘭 · 蘇花公路</span>
+      <div class="top"><span class="no">55</span><span class="badge b-view">蘇花秘境</span></div>
+      <div class="body">
+        <h2>坂下海灘</h2>
+        <div class="en">Banxia Beach</div>
+        <p>位於蘇花公路旁的秘境海灘，社群留言確認地點在「蘇花公路坂下海灘」，適合順著蘇花公路旅程停留拍照。</p>
+        <div class="meta"><div><b>位置</b><span>蘇花公路沿線</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=坂下海灘+蘇花公路" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 日常例外 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">56</span><span class="badge" style="background:rgba(47,93,79,.15);color:var(--forest)">鑲嵌玻璃選物</span></div>
+      <div class="body">
+        <h2>日常例外 Exceptional</h2>
+        <div class="en">鑲嵌玻璃・生活選物</div>
+        <p>鑲嵌玻璃手作課程與訂製服務、生活選物小店，鄰近新光三越，適合體驗手作課程。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西屯區杏林路 29 巷</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西屯區杏林路29巷" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/exceptional.offical" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 中興莊眷村文化園區 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">57</span><span class="badge b-view">眷村文化</span></div>
+      <div class="body">
+        <h2>中興莊眷村文化園區</h2>
+        <div class="en">Zhongxing Village Cultural Park</div>
+        <p>老眷村改建的文化園區，園區內附設烘焙坊／咖啡，適合散步拍照、喝下午茶。</p>
+        <div class="meta"><div><b>位置</b><span>台中市北屯區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=中興莊眷村文化園區+台中" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 埔里屋踏坑 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#7a6a3c">南投 · 埔里</span>
+      <div class="top"><span class="no">58</span><span class="badge b-view">戲水秘徑</span></div>
+      <div class="body">
+        <h2>埔里屋踏坑</h2>
+        <div class="en">戲水秘境</div>
+        <p>埔里在地戲水秘徑，鋪面道路上有溪水漫流而過，夏天消暑的私房秘境。</p>
+        <div class="meta"><div><b>位置</b><span>南投縣埔里鎮</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=屋踏坑+埔里" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台中參拾初 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">59</span><span class="badge b-food">蛤蜊鍋物</span></div>
+      <div class="body">
+        <h2>台中參拾初</h2>
+        <div class="en">從主食到湯品</div>
+        <p>招牌蛤蜊鍋物配麵條，套餐從主食、茶點到湯品一應俱全。</p>
+        <div class="meta"><div><b>備註</b><span>截圖未標明詳細地址</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中參拾初" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 白米甕砲台 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region tp">基隆</span>
+      <div class="top"><span class="no">60</span><span class="badge b-view">歷史砲台</span></div>
+      <div class="body">
+        <h2>白米甕砲台</h2>
+        <div class="en">Baimiwong Fort</div>
+        <p>基隆 400 歷史步道之一，綠草如茵的砲台遺跡俯瞰基隆嶼，海天一色視野遼闊。</p>
+        <div class="meta"><div><b>位置</b><span>基隆市中山區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=白米甕砲台+基隆" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 一品香春捲臭豆腐 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 東區</span>
+      <div class="top"><span class="no">61</span><span class="badge b-food">古早味臭豆腐</span></div>
+      <div class="body">
+        <h2>一品香春捲臭豆腐</h2>
+        <div class="en">春捲臭豆腐</div>
+        <p>春捲臭豆腐 $100；古早味臭豆腐大份 7 個 $85，內餡包杏鮑菇與素肉。</p>
+        <div class="meta"><div><b>地址</b><span>台中市東區精武東路 110 號｜0928-999-713</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市東區精武東路110號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 做手腳模型工坊 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">62</span><span class="badge" style="background:rgba(47,93,79,.15);color:var(--forest)">模型嗜好店</span></div>
+      <div class="body">
+        <h2>Do Did Done 做手腳模型工坊</h2>
+        <div class="en">鋼彈模型店</div>
+        <p>台中的鋼彈／模型嗜好專賣店，河北店有豐富的鋼普拉展示，模型迷不能錯過。</p>
+        <div class="meta"><div><b>備註</b><span>台中河北路一帶</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=做手腳+Do+Did+Done+模型工坊+台中" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 榮之饌 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 北區</span>
+      <div class="top"><span class="no">63</span><span class="badge b-food">DIY海鮮丼</span></div>
+      <div class="body">
+        <h2>榮之饌 DIY 海鮮丼飯</h2>
+        <div class="en">鮪魚生魚片・蝦蝦丼</div>
+        <p>菜單包含鮪魚生魚片、蝦蝦丼、DIY 壽司體驗，每週一公休。</p>
+        <div class="meta"><div><b>地址</b><span>台中市北區榮華街 143 號｜0933-023-511</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市北區榮華街143號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/jungsing2026" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 雜誌食事處 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 北區</span>
+      <div class="top"><span class="no">64</span><span class="badge b-food">每日售完為止</span></div>
+      <div class="body">
+        <h2>雜誌食事處</h2>
+        <div class="en">近國立自然科學博物館</div>
+        <p>距離科博館步行約 6 分鐘的定食店，每日售完為止，適合逛科博館後順路用餐。</p>
+        <div class="meta"><div><b>位置</b><span>台中市北區，近國立自然科學博物館</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=雜誌食事處+台中" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 高沐 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 北區</span>
+      <div class="top"><span class="no">65</span><span class="badge b-food">老宅義式</span></div>
+      <div class="body">
+        <h2>高沐 PASTA STEAK</h2>
+        <div class="en">一中街巷弄老宅</div>
+        <p>藏在一中街商圈巷弄裡的老宅餐廳，外觀爬滿綠意，供應義大利麵與牛排。</p>
+        <div class="meta"><div><b>位置</b><span>台中市北區一中街商圈巷弄內</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=高沐+PASTA+STEAK+台中一中街" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 豆子洋食商行 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 東海</span>
+      <div class="top"><span class="no">66</span><span class="badge b-food">日系定食</span></div>
+      <div class="body">
+        <h2>豆子洋食商行</h2>
+        <div class="en">東海商圈日系定食</div>
+        <p>東海商圈裡質感日系定食店，氛圍適合約會聚餐。</p>
+        <div class="meta"><div><b>位置</b><span>台中市東海商圈</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=豆子洋食商行+台中東海" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 27食事阿齊 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">67</span><span class="badge b-food">奶油蒜香麵包</span></div>
+      <div class="body">
+        <h2>27食事阿齊</h2>
+        <div class="en">JIFSCOOKINGSALON</div>
+        <p>招牌「開餐強到不行的奶油蒜香鯤魚麵包」，公休請先查看店家資訊。</p>
+        <div class="meta">
+          <div><b>地址</b><span>台中市南區學府路98巷7號</span></div>
+          <div><b>時間</b><span>11:30–15:00｜18:00–21:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市南區學府路98巷7號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 荔枝老樹公園 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">68</span><span class="badge b-view">老樹公園</span></div>
+      <div class="body">
+        <h2>荔枝老樹公園</h2>
+        <div class="en">Google 4.2★（53 則）</div>
+        <p>台中在地小公園，鄰近台中廣天宮財神開基祖廟，適合散步順遊。</p>
+        <div class="meta"><div><b>位置</b><span>台中市，近台中廣天宮</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=荔枝老樹公園+台中" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 胖子手作甜點 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">69</span><span class="badge b-cafe">臘腸犬主題</span></div>
+      <div class="body">
+        <h2>胖子手作甜點</h2>
+        <div class="en">寵物友善甜點店</div>
+        <p>臘腸犬主題的手作甜點店，推薦千層蛋糕，寵物友善但需預約。</p>
+        <div class="meta"><div><b>地址</b><span>台中市南區福新街 40 號｜0912-467-762</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市南區福新街40號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/pangzi888" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 圓潭自然生態園區 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region" style="background:#c77b3f">花蓮</span>
+      <div class="top"><span class="no">70</span><span class="badge b-view">無障礙步道瀑布</span></div>
+      <div class="body">
+        <h2>圓潭自然生態園區</h2>
+        <div class="en">Yuantan Eco Park</div>
+        <p>無障礙步道，10 分鐘內即可抵達兩座瀑布，老少咸宜的生態園區。</p>
+        <div class="meta"><div><b>位置</b><span>花蓮縣</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=圓潭自然生態園區+花蓮" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 沾美西餐廳 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region tp">台北 · 忠孝敦化</span>
+      <div class="top"><span class="no">71</span><span class="badge b-buffet">老字號自助餐</span></div>
+      <div class="body">
+        <h2>沾美西餐廳</h2>
+        <div class="en">Jimmy's Kitchen</div>
+        <p>1949 年創立的老字號自助餐廳，用餐限時 210 分鐘。午餐吃到飽價位已調漲至 NT$1,300。</p>
+        <div class="meta"><div><b>位置</b><span>台北市忠孝敦化一帶</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=沾美西餐廳+台北" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Herbelle Tea -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region" style="background:#3d7a8a">宜蘭 · 礁溪</span>
+      <div class="top"><span class="no">72</span><span class="badge b-cafe">湖畔茶屋</span></div>
+      <div class="body">
+        <h2>Herbelle Tea 湖畔茶屋</h2>
+        <div class="en">龍潭湖畔景觀茶屋</div>
+        <p>緊鄰龍潭湖風景區的湖畔茶屋，落地窗景觀能同時看見湖景與山景。低消 NT$80 起，寵物友善（需推車／提籠／牽繩），用餐限時 90 分鐘。</p>
+        <div class="meta"><div><b>位置</b><span>宜蘭縣礁溪鄉，龍潭湖畔</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=Herbelle+Tea+湖畔茶屋+礁溪" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台中咖啡廳雜誌特輯 x4 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">73</span><span class="badge b-cafe">法式甜點</span></div>
+      <div class="body">
+        <h2>Jego Café</h2>
+        <div class="en">台中巷弄法式甜點空間</div>
+        <p>藏身台中巷弄的法式甜點咖啡空間，雜誌特輯推薦的口袋名單。</p>
+        <div class="meta"><div><b>備註</b><span>雜誌翻拍，地址未附，建議先查詢確認</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=Jego+Café+台中" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">74</span><span class="badge b-cafe">雜糧行改建</span></div>
+      <div class="body">
+        <h2>鴻來雜糧行</h2>
+        <div class="en">老雜糧行轉型生活空間</div>
+        <p>由老牌雜糧／乾貨行轉型的生活風格空間，雜誌特輯推薦的台中口袋名單。</p>
+        <div class="meta"><div><b>備註</b><span>雜誌翻拍，地址未附，建議先查詢確認</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=鴻來雜糧行+台中" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">75</span><span class="badge b-cafe">自家烘豆</span></div>
+      <div class="body">
+        <h2>Congrats Coffee Roasters</h2>
+        <div class="en">自家烘焙・永續咖啡</div>
+        <p>以「Green Coffee／永續關係」為主題的自家烘焙咖啡館，雜誌特輯推薦。</p>
+        <div class="meta"><div><b>備註</b><span>雜誌翻拍，地址未附，建議先查詢確認</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=Congrats+Coffee+Roasters+台中" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中</span>
+      <div class="top"><span class="no">76</span><span class="badge b-cafe">西班牙街邊風</span></div>
+      <div class="body">
+        <h2>HECHO cafe &amp; wine</h2>
+        <div class="en">西班牙式全日咖啡酒館</div>
+        <p>西班牙街邊咖啡館風格，全日咖啡與酒館並行，雜誌特輯推薦的台中口袋名單。</p>
+        <div class="meta"><div><b>備註</b><span>雜誌翻拍，地址未附，建議先查詢確認</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=HECHO+cafe+wine+台中" target="_blank" rel="noopener">Google 搜尋</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 雄獅文具想像力製造所 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#9e6b3f">桃園 · 龍潭</span>
+      <div class="top"><span class="no">77</span><span class="badge" style="background:rgba(107,122,63,.15);color:#5a6934">觀光工廠</span></div>
+      <div class="body">
+        <h2>雄獅文具 想像力製造所</h2>
+        <div class="en">Simba Lion Art Studio</div>
+        <p>龍潭最美觀光工廠，8 大展區激發色彩創造力，近 40 歲落羽松林步道好拍。園內不定期推出主題企劃，如「想像力森鄰私旅－羽扇染漫食光」（手作編染課程 X 私旅特製料理），曾獲選 111 年工研院職人手作課程。</p>
+        <div class="meta">
+          <div><b>地址</b><span>桃園市龍潭區中原路二段 188 號</span></div>
+          <div><b>電話</b><span>03-411-6888</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=桃園市龍潭區中原路二段188號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://simbalionartstudio.com/page/visit" target="_blank" rel="noopener">官網參觀資訊</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 免費抓魚 -->
+    <article class="card reveal" data-cat="event">
+      <span class="region" style="background:#5a5b50">新竹 · 湖口</span>
+      <div class="top"><span class="no">78</span><span class="badge b-event">限時活動</span></div>
+      <div class="body">
+        <h2>山泉水吳郭魚・免費抓魚</h2>
+        <div class="en">隨便抓，免費送</div>
+        <p>魚池清池大放送，山泉水養殖吳郭魚肉質鮮甜無土味，不限數量、抓多少算多少。需自備水桶、魚網／撈網、青蛙裝等工具。</p>
+        <div class="meta">
+          <div><b>位置</b><span>新竹縣湖口鄉羊喜窩（詳細位置需私訊主辦）</span></div>
+          <div><b>備註</b><span>社群個人貼文，屬一次性限時活動，時效已過，僅供參考日後類似活動</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=新竹縣湖口鄉羊喜窩" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- STANDLY 詩丹德利 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#c77b3f">彰化 · 花壇</span>
+      <div class="top"><span class="no">79</span><span class="badge" style="background:rgba(199,123,63,.15);color:#8a5228">生活選物</span></div>
+      <div class="body">
+        <h2>STANDLY 詩丹德利</h2>
+        <div class="en">傢俱選物店</div>
+        <p>巷子內的傢俱選物店，好逛好挖寶又好停車。陶器皿與生活木器、各式編織椅、高腳椅升降邊桌，也接客製實木傢俱、實木升降桌訂製。</p>
+        <div class="meta">
+          <div><b>地址</b><span>彰化縣花壇鄉文德村春山巷1之1號（綠房子2F）</span></div>
+          <div><b>時間</b><span>平日 8:30–17:30｜7/25–26 13:00–18:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=彰化縣花壇鄉文德村春山巷1之1號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://standly.com.tw" target="_blank" rel="noopener">線上店</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 寝る子書店 NERUKO BOOKS -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">80</span><span class="badge b-view">獨立二手書店</span></div>
+      <div class="body">
+        <h2>寝る子書店 NERUKO BOOKS</h2>
+        <div class="en">睡貓書店</div>
+        <p>中興大學巷弄裡的二手書店兼咖啡館，老件家私搭配闆娘美感佈置，連貓也愛來。門口有免費取閱書車與「讀島」活動黑板，氛圍安靜愜意。</p>
+        <div class="meta">
+          <div><b>地址</b><span>台中市南區五權南路 278 巷 25 號</span></div>
+          <div><b>時間</b><span>日–二 14:00–19:00（三–四公休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市南區五權南路278巷25號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/neruko_books/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 幸樂窯 有田燒尋寶 -->
+    <article class="card reveal" data-cat="farm">
+      <span class="region" style="background:#264a73">日本 · 佐賀</span>
+      <div class="top"><span class="no">81</span><span class="badge" style="background:rgba(38,74,115,.15);color:#264a73">陶瓷尋寶體驗</span></div>
+      <div class="body">
+        <h2>幸樂窯 有田燒倉庫尋寶</h2>
+        <div class="en">Kouraku Kiln</div>
+        <p>創立於 1865 年、逾 150 年歷史的有田燒老窯。90 分鐘內用提籃在倉庫裡自由裝滿喜歡的陶瓷器皿，上萬件老件、瑕疵品、絕版品隨你挖，穿棉手套翻找木箱超好玩。</p>
+        <div class="meta">
+          <div><b>位置</b><span>日本佐賀縣有田町，JR有田駅轉巴士至丸尾住宅前站</span></div>
+          <div><b>費用</b><span>NT 約 6,600／13,200 日圓（依裝滿方案）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://tenjo.tw/kouraku-kiln/" target="_blank" rel="noopener">活動介紹</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台灣味噌釀造文化館 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 豐原</span>
+      <div class="top"><span class="no">82</span><span class="badge b-view">觀光工廠</span></div>
+      <div class="body">
+        <h2>台灣味噌釀造文化館</h2>
+        <div class="en">全台首座味噌觀光工廠</div>
+        <p>小而美的觀光工廠，日本風佈置搭配懷舊童玩，主要生產味噌與醬油，可預約手作 DIY，免門票、好逛好拍。</p>
+        <div class="meta">
+          <div><b>地址</b><span>台中市豐原區西勢路 701 號</span></div>
+          <div><b>時間</b><span>09:00–17:00｜免費入園・免費停車</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市豐原區西勢路701號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- MangaZine漫格誌書店 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">83</span><span class="badge b-cafe">漫畫選物店</span></div>
+      <div class="body">
+        <h2>MangaZine 漫格誌書店</h2>
+        <div class="en">漫畫 X 高級茶飲</div>
+        <p>超級乾淨、有高級茶飲的漫畫店，收藏大量台灣與日本優質漫畫，空間明亮好待，是漫畫選物店的新型態。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西屯區杏林路 15 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西屯區杏林路15號" target="_blank" rel="noopener">Google 地圖</a>
+          <a class="ghost" href="https://www.instagram.com/mangazine_bookstore" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 漢來海港 廣三SOGO店 -->
+    <article class="card reveal" data-cat="buffet">
+      <span class="region">台中 · 西區</span>
+      <div class="top"><span class="no">84</span><span class="badge b-buffet">海鮮吃到飽</span></div>
+      <div class="body">
+        <h2>漢來海港 台中廣三SOGO店</h2>
+        <div class="en">Hilai Harbor Buffet</div>
+        <p>Google 4.1 星（1.1 萬則），人均 $800–1,000。生猛螃蟹、龍蝦、生魚片一應俱全，位於廣三 SOGO 16 樓，用餐分午／下午／晚三時段。</p>
+        <div class="meta">
+          <div><b>地址</b><span>台中市西區臺灣大道二段 459 號 16 樓</span></div>
+          <div><b>時間</b><span>11:30–14:00｜14:30–16:30｜17:30–21:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西區臺灣大道二段459號+漢來海港" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 教師新村 -->
+    <article class="card reveal" data-cat="view">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">85</span><span class="badge b-view">散步聚落</span></div>
+      <div class="body">
+        <h2>教師新村</h2>
+        <div class="en">Jiaoshi New Village</div>
+        <p>台中新光三越對面的老聚落，巷弄裡藏了咖啡廳、餐廳與選物店（如日和器物 Hiyori），適合跟著散步地圖慢慢探索，每次來都能挖到不一樣的小店。</p>
+        <div class="meta"><div><b>位置</b><span>台中市西屯區，台中新光三越對面</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=教師新村+台中西屯" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 孫太太山海惠中行館 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">86</span><span class="badge b-food">私廚桌菜</span></div>
+      <div class="body">
+        <h2>孫太太．山海．惠中行館</h2>
+        <div class="en">山與海之間的靜所</div>
+        <p>以「一鍋本真之顏，為憶味、慷情的人，留一席風月」為主題的私廚料理，銅鍋鴛鴦湯底配龍蝦、生蠔、和牛等山海食材，環境有日式庭園枯山水造景。</p>
+        <div class="meta"><div><b>地址</b><span>台中市西屯區惠中六街 15 號 1 樓</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市西屯區惠中六街15號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 築樂珈琲 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region" style="background:#7a6a3c">南投 · 埔里</span>
+      <div class="top"><span class="no">87</span><span class="badge b-cafe">日式庭園餐廳</span></div>
+      <div class="body">
+        <h2>築樂珈琲</h2>
+        <div class="en">隱身桃米社區的日式景觀餐廳</div>
+        <p>木質日式老屋搭配榻榻米座位，戶外有水岸落羽松庭園四季景色不同。正餐供應日式咖哩飯、烤雞腿排定食，下午茶有戚風蛋糕、菓子與咖啡拿鐵。</p>
+        <div class="meta"><div><b>位置</b><span>南投縣埔里鎮桃米社區</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=築樂珈琲+南投埔里桃米社區" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 双漁堂 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 北區</span>
+      <div class="top"><span class="no">88</span><span class="badge b-food">30年老字號簡餐</span></div>
+      <div class="body">
+        <h2>双漁堂</h2>
+        <div class="en">在地人氣簡餐店</div>
+        <p>幾乎都是在地熟客在吃的老字號簡餐店，招牌紅燒牛肉煲牛肉塊超大厚實、蘿蔔入味，套餐附三樣小菜與熱湯，飲料大杯可無限續，據說郭台銘也愛吃。</p>
+        <div class="meta"><div><b>地址</b><span>台中市北區學士路 194 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市北區學士路194號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 櫟社 -->
+    <article class="card reveal" data-cat="cafe">
+      <span class="region">台中 · 中區</span>
+      <div class="top"><span class="no">89</span><span class="badge b-cafe">茶系伴手禮</span></div>
+      <div class="body">
+        <h2>櫟社</h2>
+        <div class="en">茶系伴手禮店</div>
+        <p>老樹環繞的玻璃屋店面，主打茶系伴手禮，老中區巷弄裡意外清幽的角落。</p>
+        <div class="meta"><div><b>地址</b><span>台中市中區市府路 150 號</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=台中市中區市府路150號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 泰潮泰式料理 -->
+    <article class="card reveal" data-cat="food">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">90</span><span class="badge b-food">一人泰式套餐</span></div>
+      <div class="body">
+        <h2>泰潮泰式料理（大墩店）</h2>
+        <div class="en">一個人也能吃的泰式料理</div>
+        <p>販售個人商業套餐，最便宜只要 $199，主食之外還附四道小菜、飲品／甜點二擇一，划算又不用湊人數，也有合菜可選。</p>
+        <div class="meta"><div><b>地址</b><span>臺中市南屯區大墩十一街 526-1 號｜04-22500925</span></div></div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=臺中市南屯區大墩十一街526-1號" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 集集鎮旅遊地圖 -->
+    <article class="card reveal" data-cat="trip">
+      <span class="region">南投 · 集集</span>
+      <div class="top"><span class="no">91</span><span class="badge b-trip">互動地圖 · 13 站</span></div>
+      <div class="body">
+        <h2>集集鎮旅遊地圖</h2>
+        <div class="en">Jiji Line · interactive map</div>
+        <p>鐵道、山蕉、綠色隧道。依動線排好的 13 個站點，點任一站地圖就帶你導覽 —— 從綠色隧道一路走到集集夜市，含火車站、武昌宮 921 遺址、明新書院、集元果觀光工廠、大樟樹。每站附開放時間與票價。</p>
+        <div class="meta">
+          <div><b>形式</b><span>互動地圖，可點選站點</span></div>
+          <div><b>提醒</b><span>地圖需連網載入一次</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="南投-集集/index.html">開啟地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 草嶺石壁之旅 -->
+    <article class="card reveal" data-cat="trip">
+      <span class="region">雲林 · 草嶺石壁</span>
+      <div class="top"><span class="no">92</span><span class="badge b-trip">2 天 1 夜 · 高鐵</span></div>
+      <div class="body">
+        <h2>草嶺石壁之旅</h2>
+        <div class="en">Caoling Shibi · 2D1N</div>
+        <p>搭高鐵到雲林站租車出發。首日斗六太平老街、仁德咖啡、糖廠竹創基地、溝壩社區，入住山林；次日清晨到石壁森林療癒基地健行，接農家茶席／烘咖啡與手作料理，下山採購在地職人伴手禮。帶路人為石壁休閒農業區發展協會理事長賴郁憲。</p>
+        <div class="meta">
+          <div><b>天數</b><span>2 天 1 夜｜高鐵雲林站進出</span></div>
+          <div><b>提醒</b><span>茶席、烘咖啡、手作料理皆須預約</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="雲林-草嶺石壁之旅/index.html">開啟行程</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<script>
+  const chips=document.querySelectorAll('.chip');
+  const cards=document.querySelectorAll('.card');
+  chips.forEach(c=>c.addEventListener('click',()=>{
+    chips.forEach(x=>x.classList.remove('active'));
+    c.classList.add('active');
+    const f=c.dataset.f;
+    cards.forEach(card=>{
+      const show=(f==='all'||card.dataset.cat===f);
+      card.classList.toggle('hide',!show);
+      if(show){card.style.animation='none';card.offsetHeight;card.style.animation='up .6s forwards'}
+    });
+  }));
+</script>
+</body>
+</html>
