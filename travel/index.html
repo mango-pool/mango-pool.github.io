@@ -47,8 +47,10 @@
   .filters .chips{display:flex;flex-wrap:wrap;gap:9px}
   .flabel{font-size:11px;letter-spacing:.22em;color:var(--ink-soft);opacity:.7;padding-top:9px;white-space:nowrap}
   .chip{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
-    font-family:"Noto Serif TC";font-size:13px;letter-spacing:.2em;padding:8px 18px;border-radius:30px;cursor:pointer;transition:.3s}
-  .chip:hover{border-color:var(--forest);color:var(--forest)}
+    font-family:"Noto Serif TC";font-size:13px;letter-spacing:.2em;padding:8px 18px;border-radius:30px;cursor:pointer;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1),border-color .3s,color .3s,background .3s,opacity .3s}
+  .chip:hover{border-color:var(--forest);color:var(--forest);transform:scale(1.07)}
+  .chip:active{transform:scale(.92)}
   .chip.active{background:var(--forest);border-color:var(--forest);color:var(--paper)}
   .chip.off{opacity:.22;pointer-events:none}
   #regions .chip{font-size:12px;padding:6px 14px;letter-spacing:.14em}
@@ -58,6 +60,7 @@
   .card{background:var(--card);border:1px solid var(--line);position:relative;
     display:flex;flex-direction:column;overflow:hidden;transition:.45s cubic-bezier(.19,1,.22,1)}
   .card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -22px rgba(47,93,79,.4);border-color:var(--forest)}
+  .card:active{transform:translateY(-2px) scale(.985)}
   .card .top{padding:26px 26px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
   .card .no{font-family:"Cormorant Garamond";font-style:italic;font-size:34px;color:var(--line);line-height:.8}
   .badge{font-size:11px;letter-spacing:.18em;padding:5px 12px;border-radius:20px;white-space:nowrap;font-weight:500}
@@ -95,6 +98,11 @@
   .card.hide{display:none}
   .reveal{opacity:0;transform:translateY(24px);animation:up .8s forwards}
   @keyframes up{to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){
+    .chip,.card{transition:none}
+    .chip:hover,.chip:active,.card:hover,.card:active{transform:none}
+    .reveal{animation:none;opacity:1;transform:none}
+  }
 </style>
 </head>
 <body>
@@ -2459,10 +2467,17 @@
   const hitC=c=>curC==='all'||c.dataset.cat===curC;
 
   function apply(){
+    /* 入場錯開：只有前 12 張依序浮現，其餘立即顯示，避免長列表等太久 */
+    let shown=0;
     cards.forEach(card=>{
       const show=hitR(card)&&hitC(card);
       card.classList.toggle('hide',!show);
-      if(show){card.style.animation='none';card.offsetHeight;card.style.animation='up .6s forwards'}
+      if(show){
+        const delay=shown<12?shown*40:0; shown++;
+        card.style.animation='none';card.offsetHeight;
+        card.style.animation='up .6s forwards';
+        card.style.animationDelay=delay+'ms';
+      }
     });
     /* 另一軸選定後會落空的鈕變灰且不可點，所以永遠不會篩出空畫面 */
     regRow.querySelectorAll('[data-r]').forEach(b=>{
