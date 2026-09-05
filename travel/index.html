@@ -42,11 +42,15 @@
   .divider span{font-family:"Cormorant Garamond";font-style:italic;font-size:16px;letter-spacing:.2em}
 
   /* 篩選 */
-  .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:18px 0 34px}
+  .filterbar{padding:18px 0 30px;display:flex;flex-direction:column;gap:9px}
+  .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;align-items:center}
+  .flabel{font-size:11px;letter-spacing:.22em;color:var(--ink-soft);opacity:.7;margin-right:2px}
   .chip{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
     font-family:"Noto Serif TC";font-size:13px;letter-spacing:.2em;padding:8px 18px;border-radius:30px;cursor:pointer;transition:.3s}
   .chip:hover{border-color:var(--forest);color:var(--forest)}
   .chip.active{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+  .chip.off{opacity:.22;pointer-events:none}
+  #regions .chip{font-size:12px;padding:6px 14px;letter-spacing:.14em}
 
   /* 卡片網格 */
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:26px;padding-bottom:80px}
@@ -75,7 +79,6 @@
   .meta b{color:var(--forest);font-weight:500;min-width:44px;letter-spacing:.1em}
   .region{position:absolute;top:0;left:0;background:var(--forest);color:var(--paper);
     font-size:11px;letter-spacing:.25em;padding:5px 14px;writing-mode:horizontal-tb}
-  .region.tp{background:var(--coral)}
   .actions{display:flex;gap:10px;margin-top:20px}
   .actions a{flex:1;text-align:center;text-decoration:none;font-size:13px;letter-spacing:.15em;
     padding:11px;transition:.3s;border:1px solid var(--ink)}
@@ -99,7 +102,10 @@
 </header>
 
 <div class="wrap">
+  <div class="filterbar">
+  <div class="filters" id="regions"><span class="flabel">地區</span></div>
   <div class="filters" id="filters">
+    <span class="flabel">分類</span>
     <button class="chip active" data-f="all">全部</button>
     <button class="chip" data-f="cafe">咖啡</button>
     <button class="chip" data-f="view">景點</button>
@@ -109,6 +115,7 @@
     <button class="chip" data-f="event">展覽活動</button>
     <button class="chip" data-f="rail">台鐵活動</button>
     <button class="chip" data-f="trip">照著走行程</button>
+  </div>
   </div>
 
   <div class="grid" id="grid">
@@ -172,7 +179,7 @@
 
     <!-- PATTIE-O DINER -->
     <article class="card reveal" data-cat="food">
-      <span class="region tp">台北 · 中山</span>
+      <span class="region" style="background:#8a4a4a">台北 · 中山</span>
       <div class="top"><span class="no">04</span><span class="badge b-us">復古美式</span></div>
       <div class="body">
         <h2>PATTIE-O DINER</h2>
@@ -210,7 +217,7 @@
 
     <!-- 台鐵鐵印帳 -->
     <article class="card reveal" data-cat="rail">
-      <span class="region tp" style="background:#2f5f9e">全台 · 台鐵</span>
+      <span class="region" style="background:#2f5f9e">全台 · 台鐵</span>
       <div class="top"><span class="no">06</span><span class="badge b-rail">集章活動</span></div>
       <div class="body">
         <h2>台鐵鐵印帳</h2>
@@ -229,7 +236,7 @@
 
     <!-- 臺鐵會員 -->
     <article class="card reveal" data-cat="rail">
-      <span class="region tp" style="background:#2f5f9e">全台 · 台鐵</span>
+      <span class="region" style="background:#2f5f9e">全台 · 台鐵</span>
       <div class="top"><span class="no">07</span><span class="badge b-rail">會員服務</span></div>
       <div class="body">
         <h2>臺鐵會員</h2>
@@ -304,7 +311,7 @@
 
     <!-- 台鐵海線慢旅行 -->
     <article class="card reveal" data-cat="rail">
-      <span class="region tp" style="background:#2f5f9e">台鐵 · 海線</span>
+      <span class="region">台中 · 海線</span>
       <div class="top"><span class="no">11</span><span class="badge b-rail">海線慢旅</span></div>
       <div class="body">
         <h2>海線慢旅行</h2>
@@ -431,7 +438,7 @@
 
     <!-- 士林廚房 -->
     <article class="card reveal" data-cat="buffet">
-      <span class="region tp">台北 · 士林</span>
+      <span class="region" style="background:#8a4a4a">台北 · 士林</span>
       <div class="top"><span class="no">19</span><span class="badge b-buffet">飯店海鮮饗宴</span></div>
       <div class="body">
         <h2>士林廚房</h2>
@@ -512,7 +519,7 @@
 
     <!-- 醉月咖啡 -->
     <article class="card reveal" data-cat="cafe">
-      <span class="region tp">新北</span>
+      <span class="region" style="background:#47607a">新北</span>
       <div class="top"><span class="no">24</span><span class="badge b-cafe">山林秘境</span></div>
       <div class="body">
         <h2>醉月咖啡</h2>
@@ -680,7 +687,7 @@
 
     <!-- 北投文物館特展 -->
     <article class="card reveal" data-cat="event">
-      <span class="region tp">台北 · 北投</span>
+      <span class="region" style="background:#8a4a4a">台北 · 北投</span>
       <div class="top"><span class="no">35</span><span class="badge b-event">限期特展</span></div>
       <div class="body">
         <h2>北投文物館《百鬼繚亂－妖怪 WORLD》</h2>
@@ -755,7 +762,7 @@
 
     <!-- 望古車站 -->
     <article class="card reveal" data-cat="view">
-      <span class="region tp">新北 · 平溪</span>
+      <span class="region" style="background:#47607a">新北 · 平溪</span>
       <div class="top"><span class="no">40</span><span class="badge b-view">秘境車站</span></div>
       <div class="body">
         <h2>望古車站・平溪松苑</h2>
@@ -863,7 +870,7 @@
 
     <!-- 陽明山野人花園 -->
     <article class="card reveal" data-cat="cafe">
-      <span class="region tp">台北 · 陽明山</span>
+      <span class="region" style="background:#8a4a4a">台北 · 陽明山</span>
       <div class="top"><span class="no">47</span><span class="badge b-cafe">秘境咖啡館</span></div>
       <div class="body">
         <h2>陽明山野人花園 SAVAGE GARDEN</h2>
@@ -1059,7 +1066,7 @@
 
     <!-- 白米甕砲台 -->
     <article class="card reveal" data-cat="view">
-      <span class="region tp">基隆</span>
+      <span class="region" style="background:#2f5f6b">基隆</span>
       <div class="top"><span class="no">60</span><span class="badge b-view">歷史砲台</span></div>
       <div class="body">
         <h2>白米甕砲台</h2>
@@ -1229,7 +1236,7 @@
 
     <!-- 沾美西餐廳 -->
     <article class="card reveal" data-cat="buffet">
-      <span class="region tp">台北 · 忠孝敦化</span>
+      <span class="region" style="background:#8a4a4a">台北 · 忠孝敦化</span>
       <div class="top"><span class="no">71</span><span class="badge b-buffet">老字號自助餐</span></div>
       <div class="body">
         <h2>沾美西餐廳</h2>
@@ -1750,18 +1757,60 @@
 </div>
 
 <script>
-  const chips=document.querySelectorAll('.chip');
-  const cards=document.querySelectorAll('.card');
-  chips.forEach(c=>c.addEventListener('click',()=>{
-    chips.forEach(x=>x.classList.remove('active'));
-    c.classList.add('active');
-    const f=c.dataset.f;
+  const cards=[...document.querySelectorAll('.card')];
+  const regRow=document.getElementById('regions');
+  const catRow=document.getElementById('filters');
+
+  /* 地區直接從卡片的地區標籤推出來，新增卡片不必再多寫欄位 */
+  const countyOf=c=>{const r=c.querySelector('.region');return r?r.textContent.split('·')[0].trim():''};
+
+  /* 地區鈕依卡片數多寡生成，非單一縣市的排最後 */
+  const TAIL=['全台','地點未詳'];
+  const tally={};
+  cards.forEach(c=>{const k=countyOf(c);if(k)tally[k]=(tally[k]||0)+1});
+  const regions=Object.keys(tally).sort((a,b)=>{
+    const ta=TAIL.indexOf(a),tb=TAIL.indexOf(b);
+    if(ta>-1||tb>-1)return (ta>-1)-(tb>-1)||ta-tb;
+    return tally[b]-tally[a]||a.localeCompare(b,'zh-Hant');
+  });
+  regRow.insertAdjacentHTML('beforeend',
+    '<button class="chip active" data-r="all">全部</button>'+
+    regions.map(r=>`<button class="chip" data-r="${r}">${r}</button>`).join(''));
+
+  let curR='all',curC='all';
+  const hitR=c=>curR==='all'||countyOf(c)===curR;
+  const hitC=c=>curC==='all'||c.dataset.cat===curC;
+
+  function apply(){
     cards.forEach(card=>{
-      const show=(f==='all'||card.dataset.cat===f);
+      const show=hitR(card)&&hitC(card);
       card.classList.toggle('hide',!show);
       if(show){card.style.animation='none';card.offsetHeight;card.style.animation='up .6s forwards'}
     });
-  }));
+    /* 另一軸選定後會落空的鈕變灰且不可點，所以永遠不會篩出空畫面 */
+    regRow.querySelectorAll('[data-r]').forEach(b=>{
+      const v=b.dataset.r;
+      b.classList.toggle('off',!cards.some(c=>hitC(c)&&(v==='all'||countyOf(c)===v)));
+    });
+    catRow.querySelectorAll('[data-f]').forEach(b=>{
+      const v=b.dataset.f;
+      b.classList.toggle('off',!cards.some(c=>hitR(c)&&(v==='all'||c.dataset.cat===v)));
+    });
+  }
+
+  function wire(row,key,set){
+    row.addEventListener('click',e=>{
+      const b=e.target.closest('[data-'+key+']');
+      if(!b||b.classList.contains('off'))return;
+      row.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      set(b.dataset[key]);
+      apply();
+    });
+  }
+  wire(regRow,'r',v=>curR=v);
+  wire(catRow,'f',v=>curC=v);
+  apply();
 </script>
 </body>
 </html>
