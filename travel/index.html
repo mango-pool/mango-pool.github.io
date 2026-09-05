@@ -43,8 +43,9 @@
 
   /* 篩選 */
   .filterbar{padding:18px 0 30px;display:flex;flex-direction:column;gap:9px}
-  .filters{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;align-items:center}
-  .flabel{font-size:11px;letter-spacing:.22em;color:var(--ink-soft);opacity:.7;margin-right:2px}
+  .filters{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:start}
+  .filters .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .flabel{font-size:11px;letter-spacing:.22em;color:var(--ink-soft);opacity:.7;padding-top:9px;white-space:nowrap}
   .chip{border:1px solid var(--line);background:transparent;color:var(--ink-soft);
     font-family:"Noto Serif TC";font-size:13px;letter-spacing:.2em;padding:8px 18px;border-radius:30px;cursor:pointer;transition:.3s}
   .chip:hover{border-color:var(--forest);color:var(--forest)}
@@ -103,9 +104,10 @@
 
 <div class="wrap">
   <div class="filterbar">
-  <div class="filters" id="regions"><span class="flabel">地區</span></div>
+  <div class="filters" id="regions"><span class="flabel">地區</span><span class="chips"></span></div>
   <div class="filters" id="filters">
     <span class="flabel">分類</span>
+    <span class="chips">
     <button class="chip active" data-f="all">全部</button>
     <button class="chip" data-f="cafe">咖啡</button>
     <button class="chip" data-f="view">景點</button>
@@ -115,6 +117,7 @@
     <button class="chip" data-f="event">展覽活動</button>
     <button class="chip" data-f="rail">台鐵活動</button>
     <button class="chip" data-f="trip">照著走行程</button>
+    </span>
   </div>
   </div>
 
@@ -1773,7 +1776,7 @@
     if(ta>-1||tb>-1)return (ta>-1)-(tb>-1)||ta-tb;
     return tally[b]-tally[a]||a.localeCompare(b,'zh-Hant');
   });
-  regRow.insertAdjacentHTML('beforeend',
+  regRow.querySelector('.chips').insertAdjacentHTML('beforeend',
     '<button class="chip active" data-r="all">全部</button>'+
     regions.map(r=>`<button class="chip" data-r="${r}">${r}</button>`).join(''));
 
