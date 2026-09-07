@@ -63,6 +63,7 @@
   .card:active{transform:translateY(-2px) scale(.985)}
   .card .top{padding:26px 26px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
   .card .no{font-family:"Cormorant Garamond";font-style:italic;font-size:34px;color:var(--line);line-height:.8}
+  #mrts[hidden]{display:none}
   .badge{font-size:11px;letter-spacing:.18em;padding:5px 12px;border-radius:20px;white-space:nowrap;font-weight:500}
   .b-cafe{background:rgba(176,132,40,.14);color:var(--gold)}
   .b-tea{background:rgba(201,85,61,.14);color:var(--coral)}
@@ -129,9 +130,11 @@
     <button class="chip" data-f="rail">台鐵活動</button>
     <button class="chip" data-f="trip">照著走行程</button>
     <button class="chip" data-f="veg">素食</button>
+    <button class="chip" data-f="mrt">台中捷運</button>
     <button class="chip" data-f="station">孫女冷門車站</button>
     </span>
   </div>
+  <div class="filters" id="mrts" hidden><span class="flabel">捷運站</span><span class="chips"></span></div>
   </div>
 
   <div class="grid" id="grid">
@@ -2899,6 +2902,1007 @@
         </div>
       </div>
     </article>
+    <!-- 岩漿火鍋 台中敦富店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="北屯總站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">164</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>岩漿火鍋 台中敦富店</h2>
+        <div class="en">Magma Hotpot · 麻辣鴛鴦鍋</div>
+        <p>好市多北屯店旁邊的麻辣鴛鴦鍋，炙燒梅花豬盤擺得很浮誇，開到半夜，宵夜場也吃得到。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 北屯總站 步行約 2 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區敦富路 468 號 2 樓</span></div>
+          <div><b>時間</b><span>11:00–00:00（最後入場 22:00）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%B2%A9%E6%BC%BF%E7%81%AB%E9%8D%8B%20%E5%8F%B0%E4%B8%AD%E6%95%A6%E5%AF%8C%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%95%A6%E5%AF%8C%E8%B7%AF%20468%20%E8%99%9F%202%20%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 港佬大港式飲茶百匯 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="北屯總站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">165</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>港佬大港式飲茶百匯</h2>
+        <div class="en">Hong Kong Style Dim Sum · 吃到飽</div>
+        <p>潮港城集團開的港點吃到飽，腸粉、燒臘、片皮鴨、點心推車一次上桌，適合家族聚餐。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 北屯總站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區敦富路 365 號 1 樓</span></div>
+          <div><b>時間</b><span>平日 11:30–15:00、17:30–21:00；假日 11:00–15:00、17:00–21:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%B8%AF%E4%BD%AC%E5%A4%A7%E6%B8%AF%E5%BC%8F%E9%A3%B2%E8%8C%B6%E7%99%BE%E5%8C%AF%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%95%A6%E5%AF%8C%E8%B7%AF%20365%20%E8%99%9F%201%20%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 大地商場 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="舊社站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">166</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>大地商場</h2>
+        <div class="en">Dadi Market · 市場＋美食街</div>
+        <p>傳統市場、生鮮攤跟美食街擠在同一棟室內商場，對面就是週三五六日開市的總站夜市，出站就能吃。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 舊社站 步行約 3–5 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區敦富一街 133 號</span></div>
+          <div><b>時間</b><span>美食攤約 11:00–20:30；生鮮攤 14:00–19:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E5%9C%B0%E5%95%86%E5%A0%B4%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%95%A6%E5%AF%8C%E4%B8%80%E8%A1%97%20133%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 南興公園 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="舊社站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">167</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>南興公園</h2>
+        <div class="en">Nanxing Park · 米奇樹</div>
+        <p>萬坪大公園，一棵百年芒果樹被叫做「米奇樹」成了打卡點，還有落羽松步道跟寵物公園。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 舊社站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區軍福十九路</span></div>
+          <div><b>時間</b><span>全天開放</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%97%E8%88%88%E5%85%AC%E5%9C%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E8%BB%8D%E7%A6%8F%E5%8D%81%E4%B9%9D%E8%B7%AF" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 馨苑小料理 松竹店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="舊社站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">168</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>馨苑小料理 松竹店</h2>
+        <div class="en">Xinyuan · 米其林必比登推薦台菜</div>
+        <p>必比登推薦的精緻台菜，就在站的斜對面，一個人也能點套餐，咖啡意外地做得不錯。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 舊社站 步行約 2 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區敦富路 68 號</span></div>
+          <div><b>時間</b><span>11:00–20:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E9%A6%A8%E8%8B%91%E5%B0%8F%E6%96%99%E7%90%86%20%E6%9D%BE%E7%AB%B9%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%95%A6%E5%AF%8C%E8%B7%AF%2068%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 潮州牛肉林牛雜湯 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="舊社站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">169</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>潮州牛肉林牛雜湯</h2>
+        <div class="en">Beef Noodle · 排隊小吃</div>
+        <p>松竹路出口走 100 公尺就到，平日假日都在排隊的九十元牛肉麵，牛雜湯也是招牌。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 舊社站 步行約 1–2 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區松竹路一段 1312 號</span></div>
+          <div><b>時間</b><span>11:00–14:00、17:00–20:00（週日休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%BD%AE%E5%B7%9E%E7%89%9B%E8%82%89%E6%9E%97%E7%89%9B%E9%9B%9C%E6%B9%AF%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%9D%BE%E7%AB%B9%E8%B7%AF%E4%B8%80%E6%AE%B5%201312%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 舊社公園 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="松竹站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">170</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>舊社公園</h2>
+        <div class="en">Jiushe Park · 蓮花池</div>
+        <p>出站就到的四公頃社區公園，有蓮花池、蓄洪池跟涼亭，繞一圈約 500 公尺，等車空檔剛好散步。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 松竹站 步行約 1–2 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區北屯路與松竹路口</span></div>
+          <div><b>時間</b><span>全天開放</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%88%8A%E7%A4%BE%E5%85%AC%E5%9C%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E5%8C%97%E5%B1%AF%E8%B7%AF%E8%88%87%E6%9D%BE%E7%AB%B9%E8%B7%AF%E5%8F%A3" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 鵝庄 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="松竹站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">171</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>鵝庄</h2>
+        <div class="en">Goose Restaurant · 鵝肉料理</div>
+        <p>在地人氣鵝肉店，鵝肉切盤配沾醬是招牌，晚餐宵夜時段常常滿座，附免費停車場。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 松竹站 步行約 4 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區松竹路二段 36 號</span></div>
+          <div><b>時間</b><span>週二–週五 15:30–23:00；週六–週日 11:00–22:00（週一休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E9%B5%9D%E5%BA%84%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%9D%BE%E7%AB%B9%E8%B7%AF%E4%BA%8C%E6%AE%B5%2036%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 大山牛肉麵 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="松竹站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">172</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>大山牛肉麵</h2>
+        <div class="en">Dashan Beef Noodle · 老字號</div>
+        <p>松竹路上開很久的牛肉麵老店，湯頭紮實份量足，是附近住戶熟悉的家常味。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 松竹站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區松竹路二段 175 號</span></div>
+          <div><b>時間</b><span>11:00–14:30、17:00–20:30（週日休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E5%B1%B1%E7%89%9B%E8%82%89%E9%BA%B5%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%9D%BE%E7%AB%B9%E8%B7%AF%E4%BA%8C%E6%AE%B5%20175%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 松竹路大麵焿 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="松竹站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">173</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>松竹路大麵焿</h2>
+        <div class="en">Da Mian Geng · 巷弄小吃</div>
+        <p>巷子裡的大麵焿專賣店，味道樸實，常常提早賣完，想吃要早點去。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 松竹站 步行約 4 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區松竹路二段 50 巷 1 號</span></div>
+          <div><b>時間</b><span>11:00–18:30（售完為止）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%9D%BE%E7%AB%B9%E8%B7%AF%E5%A4%A7%E9%BA%B5%E7%84%BF%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%9D%BE%E7%AB%B9%E8%B7%AF%E4%BA%8C%E6%AE%B5%2050%20%E5%B7%B7%201%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 積善樓 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="四維國小站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">174</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>積善樓</h2>
+        <div class="en">Jishan Gate · 市定古蹟</div>
+        <p>燕尾屋脊、雕花細緻的傳統閩式門樓，後方廣場是里民乘涼聊天的地方，順路拍幾張很值得。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 四維國小站 步行約 4 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區興安路一段 163 號</span></div>
+          <div><b>時間</b><span>08:00–17:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%A9%8D%E5%96%84%E6%A8%93%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E8%88%88%E5%AE%89%E8%B7%AF%E4%B8%80%E6%AE%B5%20163%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 一德洋樓（林懋陽故居） -->
+    <article class="card reveal" data-cat="mrt" data-mrt="四維國小站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">175</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>一德洋樓（林懋陽故居）</h2>
+        <div class="en">Yide Mansion · 日治洋樓文創園區</div>
+        <p>紅磚洋樓混了閩、日、洋三種風格，裡面進駐茶館跟咖啡廳，散步走到這裡剛好坐下來喝一杯。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 四維國小站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區文昌東十一街 14 巷 1 號</span></div>
+          <div><b>時間</b><span>週三–週日 09:00–18:00（週一、二休館）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%80%E5%BE%B7%E6%B4%8B%E6%A8%93%EF%BC%88%E6%9E%97%E6%87%8B%E9%99%BD%E6%95%85%E5%B1%85%EF%BC%89%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%96%87%E6%98%8C%E6%9D%B1%E5%8D%81%E4%B8%80%E8%A1%97%2014%20%E5%B7%B7%201%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 上海居 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="四維國小站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">176</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>上海居</h2>
+        <div class="en">Shanghai Ju · 江浙上海菜</div>
+        <p>開超過十年的江浙老味道，金華火腿白菜雞湯要燉六小時，水舖牛肉、蔥燒鯽魚是熟客必點。全預約制。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 四維國小站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區北平路四段 177 號</span></div>
+          <div><b>時間</b><span>11:30–14:00、17:30–20:30（週一、二休；需事先預約點餐）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%8A%E6%B5%B7%E5%B1%85%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E5%8C%97%E5%B9%B3%E8%B7%AF%E5%9B%9B%E6%AE%B5%20177%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 臺中民俗公園 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心崇德站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">177</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>臺中民俗公園</h2>
+        <div class="en">Folklore Park · 閩式建築園區</div>
+        <p>紅磚牆、荷花池，還有一台八十多年的運煤火車頭，不少古裝劇來取景，公園本身免費。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心崇德站 步行約 6 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區旅順路二段 73 號</span></div>
+          <div><b>時間</b><span>公園全天開放；民俗文物館 週二–週日 09:00–17:00（週一休館）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%87%BA%E4%B8%AD%E6%B0%91%E4%BF%97%E5%85%AC%E5%9C%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%97%85%E9%A0%86%E8%B7%AF%E4%BA%8C%E6%AE%B5%2073%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 老向的店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心崇德站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">178</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>老向的店</h2>
+        <div class="en">Lao Xiang · 排隊麵店</div>
+        <p>在地人吃很多年的平價麵店，韭黃水餃跟中午限量的清蒸鴨腿麵是招牌，下午照樣客滿。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心崇德站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區北平路三段 173 號</span></div>
+          <div><b>時間</b><span>10:30–22:30（週一休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%80%81%E5%90%91%E7%9A%84%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E5%8C%97%E5%B9%B3%E8%B7%AF%E4%B8%89%E6%AE%B5%20173%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Mr.38 咖哩 崇德店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心崇德站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">179</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>Mr.38 咖哩 崇德店</h2>
+        <div class="en">Mr.38 Curry · 老牌咖哩飯</div>
+        <p>開二十多年的在地咖哩飯，白飯跟湯免費續加，蛋包咖哩、焗烤咖哩都很受歡迎。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心崇德站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區崇德路二段 57 號</span></div>
+          <div><b>時間</b><span>11:00–21:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=Mr.38%20%E5%92%96%E5%93%A9%20%E5%B4%87%E5%BE%B7%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E5%B4%87%E5%BE%B7%E8%B7%AF%E4%BA%8C%E6%AE%B5%2057%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 和牛涮 文心崇德店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心崇德站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">180</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>和牛涮 文心崇德店</h2>
+        <div class="en">Wagyu Shabu · 燒肉火鍋吃到飽</div>
+        <p>幾乎一出站就到的燒肉火鍋吃到飽，逛完民俗公園肚子餓直接殺過來很順。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心崇德站 步行約 1–3 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區文心路四段 601 號</span></div>
+          <div><b>時間</b><span>平日 11:30–23:30；週六、日 11:00–23:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%92%8C%E7%89%9B%E6%B6%AE%20%E6%96%87%E5%BF%83%E5%B4%87%E5%BE%B7%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E5%9B%9B%E6%AE%B5%20601%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 天津路服飾商圈 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心中清站">
+      <span class="region">台中 · 北區</span>
+      <div class="top"><span class="no">181</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>天津路服飾商圈</h2>
+        <div class="en">Tianjin Road Fashion Street</div>
+        <p>660 公尺的街上塞了兩百多家服飾店，韓系日系歐美風都有，農曆年前會變身年貨大街封街擺攤。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心中清站 步行約 5 分鐘</span></div>
+          <div><b>地址</b><span>台中市北區天津路二、三段一帶</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A9%E6%B4%A5%E8%B7%AF%E6%9C%8D%E9%A3%BE%E5%95%86%E5%9C%88%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%8D%80%E5%A4%A9%E6%B4%A5%E8%B7%AF%E4%BA%8C%E3%80%81%E4%B8%89%E6%AE%B5%E4%B8%80%E5%B8%B6" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 金香 JIN PANG -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心中清站">
+      <span class="region">台中 · 北屯</span>
+      <div class="top"><span class="no">182</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>金香 JIN PANG</h2>
+        <div class="en">Jin Pang · 老宅家常料理</div>
+        <p>老宅整修的餐廳，木質懷舊裝潢很好拍，飯麵之外還有山形吐司，假日人多建議先訂位。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心中清站 步行約 5 分鐘</span></div>
+          <div><b>地址</b><span>台中市北屯區大連路一段 16 巷 16 號</span></div>
+          <div><b>時間</b><span>11:00–20:30（週二、三休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E9%87%91%E9%A6%99%20JIN%20PANG%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%B1%AF%E5%8D%80%E5%A4%A7%E9%80%A3%E8%B7%AF%E4%B8%80%E6%AE%B5%2016%20%E5%B7%B7%2016%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 若水茶軒 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心中清站">
+      <span class="region">台中 · 北區</span>
+      <div class="top"><span class="no">183</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>若水茶軒</h2>
+        <div class="en">Ruoshui Tea House · 素食茶藝館</div>
+        <p>老字號素食茶藝館，茶食配火鍋飯麵都有，價位平實又不收服務費，適合坐著慢慢聊。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心中清站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市北區陝西路 31 號</span></div>
+          <div><b>時間</b><span>10:00–21:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%8B%A5%E6%B0%B4%E8%8C%B6%E8%BB%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8C%97%E5%8D%80%E9%99%9D%E8%A5%BF%E8%B7%AF%2031%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 周記餃子專賣店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文華高中站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">184</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>周記餃子專賣店</h2>
+        <div class="en">Zhou's Dumplings · 三代手工水餃</div>
+        <p>二三十年的老字號餃子店，蝦仁蒸餃皮薄餡多，用餐時間常常排到門外。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文華高中站 步行約 6 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區重慶路 199 號</span></div>
+          <div><b>時間</b><span>11:00–14:00、17:00–20:00（週六休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%91%A8%E8%A8%98%E9%A4%83%E5%AD%90%E5%B0%88%E8%B3%A3%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E9%87%8D%E6%85%B6%E8%B7%AF%20199%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 易鼎活蝦 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文華高中站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">185</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>易鼎活蝦</h2>
+        <div class="en">Yi Ding · 泰式活蝦海鮮</div>
+        <p>開二十多年的活蝦餐廳，峇里島渡假風裝潢，泰式活蝦、加拿大龍蝦跟羊肉爐都是招牌，適合合菜。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文華高中站 步行約 8 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區甘肅路二段 100 號</span></div>
+          <div><b>時間</b><span>平日 11:00–14:00、17:00–22:30；週五、六及假日前一天 11:00–23:30（週二休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%98%93%E9%BC%8E%E6%B4%BB%E8%9D%A6%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E7%94%98%E8%82%85%E8%B7%AF%E4%BA%8C%E6%AE%B5%20100%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 1001 手作廚房 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文華高中站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">186</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>1001 手作廚房</h2>
+        <div class="en">1001 Kitchen · 創意義式料理</div>
+        <p>藏在巷弄裡的義式小館，套餐從前菜、沙拉、湯到主餐甜點一次到位，份量給得大方。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文華高中站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區成都路 212 號</span></div>
+          <div><b>時間</b><span>11:30–15:00、17:30–21:00（週二休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=1001%20%E6%89%8B%E4%BD%9C%E5%BB%9A%E6%88%BF%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E6%88%90%E9%83%BD%E8%B7%AF%20212%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 牛鍋私藏鍋物 文心店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心櫻花站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">187</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>牛鍋私藏鍋物 文心店</h2>
+        <div class="en">Niu Guo · 白色庭園鍋物</div>
+        <p>走咖啡廳風格的火鍋店，白色庭園造景很好拍，湯頭現煮，飲料冰淇淋無限供應。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心櫻花站 步行約 2–3 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區文心路三段 111 號</span></div>
+          <div><b>時間</b><span>11:30–24:00（23:00 後不收客）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E9%8D%8B%E7%A7%81%E8%97%8F%E9%8D%8B%E7%89%A9%20%E6%96%87%E5%BF%83%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%89%E6%AE%B5%20111%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 將軍府日式居酒屋 文心店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心櫻花站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">188</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>將軍府日式居酒屋 文心店</h2>
+        <div class="en">Shogun Izakaya · 巨無霸生蠔</div>
+        <p>深夜食堂型居酒屋，招牌是比手掌還大的生蠔，配串燒跟清酒，附近有名的下班小酌處。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心櫻花站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區文心路三段 93-1 號</span></div>
+          <div><b>時間</b><span>18:00–01:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%B0%87%E8%BB%8D%E5%BA%9C%E6%97%A5%E5%BC%8F%E5%B1%85%E9%85%92%E5%B1%8B%20%E6%96%87%E5%BF%83%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%89%E6%AE%B5%2093-1%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 羊角炭火燒肉 文心店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心櫻花站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">189</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>羊角炭火燒肉 文心店</h2>
+        <div class="en">Shofar · 燒肉吃到飽</div>
+        <p>就在櫻花站出口旁，食材含日本和牛、安格斯牛排跟活蝦，生啤無限暢飲。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心櫻花站 步行約 2 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區文心路三段 186 號</span></div>
+          <div><b>時間</b><span>11:30–15:00、17:30–24:00（週六、日全天供應）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8A%E8%A7%92%E7%82%AD%E7%81%AB%E7%87%92%E8%82%89%20%E6%96%87%E5%BF%83%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%89%E6%AE%B5%20186%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 秋紅谷景觀生態公園 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="市政府站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">190</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>秋紅谷景觀生態公園</h2>
+        <div class="en">Maple Garden · 下凹式生態公園</div>
+        <p>亞洲首創的下凹式景觀公園，湖泊木棧道被七期大樓環繞，白天晚上氣氛差很多，兩個時段都值得。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 市政府站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區朝富路 30 號</span></div>
+          <div><b>時間</b><span>全天開放</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%A7%8B%E7%B4%85%E8%B0%B7%E6%99%AF%E8%A7%80%E7%94%9F%E6%85%8B%E5%85%AC%E5%9C%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E6%9C%9D%E5%AF%8C%E8%B7%AF%2030%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 臺中國家歌劇院 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="市政府站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">191</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>臺中國家歌劇院</h2>
+        <div class="en">National Taichung Theater</div>
+        <p>伊東豊雄設計的「美聲涵洞」，建築本身就是作品，裡面有書店、市集跟空中花園，不看表演也能逛。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 市政府站 步行約 10–15 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區惠來路二段 101 號</span></div>
+          <div><b>時間</b><span>週二–週日及國定假日 11:30–21:00（週一休館）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%87%BA%E4%B8%AD%E5%9C%8B%E5%AE%B6%E6%AD%8C%E5%8A%87%E9%99%A2%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E6%83%A0%E4%BE%86%E8%B7%AF%E4%BA%8C%E6%AE%B5%20101%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 好小子擔仔麵 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="市政府站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">192</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>好小子擔仔麵</h2>
+        <div class="en">Hao Xiao Zi · 三十年熱炒</div>
+        <p>開三十年的在地熱炒，招牌是三十五元擔仔麵、鵝肉跟滷肉飯，開到深夜，也是有名的宵夜場。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 市政府站 步行約 5 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區大墩路 971 號</span></div>
+          <div><b>時間</b><span>11:00–23:30（週二休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%A5%BD%E5%B0%8F%E5%AD%90%E6%93%94%E4%BB%94%E9%BA%B5%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E5%A4%A7%E5%A2%A9%E8%B7%AF%20971%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 柏和牛燒肉 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="市政府站">
+      <span class="region">台中 · 西屯</span>
+      <div class="top"><span class="no">193</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>柏和牛燒肉</h2>
+        <div class="en">Kashiwa · 預約制吧檯和牛</div>
+        <p>小酒館風格的和牛燒肉，吧檯座位由主廚代烤，氣氛低調，適合想安靜吃頓好料的場合。純預約制，時間需先問過店家。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 市政府站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市西屯區大墩二十街 167 號</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%9F%8F%E5%92%8C%E7%89%9B%E7%87%92%E8%82%89%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E8%A5%BF%E5%B1%AF%E5%8D%80%E5%A4%A7%E5%A2%A9%E4%BA%8C%E5%8D%81%E8%A1%97%20167%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 水安宮 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="水安宮站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">194</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>水安宮</h2>
+        <div class="en">Shui An Temple · 王爺信仰中心</div>
+        <p>清康熙年間就有的老廟，主祀朱李池三府王爺，木雕石雕都很精緻，捷運等於蓋在它家門口。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 水安宮站 步行約 1 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區文心路一段 515 號</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%B0%B4%E5%AE%89%E5%AE%AE%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%80%E6%AE%B5%20515%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 屋馬燒肉 文心店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="水安宮站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">195</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>屋馬燒肉 文心店</h2>
+        <div class="en">Wuma · 台中人氣燒肉</div>
+        <p>台中在地起家的燒肉品牌，常常要排隊，肉品新鮮服務也細，想吃頓像樣的燒肉這間很保險。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 水安宮站 步行約 10 分鐘內</span></div>
+          <div><b>地址</b><span>台中市南屯區文心路一段 436 號</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%B1%8B%E9%A6%AC%E7%87%92%E8%82%89%20%E6%96%87%E5%BF%83%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%80%E6%AE%B5%20436%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 花一番炸牛排專門店 公益店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="水安宮站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">196</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>花一番炸牛排專門店 公益店</h2>
+        <div class="en">Hana Ichiban · 平價炸牛排</div>
+        <p>赤鬼牛排開的新品牌，銅板價就能吃到厚切炸牛排，還附自助吧。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 水安宮站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區文心路一段 435 號</span></div>
+          <div><b>時間</b><span>11:00–23:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%8A%B1%E4%B8%80%E7%95%AA%E7%82%B8%E7%89%9B%E6%8E%92%E5%B0%88%E9%96%80%E5%BA%97%20%E5%85%AC%E7%9B%8A%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%80%E6%AE%B5%20435%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 文心森林公園 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心森林公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">197</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>文心森林公園</h2>
+        <div class="en">Wenxin Forest Park · 圓滿戶外劇場</div>
+        <p>8.88 公頃的大草坪配上大片樹蔭，圓滿戶外劇場常辦活動，是這一帶野餐遛小孩的日常綠地。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心森林公園站 步行約 1 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區文心路一段 289 號</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%96%87%E5%BF%83%E6%A3%AE%E6%9E%97%E5%85%AC%E5%9C%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%80%E6%AE%B5%20289%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- BUN BUN 棒棒 文心森林店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心森林公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">198</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>BUN BUN 棒棒 文心森林店</h2>
+        <div class="en">Bun Bun · 潛艇堡輕食</div>
+        <p>美式復古風的潛艇堡店，脆皮奶油麵包很受歡迎，早上有特價早午餐，外帶去公園野餐剛好。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心森林公園站 步行約 5 分鐘內</span></div>
+          <div><b>地址</b><span>台中市南屯區文心路一段 215 號</span></div>
+          <div><b>時間</b><span>08:00–20:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=BUN%20BUN%20%E6%A3%92%E6%A3%92%20%E6%96%87%E5%BF%83%E6%A3%AE%E6%9E%97%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E8%B7%AF%E4%B8%80%E6%AE%B5%20215%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 藏阿胖 羅芙青蔥麵包 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心森林公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">199</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>藏阿胖 羅芙青蔥麵包</h2>
+        <div class="en">Tsang A Pang · 排隊蔥麵包</div>
+        <p>每天限量出爐、一開賣常常就被掃空的青蔥麵包，在地人口耳相傳的伴手禮，要提早去排。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心森林公園站 步行約 6 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區大英西二街 71 號</span></div>
+          <div><b>時間</b><span>週二–週六 15:30–18:00（賣完提早收；週一、日休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%97%8F%E9%98%BF%E8%83%96%20%E7%BE%85%E8%8A%99%E9%9D%92%E8%94%A5%E9%BA%B5%E5%8C%85%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E5%A4%A7%E8%8B%B1%E8%A5%BF%E4%BA%8C%E8%A1%97%2071%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 締藏和牛燒肉 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="文心森林公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">200</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>締藏和牛燒肉</h2>
+        <div class="en">Teizo · 日式和牛燒肉</div>
+        <p>主打日本 A5 和牛，全程專人代烤，包廂式的日式禪風空間，價位偏高但評價不錯。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 文心森林公園站 步行約 9 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區大觀路 36 號</span></div>
+          <div><b>時間</b><span>週一–週四 17:00–22:00；週五–週日 11:00–14:00、17:00–22:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%B7%A0%E8%97%8F%E5%92%8C%E7%89%9B%E7%87%92%E8%82%89%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E5%A4%A7%E8%A7%80%E8%B7%AF%2036%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 臺中市南屯親子館 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="南屯站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">201</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>臺中市南屯親子館</h2>
+        <div class="en">Nantun Parent-Child Center</div>
+        <p>台中第一間旗艦親子館，0–6 歲小朋友免費進去玩，空間規劃得很用心，帶小小孩在這站下車最方便。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 南屯站 步行約 7 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區南屯路二段 407 號</span></div>
+          <div><b>時間</b><span>週二–週日 09:30–11:30、13:30–16:30（週一及國定假日休館）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%87%BA%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E8%A6%AA%E5%AD%90%E9%A4%A8%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E5%8D%97%E5%B1%AF%E8%B7%AF%E4%BA%8C%E6%AE%B5%20407%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 嚮辣 台中五權西店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="南屯站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">202</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>嚮辣 台中五權西店</h2>
+        <div class="en">Xiang La · 和牛麻辣鍋吃到飽</div>
+        <p>王品集團的麻辣鍋吃到飽，和牛海陸鐵塔跟辣椒調酒是招牌，出站過個馬路就到。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 南屯站 步行約 1 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區五權西路二段 271 號</span></div>
+          <div><b>時間</b><span>週一–週五 11:30–02:00；週六、日 11:00–02:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%9A%AE%E8%BE%A3%20%E5%8F%B0%E4%B8%AD%E4%BA%94%E6%AC%8A%E8%A5%BF%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E4%BA%94%E6%AC%8A%E8%A5%BF%E8%B7%AF%E4%BA%8C%E6%AE%B5%20271%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 明月鄉串の燒 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="南屯站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">203</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>明月鄉串の燒</h2>
+        <div class="en">Mingyue · 日式串燒居酒屋</div>
+        <p>近四十種串燒任選，還有現炒跟隱藏版菜色，下班想找間輕鬆喝一杯的店，出站馬上就到。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 南屯站 步行約 1 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區五權西路二段 368 號</span></div>
+          <div><b>時間</b><span>17:30–22:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%98%8E%E6%9C%88%E9%84%89%E4%B8%B2%E3%81%AE%E7%87%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E4%BA%94%E6%AC%8A%E8%A5%BF%E8%B7%AF%E4%BA%8C%E6%AE%B5%20368%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 豐樂雕塑公園 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="豐樂公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">204</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>豐樂雕塑公園</h2>
+        <div class="en">Fengle Sculpture Park</div>
+        <p>全台第一座公立露天雕塑公園，六公頃園區擺了五十二件台中雕塑大展作品，還有人工湖、大沙坑跟磨石子溜滑梯。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 豐樂公園站 步行約 3–5 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區文心南五路一段 331 號</span></div>
+          <div><b>時間</b><span>全天開放</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E8%B1%90%E6%A8%82%E9%9B%95%E5%A1%91%E5%85%AC%E5%9C%92%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E5%8D%97%E4%BA%94%E8%B7%AF%E4%B8%80%E6%AE%B5%20331%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 千味海鮮台菜餐廳 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="豐樂公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">205</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>千味海鮮台菜餐廳</h2>
+        <div class="en">Qian Wei · 米其林指南推薦</div>
+        <p>台菜川菜粵菜混著做的熱炒館，鯧魚芋頭米粉是招牌，多年入選米其林餐盤推薦，適合家庭聚餐。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 豐樂公園站 步行約 5 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區文心南五路一段 326-3 號</span></div>
+          <div><b>時間</b><span>11:00–22:00，無店休</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%83%E5%91%B3%E6%B5%B7%E9%AE%AE%E5%8F%B0%E8%8F%9C%E9%A4%90%E5%BB%B3%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E5%8D%97%E4%BA%94%E8%B7%AF%E4%B8%80%E6%AE%B5%20326-3%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 滿溢手工麵線 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="豐樂公園站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">206</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>滿溢手工麵線</h2>
+        <div class="en">Manyi · 銅板排隊小吃</div>
+        <p>一碗料多到滿出來，腸仔蚵仔雞肉羹魚羹任選，還有隱藏版淡菜麵線，去晚了常常賣完。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 豐樂公園站 步行約 10–12 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區文心南三路 306 號</span></div>
+          <div><b>時間</b><span>11:00–14:30、16:30–20:00（週二、三休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%BB%BF%E6%BA%A2%E6%89%8B%E5%B7%A5%E9%BA%B5%E7%B7%9A%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E6%96%87%E5%BF%83%E5%8D%97%E4%B8%89%E8%B7%AF%20306%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 大慶夜市 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="大慶站">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">207</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>大慶夜市</h2>
+        <div class="en">Daqing Night Market</div>
+        <p>旱溪夜市團隊打造的南區夜市，千坪腹地上百攤，比逢甲更有在地生活感，價格也親民。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 大慶站 步行約 10 分鐘</span></div>
+          <div><b>地址</b><span>台中市南區建國南路一段 208 號</span></div>
+          <div><b>時間</b><span>週三、五、六、日 16:30–00:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E6%85%B6%E5%A4%9C%E5%B8%82%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%8D%80%E5%BB%BA%E5%9C%8B%E5%8D%97%E8%B7%AF%E4%B8%80%E6%AE%B5%20208%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 築間幸福鍋物 台中中山店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="大慶站">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">208</span><span class="badge b-food">特色餐廳</span></div>
+      <div class="body">
+        <h2>築間幸福鍋物 台中中山店</h2>
+        <div class="en">Chu Chien · 平價鍋物</div>
+        <p>附三十多種蔬食自助吧的平價鍋物，開到凌晨，中山醫學生跟上班族的消夜場。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 大慶站 步行約 5 分鐘</span></div>
+          <div><b>地址</b><span>台中市南區文心南路 546 號</span></div>
+          <div><b>時間</b><span>11:00–02:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%AF%89%E9%96%93%E5%B9%B8%E7%A6%8F%E9%8D%8B%E7%89%A9%20%E5%8F%B0%E4%B8%AD%E4%B8%AD%E5%B1%B1%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%87%E5%BF%83%E5%8D%97%E8%B7%AF%20546%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 三合手作麵線 大慶店 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="大慶站">
+      <span class="region">台中 · 南區</span>
+      <div class="top"><span class="no">209</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>三合手作麵線 大慶店</h2>
+        <div class="en">Sanhe · 學生巷口麵線</div>
+        <p>中山醫學大學旁的手作麵線，湯頭濃稠口味偏重，招牌是酥炸軟殼蟹麵線，均消約百元。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 大慶站 步行約 2 分鐘</span></div>
+          <div><b>地址</b><span>台中市南區建國南路一段 99 號</span></div>
+          <div><b>時間</b><span>06:30–14:30</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E5%90%88%E6%89%8B%E4%BD%9C%E9%BA%B5%E7%B7%9A%20%E5%A4%A7%E6%85%B6%E5%BA%97%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%8D%80%E5%BB%BA%E5%9C%8B%E5%8D%97%E8%B7%AF%E4%B8%80%E6%AE%B5%2099%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 十三咖啡 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="九張犁站">
+      <span class="region">台中 · 南屯</span>
+      <div class="top"><span class="no">210</span><span class="badge b-cafe">咖啡</span></div>
+      <div class="body">
+        <h2>十三咖啡</h2>
+        <div class="en">13 Coffee · 石頭屋秘境</div>
+        <p>開近二十年、沒招牌也不在商圈裡的無菜單咖啡館，老闆手沖五款單品，石頭屋像走進宮崎駿場景。第一次去很容易迷路。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 九張犁站 步行約 7 分鐘</span></div>
+          <div><b>地址</b><span>台中市南屯區環中路五段 200 號</span></div>
+          <div><b>時間</b><span>13:30–18:30（天黑就打烊）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E4%B8%89%E5%92%96%E5%95%A1%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%8D%97%E5%B1%AF%E5%8D%80%E7%92%B0%E4%B8%AD%E8%B7%AF%E4%BA%94%E6%AE%B5%20200%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 拾捌號粥鋪 烏日本鋪 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="九德站">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">211</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>拾捌號粥鋪 烏日本鋪</h2>
+        <div class="en">No.18 Congee · 南部粥</div>
+        <p>南部做法的海鮮粥，現點現煮，海鮮粥、皮蛋海鮮粥、芋頭排骨粥都很受歡迎，是這站少數走得到的正餐。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 九德站 步行約 5 分鐘</span></div>
+          <div><b>地址</b><span>台中市烏日區中華路 591-1 號</span></div>
+          <div><b>時間</b><span>週一–週四 11:00–14:00、16:30–21:00；週五–週六 11:00–14:00、17:00–21:00（週日休）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E6%8B%BE%E6%8D%8C%E8%99%9F%E7%B2%A5%E9%8B%AA%20%E7%83%8F%E6%97%A5%E6%9C%AC%E9%8B%AA%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E4%B8%AD%E8%8F%AF%E8%B7%AF%20591-1%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 烏日啤酒觀光工廠 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="烏日站">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">212</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>烏日啤酒觀光工廠</h2>
+        <div class="en">Wuri Brewery · 台灣菸酒烏日酒廠</div>
+        <p>免門票的觀光酒廠，兩層樓高的巨無霸啤酒箱造型建築是招牌畫面，商品區買得到廠區限定水果啤酒跟冰棒。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 烏日站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市烏日區光華街 1 號</span></div>
+          <div><b>時間</b><span>09:00–18:00，全年無休（除夕、颱風停班停課除外）</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%83%8F%E6%97%A5%E5%95%A4%E9%85%92%E8%A7%80%E5%85%89%E5%B7%A5%E5%BB%A0%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E5%85%89%E8%8F%AF%E8%A1%97%201%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 烏日觀光夜市 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="烏日站">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">213</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>烏日觀光夜市</h2>
+        <div class="en">Wuri Night Market</div>
+        <p>規模小巧的社區型夜市，一週只開三天，現做潤餅、厚片牛排、烤小卷是在地人推薦的攤子。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 烏日站 步行約 6–8 分鐘</span></div>
+          <div><b>地址</b><span>台中市烏日區光日路 228 號</span></div>
+          <div><b>時間</b><span>週二、四、六 17:00–23:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E7%83%8F%E6%97%A5%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E5%85%89%E6%97%A5%E8%B7%AF%20228%20%E8%99%9F" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 台灣鐵道故事館 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="高鐵臺中站">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">214</span><span class="badge b-view">景點</span></div>
+      <div class="body">
+        <h2>台灣鐵道故事館</h2>
+        <div class="en">Taiwan Railway Story Museum</div>
+        <p>就在台鐵新烏日站二樓，展示台灣鐵道文化跟懷舊車站元素，等車轉車有空檔很適合順路晃一圈。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 高鐵臺中站 步行約 2–3 分鐘</span></div>
+          <div><b>地址</b><span>台中市烏日區高鐵東一路 26 號 2 樓</span></div>
+          <div><b>時間</b><span>週一–週五 10:00–19:00；週六、日 09:00–20:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E7%81%A3%E9%90%B5%E9%81%93%E6%95%85%E4%BA%8B%E9%A4%A8%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E9%AB%98%E9%90%B5%E6%9D%B1%E4%B8%80%E8%B7%AF%2026%20%E8%99%9F%202%20%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 五花馬水餃館 台中烏日門市 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="高鐵臺中站">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">215</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>五花馬水餃館 台中烏日門市</h2>
+        <div class="en">Wuhuama Dumplings</div>
+        <p>車站建築裡的平價水餃小吃，均消約 110 元，搭車前後想吃頓正經午晚餐又不想跑遠很合適。營業時間請以現場公告為準。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 高鐵臺中站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市烏日區高鐵東一路 26 號 2 樓</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E4%BA%94%E8%8A%B1%E9%A6%AC%E6%B0%B4%E9%A4%83%E9%A4%A8%20%E5%8F%B0%E4%B8%AD%E7%83%8F%E6%97%A5%E9%96%80%E5%B8%82%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E9%AB%98%E9%90%B5%E6%9D%B1%E4%B8%80%E8%B7%AF%2026%20%E8%99%9F%202%20%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 陳允寶泉 台中新烏日門市 -->
+    <article class="card reveal" data-cat="mrt" data-mrt="高鐵臺中站">
+      <span class="region">台中 · 烏日</span>
+      <div class="top"><span class="no">216</span><span class="badge b-food">美食</span></div>
+      <div class="body">
+        <h2>陳允寶泉 台中新烏日門市</h2>
+        <div class="en">Chen Yun Pao Chuan · 百年糕餅</div>
+        <p>台中經營百年的糕餅老店，太陽餅、蛋黃酥、檸檬蛋糕都是招牌，搭高鐵前順手帶一盒剛好。</p>
+        <div class="meta">
+          <div><b>捷運</b><span>綠線 高鐵臺中站 步行約 3 分鐘</span></div>
+          <div><b>地址</b><span>台中市烏日區高鐵東一路 26 號 2 樓</span></div>
+          <div><b>時間</b><span>09:00–21:00</span></div>
+        </div>
+        <div class="actions">
+          <a class="solid" href="https://www.google.com/maps/search/?api=1&query=%E9%99%B3%E5%85%81%E5%AF%B6%E6%B3%89%20%E5%8F%B0%E4%B8%AD%E6%96%B0%E7%83%8F%E6%97%A5%E9%96%80%E5%B8%82%20%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%83%8F%E6%97%A5%E5%8D%80%E9%AB%98%E9%90%B5%E6%9D%B1%E4%B8%80%E8%B7%AF%2026%20%E8%99%9F%202%20%E6%A8%93" target="_blank" rel="noopener">Google 地圖</a>
+        </div>
+      </div>
+    </article>
+
 
 
   </div>
@@ -2925,15 +3929,24 @@
     '<button class="chip active" data-r="all">全部</button>'+
     regions.map(r=>`<button class="chip" data-r="${r}">${r}</button>`).join(''));
 
-  let curR='all',curC='all';
+  /* 捷運站子分類：只在分類選「台中捷運」時出現，站序直接照卡片在 HTML 裡的順序 */
+  const mrtRow=document.getElementById('mrts');
+  const mrtOrder=[];
+  cards.forEach(c=>{const m=c.dataset.mrt;if(m&&mrtOrder.indexOf(m)<0)mrtOrder.push(m)});
+  if(mrtOrder.length)mrtRow.querySelector('.chips').insertAdjacentHTML('beforeend',
+    '<button class="chip active" data-m="all">全部</button>'+
+    mrtOrder.map(m=>`<button class="chip" data-m="${m}">${m}</button>`).join(''));
+
+  let curR='all',curC='all',curM='all';
   const hitR=c=>curR==='all'||countyOf(c)===curR;
   const hitC=c=>curC==='all'||c.dataset.cat===curC;
+  const hitM=c=>curM==='all'||c.dataset.mrt===curM;
 
   function apply(){
     /* 入場錯開：只有前 12 張依序浮現，其餘立即顯示，避免長列表等太久 */
     let shown=0;
     cards.forEach(card=>{
-      const show=hitR(card)&&hitC(card);
+      const show=hitR(card)&&hitC(card)&&hitM(card);
       card.classList.toggle('hide',!show);
       if(show){
         const delay=shown<12?shown*40:0; shown++;
@@ -2945,11 +3958,16 @@
     /* 另一軸選定後會落空的鈕變灰且不可點，所以永遠不會篩出空畫面 */
     regRow.querySelectorAll('[data-r]').forEach(b=>{
       const v=b.dataset.r;
-      b.classList.toggle('off',!cards.some(c=>hitC(c)&&(v==='all'||countyOf(c)===v)));
+      b.classList.toggle('off',!cards.some(c=>hitC(c)&&hitM(c)&&(v==='all'||countyOf(c)===v)));
     });
     catRow.querySelectorAll('[data-f]').forEach(b=>{
       const v=b.dataset.f;
       b.classList.toggle('off',!cards.some(c=>hitR(c)&&(v==='all'||c.dataset.cat===v)));
+    });
+    mrtRow.hidden=(curC!=='mrt');
+    mrtRow.querySelectorAll('[data-m]').forEach(b=>{
+      const v=b.dataset.m;
+      b.classList.toggle('off',!cards.some(c=>hitR(c)&&hitC(c)&&(v==='all'||c.dataset.mrt===v)));
     });
   }
 
@@ -2964,7 +3982,12 @@
     });
   }
   wire(regRow,'r',v=>curR=v);
-  wire(catRow,'f',v=>curC=v);
+  wire(catRow,'f',v=>{
+    curC=v;
+    /* 離開台中捷運時把站點篩選歸零，免得下次進來還卡在某一站 */
+    if(v!=='mrt'){curM='all';mrtRow.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x.dataset.m==='all'))}
+  });
+  wire(mrtRow,'m',v=>curM=v);
   apply();
 </script>
 
