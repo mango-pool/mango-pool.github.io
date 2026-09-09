@@ -105,7 +105,16 @@
   .fav input{width:14px;height:14px;margin:0;accent-color:var(--coral);cursor:pointer}
   .fav:hover{color:var(--coral)}
   .card.isfav{border-color:var(--coral)}
-  #favbtn{position:fixed;top:14px;right:14px;z-index:70;display:flex;align-items:center;gap:7px;
+  #favbar{position:fixed;top:14px;right:14px;z-index:70;display:flex;align-items:center;gap:8px}
+  #favclear{padding:6px 12px;border:1px solid var(--line);border-radius:30px;background:var(--card);
+    color:var(--ink-soft);font-family:"Noto Serif TC";font-size:12px;letter-spacing:.1em;cursor:pointer;
+    box-shadow:0 4px 14px rgba(0,0,0,.07);transition:.25s}
+  #favclear:hover{border-color:var(--coral);color:var(--coral)}
+  #favbtn .onlab{display:none}
+  #favbtn.on .onlab{display:inline}
+  #favbtn.on .offlab{display:none}
+  .card.isfav .no::after{content:"\2665";color:var(--coral);font-size:.5em;vertical-align:super;margin-left:3px}
+  #favbtn{display:flex;align-items:center;gap:7px;
     padding:8px 15px;border:1px solid var(--line);border-radius:30px;background:var(--card);
     color:var(--ink-soft);font-family:"Noto Serif TC";font-size:13px;letter-spacing:.12em;cursor:pointer;
     box-shadow:0 4px 14px rgba(0,0,0,.07);
@@ -125,7 +134,10 @@
 <body>
 <span id="mgtopanchor" aria-hidden="true"></span>
 
-<button id="favbtn" type="button" aria-pressed="false" title="只看最愛">♡ 最愛 <span class="n">0</span></button>
+<div id="favbar">
+  <button id="favclear" type="button" hidden title="清空所有最愛">清空</button>
+  <button id="favbtn" type="button" aria-pressed="false"><span class="onlab">✕ 回首頁</span><span class="offlab">♡ 最愛 <span class="n">0</span></span></button>
+</div>
 <header class="masthead wrap">
   <h1>探索收藏冊</h1>
 </header>
@@ -3827,6 +3839,7 @@
   const saveFavs=()=>{try{localStorage.setItem(FAVK,JSON.stringify([...favs]))}catch(e){}};
   const favBtn=document.getElementById('favbtn');
   const favNum=favBtn.querySelector('.n');
+  const favClear=document.getElementById('favclear');
   const hitR=c=>curR==='all'||countyOf(c)===curR;
   const hitC=c=>curC==='all'||c.dataset.cat===curC;
   const hitM=c=>curM==='all'||c.dataset.mrt===curM;
@@ -3859,6 +3872,7 @@
       const v=b.dataset.m;
       b.classList.toggle('off',!cards.some(c=>hitR(c)&&hitC(c)&&hitF(c)&&(v==='all'||c.dataset.mrt===v)));
     });
+    refreshFavCount();
   }
 
   function wire(row,key,set){
@@ -3873,16 +3887,20 @@
   }
 
   /* 最愛：還原勾選狀態、綁定事件 */
+  /* 計數用「符合目前篩選的最愛數」，不是總數 —— 按下去看到幾張就是幾張。
+     篩選變動只走 apply()，所以 apply() 也要refresh，否則數字會停在舊值 */
+  const refreshFavCount=()=>{favNum.textContent=cards.filter(c=>favs.has(keyOf(c))&&hitR(c)&&hitC(c)&&hitM(c)).length};
   function paintFav(){
     cards.forEach(c=>{
       const cb=c.querySelector('.fav input'); if(!cb)return;
       const on=favs.has(keyOf(c));
       cb.checked=on; c.classList.toggle('isfav',on);
     });
-    favNum.textContent=favs.size;
+    refreshFavCount();
     favBtn.classList.toggle('on',onlyFav);
     favBtn.setAttribute('aria-pressed',onlyFav?'true':'false');
-    favBtn.title=onlyFav?'顯示全部':'只看最愛';
+    favBtn.title=onlyFav?'回到完整清單':'只看最愛';
+    favClear.hidden=!(onlyFav&&favs.size>0);
   }
   cards.forEach(c=>{
     const cb=c.querySelector('.fav input'); if(!cb)return;
@@ -3895,7 +3913,16 @@
   });
   favBtn.addEventListener('click',()=>{
     if(!onlyFav&&favs.size===0)return;   /* 一個都沒收藏時不讓它切成空畫面 */
+    const leaving=onlyFav;
     onlyFav=!onlyFav; paintFav(); apply();
+    /* 回首頁＝離開最愛並捲回頂端。用錨點而非 scrollTo，前者不會被擋 */
+    if(leaving)location.hash='#mgtopanchor';
+  });
+  favClear.addEventListener('click',()=>{
+    if(!favs.size)return;
+    if(!confirm('確定清空全部 '+favs.size+' 筆最愛？此動作無法復原。'))return;
+    favs.clear(); saveFavs(); onlyFav=false; paintFav(); apply();
+    location.hash='#mgtopanchor';
   });
   paintFav();
   wire(regRow,'r',v=>curR=v);
