@@ -115,6 +115,7 @@
     font-family:"Noto Serif TC";font-size:12px;letter-spacing:.04em;color:var(--forest);
     border:0;background:transparent;padding:0;cursor:pointer}
   .vism::-webkit-calendar-picker-indicator{opacity:.45;padding:0;margin-left:2px;cursor:pointer}
+  .vism[hidden]{display:none}
   #visbtn .onlab{display:none}
   #visbtn.on .onlab{display:inline}
   #visbtn.on .offlab{display:none}
@@ -145,6 +146,24 @@
   #favbtn.on{background:var(--coral);border-color:var(--coral);color:var(--paper)}
   #favbtn .n{font-family:Georgia,serif;font-style:italic}
   @media(prefers-reduced-motion:reduce){#favbtn{transition:none}#favbtn:hover,#favbtn:active{transform:none}}
+  #fltoggle{display:none;margin:10px auto 0;align-items:center;gap:8px;padding:9px 20px;
+    border:1px solid var(--line);border-radius:30px;background:var(--card);color:var(--ink-soft);
+    font-family:"Noto Serif TC";font-size:13px;letter-spacing:.12em;cursor:pointer}
+  #fltoggle .c{font-size:11px;transition:transform .3s}
+  #fltoggle[aria-expanded="true"] .c{transform:rotate(180deg)}
+
+  @media(max-width:600px){
+    /* 卡片：單欄、邊距對稱 */
+    .wrap{padding:0 16px}
+    .grid{grid-template-columns:1fr;gap:16px}
+    /* 篩選列預設收合，點「篩選」才展開 */
+    #fltoggle{display:flex}
+    .filterbar{display:none}
+    .filterbar.open{display:flex}
+    /* 最愛／已探訪移到底部，頂部完全淨空，不再壓到標題 */
+    #favbar{top:auto;bottom:calc(var(--mgh,79px) + 8px);right:10px;left:10px;justify-content:flex-end}
+  }
+
   @media(prefers-reduced-motion:reduce){
     .chip,.card{transition:none}
     .chip:hover,.chip:active,.card:hover,.card:active{transform:none}
@@ -165,6 +184,7 @@
 </header>
 
 <div class="wrap">
+  <button id="fltoggle" type="button" aria-expanded="false"><span class="t">篩選</span><span class="c">▾</span></button>
   <div class="filterbar">
   <div class="filters" id="regions"><span class="flabel">地區</span><span class="chips"></span></div>
   <div class="filters" id="filters">
@@ -3904,6 +3924,7 @@
       b.classList.toggle('off',!cards.some(c=>hitR(c)&&hitC(c)&&hitF(c)&&hitV(c)&&(v==='all'||c.dataset.mrt===v)));
     });
     refreshFavCount();
+    flLabel();
   }
 
   function wire(row,key,set){
@@ -3984,6 +4005,26 @@
     location.hash='#mgtopanchor';
   });
   paintFav();
+  /* 篩選收合：收起時把目前條件寫在鈕上，否則看不出篩了什麼 */
+  const flBtn=document.getElementById('fltoggle');
+  const flBar=document.querySelector('.filterbar');
+  const flTxt=flBtn?flBtn.querySelector('.t'):null;
+  function flLabel(){
+    if(!flTxt)return;
+    const p=[];
+    if(curR!=='all')p.push(curR);
+    if(curC!=='all'){
+      const b=[...catRow.querySelectorAll('[data-f]')].find(x=>x.dataset.f===curC);
+      if(b)p.push(b.textContent.trim());
+    }
+    if(curM!=='all')p.push(curM);
+    flTxt.textContent=p.length?('篩選 · '+p.join(' × ')):'篩選';
+  }
+  if(flBtn)flBtn.addEventListener('click',()=>{
+    const open=flBar.classList.toggle('open');
+    flBtn.setAttribute('aria-expanded',open?'true':'false');
+  });
+
   wire(regRow,'r',v=>curR=v);
   wire(catRow,'f',v=>{
     curC=v;
@@ -4019,7 +4060,14 @@
   var n=document.querySelectorAll("a.mgmail");
   for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
   var bar=document.getElementById("mgbar");
-  function pad(){document.body.style.paddingBottom=(bar.offsetHeight+10)+"px";}
+  var favbarEl=document.getElementById("favbar");
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    var narrow=window.matchMedia("(max-width:600px)").matches;
+    var extra=(narrow&&favbarEl)?favbarEl.offsetHeight+8:0;
+    document.body.style.paddingBottom=(h+extra+10)+"px";
+  }
   pad(); addEventListener("resize",pad);
   /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
   function toggle(){
