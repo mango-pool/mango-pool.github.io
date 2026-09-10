@@ -51,6 +51,10 @@ tbody tr:last-child td{border-bottom:none}
 .untouched h4{font-size:13px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:22px 0 10px}
 footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:13px}
 @media print{body{font-size:12pt}.wrap{padding:0}details{display:none}}
+.maplede{color:var(--ink2);font-size:15.5px;margin:0 0 14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 16px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
 </style>
 </head>
 <body>
@@ -62,18 +66,51 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <section id="summary">
 <h2>摘要</h2>
 <div class="summary">
-<p class="lede">這集由主持人與 J 藥師對談，從藏傳佛教的中陰期談人死後 49 天的歷程、臨終感官消失的順序、死亡的預演，以及祭祀與誦經對往生者的意義。</p>
+<p class="lede">這集由主持人與 J 藥師對談，順著「臨終、中陰、去向」的時間線講人死後 49 天會經歷什麼，再回頭談活著時能為自己和往生者做的事。</p>
 <ul>
-<li><strong>審判不來自外在。</strong> 死後沒有唯一的神來審判，也沒有判官；看到的世界都是自己信念的投射。</li>
-<li><strong>中陰期是過渡狀態。</strong> 最久 49 天，每 7 天看到不同風景。做夢時其實就在中陰階段。</li>
-<li><strong>第一道強光最關鍵。</strong> 跟著去就能跳脫六道輪迴，錯過後光一次比一次微弱，六色微光分別對應六道。</li>
-<li><strong>臨終感官依序關閉：</strong> 味覺、嗅覺、視覺、觸覺，最後才是聽覺。所以親人臨終時仍聽得到你說話。</li>
-<li><strong>身體依地、水、火、風四大依序瓦解，</strong> 最後帶著識離開。</li>
-<li><strong>死亡要預演兩件事：</strong> 該說的愛與抱歉先說出口，以及練習看到強光時不躲不逃。</li>
-<li><strong>現世報不必用宗教視角看：</strong> 每個人有自己的功德花園，做的事會很快回到身上，快慢看善果多還是惡果多。</li>
-<li><strong>燒紙錢往生者收不到實物，</strong> 頂多收到訊息；真正帶得走的是功德，誦經要依執念挑對應的經。</li>
+<li><strong>臨終先是感官依序關閉。</strong> 味覺、嗅覺、視覺、觸覺，最後才是聽覺，所以親人臨終時仍聽得到你說話。接著身體依地、水、火、風瓦解，最後帶著「識」離開。</li>
+<li><strong>離開之後進入中陰期。</strong> 最久 49 天，每 7 天換一個風景。做夢的時候其實就在中陰階段。</li>
+<li><strong>第 1 個 7 天出現最強的光，這是關鍵分岔。</strong> 跟著去就跳脫六道輪迴；錯過或想再來，光會一次比一次弱，六色微光對應六道，由這輩子的功過損益表決定被業力的風推向哪一道。</li>
+<li><strong>兩條例外路線。</strong> 臨終前專注念佛號 10 次，可去西方極樂淨土；作惡多端、傷害父母、出佛身血的人，即使看到強光也會被拖住。</li>
+<li><strong>沒有外在的審判者。</strong> 沒有唯一的神也沒有判官，看到的一切都是自己信念的投射，審判你的只有自己。</li>
+<li><strong>所以活著時要預演死亡，分兩件事。</strong> 先把該說的愛與抱歉說出口、不留遺憾；再練習看到強光時不躲不逃。</li>
+<li><strong>現世報靠功德花園運作。</strong> 做的事會很快回到自己身上，快慢看善果與惡果哪個多。只剩一個月時，放下罪惡感、活在當下，即使只剩 3 分鐘專注跟自己對話也算數。</li>
+<li><strong>為往生者能做的是迴向功德，不是燒東西。</strong> 紙錢紙紮收不到實物，頂多收到訊息；依往生者的執念挑對應的經文，心經、大悲咒也可以。</li>
 </ul>
 </div>
+</section>
+<section id="map">
+<h2>脈絡圖</h2>
+<p class="maplede">第一張是時間線：從臨終到去向，每一步的順序和分岔。第二張是活著的人能做的事，依對象分成四組。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["臨終"] --&gt; B["感官依序關閉&lt;br/&gt;味覺 → 嗅覺 → 視覺 → 觸覺 → 聽覺"]
+  B --&gt; C["四大瓦解&lt;br/&gt;地 → 水 → 火 → 風"]
+  C --&gt; D["帶著「識」離開"]
+  D --&gt; E["中陰期&lt;br/&gt;最久 49 天，每 7 天換一景"]
+  E --&gt; F{"第 1 個 7 天&lt;br/&gt;看到最強的光"}
+  F --&gt;|勇敢走向光| G["跳脫六道輪迴"]
+  F --&gt;|錯過，或想再來| H["光一次比一次弱&lt;br/&gt;六色微光對應六道"]
+  H --&gt; I["業力的風推向某一道&lt;br/&gt;看這輩子的功過損益表"]
+  D -. 臨終專注念佛號 10 次 .-&gt; J["西方極樂淨土"]
+  F -. 作惡多端、五逆 .-&gt; K["被拖住，去不了"]</pre></div>
+<div class="chart"><pre class="mermaid">mindmap
+  root((活著時能做的))
+    死亡的預演
+      該說的愛與抱歉先說出口
+      練習看到強光不躲不逃
+    現世報
+      每個人有自己的功德花園
+      做的事很快回到身上
+      快慢看善果與惡果哪個多
+    只剩一個月時
+      放下罪惡感，煩惱也在種惡因
+      活在當下
+      只剩 3 分鐘，專注對話也算數
+    為往生者
+      紙錢紙紮收不到實物，只收到訊息
+      功德才帶得走
+      依執念選經，病痛念藥師經
+      心經、大悲咒也可以</pre></div>
 </section>
 <section id="body">
 <h2>全文</h2>
@@ -138,7 +175,16 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 </div>
 </details>
 </section>
-<footer>後製於 2026-09-10 22:24</footer>
+<footer>後製於 2026-09-10 23:17</footer>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+(function(){
+  if(!window.mermaid) return;
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();
+</script>
 </body>
 </html>
