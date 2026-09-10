@@ -51,10 +51,19 @@ tbody tr:last-child td{border-bottom:none}
 .untouched h4{font-size:13px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:22px 0 10px}
 footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:13px}
 @media print{body{font-size:12pt}.wrap{padding:0}details{display:none}}
+.maplede{color:var(--ink2);font-size:15.5px;margin:0 0 14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 16px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
 </style>
 </head>
 <body>
 <div class="wrap">
+<nav class="crumb"><a href="../../">首頁</a><span>/</span><a href="../">影片轉文</a></nav>
 <header>
 <h1>仙姑教你如何求財庫跟補財庫</h1>
 <p class="meta"><span>科技仙姑實驗室</span><span>2023-01-02</span><span>逐字稿來源：語音辨識</span></p>
@@ -62,19 +71,59 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <section id="summary">
 <h2>摘要</h2>
 <div class="summary">
-<p class="lede">仙姑行不行第三集，叔叔以麻瓜身分向仙姑愛麗絲請教財庫裡裝什麼、怎麼判斷漏財、要去哪裡求財庫，以及有了財庫之後怎麼再開源。</p>
+<p class="lede">仙姑行不行第三集，叔叔以麻瓜身分請教仙姑愛麗絲：先看財庫裡裝什麼、怎麼判斷好壞，再問漏財的成因與對應解法，最後談去哪裡求、怎麼求，以及有了財庫之後怎麼再開源。</p>
 <ul>
-<li><strong>財庫裡多半是元寶。</strong> 一般上班族是銀元寶，一顆約代表 50 到 80 萬年薪；一個箱子裝滿 6 顆銀元寶會進位成一顆金元寶，再往上是金條、地契、房子。</li>
-<li><strong>空財庫比鐵碗好。</strong> 有箱子但空的代表存不住錢或有負債，仍有機會賺回來；鐵碗這類形式則是收入不穩又不節省。先求好的基本盤，再求裡面裝滿。</li>
-<li><strong>補財庫半年或一年一次就好。</strong> 自己不努力，天天去求神明也不會掉錢下來；沒有財庫的人一定要去求，已有財庫的人可求可不求。</li>
-<li><strong>漏財多半是財庫破損。</strong> 板子少一塊、有破洞，要去財神廟請五路財神或玄壇元帥修補；有冤親債主要念經；財庫裡有老鼠是前世殺了修行的鼠妖，要渡牠去投胎。</li>
-<li><strong>花錢隨便、事業犯小人，也會讓財庫破洞。</strong> 可以求神明幫忙開源節流，但七成靠人為，神明只幫三成。</li>
-<li><strong>樂透號碼看不到，股票只能看公司有沒有未來性。</strong> 仙姑本身偏財運只有 5% 到 6%，命格要靠正財，所以不會用天賦去賭。</li>
-<li><strong>土地公顧家運與工作順利，補財庫要去財神廟。</strong> 金山、石碇財神廟、松山北巡武德宮拜五路財神，南崁五福宮拜五路財神之首玄壇元帥趙公明。</li>
-<li><strong>求財要擲連續 3 個聖杯，帶 3 樣水果各 3 顆或一束鮮花。</strong> 光燒金紙順位會排很後面；有人擲了 20 幾次、一小時才求到。想再積極一點可以念金龍如意玄壇元帥真經，指南宮求金雞回來要每天供水或每週換米。</li>
-<li><strong>有了財庫還想更多，就要理財或發展副業。</strong> 存股、基金、投資型保單、存錢買房、二房東都行，錢放著不動很難退休，絕對不要放台幣定存。</li>
+<li><strong>先看裡面裝什麼。</strong> 一般上班族是銀元寶，一顆約代表 50 到 80 萬年薪；裝滿 6 顆進位成一顆金元寶，再往上是金條、地契、房子。地契通常是已發生的，看到整棟建築則多半是未來。</li>
+<li><strong>再看基本盤好不好。</strong> 有箱子但空的代表存不住錢或有負債，仍有機會賺回來；鐵碗、櫻花飄落、垃圾桶這類形式則是收入不穩又不節省，要先求一個新財庫，再求裡面裝滿。</li>
+<li><strong>錢實際上靠自己賺，神明只幫三成。</strong> 工作努力、投資得當、換工作加薪才是真正讓元寶變多的方式；補財庫半年或一年一次就好，天天求只會讓神明覺得煩。</li>
+<li><strong>漏財看流年，也看財庫有沒有破損。</strong> 運勢差的年份要保守；破洞的成因分三種，行為造成的破損、冤親債主、財庫裡有老鼠，三種解法不一樣。</li>
+<li><strong>三種破損對三種解法。</strong> 板子少一塊或破洞，去財神廟請五路財神或玄壇元帥修補；有冤親債主要念經解累世；有老鼠是前世殺了修行的鼠妖，要渡牠去投胎，牠離開錢才進得來。</li>
+<li><strong>行為造成的破洞最常見。</strong> 對錢隨便、賺多少花多少，或事業犯小人後靠消費療癒，年薪百萬也存不住。可以求神明幫忙開源節流，但七成還是在人為。</li>
+<li><strong>樂透號碼看不到，股票只能看公司有沒有未來性。</strong> 仙姑本身偏財運只有 5% 到 6%，命格要靠正財，所以不用天賦去賭；報明牌的福報屬於問的人，不屬於她。</li>
+<li><strong>求財要找對神明。</strong> 土地公顧家運與工作順利，補不到財庫；補財庫要去財神廟，金山、石碇、松山北巡武德宮拜五路財神，南崁五福宮拜五路財神之首玄壇元帥趙公明。</li>
+<li><strong>求的方式決定順位。</strong> 帶 3 樣水果各 3 顆或一束鮮花，講完姓名、農曆生日、地址與所求，擲到連續 3 個聖杯才算圓滿；只燒金紙順位會排很後面，有人擲 20 幾次、花一小時才求到。</li>
+<li><strong>想更積極就念經，想再開源就理財。</strong> 每天或每週念金龍如意玄壇元帥真經迴向自己；指南宮求金雞回來要每天供水或每週換米，做不到就別求。存股、基金、投資型保單、買房、二房東都行，錢放著不動很難退休，絕對不要放台幣定存。</li>
 </ul>
 </div>
+</section>
+<section id="map">
+<h2>脈絡圖</h2>
+<p class="maplede">第一張是判讀與處置的流程：先看財庫形式，再依症狀找對應的解法。第二張是求財的完整動作，從挑廟到擲筊到後續。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["看一個人的財庫"] --&gt; B{"有沒有箱子"}
+  B --&gt;|"沒有：鐵碗、櫻花飄落、垃圾桶"| C["收入不穩又不節省&lt;br/&gt;先求一個新財庫"]
+  B --&gt;|"有箱子"| D{"裡面有沒有元寶"}
+  D --&gt;|"空的：只有銅板紙鈔"| E["存不住錢或有負債&lt;br/&gt;仍有機會賺回來"]
+  D --&gt;|"有元寶"| F["銀元寶 6 顆進位成金元寶&lt;br/&gt;再往上是金條、地契、房子"]
+  F --&gt; G{"今年有沒有漏財"}
+  E --&gt; G
+  C --&gt; G
+  G --&gt;|"沒有"| H["靠工作、投資、加薪繼續累積&lt;br/&gt;神明只幫三成"]
+  G --&gt;|"有"| I{"破損的成因"}
+  I --&gt;|"板子少一塊或破洞"| J["去財神廟請神明修補"]
+  I --&gt;|"冤親債主"| K["念經解累世"]
+  I --&gt;|"財庫裡有老鼠"| L["前世殺了修行的鼠妖&lt;br/&gt;渡牠投胎，牠離開錢才進得來"]</pre></div>
+<div class="chart"><pre class="mermaid">mindmap
+  root((求財庫怎麼做))
+    找對神明
+      土地公顧家運與工作順利
+      土地公補不到財庫
+      五路財神在金山、石碇、松山北巡武德宮
+      玄壇元帥趙公明在南崁五福宮，五路財神之首
+    帶什麼去
+      水果 3 樣，每樣 3 顆
+      或一束鮮花
+      神明吃素，不要葷食
+    現場怎麼做
+      講姓名、農曆生日、地址
+      說出想補的是開源還是節流
+      擲到連續 3 個聖杯才圓滿
+      只燒金紙順位排很後面
+    回家還能做
+      念金龍如意玄壇元帥真經
+      每天念比每週念更有誠意
+      指南宮求金雞要每天供水或每週換米
+      做不到就換錢母就好</pre></div>
 </section>
 <section id="body">
 <h2>全文</h2>
@@ -171,7 +220,16 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 </div>
 </details>
 </section>
-<footer>後製於 2026-09-10 23:06</footer>
+<footer>後製於 2026-09-10 23:26</footer>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+(function(){
+  if(!window.mermaid) return;
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();
+</script>
 </body>
 </html>
