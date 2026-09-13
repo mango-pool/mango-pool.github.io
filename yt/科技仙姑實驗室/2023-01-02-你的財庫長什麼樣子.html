@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你的財庫長什麼樣子？</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8;--mark:#faeeda}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29;--mark:#412402}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+header{margin-bottom:40px}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0}
+.meta span+span::before{content:"·";margin:0 8px;color:var(--ink3)}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--line)}
+section:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px}
+.lede{font-size:18px;margin:0 0 18px;line-height:1.8}
+.summary ul{margin:0;padding-left:0;list-style:none}
+.summary li{position:relative;padding-left:20px;margin:0 0 12px;font-size:16px;line-height:1.8}
+.summary li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.summary strong{font-weight:500;color:var(--accent)}
+.maplede{color:var(--ink2);font-size:15.5px;margin:0 0 14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 16px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+h3{font-size:14px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:36px 0 14px}
+p{margin:0 0 1.35em;text-align:justify}
+.pre{background:var(--aside);border-radius:12px;padding:20px 24px;color:var(--ink2);margin-bottom:8px}
+.pre h3{margin-top:0}
+.pre p:last-child{margin-bottom:0}
+.aside{color:var(--ink2);background:var(--aside);border-radius:10px;padding:14px 18px;font-size:15.5px}
+details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 22px;margin-top:8px}
+summary{cursor:pointer;padding:16px 0;font-size:15px;color:var(--ink2);list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";width:0;height:0;border:5px solid transparent;border-left:7px solid var(--ink3);transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid var(--line)}
+.det{padding:18px 0 22px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:0 0 20px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+th{color:var(--ink3);font-weight:500;font-size:13px}
+td:nth-child(1){color:var(--ink2)}
+td:nth-child(2){font-weight:500}
+td:nth-child(3){color:var(--ink2);font-size:13.5px}
+tbody tr:last-child td{border-bottom:none}
+.low{background:var(--mark);padding:1px 6px;border-radius:4px;font-size:12.5px;margin-left:4px}
+.untouched{margin:0;padding-left:0;list-style:none;font-size:14.5px;color:var(--ink2)}
+.untouched li{padding-left:16px;position:relative;margin-bottom:8px;line-height:1.7}
+.untouched li::before{content:"–";position:absolute;left:0;color:var(--ink3)}
+.untouched h4{font-size:13px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:22px 0 10px}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:13px}
+@media print{body{font-size:12pt}.wrap{padding:0}details{display:none}}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style>
+</head>
+<body>
+<span id="mgtopanchor" aria-hidden="true"></span>
+<div class="wrap">
+<nav class="crumb"><a href="../">首頁</a></nav>
+<header>
+<h1>你的財庫長什麼樣子？</h1>
+<p class="meta"><span>科技仙姑實驗室</span><span>2023-01-02</span><span>逐字稿來源：語音辨識</span></p>
+</header>
+<section id="summary">
+<h2>摘要</h2>
+<div class="summary">
+<p class="lede">仙姑愛麗絲用「財庫」的形狀讀一個人的錢財狀況，這集把她看過的財庫形式從普通到頂級、從正常到特殊一路列出來，並說明形式會隨個性與處境改變。</p>
+<ul>
+<li><strong>能賺多少錢先看命格，先天約占八成。</strong> 後天努力、累世善惡與冤親債主的干擾約占兩成，所以不是億萬富翁的命就很難成為億萬富翁。</li>
+<li><strong>財庫是無形的寶箱，跟元辰宮一樣對應到每個人。</strong> 它決定錢留不留得住；仙姑看人時圖案會直接浮現，而且會隨機運與努力變好或變差。</li>
+<li><strong>女生多是木箱，男生多是鐵箱與黑曜石。</strong> 女生依收入從組合木材、上漆貼皮到檀木、鑲珠寶金箔；愛美的多一面鏡子，琉璃箱也屬女生；承擔養家責任的女生會偏向男生的形式。</li>
+<li><strong>頂級不分男女。</strong> 翡翠、珍珠、黃金箱、提款機、金礦、金庫、有守衛的地窖；提款機目前看到都是女生，地窖那位做建築營造。</li>
+<li><strong>保險箱代表錢夠用、個性謹慎。</strong> 大陸做生意的男生保險箱大如酒櫃，對太太節省，仙姑給太太的建議是多撒嬌。</li>
+<li><strong>特殊形式各有寓意。</strong> 鐵碗守不住錢、鐵碗裡有骰子是朋友來分錢、樹葉櫻花飄落是留不住、垃圾桶蓋住元寶是事業沒方向、花瓶要靠嫁好老公、樹洞加松鼠是格局小藏私房錢、啄木鳥是一直有人來要錢、盆栽底下是餐廳二代藏私錢、水族箱裡的貓把錢舔掉。</li>
+<li><strong>財庫可以求也可以改。</strong> 垃圾桶那位指點方向後兩三個月變回箱子，水族箱那位被建議多接案、爭取主管職。</li>
+<li><strong>叔叔的財庫是鑲金箔的檀木箱。</strong> 主管級，但收入還沒到命格，仙姑建議投資副業或爭取加薪；下一集講怎麼增加財庫。</li>
+</ul>
+</div>
+</section>
+<section id="map">
+<h2>脈絡圖</h2>
+<p class="maplede">上圖是仙姑的判讀架構：命格與後天決定財庫，財庫再依性別與福報分出等級，特殊形式則是當下處境的投影，而形式會隨行為改變而變回來；下圖把特殊形式依寓意分成四類。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["命格&lt;br/&gt;先天約八成"] --&gt; B["財庫&lt;br/&gt;無形的寶箱"]
+  C["後天努力、累世善惡&lt;br/&gt;約兩成"] --&gt; B
+  B --&gt; D["女生 木箱"]
+  B --&gt; E["男生 鐵箱、黑曜石"]
+  D --&gt; F["組合木材 → 上漆貼皮&lt;br/&gt;→ 檀木 → 鑲珠寶金箔"]
+  E --&gt; G["金礦、金庫&lt;br/&gt;有守衛的地窖"]
+  B --&gt; H["不分男女&lt;br/&gt;翡翠、珍珠、黃金、提款機"]
+  B --&gt; I["特殊形式&lt;br/&gt;鐵碗、樹葉、垃圾桶、花瓶&lt;br/&gt;樹洞、啄木鳥、水族箱"]
+  I --&gt; J["求財庫或改變行為&lt;br/&gt;形式會變"]
+  J --&gt; B</pre></div>
+<div class="chart"><pre class="mermaid">mindmap
+  root((特殊財庫))
+    守不住
+      鐵碗
+      樹葉櫻花飄落
+    被別人分走
+      鐵碗裡有骰子
+      啄木鳥啄樹皮
+      水族箱裡的貓
+    藏起來
+      樹洞加松鼠
+      盆栽底下
+    等待轉機
+      垃圾桶蓋住元寶
+      花瓶等好老公</pre></div>
+</section>
+<section id="body">
+<h2>全文</h2>
+<h3>正片</h3>
+<p>哈囉，歡迎大家收聽仙姑行不行第二集，我是叔叔。我是愛麗絲。上一次我們播出的第一集迴響還不錯，那也接收到很多朋友來的訊息，那他們對這樣的一個主題也蠻好奇的，所以我們雖然短短一個禮拜還蠻多人收聽的，我其實蠻意外的。愛麗絲這邊呢？對啊，迴響還不錯。謝謝大家的支持。</p>
+<p>那記得我們上次有問過仙姑說，來諮詢你的人最常問的問題是哪些，那你有提到第一名就是有關自己有多少錢財嘛，所以我們今天的主題就是來講講財庫這件事情。那我先發問好了，就是當有人來諮詢愛麗絲說，愛麗絲我一年可以賺多少錢？通常，你都會怎麼去看這個人，然後來回答這個問題呢？</p>
+<p>第一個就是命格嘛，他這個人的命格就是大概可以賺多少錢，其實有點像是我們講的就是，有點與生俱來的天註定的這個財富。但是這個其實並不是絕對，那財富的部分會有加上他先天的命格，還有他後天的努力，對，所以可以賺到多少錢就真的很難講，像例如說有些人他命格是賺五百塊，但因為他很努力，所以他的年收入是一千萬，但有人就是我看他命格是有賺五百萬，但他真的太懶惰了，所以他一年收入就只有一百多萬。所以聽起來就是每個人與生俱來都有一個基本盤，那個基本盤是就是你所謂的命格，他是註定的。對，但是他的例如他累世有沒有行善啊，或他有沒有一些冤親債主業力，那都會影響到他這輩子的財富啊，還有他的那個運勢的狀況。</p>
+<p>但你說後天也會影響，那這個比例呢？比例大概是幾比幾啊？嗯，大部分人來講大概是先天來講狀況是八成。八成，所以我努力怎麼改也是只有兩成的意思，所以如果我不是億萬富翁的命，我也不可能成為億萬富翁。就比較難，對，那另外一個就是我們講到的有些是冤親債主的干擾嘛，例如累世騙人家錢財啊，或把人家殺了，那冤親債主來找你報復，那這個也會影響到你的財富的狀況。所以我透過一些簡化還是有可能。嗯，就是降低這些報復，然後增加我的財富收入。對，增加後面，例如你的找到的工作可以找到比較好啊，還有你的投資的報酬率會比較高。</p>
+<p>那你剛剛提到說，一個是命格，那一個是財庫嗎？對，我們其實在這輩子，我們是有形的形體嘛，那其實它會對應到我們的元辰宮，然後還有就是我們的有個無形的寶箱，就是財庫。它會影響到說，到底我們的錢。欸，為什麼我做財庫？因為我賺了很多錢都留不下來，或是說我怎麼努力都是賺不到錢。那就是跟你的財，你的目前的財庫的形式，也會影響到你實際現在的賺錢的狀況。所以，仙姑你在看我們的時候，你是看得到這個人是什麼樣的財庫的形式？對，我看得到當下的，但是這個當下的財庫，它也會因為你的機運啊、努力，所以它的財庫是有可能會變得更好，或是會變得更差，都是有可能的。</p>
+<p>那你可以幫我們介紹，財庫有什麼形式嗎？就你看到的，就是說一般人來說，先講講，有分男生女生嗎？欸，財庫還是有分男生女生。喔，真的？那，可是有的人這一輩子是女生，上一輩子是男生，所以他的財庫也會不一樣。也會有可能不一樣，對。那我先問好了，女生的財庫形式會是什麼？女生的大部分還是以木頭，因為在古時候的人來講的話，女生就不用承擔要養家的責任嘛。那以前，你看以前古裝劇演的，嬪妃啊，他們的那種寶箱都是那種木頭的材質。所以女生大部分都是木頭的材質。對，但是以我在查的狀況，有些是女生她要比較承擔養家的責任。那她的財庫可能就會跟男生比較像，例如是鐵礦啊、鐵箱，或是黑曜石的箱子。黑曜石的箱子就是以男生的財庫來講，它就是比較高階的。那一般像是，例如是富二代啊，或是自己有在投資做生意的，大部分都是黑曜石的箱子。</p>
+<p>所以，如果你的財庫是正常的，女生的，你剛剛講的都是木盒子、木箱比較多。那男生來說，就是鐵箱跟黑曜石、寶石的箱子。對，那像那個女生的，以木頭來講，木頭又分很多種。一個就是一般的組合木材，它沒有上漆，就是比較一般 normal 的箱子。那再來的話，就是它是組合木材，但它是有，例如上亮光漆，或是有貼皮，是比較高階的。那再來，一般人收入大概有兩百萬以上，它的箱子就是檀木的箱子。檀木就是原木的箱子。對，那有些人的箱子上面會依照他的個性或喜愛的東西，會在他的檀木箱上面會有雕刻。例如像我之前有人來問事的話，他這個女生的個性就是很不拘小節，然後很活潑，所以他的箱子上面寫一個豹，然後還有另外一個，一隻豹，動物的豹。對，豹，雕刻在他的檯面上。那很有個性的感覺。對，然後有的是比較溫順的個性，就是他的財庫箱子上面就是花朵的形狀。對，然後像之前有個女生是他很喜歡星空啊、宇宙這種星星月亮、星辰，所以他的財庫上面就是有個月亮的符號。</p>
+<p>聽起來，好像這個箱子會隨著你的心境，或者你的成長改變。是會改變，對。外貌也會不一樣啊。會，會。哦，很有意思。那仙姑你在看那個財庫的時候，它是，比如說我今天站在你面前，那個財庫是？我就會看到一個圖啊，圖案，圖案就會跑出來。無形的，就會在我腦中會眼前這樣跑過，我就知道。啊，這好有意思。對。</p>
+<p>那女生就是剛剛講的，就是木頭，然後如果你收入比較高的話，可能就是檀木。那個會變成檀木，或者檀木上面有鑲珠寶、鑲金箔。對，有比較好有金箔。哦，OK。那像是長得比較漂亮的女生，他的箱子上面就是還會有鏡子，就有點像梳妝台，上面有個鏡子，底下有抽屜這樣。哦，因為他可能很愛照鏡子。很愛，對，很愛打扮，很愛很漂亮，會很注重自己的儀容。或是他累世有當過嬪妃的，很多都是有箱子，有鏡子的，箱子上面是有鏡子。然後再來還有就是像，有的是琉璃的箱子，琉璃就是那種透明的，有點透明，然後一般我們像是聚寶的材質都會，也都會有琉璃的魚啊，這種。所以琉璃也是屬於女生的。也是女生的，對。</p>
+<p>那我想問一下愛麗絲哦，你看過女生最超級豪華頂級的財庫的形式是什麼，讓你非常印象深刻的。我們不要講這個人是誰，就是。嗯，像一般來講的話，我剛才講的都是箱子嘛。對。然後再來比較進階的有，什麼翡翠嘛，然後，或是玉石、珍珠，或珍珠做成的箱子。然後還有他的本身的箱子就是一個黃金。哇，那真的很頂級啊。黃金打造的箱子。真的很頂級，這樣的人多嗎？其實比較不多欸，他剛才可能以目前來講可能十分之，應該也有，十分之，那你看到，那，這個是，錢財蠻好的。</p>
+<p>黃金財庫的這個女生，她從事哪一行業的，或是她的福報什麼什麼的。嗯，像例如之前，有查到一個女生的箱子是提款機。蛤，怎麼這麼好。對，就直接提款機了。她就不用上班，她從小原生家庭就很好，然後後來她嫁，她在英國念書，然後後來嫁一個日本人，定居在美國。然後她老公就是做生意的，她完全就是沒有錢財的煩惱。要多少錢，就可以領多少錢。哇，這真是好，這個絕無僅有吧。對，提款機的部分來講，目前是看到都是女生比較多。</p>
+<p>對，但那像男生比較好的話，我有看到是，例如它有金礦，然後還有金庫。金庫就是那種很，一個門進去，然後一整間房間都是珠寶、錢。對，然後還有比較是，然後年紀比較大，我看到它是一個地窖。地窖就是以前，股東放錢，它可能會有一個密室，地下室往下走。嗯。然後經過樓梯往下走之後，它就整間都是它的金銀財寶。就像我們去挖，那個電影上演的，我們如果去尋寶、挖寶，開啟那個地窖。對，開啟門之後，出現了滿滿的金銀財寶、鑽石、瑪瑙在裡面，那種感覺。對，然後那時候我看到的時候，它的地窖門口還有兩個守衛，是在守護它那個地窖的門這樣。所以這是很好的一個代表，就是你的錢財還有人幫你顧著。對，對，這個就是真的是家裡很有錢。天啊。嗯，這樣的人，通常跟他現實從事的事情的格局大小應該有很大的關係。嗯，像例如那個來講，它本身是做營造業的。哦。建築營造業的。是。對，它就真的是賺滿多錢的。</p>
+<p>OK，好，剛剛講到，我們再總結一下，女生就是木頭箱子，那根據你的錢財多寡，那個箱子的等級越來越高。男生就是鐵箱、黑曜石，但是好的人就是金庫。這個是什麼，女生的話是提款機。像這個都是不一樣，像那個什麼，例如我們講的什麼翡翠啊，然後玉石啊，提款以及金庫，這個就是沒有分成男女，就是看它的福報來講，然後目前的狀況。嗯哼。對。</p>
+<p>好，那講到這一般 normal 的，那。一般，啊對，另外還有一個是，像有些人是保險箱。保險箱的話代表他錢其實已經夠他這輩子可以用。是。對。那再來就是他在處事上是比較小心謹慎。對。他比較小心謹慎，他不隨便投資。他賺的錢就是，基本上就是放在那邊。就是入袋為安。對。他的個性，所以保險箱也代表他這個人個性就是很謹慎。他就是他已經有，基本上他也不會亂花。對。那錢守得很好。錢守得很好的話，就是保險箱。</p>
+<p>所以，你通常在看到一個人的財庫的形式，你會給他什麼樣的建議，對不對？應對那個形式。其實目前看到的財庫的形式，跟那個人個性就是也有關係。像我之前有遇到一個是在大陸做生意的一個男生。嗯。那他的財庫是保險箱，但是保險箱很大，是酒櫃的那種大小。嗯哼。對。小型的冰箱的大小。是。他賺了很多錢，但是他就是，對自己還蠻大方。但他對他的例如是另一半啊，他就比較節省。是。對。這就會顯現出他的個性上也有相關。哦。</p>
+<p>那他這樣子他需要改進嗎？或做什麼改善嗎？你剛剛一直說，雖然他有很大的一個財庫。可是他都沒有。他對家人可能比較苛刻一點。那，這跟他的財庫之間是有關係的嗎？像這種情況，因為那時候來找我問，是他太太嘛。哦。對。是他，瞭解他的個性是這樣，所以就。對。那我就跟他太太說，那如果你想要從你老公那邊，可以拿到比較多的錢可以用的話，那你可能就要多撒嬌啊。對。對你老公好一點，他可能就會把他的錢財，就是從保險箱裡面，拿出來給你花。但是因為問事者是不一樣的。那個他太太是怎麼覺得，欸，她的老公怎麼對她這麼小氣，所以她來諮詢你。對。那，其實你看到她老公是有財庫的，只是不願意分享給家人。所以反過來給他建議就是，你要多撒嬌。對。好，原來是這樣，好。</p>
+<p>那我再問一下，有沒有，你剛剛講的都比較正常的財庫，那有沒有不好的財庫的形態，或者那個形狀的？嗯，應該也不是說不好，就是有的是比較特殊。例如像我之前有人，有問事的是一個鐵碗嘛。鐵碗？你說敲鐵碗那種，鐵的碗。對，鐵的碗。那他代表他的錢就是守不住。他裡面有錢，但是他錢就是很容易就花掉，他沒有確切的就是把錢存下來。哦，鐵碗，OK。所以他錢就是守不住。那另外的話就是，像之前有一個是家裡是有開工廠的，然後，但他自己本身有在外面上班。那他的，那花錢來講，就是沒有這麼的積極。嗯。他也很貼心，然後他對他朋友也很大方。所以他的鐵碗裡面就是有像骰子、洗髮刀這樣。哦。代表說就是，他會跟很多朋友聚在一起，分享他的錢。他的朋友會分享他的錢。他很大方，但是會有朋友來分享，一起分享。對，所以我就問他說，欸你跟你朋友出去吃飯、出去玩，是不是都你在付錢？然後你也沒有跟他們計較說要把錢拿回來。他說對啊，就是這樣。對，所以他後來有去求財庫，然後他的財庫有變成一個箱子。所以財庫也是可以求的喔。對，財庫是可以求。後面再講到說，到底要怎麼求財庫。哦，OK，好。</p>
+<p>那還有什麼樣特殊的，除了剛剛鐵碗跟洗髮刀之外？其實蠻多，像有的，我看到的財庫是，例如它就是樹葉啊，或是櫻花飄落。代表說它這輩子就是，錢都是一直留不住。留不住，就像是打水漂這樣。哦，所以我們剛剛問財庫會覺得是個裝東西的什麼庫。可是如果你在看這個人也沒有錢的時候，也有可能顯化出來的不是庫的這種東西。他就是沒有錢。他就是個葉子、花飄下來。對。就代表零零落落的。對，代表他的錢，就是這輩子就是都沒什麼錢啊，一直一直在籌錢。或他賺到的很多錢，就是又滑出去了。對，然後最終留在他身邊的錢才是，其實是寥寥無幾。那還蠻悲哀的耶。蠻辛苦的啦。如果有人諮詢你，他出現這個。就是比較辛苦。</p>
+<p>那，好，鐵碗、櫻花飄落，那還有什麼？然後還有像是有垃圾桶，之前也是有一個，他們是新創。垃圾桶喔，有人財庫是垃圾桶。他的狀況就是，他那時候思緒很軟。然後他的事業算是剛起步。所以我就看他垃圾桶裡面有很多，就是 A4 的紙。然後被他寫一寫，又揉成一團丟到垃圾桶裡面。但他垃圾桶裡面底下還是有一個元寶。喔，但是被他現在的那些東西蓋住了。對，代表說他現在的事業上是有稍微一點沒方向。對，所以後來我就是有指點說，那你的事業應該朝哪幾個方向進行。所以他後來的箱子又變成一般的箱子了，就不是垃圾桶。所以就是你剛剛講的，他有去改善，或者做一些改變的事情。那他花了多少時間去改變他的財庫？他的事業來講，應該大概兩三個月後，他的整個策略上是比較穩定的。然後我記得我在半年後有再跟他諮詢，他是說目前是蠻穩定的狀況。然後也算是有點收入進來，有賺錢。瞭解，還好那個財庫這種東西不是一成不變的。不是一直的，他就會一直暫時。</p>
+<p>然後之前有一個，像有一個女生，她的財庫是花瓶。然後花瓶底下就有放元寶跟一些銅鏡。花瓶。有錢，但是不多。那就是，因為這是他媽媽來問的嘛。我就跟他媽媽說，你的女兒要有錢就是要嫁一個好老公。對，就等於說你的女兒長得很漂亮。但是你嫁一個好老公的話，你的錢就是會進來這樣。就算那個花瓶是會滿的意思。對，花瓶都會滿。所以他的命格就是等下嫁一個好老公。好有意思喔，先看到一個人的那個形象，就代表那個人的樣子。就是目前的狀況。所以搞不好他結了婚之後，他的箱子說不定會變成什麼高階的檀木箱，有帶鏡子的，說不定。就不會只是一個花瓶。</p>
+<p>對，然後還有就是像，目前之前有一個諮詢的對象的老公，他比較小氣。他的錢就藏在樹洞。樹洞？對，那樹洞前面就是還有松鼠，就是偽裝在那個，守在那個樹洞前面。然後他的錢就變成藏在那個很後面的葉子啦。不要讓人家看見就是了。對，松果啊、栗子這種食物的底下。可是這剛剛的那個什麼，金庫、保險箱是不一樣的嗎？應該說他，代表說他這個人的格局就比較小。他沒有像金庫、保險箱的那個老闆，他們格局比較大，他是大氣的。對，他是本身格局是比較小。所以他顯示的就是樹洞，然後他也不想讓他的家人知道他有多少錢。他就像那隻松鼠守在旁邊，這樣子。類似這樣，對。那我們就盡量不要交這樣的朋友。</p>
+<p>然後下一個是男生，那他的錢是有，他有啄木鳥，一直在啄他的樹皮。啄木鳥？代表說他的錢就是，一直會有人來跟他要錢。不管是家人啊、親戚或什麼。他很多的錢就是，會變，一輩子所賺的自己可能花不多，但是花在別人身上。嗯，是。啄木鳥，所以有出現啄木鳥也是不好的。對，這個也是不太好，代表啄木鳥會把你的錢就是分走。對。</p>
+<p>然後還有就是，之前有一個是開餐廳的男生。他的錢，因為他目前來講，他就是經營家裡事業，但是上一代都還在。所以他變成說他有錢，他有他自己的錢。那我看他錢就在一個辦公室的一個盆栽底下。所以變成說他的錢財來講是，他自己的部分是他自己藏起來。然後家裡的，家庭的事業，他又另外一部分就是看到是辦公桌。他要真正賺錢來講，他還是得要把家裡的事業做好。他才有，他錢才有辦法增加。但因為相對的情況來講，就是說他的錢財也不想讓別人知道他到底真正賺多少錢。所以他錢才是藏起來的。對。那他是屬於剛剛的哪一種？以他這種，他的錢財來講，其實他也算是鐵，有鐵箱啦。鐵箱。有鐵箱，然後有元寶。但是他就不想讓人家知道他的錢財。所以他就把錢財藏在一個盆栽底下，讓他自己知道。跟樹洞其實有點像。但是他來諮詢，你會告訴他說，你如果要增加你的財庫的話，你就必須要去把，算的正財嗎？你家庭那一塊。對，就變成說你的家庭這塊你還是要做好。否則你的錢財，你的自己的錢財來講，其實他不是不會，不會變多。所以其實是鐵箱，要怎麼把鐵箱變成剛剛講的黑曜石。對，就是這樣。所以那時候我就有跟他太太說，你的先生的部分來講，雜事太多了。他要真正自己可以思考，要怎麼幫助家業，這個餐廳可以做得更好，你的錢財才會增加。瞭解。哇，光是這個形式就很多種喔。</p>
+<p>那比較特別，像是之前，有人有養寵物。然後那個寵物其實年紀，貓咪，一隻貓，很可愛的貓咪，年紀很多，大十幾歲。是。那貓咪每天的營養，每個月的營養品啊，然後還有看醫生的前期可能就要花個八千一萬。但他本身就是一個上班族。八千一萬。對，一個月薪水才四萬多塊。跟養一個小孩一樣，對。對，所以他的很妙，他的財庫就是一個水族箱。然後那隻貓就會。水會流掉的意思嗎？那隻貓就一直去舔那個水族箱的水盒。因為很多貓咪他只喝流動的水。是。對，但他在那個水族箱底下還是有一些彈珠啊，然後貝殼之類，但是那就不太值錢嘛。那像這樣的狀況，你會給他什麼建議啊？但他的水族箱裡面還是有兩隻金魚，橘色跟紅色的金魚。所以代表說他的錢財來講，還是賺得進錢財的，但是他很多錢是被他的貓咪花掉了。可是比如說我要是那個人，我一點都不想要水族箱。我想要是那個有鑲的寶石的木箱。那我這樣的改變，跟剛剛您講的那個。有啊，後來對。對，後來就建議他說，就是他可能，因為他本身也不是太勤勞的人。所以我說那你真的要改變，那你，因為他是做設計的嘛。我說那你就要去多接一些案子。然後說你的，要換工作這樣。那你願意承擔主管職的責任。因為他在做設計十幾年了。那你的薪水才會增加。哦，所以你還是有給他一些。你是有這個財庫的，但是你要不要多勤勞、勤奮一點去。對，否則你目前的。多去開源，對不對。對，否則以他來講，目前的財庫一年賺的錢就是六七十萬。其實他以這個水族箱等級來講，其實跟女生木箱是同一個等級。只是因為他大部分的錢都被他那貓花掉了。哦，好啊。對。</p>
+<p>我們剛剛見到很多財庫的那個材質形式哦，還蠻好玩的。那我可不可以借這個節目問一下仙姑，那請問你現在看得到叔叔有財庫嗎？你的財庫就是檀木的箱子，是有鑲金箔的。我是檀木的箱子，有鑲金箔。欸，好高興喔。箱子是蠻高階的。就是主管級的，記得，箱子。哦，好。但是以你的來講啊，你現在賺的錢其實也沒有到你的命格。所以我還可以再多賺，再勤奮一點的話。對，就是例如說你在投資上面，或是你可以投資副業啊，或這種的，其實就可以幫助你賺錢。聽起來不錯。對，或是說你在工作上去爭取其他的職務啊，然後有加薪的機會。對，這個話其實你的錢財才會變得更多。瞭解，好。</p>
+<p>那我們第二集呢，光介紹財庫的種類呢，就有琳琅滿目齁。但我覺得應該大家比較關心的還是說，怎麼樣增加財庫，或者是改變財庫的材質齁，到一個我們剛剛講的一個比較好的一個境界齁。有像珠寶的啦，有黑曜石啊。那如果是這樣的話，我們下一集來介紹這個，有怎麼樣增加財庫這件事情。好。好，那我們這一集就到這邊囉。好，謝謝大家。謝謝大家。</p>
+</section>
+<section id="fixes">
+<h2>供評估</h2>
+<details>
+<summary>修字清單（26 處，3 處把握度較低）</summary>
+<div class="det">
+<table>
+<thead><tr><th>原文</th><th>改為</th><th>依據</th></tr></thead>
+<tbody>
+<tr><td>回想還不錯</td><td>迴響還不錯</td><td>上下文（2 處）</td></tr>
+<tr><td>我是書書</td><td>我是叔叔</td><td>同頻道前一集與本集後文皆作「叔叔」</td></tr>
+<tr><td>謝謝大家的支援</td><td>謝謝大家的支持</td><td>OpenCC 把「支持」轉成「支援」的副作用</td></tr>
+<tr><td>一萬富翁</td><td>億萬富翁</td><td>上下文（2 處）</td></tr>
+<tr><td>隻有兩成</td><td>只有兩成</td><td>OpenCC 把「只」轉成「隻」的副作用</td></tr>
+<tr><td>冤親債主的幹擾</td><td>冤親債主的干擾</td><td>OpenCC 把「干」轉成「幹」的副作用</td></tr>
+<tr><td>對應到我們的原成功</td><td>對應到我們的元辰宮</td><td>民俗用語，有形的身體對應元辰宮、無形的寶箱是財庫</td></tr>
+<tr><td>平妃啊</td><td>嬪妃啊</td><td>上下文，後文作「嬪妃」</td></tr>
+<tr><td>累次有當過嬪妃</td><td>累世有當過嬪妃</td><td>上下文，前文作「累世」</td></tr>
+<tr><td>檯木、臺木</td><td>檀木</td><td>同頻道前一集作「檀木箱」（6 處）</td></tr>
+<tr><td>有像珠寶、像金箔、有箱金箔、有香的寶石</td><td>有鑲珠寶、鑲金箔、有鑲金箔、有鑲的寶石</td><td>上下文（5 處）</td></tr>
+<tr><td>寫一個寶、一隻寶、動物的寶</td><td>豹</td><td>上下文，講者接著說「動物的」（4 處）</td></tr>
+<tr><td>有人來問世的話</td><td>有人來問事的話</td><td>民俗用語，同頻道前一集作「問事」</td></tr>
+<tr><td>巨寶的材質</td><td>聚寶的材質</td><td>上下文，<span class="low">把握度較低</span></td></tr>
+<tr><td>鑽石、馬老在裡面</td><td>鑽石、瑪瑙在裡面</td><td>上下文</td></tr>
+<tr><td>跟他縣市從事的事情</td><td>跟他現實從事的事情</td><td>上下文</td></tr>
+<tr><td>提款已經金庫</td><td>提款以及金庫</td><td>上下文</td></tr>
+<tr><td>諮詢的物件</td><td>諮詢的對象</td><td>OpenCC 把「對象」轉成「物件」的副作用</td></tr>
+<tr><td>他也很貼神</td><td>他也很貼心</td><td>上下文，<span class="low">把握度較低</span></td></tr>
+<tr><td>他們是新廠</td><td>他們是新創</td><td>上下文，接著說事業剛起步，<span class="low">把握度較低</span></td></tr>
+<tr><td>著木鳥、一直在著他的樹皮</td><td>啄木鳥、一直在啄他的樹皮</td><td>上下文（5 處）</td></tr>
+<tr><td>一個盆在底下</td><td>一個盆栽底下</td><td>上下文（2 處）</td></tr>
+<tr><td>被他那毛滑掉了</td><td>被他那貓花掉了</td><td>前文作「被他的貓咪花掉了」</td></tr>
+<tr><td>有黑鑰匙啊</td><td>有黑曜石啊</td><td>上下文，全篇作黑曜石</td></tr>
+<tr><td>打水飄</td><td>打水漂</td><td>用字</td></tr>
+<tr><td>梳妝臺</td><td>梳妝台</td><td>台灣慣用寫法</td></tr>
+</tbody>
+</table>
+<div class="untouched"><h4>未改動的地方</h4>
+<ul class="untouched">
+<li>「為什麼我做財庫」：語意不明，可能是「為什麼要做財庫」，保留。</li>
+<li>「透過一些簡化」：聽不出原意，可能是「化解」，音不近，保留。</li>
+<li>「十分之，應該也有，十分之」：句子沒說完，保留。</li>
+<li>「股東放錢」：語意不明，保留。</li>
+<li>「洗髮刀」（2 處）：聽不出是什麼物件，保留。</li>
+<li>「思緒很軟」：可能是「思緒很亂」，音不近，保留。</li>
+<li>「等下嫁一個好老公」：可能是「等於」，音不近，保留。</li>
+<li>「算的正財嗎」：可能是「算是」，保留。</li>
+<li>「看醫生的前期」「他就會一直暫時」：語意不明，保留。</li>
+<li>「檯面上」：檯面為台灣通用寫法，未隨「檀木」改動。</li>
+<li>「他／她」全篇混用，照原樣。</li>
+<li>「OK」「normal」「A4」等英文照原樣。</li>
+</ul></div>
+</div>
+</details>
+</section>
+<footer>後製於 2026-09-11 10:57</footer>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+(function(){
+  if(!window.mermaid) return;
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();
+</script>
+</body>
+</html>
