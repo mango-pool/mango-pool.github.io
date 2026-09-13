@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>台中模型店地圖 · 芒果鋪</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+:root{
+  --paper:#F3EFE1; --paper-2:#FBF8EF; --ink:#20302B; --ink-soft:#5C6A63;
+  --mango:#F5A524; --mango-deep:#E07A00; --leaf:#2F7D5B; --clay:#C1553B;
+  --line:rgba(32,48,43,.14); --shadow:0 6px 24px rgba(32,48,43,.10); --r:14px;
+  --sidebar:380px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink); background:var(--paper);
+  font-family:"Noto Sans TC",system-ui,sans-serif; line-height:1.6;
+  -webkit-font-smoothing:antialiased; overflow:hidden;
+}
+.mono{font-family:"Space Mono",monospace}
+
+/* ── 版面 ── */
+.app{display:flex; height:100vh; width:100%}
+.sidebar{
+  width:var(--sidebar); flex:none; height:100%; display:flex; flex-direction:column;
+  background:var(--paper); border-right:1px solid var(--line); box-shadow:2px 0 12px rgba(32,48,43,.05); z-index:500;
+}
+.mapwrap{flex:1; position:relative; min-width:0}
+#map{position:absolute; inset:0; background:#dfe6e2}
+
+/* ── 標頭 ── */
+.head{padding:16px 18px 12px; border-bottom:1px solid var(--line); flex:none}
+.head-top{display:flex; align-items:center; gap:11px}
+.head h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:19px;margin:0;letter-spacing:.5px}
+.head .sub{font-size:11px;color:var(--ink-soft);letter-spacing:1.5px;font-family:"Space Mono",monospace}
+
+/* ── 篩選 ── */
+.filters{padding:12px 18px; border-bottom:1px solid var(--line); flex:none}
+.flabel{font-family:"Space Mono",monospace;font-size:10px;letter-spacing:1.5px;color:var(--mango-deep);text-transform:uppercase;margin-bottom:7px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  padding:5px 13px;border-radius:20px;font-size:12.5px;font-weight:500;cursor:pointer;
+  background:var(--paper-2);border:1px solid var(--line);color:var(--ink-soft);
+  transition:all .15s; user-select:none; white-space:nowrap;
+}
+.chip:hover{border-color:var(--mango);color:var(--ink)}
+.chip.on{background:var(--mango);border-color:var(--mango);color:var(--ink);font-weight:700}
+.chip .n{font-family:"Space Mono",monospace;font-size:10.5px;opacity:.7;margin-left:3px}
+.chip input[type=checkbox]{width:14px;height:14px;margin:0 5px 0 0;accent-color:var(--mango-deep);cursor:pointer;vertical-align:-2px}
+.linkbtn{
+  font-family:"Noto Sans TC",sans-serif;font-size:10.5px;font-weight:500;letter-spacing:0;
+  color:var(--ink-soft);cursor:pointer;margin-left:8px;text-transform:none;
+  border-bottom:1px dotted var(--line);
+}
+.linkbtn:hover{color:var(--mango-deep);border-color:var(--mango-deep)}
+
+.toggles{display:flex;gap:14px;margin-top:11px;font-size:12px;color:var(--ink-soft);align-items:center;flex-wrap:wrap}
+.toggles label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.toggles input{accent-color:var(--leaf);cursor:pointer}
+
+/* ── 清單 ── */
+.listwrap{flex:1; overflow-y:auto; padding:10px 12px 12px}
+.listwrap::-webkit-scrollbar{width:8px}
+.listwrap::-webkit-scrollbar-thumb{background:rgba(32,48,43,.18);border-radius:4px}
+
+.hint{font-size:11px;color:var(--ink-soft);padding:2px 6px 9px;display:flex;align-items:center;gap:5px}
+
+.card{
+  background:var(--paper-2); border:1px solid var(--line); border-radius:var(--r);
+  padding:11px 12px; margin-bottom:9px; cursor:grab; position:relative;
+  transition:border-color .15s, box-shadow .15s, opacity .2s;
+}
+.card:hover{border-color:var(--mango); box-shadow:var(--shadow)}
+.card.dragging{opacity:.4; cursor:grabbing}
+.card.over{border-color:var(--mango-deep); border-style:dashed}
+.card.visited{opacity:.62}
+.card.checked{border-color:var(--mango); background:linear-gradient(100deg,rgba(245,165,36,.09),var(--paper-2) 60%)}
+
+.card-row{display:flex; align-items:flex-start; gap:9px}
+.card input[type=checkbox]{margin-top:3px; width:16px; height:16px; accent-color:var(--mango-deep); cursor:pointer; flex:none}
+.card-main{flex:1; min-width:0}
+.card-name{font-family:"Noto Serif TC",serif; font-weight:700; font-size:15px; display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.seq{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;background:var(--mango-deep);color:#fff;
+  font-family:"Space Mono",monospace;font-size:11px;font-weight:700;flex:none;
+}
+.card-meta{font-size:11.5px;color:var(--ink-soft);margin-top:3px;display:flex;flex-wrap:wrap;gap:4px 9px}
+.card-spec{font-size:11.5px;color:var(--ink);margin-top:5px;line-height:1.5}
+.rating{font-family:"Space Mono",monospace;font-size:11px;color:var(--mango-deep);font-weight:700}
+.tag{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10px;font-weight:700;font-family:"Space Mono",monospace}
+.tag.visited{background:rgba(47,125,91,.16);color:var(--leaf)}
+.tag.want{background:rgba(245,165,36,.22);color:var(--mango-deep)}
+.tag.closed{background:rgba(193,85,59,.16);color:var(--clay)}
+.card-acts{display:flex;gap:7px;margin-top:7px}
+.mini{
+  font-size:11px;padding:3px 9px;border-radius:8px;border:1px solid var(--line);
+  background:#fff;color:var(--ink-soft);cursor:pointer;text-decoration:none;transition:all .15s;
+}
+.mini:hover{border-color:var(--mango);color:var(--ink)}
+
+/* ── 路線列 ── */
+.routebar{
+  flex:none; padding:12px 16px; border-top:1px solid var(--line); background:var(--paper-2);
+}
+.btn{
+  display:block;width:100%;padding:11px;border-radius:11px;border:none;cursor:pointer;
+  background:var(--mango);color:var(--ink);font-family:"Noto Sans TC",sans-serif;
+  font-weight:700;font-size:14px;transition:all .15s;text-align:center;text-decoration:none;
+}
+.btn:hover{background:var(--mango-deep);color:#fff}
+.btn:disabled{background:rgba(32,48,43,.10);color:var(--ink-soft);cursor:not-allowed}
+.btnrow{display:flex;gap:8px;align-items:stretch}
+.btnrow .btn{flex:2 1 0;min-width:0}          /* 主按鈕佔 2 份 */
+.btnrow .btn-sub{flex:1 1 0}                   /* 次按鈕佔 1 份 */
+.btn-sub{background:transparent;border:1px solid var(--line);color:var(--ink-soft);font-size:12.5px;padding:11px 6px;font-weight:500;white-space:nowrap}
+.btn-sub:hover{background:#fff;color:var(--ink);border-color:var(--mango)}
+
+/* ── 地圖標記 ── */
+.pin-ico{
+  display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);
+  background:var(--mango);border:2px solid #fff;box-shadow:0 3px 8px rgba(0,0,0,.25);
+  font-family:"Space Mono",monospace;font-weight:700;font-size:12px;color:var(--ink);
+}
+.pin-ico span{transform:rotate(45deg)}
+.pin-ico.visited{background:var(--leaf);color:#fff}
+.pin-ico.checked{background:var(--mango-deep);color:#fff;width:34px;height:34px;font-size:14px}
+.leaflet-control-layers{
+  border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);
+  background:var(--paper-2);font-family:"Noto Sans TC",sans-serif;font-size:12.5px;color:var(--ink)
+}
+.leaflet-control-layers-list{padding:4px 2px}
+.leaflet-control-layers label{display:flex;align-items:center;gap:6px;padding:2px 4px;cursor:pointer}
+.leaflet-control-layers input{accent-color:var(--mango-deep);margin:0}
+.leaflet-popup-content{margin:11px 13px;font-family:"Noto Sans TC",sans-serif}
+.pop-name{font-family:"Noto Serif TC",serif;font-weight:700;font-size:15px;margin-bottom:4px}
+.pop-meta{font-size:12px;color:var(--ink-soft);line-height:1.6}
+.pop-acts{margin-top:8px;display:flex;gap:6px}
+
+/* ── 手機 ── */
+.mtabs{display:none}
+@media(max-width:820px){
+  body{overflow:auto}
+  .app{flex-direction:column;height:auto}
+  .sidebar{width:100%;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+  .mapwrap{height:58vh;min-height:340px}
+  .listwrap{max-height:44vh}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ══ 左側 ══ -->
+  <aside class="sidebar">
+    <div class="head">
+      <div class="head-top">
+        <div>
+          <h1>台中模型店地圖</h1>
+          <div class="sub">MODEL SHOPS · TAICHUNG</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="flabel">行政區 <span id="areaAll" class="linkbtn">全選</span><span id="areaNone" class="linkbtn">全不選</span></div>
+      <div class="chips" id="areaChips"></div>
+      <div class="toggles">
+        <label><input type="checkbox" id="hideVisited"> 隱藏已訪</label>
+      </div>
+    </div>
+
+    <div class="listwrap">
+      <div class="hint">☑ 勾選加入路線・滑鼠點擊店家卡片不放可改變順序<span id="btnFit" class="linkbtn">⤢ 全部入鏡</span></div>
+      <div id="list"></div>
+    </div>
+
+    <div class="routebar">
+      <div class="btnrow">
+        <button class="btn" id="btnRoute" disabled>搬到 Google Map 規劃路線</button>
+        <button class="btn btn-sub" id="btnClear">清除勾選</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══ 右側地圖 ══ -->
+  <div class="mapwrap"><div id="map"></div></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ═══════════════════════════════════════
+   資料(2026-08-22 Google Maps 全面覆核)
+   ═══════════════════════════════════════ */
+const SHOPS = [
+  {
+    id:'weei', name:'威逸模型', area:'西區',
+    lat:24.1427072, lng:120.6738826,
+    addr:'台中市西區中華路一段39號',
+    hours:'10:00–20:00・週日公休', tel:'04-2223-0500',
+    rating:4.6, reviews:null,
+    spec:'軍模為主(幾乎無鋼彈)・威逸盃主辦',
+    visited:true, closed:false
+  },
+  {
+    id:'thunder', name:'雷鳥鋼彈模型玩具店', area:'北區',
+    lat:24.1589733, lng:120.6708676,
+    addr:'台中市北區健行路825號(民權路口)',
+    hours:'11:00–22:00・全年無休', tel:'04-2201-7676',
+    rating:4.4, reviews:522,
+    spec:'鋼彈為主(架上後排有軍武)',
+    visited:true, closed:false
+  },
+  {
+    id:'sy', name:'精準模型', area:'西區',
+    lat:24.1393340, lng:120.6748576,
+    addr:'台中市西區民生路69號',
+    hours:'10:30–18:30・週日一公休', tel:'04-2224-8417',
+    rating:4.5, reviews:917,
+    spec:'綜合大店・逾30年・工具最齊',
+    visited:true, closed:false
+  },
+  {
+    id:'yld', name:'育樂達模型玩具專賣', area:'潭子區',
+    lat:24.2323577, lng:120.7090671,
+    addr:'台中市潭子區中山路三段358號',
+    hours:'13:00–21:00・週二公休', tel:'04-2532-0458',
+    rating:4.8, reviews:49,
+    spec:'老闆是玩家可請教技巧・店內展示國軍F-16(軍模傾向)',
+    visited:false, closed:false
+  },
+  {
+    id:'thunder2', name:'雷鳥模型(太平店)', area:'太平區',
+    lat:24.1485692, lng:120.7057769,
+    addr:'台中市太平區中山路四段100-1號',
+    hours:'13:00–21:00・週一公休', tel:'04-2395-7577',
+    rating:null, reviews:null,
+    spec:'鋼彈為主/綜合',
+    visited:false, closed:false
+  },
+  {
+    id:'hunter', name:'獵模士玩具模型專賣店', area:'西屯區',
+    lat:24.1819763, lng:120.6455038,
+    addr:'台中市西屯區西安街191號',
+    hours:'13:00–22:00・週三公休', tel:'0930-550-293',
+    rating:4.7, reviews:117,
+    spec:'⚠ 以卡牌桌遊為主、鋼彈次之(店內設對戰桌)・店小而齊・老闆親切專業・可店取外送・無軍模資訊',
+    visited:false, closed:false
+  },
+  {
+    id:'kirby', name:'卡比戰士玩具模型屋', area:'南屯區',
+    lat:24.1362496, lng:120.6519909,
+    addr:'台中市南屯區南屯路二段130號',
+    hours:'平日 12:00–22:00・週末 10:00–22:00・全年無休', tel:'04-2475-2297',
+    rating:4.7, reviews:null,
+    spec:'鋼彈種類齊全・價格親民貨流通快・亦售公仔童玩・老闆娘親切專業<br>💡 遠道建議先電話問貨(評論建議)・有網路商店 kirbystar.shop2000.com.tw',
+    visited:false, closed:false
+  },
+  {
+    id:'gllab', name:'GL LAB Model Car(模型車專門店)', area:'北屯區',
+    lat:24.1649724, lng:120.7062359,
+    addr:'台中市北屯區太原路三段607號',
+    hours:'14:00–21:00・週一、二公休', tel:'0903-218-354',
+    rating:4.5, reviews:68,
+    spec:'⚠ 純汽車模型(成品車模,非組裝軍模)・車款齊全做工細緻・老闆健談、業主回覆評論・可店取',
+    visited:false, closed:false
+  },
+  {
+    id:'dodiddone', name:'做手腳 Do Did Done 模型工房', area:'北屯區',
+    lat:24.1706721, lng:120.6831885,
+    addr:'台中市北屯區河北路二段73號',
+    hours:'週二 18:00–22:00・週三～日 14:00–22:00・週一公休', tel:'04-2237-1171',
+    rating:null, reviews:null,
+    spec:'⭐ 模型工坊(不只零售)・1F 組裝玩具+工具漆料・2F 以上製作空間:噴筆、排風、空壓機，可在店內動手做',
+    visited:false, closed:false
+  }
+];
+
+/* ═══════════════════════════════════════
+   狀態
+   ═══════════════════════════════════════ */
+const LS_KEY = 'mangopool_model_shops_v1';
+const ALL_AREAS = [...new Set(SHOPS.filter(s => !s.closed).map(s => s.area))].sort();
+let state = {
+  areas: [...ALL_AREAS],   // 多選:預設全部勾選
+  hideVisited: false,
+  order: SHOPS.map(s => s.id),
+  checked: [],             // 依勾選順序
+  visited: {}              // id -> bool(覆寫預設)
+};
+(function load(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      const s = JSON.parse(raw);
+      state = Object.assign(state, s);
+      // 資料若增減,補齊 order
+      const known = new Set(state.order);
+      SHOPS.forEach(sh => { if(!known.has(sh.id)) state.order.push(sh.id); });
+      state.order = state.order.filter(id => SHOPS.some(s2 => s2.id === id));
+      // 行政區若增減,只保留仍存在的;舊版無 areas 則預設全選
+      if(!Array.isArray(state.areas)) state.areas = [...ALL_AREAS];
+      else {
+        const before = state.areas.length;
+        state.areas = state.areas.filter(a => ALL_AREAS.includes(a));
+        // 新增的行政區自動納入(避免新店預設被隱藏)
+        ALL_AREAS.forEach(a => { if(!state.areas.includes(a) && before === ALL_AREAS.length - 1) state.areas.push(a); });
+      }
+    }
+  }catch(e){ console.warn('localStorage 讀取失敗', e); }
+})();
+function save(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){}
+}
+function isVisited(shop){
+  return (shop.id in state.visited) ? state.visited[shop.id] : shop.visited;
+}
+
+/* ═══════════════════════════════════════
+   地圖
+   ═══════════════════════════════════════ */
+const map = L.map('map', { zoomControl:true }).setView([24.16, 120.68], 12);
+
+/* ── 底圖圖磚 ─────────────────────────────────
+   踩過兩個坑,兩次都是「圖片正常載入、內容卻是警告」——tileerror 抓不到,
+   只能用眼睛看,所以下面直接開放手動切換,選擇記在 localStorage。
+     ✗ tile.openstreetmap.org  : file:// 無 Referer → 403 + 「Access blocked」圖
+     ✗ basemaps.cartocdn.com   : 2025 起免金鑰改為浮水印「API KEY REQUIRED」
+   預設改用國土測繪中心「臺灣通用電子地圖」:官方圖資、免金鑰、全中文標註、
+   台灣路網與門牌細節優於任何國際來源。
+   ────────────────────────────────────────── */
+const OSM_CREDIT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const BASEMAPS = {
+  '國土測繪中心 電子地圖': L.tileLayer(
+    'https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}',
+    { maxZoom:20, attribution:'&copy; <a href="https://maps.nlsc.gov.tw/">內政部國土測繪中心</a>' }),
+  'OpenStreetMap': L.tileLayer(
+    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { maxZoom:19, attribution:OSM_CREDIT }),          // 僅在以 http(s) 提供時可用
+  'Esri 街道圖': L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+    { maxZoom:19, attribution:'Tiles &copy; Esri — ' + OSM_CREDIT }),
+  'Esri 衛星影像': L.tileLayer(
+    'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+    { maxZoom:19, attribution:'Tiles &copy; Esri' })
+};
+const BASE_KEY = 'mangopool_model_basemap';
+const BASE_DEFAULT = '國土測繪中心 電子地圖';
+let baseName = BASE_DEFAULT;
+try{ const sv = localStorage.getItem(BASE_KEY); if(sv && BASEMAPS[sv]) baseName = sv; }catch(e){}
+BASEMAPS[baseName].addTo(map);
+L.control.layers(BASEMAPS, null, { position:'topright' }).addTo(map);
+map.on('baselayerchange', e => { try{ localStorage.setItem(BASE_KEY, e.name); }catch(err){} });
+const markers = {};      // id -> marker
+let routeLine = null;
+
+/* ═══════════════════════════════════════
+   篩選 / 排序
+   ═══════════════════════════════════════ */
+function orderedShops(){
+  return state.order.map(id => SHOPS.find(s => s.id === id)).filter(Boolean);
+}
+function visibleShops(){
+  return orderedShops().filter(s => {
+    if(s.closed) return false;
+    if(!state.areas.includes(s.area)) return false;
+    if(state.hideVisited && isVisited(s)) return false;
+    return true;
+  });
+}
+/* 路線站序 = 清單「由上到下」的顯示順序(非勾選先後)
+   → 想改順序就拖曳清單卡片,這也是拖曳排序存在的意義
+   Q3:被篩選隱藏的勾選店自動踢出路線 */
+function activeChecked(){
+  return visibleShops()                       // 已是由上到下的顯示順序
+    .map(s => s.id)
+    .filter(id => state.checked.includes(id));
+}
+
+/* ═══════════════════════════════════════
+   渲染:篩選列
+   ═══════════════════════════════════════ */
+function renderChips(){
+  const box = document.getElementById('areaChips');
+  box.innerHTML = '';
+  ALL_AREAS.forEach(a => {
+    const n  = SHOPS.filter(s => s.area === a && !s.closed).length;
+    const on = state.areas.includes(a);
+    const el = document.createElement('label');
+    el.className = 'chip' + (on ? ' on' : '');
+    el.innerHTML = '<input type="checkbox"' + (on ? ' checked' : '') + '>' + a + '<span class="n">' + n + '</span>';
+    el.querySelector('input').onchange = e => {
+      if(e.target.checked){ if(!state.areas.includes(a)) state.areas.push(a); }
+      else { state.areas = state.areas.filter(x => x !== a); }
+      save(); renderAll();
+    };
+    box.appendChild(el);
+  });
+}
+
+/* ═══════════════════════════════════════
+   渲染:清單(含拖曳排序)
+   ═══════════════════════════════════════ */
+let dragId = null;
+function renderList(){
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  const vis = visibleShops();
+  const act = activeChecked();
+
+  if(!vis.length){
+    const msg = state.areas.length === 0
+      ? '尚未勾選任何行政區<br><span style="font-size:11.5px">請在上方勾選,或按「全選」</span>'
+      : '此條件下沒有店家<br><span style="font-size:11.5px">試著多勾幾個行政區,或取消「隱藏已訪」</span>';
+    list.innerHTML = '<div style="padding:22px 8px;text-align:center;color:var(--ink-soft);font-size:13px">' + msg + '</div>';
+    return;
+  }
+
+  vis.forEach(s => {
+    const seq = act.indexOf(s.id);
+    const checked = seq >= 0;
+    const v = isVisited(s);
+
+    const card = document.createElement('div');
+    card.className = 'card' + (checked ? ' checked' : '') + (v ? ' visited' : '');
+    card.draggable = true;
+    card.dataset.id = s.id;
+
+    const rate = s.rating
+      ? '<span class="rating">★' + s.rating + (s.reviews ? '<span style="opacity:.65">(' + s.reviews + ')</span>' : '') + '</span>'
+      : '';
+    const stateTag = s.closed
+      ? '<span class="tag closed">已歇業</span>'
+      : (v ? '<span class="tag visited">已訪</span>' : '<span class="tag want">想去</span>');
+
+    card.innerHTML =
+      '<div class="card-row">' +
+        '<input type="checkbox" ' + (checked ? 'checked' : '') + (s.closed ? ' disabled' : '') + '>' +
+        '<div class="card-main">' +
+          '<div class="card-name">' +
+            (checked ? '<span class="seq">' + (seq + 1) + '</span>' : '') +
+            s.name + stateTag +
+          '</div>' +
+          '<div class="card-meta">' +
+            '<span>' + s.area + '</span>' + rate +
+            '<span>' + s.hours + '</span>' +
+          '</div>' +
+          '<div class="card-spec">' + s.spec + '</div>' +
+          '<div class="card-acts">' +
+            '<a class="mini" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s.name + ' ' + s.addr) + '" target="_blank" rel="noopener">📍 地圖</a>' +
+            (s.tel ? '<a class="mini" href="tel:' + s.tel.replace(/-/g,'') + '">📞 ' + s.tel + '</a>' : '') +
+            (s.closed ? '' : '<button class="mini" data-act="visit">' + (v ? '↩ 標為想去' : '✓ 標為已訪') + '</button>') +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    // 勾選
+    const cb = card.querySelector('input[type=checkbox]');
+    cb.onclick = e => e.stopPropagation();
+    cb.onchange = () => {
+      if(cb.checked){ if(!state.checked.includes(s.id)) state.checked.push(s.id); }
+      else { state.checked = state.checked.filter(x => x !== s.id); }
+      save(); renderAll();
+    };
+
+    // 已訪切換
+    const vb = card.querySelector('[data-act=visit]');
+    if(vb) vb.onclick = e => {
+      e.stopPropagation();
+      state.visited[s.id] = !v;
+      save(); renderAll();
+    };
+
+    // 點卡片 → 地圖飛過去
+    card.onclick = () => {
+      map.flyTo([s.lat, s.lng], 16, {duration:.6});
+      markers[s.id] && markers[s.id].openPopup();
+    };
+
+    // 拖曳排序
+    card.ondragstart = e => { dragId = s.id; card.classList.add('dragging'); e.dataTransfer.effectAllowed='move'; };
+    card.ondragend   = () => { dragId = null; card.classList.remove('dragging'); document.querySelectorAll('.card').forEach(c=>c.classList.remove('over')); };
+    card.ondragover  = e => { e.preventDefault(); if(dragId && dragId !== s.id) card.classList.add('over'); };
+    card.ondragleave = () => card.classList.remove('over');
+    card.ondrop      = e => {
+      e.preventDefault(); card.classList.remove('over');
+      if(!dragId || dragId === s.id) return;
+      const from = state.order.indexOf(dragId);
+      const to   = state.order.indexOf(s.id);
+      state.order.splice(to, 0, state.order.splice(from, 1)[0]);
+      save(); renderAll();   // 站序由清單順序決定,拖曳即改路線順序
+    };
+
+    list.appendChild(card);
+  });
+}
+
+/* ═══════════════════════════════════════
+   渲染:地圖標記
+   ═══════════════════════════════════════ */
+function renderMarkers(){
+  Object.values(markers).forEach(m => map.removeLayer(m));
+  for(const k in markers) delete markers[k];
+
+  const vis = visibleShops();
+  const act = activeChecked();
+
+  vis.forEach(s => {
+    const seq = act.indexOf(s.id);
+    const checked = seq >= 0;
+    const v = isVisited(s);
+    const cls = 'pin-ico' + (checked ? ' checked' : (v ? ' visited' : ''));
+    const label = checked ? (seq + 1) : (s.closed ? '✕' : '●');
+
+    // 尖端朝下:旋轉 -45° 後,尖角落在中心正下方(半對角線 = size*0.707)
+    const size = checked ? 34 : 30;
+    const tipY = Math.round(size/2 + size*0.707);
+    const icon = L.divIcon({
+      className:'', iconSize:[size, size], iconAnchor:[size/2, tipY], popupAnchor:[0, -tipY - 4],
+      html:'<div class="' + cls + '"><span>' + label + '</span></div>'
+    });
+
+    const m = L.marker([s.lat, s.lng], {icon}).addTo(map);
+    m.bindPopup(
+      '<div class="pop-name">' + s.name + '</div>' +
+      '<div class="pop-meta">' +
+        (s.rating ? '★' + s.rating + (s.reviews ? ' (' + s.reviews + ')' : '') + '<br>' : '') +
+        s.addr + '<br>' + s.hours + (s.tel ? '<br>' + s.tel : '') +
+        '<br><span style="color:var(--ink)">' + s.spec + '</span>' +
+        (s.approx ? '<br><span style="color:var(--clay);font-size:11px">⚠ 座標為約略值(±100m)</span>' : '') +
+      '</div>' +
+      '<div class="pop-acts">' +
+        '<a class="mini" href="https://www.google.com/maps/dir/?api=1&destination=' + s.lat + ',' + s.lng + '" target="_blank" rel="noopener">🧭 導航</a>' +
+      '</div>'
+    );
+    markers[s.id] = m;
+  });
+
+}
+
+/* ═══════════════════════════════════════
+   路線列
+   ═══════════════════════════════════════ */
+function haversine(a, b){
+  const R = 6371, toRad = d => d * Math.PI / 180;
+  const dLat = toRad(b[0]-a[0]), dLng = toRad(b[1]-a[1]);
+  const s = Math.sin(dLat/2)**2 + Math.cos(toRad(a[0]))*Math.cos(toRad(b[0]))*Math.sin(dLng/2)**2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+
+/* ── 真實道路路線 ────────────────────────────────
+   三層策略(皆免金鑰):
+   1. Valhalla(OSM 官方託管)+ shortest —— 實測與 Google Maps 路線一致
+      (雷鳥→威逸→精準:本設定 2.906km / Google 2.9km)
+      ※ 預設的「時間最佳化」會偏好省道(台1乙/台12),繞路且與 Google 不符
+   2. OSRM 公開服務 —— Valhalla 失敗時備援
+   3. 直線示意 —— 兩者皆失敗時的保底,功能不中斷
+   ────────────────────────────────────────────── */
+let routeSeq = 0, routeStats = null;
+
+/* Valhalla 回傳 polyline6 編碼,需自行解碼 */
+function decodePolyline(str, precision){
+  let index = 0, lat = 0, lng = 0, byte = null, shift = 0, result = 0;
+  const factor = Math.pow(10, precision || 5), out = [];
+  while(index < str.length){
+    shift = 0; result = 0;
+    do { byte = str.charCodeAt(index++) - 63; result |= (byte & 0x1f) << shift; shift += 5; } while(byte >= 0x20);
+    lat += (result & 1) ? ~(result >> 1) : (result >> 1);
+    shift = 0; result = 0;
+    do { byte = str.charCodeAt(index++) - 63; result |= (byte & 0x1f) << shift; shift += 5; } while(byte >= 0x20);
+    lng += (result & 1) ? ~(result >> 1) : (result >> 1);
+    out.push([lat / factor, lng / factor]);
+  }
+  return out;
+}
+
+async function fetchValhalla(shops){
+  const body = {
+    locations: shops.map(s => ({lat: s.lat, lon: s.lng})),
+    costing: 'auto',
+    costing_options: {auto: {shortest: true}},
+    directions_options: {units: 'kilometers'}
+  };
+  const r = await fetch('https://valhalla1.openstreetmap.de/route', {
+    method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+  });
+  const j = await r.json();
+  if(!j.trip || j.trip.status !== 0 || !j.trip.legs) throw new Error('valhalla');
+  const pts = [];
+  j.trip.legs.forEach(lg => decodePolyline(lg.shape, 6).forEach(p => pts.push(p)));
+  if(!pts.length) throw new Error('valhalla empty');
+  return {pts, km: j.trip.summary.length, min: j.trip.summary.time / 60, src:'valhalla'};
+}
+
+async function fetchOSRM(shops){
+  const coords = shops.map(s => s.lng + ',' + s.lat).join(';');
+  const r = await fetch('https://router.project-osrm.org/route/v1/driving/' + coords + '?overview=full&geometries=geojson');
+  const j = await r.json();
+  if(j.code !== 'Ok' || !j.routes || !j.routes.length) throw new Error(j.code || 'osrm');
+  const rt = j.routes[0];
+  return {pts: rt.geometry.coordinates.map(c => [c[1], c[0]]), km: rt.distance/1000, min: rt.duration/60, src:'osrm'};
+}
+
+async function drawRoute(){
+  const act = activeChecked();
+  if(routeLine){ map.removeLayer(routeLine); routeLine = null; }
+  routeStats = null;
+
+  if(act.length < 2){ renderRouteInfo(); return; }
+
+  const shops = act.map(id => SHOPS.find(s => s.id === id));
+  const pts = shops.map(s => [s.lat, s.lng]);
+
+  // 先畫直線示意,提供即時回饋
+  routeLine = L.polyline(pts, {color:'#E07A00', weight:3, opacity:.45, dashArray:'8,7'}).addTo(map);
+
+  const seq = ++routeSeq;
+  routeStats = {loading:true};
+  renderRouteInfo();
+
+  try{
+    let res;
+    try{ res = await fetchValhalla(shops); }
+    catch(e1){ res = await fetchOSRM(shops); }     // 備援
+    if(seq !== routeSeq) return;                    // 已被新請求取代
+
+    if(routeLine) map.removeLayer(routeLine);
+    routeLine = L.polyline(res.pts, {color:'#E07A00', weight:5, opacity:.85, lineJoin:'round', lineCap:'round'}).addTo(map);
+    routeStats = {km: res.km, min: res.min, real:true, src: res.src};
+  }catch(err){
+    if(seq !== routeSeq) return;
+    let km = 0;
+    for(let i=0;i<pts.length-1;i++) km += haversine(pts[i], pts[i+1]);
+    routeStats = {km, real:false};
+  }
+  renderRouteInfo();
+}
+
+/* 資訊列已移除,本函式僅負責按鈕的啟用狀態
+   (路線仍持續計算,供地圖上的道路折線使用) */
+function renderRouteInfo(){
+  const btn = document.getElementById('btnRoute');
+  btn.disabled = activeChecked().length === 0;
+}
+
+/* Q4:我的位置為起點,未授權則以第一家為起點 */
+function openRoute(){
+  const act = activeChecked();
+  if(!act.length) return;
+  const shops = act.map(id => SHOPS.find(s => s.id === id));
+  const btn = document.getElementById('btnRoute');
+  const orig = btn.textContent;
+  btn.textContent = '定位中…';
+  btn.disabled = true;
+
+  const go = (originStr) => {
+    btn.textContent = orig; btn.disabled = false;
+    let dest, waypoints = [];
+    if(originStr){
+      dest = shops[shops.length-1];
+      waypoints = shops.slice(0, -1);
+    }else{
+      originStr = shops[0].lat + ',' + shops[0].lng;
+      dest = shops[shops.length-1];
+      waypoints = shops.slice(1, -1);
+    }
+    let url = 'https://www.google.com/maps/dir/?api=1'
+      + '&origin=' + encodeURIComponent(originStr)
+      + '&destination=' + encodeURIComponent(dest.lat + ',' + dest.lng)
+      + '&travelmode=driving';
+    if(waypoints.length){
+      url += '&waypoints=' + encodeURIComponent(waypoints.map(s => s.lat + ',' + s.lng).join('|'));
+    }
+    window.open(url, '_blank', 'noopener');
+  };
+
+  if(!navigator.geolocation){ go(null); return; }
+  navigator.geolocation.getCurrentPosition(
+    pos => go(pos.coords.latitude + ',' + pos.coords.longitude),
+    ()  => go(null),
+    { timeout:6000, maximumAge:300000 }
+  );
+}
+
+/* ═══════════════════════════════════════
+   總渲染
+   ═══════════════════════════════════════ */
+function renderAll(){
+  renderChips();
+  renderList();
+  renderMarkers();
+  drawRoute();
+}
+
+document.getElementById('hideVisited').onchange = e => { state.hideVisited = e.target.checked; save(); renderAll(); };
+document.getElementById('areaAll').onclick  = () => { state.areas = [...ALL_AREAS]; save(); renderAll(); };
+document.getElementById('areaNone').onclick = () => { state.areas = []; save(); renderAll(); };
+document.getElementById('btnRoute').onclick = openRoute;
+document.getElementById('btnClear').onclick = () => { state.checked = []; save(); renderAll(); };
+document.getElementById('btnFit').onclick   = () => fitAll();
+
+document.getElementById('hideVisited').checked = state.hideVisited;
+
+renderAll();
+
+/* 自動框住所有可見店家。
+   ⚠ 必須等版面完成後再算:容器尺寸未定時 fitBounds 會誤判成 0x0 而縮到最大級距 */
+function fitAll(){
+  const vis = visibleShops();
+  if(vis.length > 1) map.fitBounds(vis.map(s => [s.lat, s.lng]), {padding:[45,45], maxZoom:16});
+  else if(vis.length === 1) map.setView([vis[0].lat, vis[0].lng], 16);
+}
+function initView(){ map.invalidateSize(); fitAll(); }
+if(document.readyState === 'complete') initView();
+else window.addEventListener('load', initView);
+window.addEventListener('resize', () => map.invalidateSize());
+</script>
+</body>
+</html>
