@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>上集被罵爆了!針對財庫仙姑有話要說</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8;--mark:#faeeda}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29;--mark:#412402}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+header{margin-bottom:40px}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0}
+.meta span+span::before{content:"·";margin:0 8px;color:var(--ink3)}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--line)}
+section:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px}
+.lede{font-size:18px;margin:0 0 18px;line-height:1.8}
+.summary ul{margin:0;padding-left:0;list-style:none}
+.summary li{position:relative;padding-left:20px;margin:0 0 12px;font-size:16px;line-height:1.8}
+.summary li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.summary strong{font-weight:500;color:var(--accent)}
+.maplede{color:var(--ink2);font-size:15.5px;margin:0 0 14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 16px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+h3{font-size:14px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:36px 0 14px}
+p{margin:0 0 1.35em;text-align:justify}
+.pre{background:var(--aside);border-radius:12px;padding:20px 24px;color:var(--ink2);margin-bottom:8px}
+.pre h3{margin-top:0}
+.pre p:last-child{margin-bottom:0}
+.aside{color:var(--ink2);background:var(--aside);border-radius:10px;padding:14px 18px;font-size:15.5px}
+details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 22px;margin-top:8px}
+summary{cursor:pointer;padding:16px 0;font-size:15px;color:var(--ink2);list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";width:0;height:0;border:5px solid transparent;border-left:7px solid var(--ink3);transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid var(--line)}
+.det{padding:18px 0 22px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:0 0 20px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+th{color:var(--ink3);font-weight:500;font-size:13px}
+td:nth-child(1){color:var(--ink2)}
+td:nth-child(2){font-weight:500}
+td:nth-child(3){color:var(--ink2);font-size:13.5px}
+tbody tr:last-child td{border-bottom:none}
+.low{background:var(--mark);padding:1px 6px;border-radius:4px;font-size:12.5px;margin-left:4px}
+.untouched{margin:0;padding-left:0;list-style:none;font-size:14.5px;color:var(--ink2)}
+.untouched li{padding-left:16px;position:relative;margin-bottom:8px;line-height:1.7}
+.untouched li::before{content:"–";position:absolute;left:0;color:var(--ink3)}
+.untouched h4{font-size:13px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:22px 0 10px}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:13px}
+@media print{body{font-size:12pt}.wrap{padding:0}details{display:none}}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style>
+</head>
+<body>
+<span id="mgtopanchor" aria-hidden="true"></span>
+<div class="wrap">
+<nav class="crumb"><a href="../">首頁</a></nav>
+<header>
+<h1>上集被罵爆了!針對財庫仙姑有話要說</h1>
+<p class="meta"><span>科技仙姑實驗室</span><span>2023-01-02</span><span>逐字稿來源：語音辨識</span></p>
+</header>
+<section id="summary">
+<h2>摘要</h2>
+<div class="summary">
+<p class="lede">上一集講財庫材質分男女，被聽眾批性別歧視，這集兩人請示玄壇元帥後做澄清：材質只是方便顯化的意象、等級兩性相當，並接著講元辰宮怎麼看、怎麼補。</p>
+<ul>
+<li><strong>爭議點是「女生木箱、男生鐵箱」被讀成性別歧視。</strong> 通靈者的訓練是如實轉達神明訊息、不夾帶個人想法，所以當下沒想到要反映平權問題。</li>
+<li><strong>元帥的回答：沿用古時男主外女主內的分法，一直沒人反應就沿用至今。</strong> 元帥自己是兩三千年前的古人，沒想到這套不適用於現在，往後會重新檢視、給更合適的財庫。</li>
+<li><strong>材質是意象，不是等級。</strong> 鐵箱對應木箱、黑曜石也對應木箱，代表的賺錢能力與財運相當，不因性別有高低。</li>
+<li><strong>回到命格八成、努力兩成。</strong> 命格五百萬的人懶散只賺一百多萬，努力的人賺到兩倍；過三五年再看，五百萬可能變兩千萬。</li>
+<li><strong>但額度不會跳級。</strong> 五百萬不會突然變一億，除非本來就看到五千萬。</li>
+<li><strong>提款機不是女生專利。</strong> 目前案例沒看到男生是提款機，但男生的地窖、金庫等級相當；女生靠自己努力，財庫會以黃金箱、金庫、黃金的樣貌顯現，箱子裡的銀元寶會變金元寶。</li>
+<li><strong>元辰宮是對應有形身體的虛擬房子。</strong> 客廳看事業、臥房看感情、書房看考運升遷、廚房看錢財；廚房的水缸看錢財流不流動、米缸看夠不夠用、柴火看旺不旺，柴潮濕不能用就是有瓶頸。</li>
+<li><strong>補元辰宮是救急不是一勞永逸。</strong> 請有緣神佛或管家修補、師兄姐燒金紙當裝潢費；但態度不上進還是會繼續破。一般人的做法是年初點光明燈（一盞就夠），沒點到就到金紙店買壽生蓮花，六朵或十二朵。</li>
+</ul>
+</div>
+</section>
+<section id="map">
+<h2>脈絡圖</h2>
+<p class="maplede">上圖是這集的澄清路線：從聽眾的指控到元帥的回答，最後收回命格與努力的老結論；下圖是元辰宮的判讀與補運方式。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["上一集被罵爆&lt;br/&gt;指財庫分男女是性別歧視"] --&gt; B["通靈者只如實轉達&lt;br/&gt;不夾帶個人想法"]
+  A --&gt; C["請示玄壇元帥"]
+  C --&gt; D["古時男主外女主內&lt;br/&gt;沒人反應就沿用至今"]
+  C --&gt; E["元帥往後重新檢視&lt;br/&gt;改給更合適的財庫"]
+  D --&gt; F["材質只是方便顯化的意象&lt;br/&gt;鐵箱、黑曜石都對應木箱"]
+  F --&gt; G["賺錢能力與財運相當&lt;br/&gt;不因性別有高低"]
+  G --&gt; H["回到命格八成、努力兩成"]
+  H --&gt; I["努力可賺到兩倍&lt;br/&gt;五百萬變兩千萬"]
+  H --&gt; J["但五百萬不會跳成一億"]</pre></div>
+<div class="chart"><pre class="mermaid">mindmap
+  root((元辰宮))
+    房間對應
+      客廳是事業
+      臥房是感情
+      書房是考運升遷
+      廚房是錢財
+    廚房看三樣
+      水缸、米缸、柴火
+    怎麼補運
+      點光明燈
+      壽生蓮花
+      請神明修補</pre></div>
+</section>
+<section id="body">
+<h2>全文</h2>
+<h3>正片</h3>
+<p>哈囉大家好，歡迎大家收聽仙姑行不行，人生大小事問仙姑就沒事，我是叔叔，我是愛麗絲。今天呢，其實我們有個很重要的任務就是，我們上一集介紹財庫的材質，以及怎麼把財庫這件事的時候呢，受到了廣大的迴響，那這個迴響，簡單來說我們被罵爆了。對啊，好可怕喔。對啊，為什麼？他說，我們有性別歧視，為什麼女生的是木頭，然後男生的是鐵箱？</p>
+<p>其實這個，我要幫愛麗絲說一下，哇，這個應該跟愛麗絲本意無關齁，這就是，愛麗絲你看到什麼就說什麼吧，對不對？對啊，因為通靈者的訓練就是被賦予的使命，就是將神明給予的訊息，不夾雜個人的想法表達出來。所以沒有辦法，沒有去思考說，應該要和元帥反應說，欸，這個是不是不符合性的、性別的平等平權。</p>
+<p>所以，但我們還是把聽眾的這些問題呢，做了一些整理，我覺得我們要稍微做一點點釐清。那當然，我們的愛麗絲仙姑也有去請示神明，我記得是你有說，掌管那個財庫的最大的神明是玄壇元帥嘛，那你有去請示玄壇元帥，有關於財庫的材質這件事情，為什麼男生女生不一樣，對不對？對。對，那元帥怎麼說？</p>
+<p>元帥說啊，財庫的材質是因為用古時候男主外女主內的區別法，所以，因為一直都沒有人反應這樣的區別有問題，所以就一直沿用至今。那元帥說，他，元帥也是一個兩三年前的古人，所以他也。兩三千年。兩三，對，兩三年前的古人。兩三千年前的古人。OK。所以他並沒有想到，欸，這樣的區分其實並不適用於現在，就是平等平權的社會。那元帥說，那現在有人反應的話，那他也覺得說，欸，這個區分法其實確實是不是這麼的恰當。所以元帥說，他往後會重新檢視，然後並給予一個更合適的財庫。是針對就是這個人合適的，就不要再區分什麼男女這樣子。</p>
+<p>呃，我可以這樣說好了，可能，其實通靈者他就是，他看到什麼東西，他就轉達給問事者。那至於傳達什麼樣訊息給通靈者就是神明。那應該是說，幾千年來，神明就是很習慣，呃，講到女生的財庫，他就顯化這些木質的東西、珠寶盒，然後男生，上次愛麗絲有說鐵箱嘛，或者是金屬的東西。但這個其實，如果照剛剛那樣來說，他只是一個方便顯化、讓通靈者容易去跟問事者說明的一個意象啦。意象。對，一個意象。但這不代表絕對說，木質就比較不好，鐵箱就一定比較好。對。是不是這樣的意思？</p>
+<p>對，因為元帥的說明是，元帥給我的說明是說，鐵箱是對應木箱，那黑曜石其實就是對應女生的木箱。所以他所代表的賺錢能力跟財運是相當的，只是因為古時候的傳統的劃分造成不同。但是沒有因為你是說，你是木箱，或是你是女生，你的賺錢能力或財運就比較差；就也沒有因為你是男生，你的賺錢能力或是財運就會比較好。這還是要靠個人的努力。嗯。</p>
+<p>所以我這樣聽起來就大家不用太在意，你那個材質是木箱還是鐵箱，就會影響你的財運。我覺得還是回到一開始我們講的，其實一個人的累世修行是會影響這一世的財運的，那個已經佔了八成。對。但是這個八成呢，上次有聽到說，你還是要靠你個人的努力。嗯。那這個人的努力，就像愛麗絲你常常看到，明明這個人有很多的錢、很多的財庫，可是他賺的薪水跟他現在，他天生給予的這個財庫的額度，好像又不匹配、不符合。對，他可能例如他可以賺五百萬，但是因為他真的是很安逸、很懶散，所以他大概現在的薪水可能就例如只有四分之一，一百多萬這樣。</p>
+<p>嗯。那也就代表說，如果，雖然我的命格裡面大概五百萬，但是我如果，呃，超，就是我很努力，我也超過百分之百的努力，我有可能賺比我原本的命格裡面所謂所定的五百萬更多嗎？就是有可能的。之前有，的確有人來找我問事，他就是賺到兩倍的錢財。嗯。所以我覺得，這樣聽起來，雖然我有一個扣打是，我這一次大概賺多少錢，但是我如果自己努力，我也去精進我自己的能力啊、累積實力啊、我去拓展更多人脈、我去學投資理財，那這樣子的話，我會賺的比我所定的還要多。那也就是說這部分的話，神明看到你的努力也會給予幫助對不對。</p>
+<p>對，那應該是這樣講，我們假設我們現在看到五百萬，那說不定他因為很努力，他過了五年還是三年之後再來看，搞不好他變成兩千萬，這個也是有可能的。嗯。因為財庫的這個容量、這輩子命格賺到的錢，雖然是有個命定，但會隨著你的努力，然後你的擴展的人脈，人脈或是說你有學習投資理財，所以你的這個命格的財庫也是有可能會隨之增加的。所以這個命定的額度，大概我們知道這個範圍，但這個範圍不會突然從比如說我五百萬，突然我這輩子就賺到一億，這的確就是比較難。除非說我今天已經看到五千萬，他這之後會變成一億，那就是比較有可能的。嗯，瞭解。對。</p>
+<p>好，還有一個問題就是，上一集有提到有一個女生她的那個財庫是提款機這件事情。我其實這件事情喔，有兩極，有的人是又嫉妒又羨慕，有的人是，為什麼女生就提款機，那男生就該被提款嗎？哈哈哈哈。他說有沒有男生是提款機、女生被提款的？呃，應該這樣講，因為我分享的案例都是目前有來找我諮詢的人的狀況，但以目前的狀況來看是沒有看到男生有提款機。但是男生就是會有講的例如是一個地窖啊，或是一個金庫的樣子。那其實你說那他的等級來講其實跟提款機也是相當。對。</p>
+<p>那像又有朋友跟我反應說，欸，那我是女生，那我靠著我自己努力，那我就不能有提款機嗎？對啊，我自己不能創一個提款機嗎？對。那元帥一直說如果你自己努力來講的話，那你的財庫可能會是以黃金的樣貌顯示，例如是黃金的箱子，或是金庫，或是一座黃金的細紗，那這個等級跟提款機其實是一樣的。就是我靠我自己的努力的話，我的財庫的箱子裡面的東西會跟著改變，可能從銀元寶變成金元寶，變成黃金、黃金細紗，這樣子。對。那未來有人找我問事，他是太太的工作能力比較強，然後那先生可能就負責照顧好家裡，那說不定這個先生的財庫也有可能是提款機。哦。只是說目前你的案例比較少，目前是比較沒有這樣的狀況。對。</p>
+<p>所以這回到我們剛剛講的，現在是一個男女平權的時代，女生其實不一定要靠男生。那我一樣，我是女生，包括我跟愛麗絲兩個都是女生，我們只要努力在工作上獲得升遷，其實我們也是有加薪機會，我們也不會就是比你，就是這樣的機會也不會因為我們是女生，這個機會就遜於男生。是的。對。</p>
+<p>那剛剛講的就是，其實我們上一集有講啊，就是我覺得想要賺多一點、更多一點的錢，或者是想讓自己有更多的退休金，現在我覺得現在這個社會大家都有意識到的，所以很多人會去學投資理財，很多人會去有副業，會去有斜槓人生。那好一點的就是，也許他也會人相助，可能前輩子還有做很多好事，我覺得這些都應該會是讓財庫升級。對，沒錯。</p>
+<p>對啊，所以不是說一定要去嫁好老公，或娶好太太，我覺得這樣的說法可能會讓人家覺得，嗯，比較狹隘，因為我怎麼知道我今天嫁老公是不是好老公，我今天娶的太太是不是好太太。對。對。我覺得好像還是靠自己。對。應該這樣講，因為來找我問事的人很多、很多遠心，有些人就是想要靠自己，有些人就是想要嫁好老公。應該說每個人對每個人的人生的價值觀，跟他想要達到的人生目的、目標是不一樣的。對。那我們當然會因為就是問事者的不同的目標，我們會給予就是適合他的建議。嗯。好。</p>
+<p>但，嗯，因為每個人都是想嫁，那女生都想嫁個好老公，沒有人不想，沒有人想要結婚。因為男生也會想說我要娶一個好老婆、好太太、顧家的什麼的。只是說這個姻緣又是另外一個議題了。對。也不是說想就想、就能，就剛好就會，就一定會碰得到是好老公。就跟我們的累世緣分。對啊，也是有關係的，跟就是說我們跟你的未來的另外一半。對啊，或是說你已經結婚了，你跟你的先生或是太太會結婚，也都是你可能有累世緣分的觀點。</p>
+<p>對啊，那你說我可不可以這樣說，反而我覺得在追求更多的財富跟，或者是理財這一，額，更多的錢財這一塊，我反而覺得我靠我自己、我努力，我可能還有回報。但是姻緣這個，找到好老公或是找到好太太這個部分，我覺得還要交給對方，看我碰到什麼樣的人。這個，我的意思是說，我努力工作，然後我有去斜槓人生、我去投資自己、我去賺到比我命格裡規定的那些更多的財富、數目更多的錢，但是這是我努力可以做到的。但是如果我今天一直想要，我要嫁好老公、我要娶個好太太，我覺得這好像不是我能決定的。</p>
+<p>這個的話其實交代別人，有蠻多面向的啦。嗯。對。這個的話，一個就是說你自己是不是有想要這樣子。現在就是因緣，因緣的部分是由月老星君掌管，那通常我都會建議說，那你可能就要去求因緣。嗯。可是，對，求因緣就代表一定是好因緣嗎？嗯。老師前輩只欠他。所以會建議說，條件要講清楚。哦，還可以這樣子。對，你要把條件講清楚，然後他請月老給你三個聖杯，代表說月老已經同意你提出的條件，他會依照你的條件去找你，找一個就是最要求的，求要給我一個對象。那可能那個對象來講，他們的確可能是有緣分，但是他們要磨合的地方就蠻多的。嗯哼。好。</p>
+<p>沒錯，所以錢財的部分靠自己努力，它其實是可以改變的，我們提升自己的能力、實力，學習投資理財，來透過這些管道來拓展自己的財庫。嗯哼。是比較實際的做法。就是我的財庫大小多寡啊，是靠我自己的努力可以去改變的嗎？對。對。OK。所以我覺得這樣聽起來沒有那麼絕望，就是雖然，嗯，我這輩子已經被八成被定了，說我大概可以賺多少錢，但我還是有可能這個數目有可能翻倍的。對。對。</p>
+<p>因為其實，應該這樣講，嗯，來問事情或查事情，我查的它其實是你目前現在環境跟當下的狀況，那就你目前的自己建議。但是這些其實都會學著你在努力，然後提升自己，等到後面可能再來問我的時候，那你整個狀況就會是往好的方向去走的。嗯，瞭解。</p>
+<p>那我想問愛麗絲，嗯，因為我們有提到說，一開始人家來問事情就是想問說，我這輩子可以賺多少錢，然後你提到說，這跟你個人天生的這個財庫是有關係的。那除了財庫之外，還有沒有什麼影響一個人的一個財運呢？嗯，其實一般我們其實目前都是看到財庫的樣子嘛，那其實還有像是元辰宮。元辰宮。元辰宮是什麼呢？</p>
+<p>嗯，像，因為現在是準備要過年嘛，那我就會，很多人都說，欸，那我要不要去點光明燈，然後，對，就是安太歲。對。點光明燈真的有效嗎？我媽每年都會跟我們要生辰八字去點光明燈。其實就麻瓜的我來說，點光明燈的用意是在讓我們的元辰光彩。元辰光彩。對。</p>
+<p>那到底，嗯，很多人說，那元辰是什麼？那其實元辰呢，它類似像，它會顯現，我們現在這邊是有形的形體，那元辰宮它對應在我們，它會把我們現在的狀況反映出來。那一般的元辰宮的話，就會像是一個房子的樣子。哦，就是一個虛擬的房子。對。那它顯示的那個狀況，就代表你現在的例如財庫啊，然後你跟另外一半的關係、你跟小孩的關係，然後你的冤親債主。所以它是一個房子嗎？這個房子它是富麗堂皇、破舊，就是你現在元辰宮的狀態嗎？就是對，那個顯示就是你現在的實際的狀況。對。</p>
+<p>那很多人就問我說，那我看了元辰宮之後，我有什麼房租？那我可以馬上把我的破掉的地方，或是缺少的地方修補嗎？我可以在現代、現代的這個社會，我可能花一筆裝修費，我可以把房子變漂亮。請問如果我的元辰宮是又破又舊，或是哪裡漏水，我的那個虛擬元辰宮，我可以透過什麼樣無形的力量去改變嗎？</p>
+<p>像早期我就幫人家關元辰宮，是在宮廟，那宮廟會有法師，就是念咒語，他念咒語是要呼請，就是和我有緣，就是通靈者，或是自己，元辰宮它也可以自己關。那關不進去的話，就會透過我們這些會通靈的人幫忙關。那它會找就是和我，或是和這些就是想要關靈的人的累世有緣的神佛，帶領他就是去看他的元辰宮。那通常補的方式就是當下如果發現有缺損或什麼的，有的元辰宮會有管家，我們就會請那個管家幫忙修補他的房子。還有管家啊，有破損的地方。但不是每個人都有管家。那如果沒有管家的話，當下就是我就會詢問菩薩或是神明說，那可不可以幫忙這個諮詢者修補他的元辰宮。那一般做法的話，當下就是佛堂的其他師兄姐就是會燒金紙。對，等於是裝潢費的意思。對，他就會燒金紙到他這個元辰宮裡面，那他可能有些破損的地方就會補齊。對。</p>
+<p>那元辰宮來講，我們會先看到房子，那房子的話，它的那個外觀樣子就是算是你現在目前的格局。有些人是城堡，那他就是很好命；那有些人就是古厝，那也可能也顯現說他的個性是比較傳統的；那有些人是現代公寓。那我可以問一下，或是現代房子的樣子。我們的那個首富郭台銘先生，像他這樣等級人，他的元辰宮是什麼呢？因為元辰宮來講，基本上是要神明帶著才能看啦，但是以他這樣的狀況來講，那他一定是非常富麗堂皇，搞不好是一個小島也說不定。小島 OK。對。已經不是城堡等級是小島。就有可能。那我們一般凡夫俗子就是一個房子的樣子。對。</p>
+<p>然後房子的話有很多不同，有現代的、古代的，然後也有國外的樣子，也有城堡的樣子。那這個現代古代國外為什麼會因人而異呢？應該說這個就是影響到他現在好不好命，他顯現是你現在的狀況。國外有比較好嗎？國外的話，像例如我之前看到是，他就是蠻嚮往國外的生活，所以他這個。所以元辰宮反映的也是這個人的心靈的狀況。國外的生活，所以他元辰宮可能就是歐洲古堡這一類的。對。在財富來講是比較好的。所以他是歐洲古堡。那像之前也有人他嚮往國外的生活，但是他目前來講，他的財運是還需要再努力，所以我看到的樣子，他就是一個國外的一層的公寓，或一層的房子。一層的公寓。對。</p>
+<p>那在裡面，其實元辰宮裡面，他會我們看到，在進去會看到客廳嘛，那客廳影響的就是你的事業的發展，他會顯現你現在事業發展的狀況。客廳是影響事業的發展。對。房間、臥房來講，就是會看到你感情的狀況。喔，房間是感情。對。然後還有再來，有些人是有書房，有些人沒有書房，這不見得每個人都會有書房。書房的話會看到你的就是考運啊，然後你的升遷，就是我們一般，就是你當官的，所謂的文昌宮。對。文昌宮。</p>
+<p>那再來還有就是，最主要其實是廚房，大部分的錢財的部分跟你現在狀況會看到廚房的樣子。那廚房樣子其實很有趣，有些人是傳統的灶。喔。對。有人是現代廚房。對。然後有些人是現代廚房，是有瓦斯爐的。那像燒柴的，裡面有的，之前看到就有些有火在燒，代表他的錢現在是旺盛的。喔。那有些就沒有柴，那就是可能要請管家或請神明，就是幫忙找柴，去買柴火就是。對。那有些人是，像之前看到是說，他的柴是放在外面的院子，但他柴可能潮濕，不能用，所以代表他現在的財富狀況是有瓶頸的。瞭解。對。因為他有錢，但他錢現在就是進不來，可能跟他的規劃還沒有，規，呃，計劃，計劃或是他的投資實力，所以柴暫時被困住，不能使用。</p>
+<p>那我想問一下愛麗絲啊，以你過去的那個諮詢案例，你看到，給我們一個例子好了，看到最好的元辰宮的一個狀態，跟一個你看了最差的元辰宮狀態，它分別是怎麼樣，我們講一講。你看過最好的元辰宮的狀態。對。最好其實就是看到那個很厲害的歐洲古堡。歐洲古堡。然後它還有大門，然後院子有很大的草坪。哇。對。很大的一個庭院。很大的庭院。然後還有很多管家、管家傭人。管家不只一位。不只一位，很多位管家。他是台灣人嗎？他是台灣人。他是台灣人，他後來嫁去加拿大了。哦。對。這人也太好了。嗯。</p>
+<p>那比較差的你看到的。比較差的就是他的房子是橘色磚瓦，但是他沒有，他屋頂只有一半，所以天天他的那一半沒有、沒有屋頂的，是在他的廚房上。那他更漏財了。對，他就漏財。然後他的米缸也都沒什麼水，然後還有青苔，然後他外面就是窗戶望過去就是一個雜草叢生的地方，然後草很高，然後那個窗戶還是會透風進來的，沒有紗窗的那種，寒風瑟瑟的感覺。對。尤其那時候他的就是一年只賺十幾二十萬，那時候他是一個房仲、房仲業務。哦。</p>
+<p>那像這樣子的話，你會給他什麼建議？就是上一集我們講的補財庫嗎？還是說要先修補元辰宮？對。像這種狀況就是，那時候我記得當下就是幫他修補元辰宮。哦。那我更好奇了，那修補元辰宮就代表一輩子我的房子都沒事嗎？嗯，他其實就是元辰宮跟財庫都是動態會改變的。OK。神明他可以幫你暫時性的修補，但是如果神明修補後，你的態度還是一樣不上進。哦。你的作為還是一樣。對。他還是會繼續破下去。或是說你的亂投資，沒有真的去認真努力研究的話，那其實他還是沒辦法，他只能補得了一輩子，補不了一輩子。所以我們請神明幫忙元辰宮的修補，他算是一個救急的事情。對，就是會讓你當下會暫時比較好過，例如度過這個難關或是關卡。</p>
+<p>那像在元辰宮其實還會看到就是很多，有些人會有神明廳，有些人沒有，然後祖先的狀況，就拜拜、拜拜的地方。對。他會顯現說你類似跟哪些神佛有緣。哦，那個神明廳。那個神明廳裡面的那個主神，就是跟你有緣的神佛。對。那我就說，沒有意思，你就是，你類似就是跟這神佛有緣。那所謂類似有緣，就是說你類似家裡有供奉，或是你有在拜拜，然後或是有在唸他的經文。對。那我就說那你這輩子其實你再去求這個神明，神明會幫助你，因為你類似有拜過這個神明。我懂了，神明會記，就記得你。</p>
+<p>我突然想到，以前就是有緣過愛麗絲，嗯，就是小孩要考大學，然後呢想問他說要去拜哪一個神明比較好。所以那時候你看到的就是，嗯，這個小孩的元辰宮。嗯，應該是。對，應該就是沒有，沒有直接，沒有查到什麼元辰宮這麼複雜，就會直接查到他類似有緣的神明。但是類似有緣的神明，其實直接查查得到，那再來就是說，透過元辰宮也可以查得到。瞭解。對。</p>
+<p>元辰宮，我們還是講錢財這一塊嘛，所以，嗯，如果我要我的有更多的就是錢財進來，除了剛剛講的我要去，我可以跟神明求財庫、補財庫，另外一個就是我可以從元辰宮的廚房下手。對，廚房的話應該就講到財嘛，財的部分會顯示你現在的狀況。再來就是一個水、水缸，因為以水缸來講，水是流動的，水缸也是在廚房裡面。對，因為我們想源潔流，那你的看源頭跟流，這就是指水，嗯，水的狀況。所以你水缸有水的話，代表你的錢財啊，你的是有在流動的。嗯。</p>
+<p>然後再來還會看到，嗯，米缸。那米缸的部分會顯的多寡，會顯示說你目前現在的財富是不是夠用，生活上的狀況來講，因為米就是我們的經濟的狀況。米缸、水缸，還有柴火。對。主要就是，因為有些的米缸可能會有蟑螂啊、老鼠，嗯，那就是要把它清除掉。清除掉。嗯。</p>
+<p>如果是這樣子的話，當然，以我自己來說，我聽了元辰宮裡面的財運，就是我的廚房裡面要有滿滿的米缸，然後滿滿的、呃、乾燥的柴火，水，然後滿滿的水。可是像我們一般麻瓜哪知道自己的元辰宮是現在什麼狀態啊？又不可能一天到晚找仙姑說，欸，我看你也會被煩死。那有沒有一個比較快速，或者是說平常我就可以做得到的，就是我請神明啊、菩薩啦保佑我。我們常常去廟裡會講說，保佑我元辰光彩，應該是從這裡來的嗎？對。對。</p>
+<p>那我可以，一般的人我們可以怎麼做？一般的話就是我最前面我們講到就是要點光明燈，點光明燈就是一個元辰光彩，它就一年點一次。那很多人會問我說，點光明燈，我會說，那你去你常常就是常拜拜的廟。所以點光明燈其實就是讓元辰光彩。元辰光彩，難怪每一年都要點，這個意思是在這裡嗎？對，就是保佑你一整年，至少你元辰是有一個像是有盞燈在你的元辰宮裡面，照亮你今年人生的路，有點這樣的意思在。</p>
+<p>所以我回到剛剛開頭我講了，像我媽媽一天到晚都在幫我們小孩子點元辰、呃、點光明燈，所以這是有它的效果。對，我自己也是從小點、點到現在。那我多點幾點、幾盞，就我家嗎？沒有用嗎？光明燈就點一盞就可以了。OK OK。好好好，那我們大概知道了。對。</p>
+<p>那像另外一個方式說，因為如果假設，因為一般光明燈就在年初的時候點，那如果假設我今天沒有點到的話，那我還可以透過什麼方式去讓我的元辰光彩？那有個方式就是說，透過壽生蓮花。壽就是壽命的壽。壽命的壽。那請求就是有緣的神佛，就是讓你的元辰補運，然後讓你的元辰光彩，這也是一個方式。比如說跟我比較有份的可能是觀音菩薩，我就去金紙店買壽生蓮花。對，通常是買六朵或十二朵，一般六朵。一般都是六朵。那真的運氣真的剛好，現在真的比較不好的，它缺祿缺財比較嚴重，那我就說，那你就可能要，你需要十二朵壽生蓮花。都是六的倍數啦。OK。好。</p>
+<p>然後就去觀音，比如說我去觀音菩薩的廟宇，然後去跟他求，希望菩薩能保佑我今年運勢順利啊，運勢順利、元辰光彩，然後是工作順利。對，升遷順利之類的這樣。所以補運、補運氣。所以其實這樣聽來，我覺得常常跟菩薩神明溝通也是很重要的。對，就是我們講的，也就俗語說嘛，就是七分靠自己嘛，助人，助人。對。瞭解、瞭解。所以常跑廟宇啊，或者是拜拜，我覺得這是一種，不只一種精神的寄託，而是說他想要神明幫他成就什麼，也是透過這樣子的意念的一個溝通。對，來成就的嘛。對啊。</p>
+<p>所以啊，我想接下來快過年了，大家都會希望新的一年能有更好的發展，獲得更好的運途，我覺得不妨就是到，呃，把原算的廟去求，求神財，呃，那個錢財，獲得到跟你有緣的這些佛菩薩的廟，據點光明燈啊，補財運。對。所以明年的運勢多少還是有幫助的啦。是的。OK。好。</p>
+<p>那我們這一期、這一集補充財庫的說明就到這邊。那想要各位聽眾，呃，再一次抱歉的是，我們並沒有性別歧視。對，愛麗絲真的就是，她看到什麼她就如實的傳達給聽眾。那可能有一些人會覺得說，你怎麼，呃，男生、男女有別，那其實我覺得這不是當初的意圖，這只是以宣告、呃、顯化這些東西的一個意象，讓這些通靈人能好的傳達。沒錯。</p>
+<p>但其實不管是什麼樣的材質，你的那個份額在前輩子其實大部分都已經註定了，只是那個註定的份額要靠你後天的努力。對，不是說老天爺給你一千萬，不是說老天爺給你一千萬你就一千萬，你還是要靠你自己的努力，把這個一千萬的份額賺滿。嗯，甚至你要超過都可以。對，只是你沒有辦法從一千萬變成一億。就，對，可能搞不好三十年後有可能也說不定。哈哈哈哈。就是那個什麼，是那個倍數成長。對，就是複利，複利的，複利的概念就是了。對。OK。好，那我們這一集就到這邊，謝謝大家。謝謝大家。拜拜。</p>
+</section>
+<section id="fixes">
+<h2>供評估</h2>
+<details>
+<summary>修字清單（49 處，3 處把握度較低）</summary>
+<div class="det">
+<table>
+<thead><tr><th>原文</th><th>改為</th><th>依據</th></tr></thead>
+<tbody>
+<tr><td>我是書書</td><td>我是叔叔</td><td>固定詞表，同頻道前兩集皆作「叔叔」</td></tr>
+<tr><td>愛麗詩</td><td>愛麗絲</td><td>上下文，全篇作愛麗絲</td></tr>
+<tr><td>玄臺元帥</td><td>玄壇元帥</td><td>固定詞表（3 處）</td></tr>
+<tr><td>館長那個財庫的最大的神明</td><td>掌管那個財庫的最大的神明</td><td>上下文</td></tr>
+<tr><td>愛麗絲先故</td><td>愛麗絲仙姑</td><td>固定詞表</td></tr>
+<tr><td>問世者、來找我問是、來找我問世</td><td>問事者、來找我問事</td><td>固定詞表（6 處）</td></tr>
+<tr><td>沿用致敬</td><td>沿用至今</td><td>上下文</td></tr>
+<tr><td>提款季</td><td>提款機</td><td>同頻道前一集作「提款機」（8 處）</td></tr>
+<tr><td>有兩集</td><td>有兩極</td><td>上下文，接著說「又嫉妒又羨慕」與「為什麼女生就提款機」</td></tr>
+<tr><td>身遷移</td><td>升遷</td><td>上下文</td></tr>
+<tr><td>有假性機會</td><td>有加薪機會</td><td>上下文，與升遷並列</td></tr>
+<tr><td>擴充套件的人脈</td><td>擴展的人脈</td><td>OpenCC 把「擴展」轉成「擴充套件」的副作用</td></tr>
+<tr><td>閒告人生</td><td>斜槓人生</td><td>上下文，前文作「斜槓人生」</td></tr>
+<tr><td>投資利財</td><td>投資理財</td><td>上下文，全篇作投資理財</td></tr>
+<tr><td>財庫大小多股</td><td>財庫大小多寡</td><td>上下文</td></tr>
+<tr><td>生命看到你的努力</td><td>神明看到你的努力</td><td>上下文，全篇談神明</td></tr>
+<tr><td>月老新君</td><td>月老星君</td><td>民俗用語</td></tr>
+<tr><td>求要給我一個物件、那個物件</td><td>一個對象、那個對象</td><td>OpenCC 把「對象」轉成「物件」的副作用（2 處）</td></tr>
+<tr><td>圓成功、原成功、緣成功</td><td>元辰宮</td><td>民俗用語，同頻道前一集作「元辰宮」（38 處）</td></tr>
+<tr><td>圓成光彩、原成光彩</td><td>元辰光彩</td><td>民俗用語（6 處）</td></tr>
+<tr><td>圓成、原成、緣成</td><td>元辰</td><td>民俗用語（7 處）</td></tr>
+<tr><td>原成宮</td><td>元辰宮</td><td>民俗用語</td></tr>
+<tr><td>安泰稅</td><td>安太歲</td><td>民俗用語</td></tr>
+<tr><td>生辰八辰</td><td>生辰八字</td><td>民俗用語</td></tr>
+<tr><td>我又不要去點光明燈</td><td>我要不要去點光明燈</td><td>上下文，接著問「真的有效嗎」</td></tr>
+<tr><td>燒金子</td><td>燒金紙</td><td>固定詞表（2 處）</td></tr>
+<tr><td>所謂的圓長工</td><td>所謂的文昌宮</td><td>民俗用語，考運與升遷由文昌掌管，<span class="low">把握度較低</span>（2 處）</td></tr>
+<tr><td>狗雜處</td><td>古厝</td><td>上下文，接著說「個性比較傳統」，<span class="low">把握度較低</span></td></tr>
+<tr><td>現在公寓、現在房子的樣子</td><td>現代公寓、現代房子的樣子</td><td>上下文，與古代、國外並列（2 處）</td></tr>
+<tr><td>郭臺銘</td><td>郭台銘</td><td>台灣慣用寫法</td></tr>
+<tr><td>蠻像我國外的生活</td><td>蠻嚮往國外的生活</td><td>上下文，後文作「嚮往國外的生活」</td></tr>
+<tr><td>他的錢現在是往生的</td><td>他的錢現在是旺盛的</td><td>上下文，講的是柴火在燒</td></tr>
+<tr><td>財火</td><td>柴火</td><td>上下文，與米缸、水缸並列（2 處）</td></tr>
+<tr><td>他更弱材了、他就弱材</td><td>他更漏財了、他就漏財</td><td>上下文，屋頂缺的那半在廚房上，廚房對應財（2 處）</td></tr>
+<tr><td>雜草重生</td><td>雜草叢生</td><td>成語</td></tr>
+<tr><td>沒有沙窗</td><td>沒有紗窗</td><td>用字</td></tr>
+<tr><td>寒風澀澀</td><td>寒風瑟瑟</td><td>成語</td></tr>
+<tr><td>都是動他會改變的</td><td>都是動態會改變的</td><td>上下文</td></tr>
+<tr><td>那個祖神</td><td>那個主神</td><td>上下文，神明廳裡的主神</td></tr>
+<tr><td>瘦身蓮花、瘦就是瘦命的瘦</td><td>壽生蓮花、壽就是壽命的壽</td><td>民俗用語（6 處）</td></tr>
+<tr><td>金子殿</td><td>金紙店</td><td>上下文，同頻道前一集亦談燒金紙</td></tr>
+<tr><td>缺肉缺財</td><td>缺祿缺財</td><td>民俗用語</td></tr>
+<tr><td>昇天順利</td><td>升遷順利</td><td>上下文，與工作順利並列</td></tr>
+<tr><td>也就菩語說嘛</td><td>也就俗語說嘛</td><td>上下文</td></tr>
+<tr><td>精神的掛脫</td><td>精神的寄託</td><td>上下文，<span class="low">把握度較低</span></td></tr>
+<tr><td>更好的運圖</td><td>更好的運途</td><td>用字</td></tr>
+<tr><td>據點光明的啊</td><td>據點光明燈啊</td><td>上下文，全篇作光明燈</td></tr>
+<tr><td>負利、負利的概念</td><td>複利、複利的概念</td><td>上下文，前句講倍數成長（3 處）</td></tr>
+<tr><td>臺灣人</td><td>台灣人</td><td>台灣慣用寫法（3 處）</td></tr>
+</tbody>
+</table>
+<div class="untouched"><h4>未改動的地方</h4>
+<ul class="untouched">
+<li>「兩三年前的古人」：愛麗絲說「兩三年」、叔叔更正「兩三千年」，愛麗絲又說成「兩三年」，這是兩人實際的來回，照原話保留。</li>
+<li>「很多遠心」：聽不出原意，保留。</li>
+<li>「老師前輩只欠他」：整句聽不出原意，可能與「前輩子欠他」有關，但要動多個字，保留。</li>
+<li>「我有什麼房租」：可能是「幫助」或「好處」，音不近，保留。</li>
+<li>「一座黃金的細紗」「黃金細紗」（2 處）：聽不出是什麼，保留。</li>
+<li>「因為我們想源潔流」：可能是成語，聽不出原句，保留。</li>
+<li>「他只能補得了一輩子，補不了一輩子」：前半應為「一時」，但講者自己緊接著更正，照原話保留。</li>
+<li>「他的米缸也都沒什麼水」：米缸裝米、水缸裝水，疑為講者口誤，音不近，保留。</li>
+<li>「沒有意思」「有緣過愛麗絲」「這些其實都會學著」「交代別人」「以宣告」「把原算的廟」「求神財」「就我家嗎」「那真的運氣真的剛好」「跟我比較有份的」：皆聽不出原意或句子斷裂，保留。</li>
+<li>「助人。助人。」：可能是「自助人助」，但要補字，保留。</li>
+<li>「沒有人想要結婚」：依前後文應為「沒有人不想要結婚」，漏字非錯字，保留。</li>
+<li>「也許他也會人相助」：疑漏「有」字，未補。</li>
+<li>「扣打」：台灣口語的額度，照原樣。</li>
+<li>「關元辰宮」「關靈」：講者一律用「關」而非「觀」，照原話保留。</li>
+<li>「麻瓜」：主持人自稱，照原樣。</li>
+<li>「他／她」全篇混用，照原樣。</li>
+</ul></div>
+</div>
+</details>
+</section>
+<footer>後製於 2026-09-11 12:09</footer>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+(function(){
+  if(!window.mermaid) return;
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();
+</script>
+</body>
+</html>
