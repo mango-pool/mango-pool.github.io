@@ -8,12 +8,19 @@
     body {
       font-family: system-ui, sans-serif;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
       min-height: 100vh;
       margin: 0;
       background: #0d1117;
       color: #e6edf3;
+    }
+    .wrap {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      box-sizing: border-box;
     }
     .card {
       text-align: center;
@@ -46,22 +53,30 @@
       padding: 0.4rem 0;
     }
     .notes a:hover { text-decoration: underline; }
+
+    /* 手機：4rem 左右內距在 360px 下佔掉三分之一寬，標題被擠成三行 */
+    @media (max-width: 480px) {
+      .wrap { padding: 1rem; }
+      .card { padding: 2rem 1.25rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="rocket">🚀</div>
-    <h1>Hello, GitHub Pages!</h1>
-    <p>我的人生旅程，從這一頁開始。</p>
-    <div class="notes">
-      <h2>學習筆記</h2>
-      <a href="yt/">影片轉文 — YouTube 影片的可讀文本，含摘要與全文 →</a>
-    </div>
-    <div class="notes">
-      <h2>作品</h2>
-      <a href="green-building/">綠建築換皮 — 節能減碳房屋改造遊戲 →</a>
-      <a href="all-you-can-eat/">All You Can Eat — 1〜4 人同機飲食教育桌遊 →</a>
-      <a href="travel/">探索收藏冊 — 私房清單與照著走行程 →</a>
+  <div class="wrap">
+    <div class="card">
+      <div class="rocket">🚀</div>
+      <h1>Hello, GitHub Pages!</h1>
+      <p>我的人生旅程，從這一頁開始。</p>
+      <div class="notes">
+        <h2>學習筆記</h2>
+        <a href="yt/">影片轉文 — YouTube 影片的可讀文本，含摘要與全文 →</a>
+      </div>
+      <div class="notes">
+        <h2>作品</h2>
+        <a href="green-building/">綠建築換皮 — 節能減碳房屋改造遊戲 →</a>
+        <a href="all-you-can-eat/">All You Can Eat — 1〜4 人同機飲食教育桌遊 →</a>
+        <a href="travel/">探索收藏冊 — 私房清單與照著走行程 →</a>
+      </div>
     </div>
   </div>
 
