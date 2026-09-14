@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>你的正緣不是你的正緣--仙姑談姻緣</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8;--mark:#faeeda}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29;--mark:#412402}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+header{margin-bottom:40px}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0}
+.meta span+span::before{content:"·";margin:0 8px;color:var(--ink3)}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--line)}
+section:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px}
+.lede{font-size:18px;margin:0 0 18px;line-height:1.8}
+.summary ul{margin:0;padding-left:0;list-style:none}
+.summary li{position:relative;padding-left:20px;margin:0 0 12px;font-size:16px;line-height:1.8}
+.summary li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.summary strong{font-weight:500;color:var(--accent)}
+.maplede{color:var(--ink2);font-size:15.5px;margin:0 0 14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 16px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+h3{font-size:14px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:36px 0 14px}
+p{margin:0 0 1.35em;text-align:justify}
+.pre{background:var(--aside);border-radius:12px;padding:20px 24px;color:var(--ink2);margin-bottom:8px}
+.pre h3{margin-top:0}
+.pre p:last-child{margin-bottom:0}
+.aside{color:var(--ink2);background:var(--aside);border-radius:10px;padding:14px 18px;font-size:15.5px}
+details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 22px;margin-top:8px}
+summary{cursor:pointer;padding:16px 0;font-size:15px;color:var(--ink2);list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";width:0;height:0;border:5px solid transparent;border-left:7px solid var(--ink3);transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid var(--line)}
+.det{padding:18px 0 22px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:0 0 20px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+th{color:var(--ink3);font-weight:500;font-size:13px}
+td:nth-child(1){color:var(--ink2)}
+td:nth-child(2){font-weight:500}
+td:nth-child(3){color:var(--ink2);font-size:13.5px}
+tbody tr:last-child td{border-bottom:none}
+.low{background:var(--mark);padding:1px 6px;border-radius:4px;font-size:12.5px;margin-left:4px}
+.untouched{margin:0;padding-left:0;list-style:none;font-size:14.5px;color:var(--ink2)}
+.untouched li{padding-left:16px;position:relative;margin-bottom:8px;line-height:1.7}
+.untouched li::before{content:"–";position:absolute;left:0;color:var(--ink3)}
+.untouched h4{font-size:13px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:22px 0 10px}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:13px}
+@media print{body{font-size:12pt}.wrap{padding:0}details{display:none}}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style>
+</head>
+<body>
+<span id="mgtopanchor" aria-hidden="true"></span>
+<div class="wrap">
+<nav class="crumb"><a href="../">首頁</a></nav>
+<header>
+<h1>你的正緣不是你的正緣--仙姑談姻緣</h1>
+<p class="meta"><span>科技仙姑實驗室</span><span>2023-01-05</span><span>逐字稿來源：語音辨識</span></p>
+</header>
+<section id="summary">
+<h2>摘要</h2>
+<div class="summary">
+<p class="lede">仙姑行不行第五集談姻緣：Alice 以自己天界悔婚、下凡還一場婚禮又離婚的經歷開場，說明「真命天子」不等於幸福，累世有緣的對象一生會出現好幾個，錯過時機緣分就會變淡，而最後要不要走下去，神明只分析利弊、不替你決定。</p>
+<ul>
+<li><strong>Alice 自己就是「註定在一起」卻離婚的案例。</strong> 菩薩說她和前夫是真命天子天女，瑤池金母卻說她可能會離婚，兩個都成真——她前世在天界悔婚，這輩子是來還那場婚禮的。</li>
+<li><strong>真命天子分兩種，一種是善緣，一種是來討債。</strong> 註定要碰到，不代表註定會幸福。</li>
+<li><strong>累世有緣的對象一生可能出現六七個。</strong> 挑誰、什麼時候挑，是開放題；年輕時的想法和年紀大時不一樣，所以會錯過。</li>
+<li><strong>錯過時機，緣分本身會變淡。</strong> 有個女生被追了八年才答應，Alice 說若在第五年交往還可能結婚，第八年時男方的感情已經不深了，後來男方很快和別人結婚。</li>
+<li><strong>正緣也可能變成過客。</strong> 有人因為怕不能生小孩而分手，有人因為家裡背了幾千萬負債怕連累對方而分手，雙方都還相愛，緣分卻就此中斷。</li>
+<li><strong>姻緣老是不順，Alice 會先看累世業力。</strong> 女生常見的是前世在青樓以美色騙財，男生常見的是進京趕考後忘了原本的妻小；前世外遇出軌也會帶到這輩子。</li>
+<li><strong>另外兩個成因是自己的態度和磁場。</strong> 態度隨便就會被當成玩玩的對象，而磁場會吸引磁場差不多的人。</li>
+<li><strong>斬爛桃花有方法，但斬完還是要自己維繫感情。</strong> 用帶花帶葉的桃枝到月老廟求、燒化、擲三個聖杯，或念《月老和合真經》；有位太太斬完卻整天不跟先生講話，心當然回不來。</li>
+</ul>
+</div>
+</section>
+<section id="map">
+<h2>脈絡圖</h2>
+<p class="maplede">上圖是這集對「正緣」的拆解，從為什麼註定不等於幸福，走到時機與選擇；下圖整理姻緣不順的成因與 Alice 給的解法。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["正緣不等於幸福"] --&gt; B["真命天子天女&lt;br/&gt;可能是善緣也可能是來討債"]
+  A --&gt; C["累世有緣的對象&lt;br/&gt;一生可能出現六七個"]
+  A --&gt; D["累世不認識&lt;br/&gt;這輩子才創造的緣分"]
+  B --&gt; E["Alice 自己的例子&lt;br/&gt;天界悔婚、下凡還一場婚禮"]
+  C --&gt; F["時機會變&lt;br/&gt;錯過最愛你的時間點緣分就淡"]
+  F --&gt; G["追了八年才交往&lt;br/&gt;男方感情已經不深"]
+  C --&gt; H["正緣也可能變過客&lt;br/&gt;怕不能生小孩、怕負債連累"]
+  A --&gt; I["最後仍是自己選&lt;br/&gt;神明只分析利弊不替你決定"]</pre></div>
+<div class="chart"><pre class="mermaid">mindmap
+  root((姻緣不順))
+    累世業力
+      青樓騙財或不守婚約
+      前世外遇出軌
+    這輩子的態度
+      磁場吸引磁場
+    外遇的解法
+      斬爛桃花
+      月老和合真經
+      斬完仍要自己維繫感情
+    心結的解法
+      念大悲咒或心經</pre></div>
+</section>
+<section id="body">
+<h2>全文</h2>
+<h3>正片</h3>
+<p>哈囉，大家好，我是 SuSu，現在為您進行的是仙姑行不行第五集。那我們今天要談的是姻緣，我想這是一個大家非常好奇的題目，包括我自己也是。那今天我們就來聽聽仙姑怎麼為我們講解有關姻緣這件事情。</p>
+<p>哈囉，歡迎大家繼續收聽仙姑行不行，人生大小事問仙姑就沒事，我是 SuSu，我是 Alice。Alice，我們今天要講一個全天下女生最關心的一件事情，就是姻緣。對，男生也很關心。對，因為我是女生嘛，應該很多人也問你這個問題吧。對。好啊，那姻緣這個題目可大可小，好，我們就看看今天能說到什麼程度好了。</p>
+<p>那 Alice，你看你三千個詢問當中，是不是百分之八十都會問姻緣啊？對，就是不管沒結婚的人會問我說，欸，我的另外一半什麼時候會出現，我跟這個對象適不適合；有結婚的人問我說，我跟我老公好像相處是不是有點問題。那你是不是就開始好像把你的那個 X 光開啟，開始偵測這個人的婚姻狀況？沒錯，沒錯，就是這樣。</p>
+<p>好，那我們來看看好了。就是一般的人，不管是電影裡啊還是小說都會講說，姻緣天註定，真的是有姻緣天註定這樣的事情嗎？</p>
+<p>嗯，其實早期我也不相信這個。我一開始是去宮廟嘛，那時候的確就是婚姻不太好。那後來去完這宮廟之後，認識了一個對象，那菩薩就跟我說，我跟這個人就是，我們彼此是真命天子、真命天女。哦，就是你們註定要在一起的。對，就是註定要結婚的。</p>
+<p>那時候又有另外一位神佛，就是瑤池金母就說，欸，她也，就那個師姊姊瑤池金母，她就看到說，欸，我有可能會離婚。那時候其實我蠻納悶，因為那時候我跟我前夫的感情，還沒結婚的時候很好，然後我們也是以結婚為前提交往的。哦，所以有一個神明看到你們是註定要在一起，另外一個瑤池金母的神明就說她已經看到結局了。對，菩薩就說我們註定要在一起，那瑤池金母說我們可能會離婚。</p>
+<p>那時候就是說，我也不以為意嘛，我就覺得說，怎麼可能，說離婚是離婚，我只不過我自己好好的相處，我們彼此有默契，好好的經營，怎麼可能會離婚。</p>
+<p>那一開始有講到說我是因為在天界做了壞事被貶下來了嘛，那其實後來我離婚之後才知道說，哦，其實我也不是做了什麼壞事，是因為那時候我跟我前夫在天界有訂婚，那訂了婚之後他已經發了喜餅，但我反悔。天界也有訂婚，也有反悔？對，天界就是一個類似像是皇宮的縮影吧。哦，也是類似人的世界。人的世界，對。</p>
+<p>那時候菩薩就說，那你要悔、你不想結婚，那怎麼辦呢，就是也沒有面子去拒絕嘛，不好講。那菩薩就說，那你就下來人間歷練嘛。所以我就逃避下來人間，就到現在。哦。所以這邊才得有這個天命，要累積就是幫人家問事啊，累積一些功德，才有辦法回去天界。</p>
+<p>你那時候在天界為什麼要反悔呢，你還記得嗎？呃，後來我那時候透過關——你喜歡上別人了嗎？沒有。我那時候關靈的時候有關到，因為那時候應該是我的前夫在天界就跟我求婚，然後我後來考慮之後就覺得好，就答應吧。但答應之後又反悔。不是，你不是那麼愛他？也不是，對，不是那麼愛他。</p>
+<p>哦，OK。那來到這一世，他也跟著投胎來這一世了，他看到你一定又想到說當初你悔婚那一段嗎？他本人不知道，但我覺得他靈魂潛意識知道。因為我們那時候見面第二次，他就說，你可以跟我交往嗎，然後我們以結婚為前提交往。我們交往了半年多，就開始在規劃結婚的事情。所以他有一種非娶到你不可。對，非常，因為我欠他一個結婚的這個儀式跟流程。</p>
+<p>而且我們結婚的儀式跟流程就是弄得很傳統的方式。哦，傳統的。就該弄的什麼訂婚啊，然後結婚歸寧，那些什麼六禮、聘金什麼那些，傳統的儀式都有，都是照著那個傳統儀式弄的。</p>
+<p>哦，那好，結了婚了，但你發現其實後來你還是不喜歡他。這一輩子應該是這樣講，他結婚之後整個性格大變。大概是，我覺得應該度蜜月的時候就已經開始怪怪的。所以是所謂的到手了。嗯，對，因為他的靈魂潛意識就知道我欠他一個結婚，所以他覺得我已經還完他了，所以他也不需要再對我好。我覺得應該大概是這樣的狀況。</p>
+<p>瞭解。對，所以那時候我就是，呃，怎麼講，欸，那時候回去，我前夫就開始——因為他那時候錢賺比我多嘛，我那時候一個月很可憐，賺一個月三萬多塊。然後他那時候上班的地點離我們那時候住的地方很近，但是我比較遠嘛，我還要坐火車再轉捷運。然後他就說，你錢賺比我少，你憑什麼比我晚回家，你就算回來也要煮飯。他就認為你要做好相夫教子。對，你要回來煮飯給他吃。</p>
+<p>明明你的工作的地點比他遠，他還是認為你要比他早回家。而且他是工程師，我是業務性質。我覺得，那我想說我事情還沒忙完，而且我為什麼一定要回去煮飯，我不能自己努力打拼事業嘛，我沒靠你。嗯，對。</p>
+<p>所以你們開始有了分歧。對，後來，但是真的很快，我們從交往到離婚大概兩年半的時間。哇，就結束這個。而且那時候我們離婚的時候，其實談得很融洽，彼此都覺得我不需要你了。哈哈哈哈。就覺得就放下這樣。哦，OK。就是沒有拖很久就是了。</p>
+<p>對。所以你說這個是不是真命天子？其實是，因為我跟他有潛在的，我們就得要透過這樣的關係，才有辦法了業了緣。瞭解，所以這也是註定的一種，你必須要走的一段路就是了。對。</p>
+<p>OK，那好，說到真命天子、真命天女，剛剛講到的有好的、有不好的，那我們怎麼樣看待這件事情是說，如果真的跟前輩子有關的話，我這輩子碰到他，但我也不知道善緣還是惡緣。對，所以因緣其實就有講的，剛剛有真命天子跟真命天女，真命天子跟真命天女就分了，就是你是善緣，跟你討債。</p>
+<p>對。那另外一個就是說，你們累世有緣分。但是因為我們每輩子、我們投胎當人其實很多次，對啊，每個人都有緣分嘛，今天出現在我們桌上的每個人都是累世有緣分的。這就是其中一個，你累世有緣分。你可能在你適婚年齡這段時間，會陸續出現六七個、七八個以上累世有緣分的對象，那你怎麼去挑合適的。</p>
+<p>所以這是一個開放題，就是說生命沒有說你這一次一定要跟誰結婚。對。也就是過去你可能累世的出現，可能有六七個，那這一次你決定跟誰繼續走這個劇本，還是靠你自己的決定嗎？對。但是這也牽涉到說，我們年輕的時候遇到的對象，跟年紀比較大的時候遇到的對象，在當下的思維可能不一樣。對。所以也許你有可能就錯過，你在年輕的時候還不想結婚，你可能就錯過這個有緣的對象。哦。然後那後續那就看有其他有緣對象再出現。</p>
+<p>那另外一種是累世都不認識，這輩子才認識去創造緣分的，也是有這樣子的。對，但是在這個狀況來講是比較偏少。以目前來問的就是男女朋友或是夫妻，他們幾乎累世都很認識，當過夫妻，當過父母兄弟姐妹。嗯，瞭解。</p>
+<p>好，那人家說有適婚年齡，這其實也跟自己的對象有沒有出現有關係吧？呃，其實適婚年齡的確是——我幫人家諮詢其實看到的姻緣，很多父母會來問小孩子幾歲適合結婚，那其實看到的姻緣會有好幾個，或是一段期間。那通常都是可能到了四十幾歲之後，那姻緣就會比較弱。原因是因為通常一般人如果在四十幾歲可能還沒結婚的話，他可能就不會想要生小孩，所以他會覺得說我有一個伴就好了，我結不結婚也沒差。嗯，對。</p>
+<p>那的確也會看到說，有些小孩我發現看到說，他幾歲的時候可能要避開，因為他可能累世不好的緣分會在這時候出現。我就跟他媽媽說，那你兒子或女兒可能這個時間點不要結婚，會是對他比較好，人生比較順利。就是剛剛講的，我如果有六七個選擇，其中可能有三個是不好的，他會在我比較年輕的時候出現。對，那我盡量不要再去履闢這些不好的姻緣。對，就可能如果說避過的話，他接下來其他對象可能會是比較合適的。</p>
+<p>可是我覺得當局者迷欸，在當下愛得死去活來，這個父母親怎麼勸應該也是沒有用。沒有用，就覺得說哪有什麼問題，太迷信了吧。對啊，就覺得我們會好好努力的，我們一定會進一個甜蜜的家庭。對，的確是這樣。</p>
+<p>那有沒有一些諮詢的案例裡面，就是明明他有這個姻緣但他錯過了？所謂錯過就是，他明明是好的，然後他錯過了。對，有。其實像有個女生，她早我問事四五年了嘛，那時候有個男生追了她八年，從她二十幾歲的時候就開始。那時候那女生也有其他對象在追她，所以她沒有選擇跟這個男生交往。</p>
+<p>那等到這女生三十幾歲的時候，她發現，欸，我周圍好像真的沒有好的對象了，所以那個男生那時候還在追她，他們兩個就交往。但交往到最後，那男生發現其實感情已經沒有那麼深了，所以他們——我一開始查，他們是註定可能是這邊要當夫妻，但是因為女生錯過了那個男生最愛她的時間點，所以他們最後還是分手了。</p>
+<p>所以你在查的時候就是也沒緣分。對，他來找我的時候，我就說你可以交往看看，但是你們的姻緣已經變淡了。你跟他的緣分最適合的話，可能是三年前交往的時候，就是不要讓那男生追你那麼久，追了八年，追到現在八年就太久了。那時候他追了你五年交往的時候，你們那個緣分還是有可能是結婚的。</p>
+<p>喔，那這樣子，我覺得跟剛剛講的註定姻緣這件事情又不太一樣了，因為隨著時間拉長，這個註定姻緣的部分也會改變。對，因為後來那個男生又遇到了另外一個他類似有緣的，他也有同時在找各式各樣的選擇。對，他有其他的緣分在走，所以那男生後來就覺得，這個女生他追了很久並不適合他，然後他就很快跟另外一個女生交往，而且很快就結婚了。那個男生的另外的緣分也出現了。也出現了，所以又產生不同的化學變化。對，所以他後來只跟新的這個女朋友交往一年多他們就結婚了，因為剛好男生也到了適婚年齡。</p>
+<p>嗯，對，所以真的緣分就是很多錯綜複雜的因素會影響緣分。可是我覺得真的當局者迷，我要是那個女生也會不知道說，欸，我如果這個時間沒有選他，之後我們就沒緣分了。對。</p>
+<p>這個就講的就是說是正緣變過客。其實也有可能，像之前有一個諮詢說，因為這女生跟男生，男生當老師，然後他們本來要結婚，但是男方家裡比較傳統，那時候剛好女生子宮開刀，那他未來的婆婆就怕她不能生小孩。嗯哼。所以這個女生當下就是也不確定自己會不會有這個問題，所以她就跟這男生分開了。但那時候她還沒找我諮詢，這是她後來跟我講的。</p>
+<p>所以那時候我就幫她查說，她和這個男生其實是有正緣的，但女生因為怕不能生小孩，所以選擇跟男生分開。OK，所以這個就是她當下選擇，讓她的正緣錯過了。對。但後來這個男生跟女生都另外嫁娶，也有生了小孩。那沒關係，反正他們下輩子還有，如果是好的緣分的話，結婚再續的嗎。對。</p>
+<p>所以男女朋友他們交往了三年多吧，但後來因為男方家中做生意失敗，他承擔了家中的負債，然後他又怕連累女方，所以他就選擇跟女方分手。那他是很愛女方，彼此都很相愛，但是的確這經濟負擔，那是突然進來好幾千萬負債，的確就是也沒辦法。對，最後就是還是選擇和平的分手了，然後彼此都還是蠻痛苦的啊。</p>
+<p>所以這也是一種正緣，只是當下的選擇讓他們這輩子就是沒有繼續再續這個緣分。對。但是他們後來這一對也是遇到、後來都有交到男女朋友，只是目前還沒結婚，新的對象來講才沒結婚的。瞭解。</p>
+<p>嗯，還有啊，我們常常聽到，就是為什麼老是遇到不好的對象、不適合自己的對象，這個婚姻這一條路、走到自己的對象這一條路走得很坎坷，為什麼會有這樣的狀況？</p>
+<p>嗯，一般其實如果是來諮詢這部分的話，我會先看一下他有沒有累世的業力。對，因為累世的因果其實也會影響到這輩子嘛。那通常其實如果姻緣比較不好的，有幾個狀況。一個是他累世可能是當過青樓的女子，他有透過美色騙財。然後以男生來講的話，他可能以前是不守婚約，我們最常看到就是說他進京趕考之後就忘了原本的妻子或小孩，然後就娶了別人。</p>
+<p>這個在古代來說是蠻常發生的。其實現在也有啊，你說美色騙財，現在這個世界也都有。對。然後不承諾婚約，現在這個世界上也不一定要進京趕考，很好玩。哈哈。</p>
+<p>就是說你曾經在累世前世的時候，你曾經騙過人家，對，或者是說你曾經答應對方要跟他結婚沒有做到，讓人家很難過、很傷心。對。或是說以前有做比較不好的行為，例如像我們強搶民女啊，或是調戲良家婦女啊，這可能就會影響到這輩子的姻緣。嗯。或是說以前講的就是外遇或出軌嘛，這個帶到這輩子來講也有可能會有這樣的，就是如果你在前輩子你曾經犯過外遇或出軌，也可能會有一些影響。嗯，對。</p>
+<p>那再來就是自己的態度。如果我今天想要找一個好的對象，但是我自己的態度可能很隨便，或是說誰都可以，對，那不管是男生或女生，就不會把這樣的對象當成是一個合適結婚的對象，他會覺得說，啊，你是玩一玩，那我給你玩一玩。這個也是一個影響。</p>
+<p>那再來就是自己的條件，其實就是說我們自己的磁場會吸引和自己磁場差不多的人。對。所以其實另外就是說，你把自己的磁場調整好、狀態調整好，那你未來遇到的另外一半男生女生，就會是和你自己磁場至少是差不多的人。</p>
+<p>嗯，他會不會調一調覺得，我這輩子根本不需要婚姻，我一個人也過得很好？哦，有，有很多是這樣。有些人來找我說，哦，我自己的錢財很夠，我覺得我不需要另外一半。我說那這個可以看你自己的選擇。那有些人覺得說，我現在已經就是四五十歲了，我這是第二段婚姻，那他問我說我要不要結婚。我說這個你可以看你自己要不要結婚，你要結婚是可以的，我查你們兩個也是可以結婚。</p>
+<p>對，我可能以後如果生病啊，有個人可以幫我簽什麼同意書的話，就是要另外一半。對，那他就會考量說，那我這個年紀我還是希望我可以結婚。嗯，哦，好。</p>
+<p>那還有一種就是，我想你的諮詢案例我有聽你說的啊，就是常常問你說為什麼老公還是老婆會外遇啊。對，這也是跟前世自己可能造的也有關係嗎？</p>
+<p>目前查到的是說，嗯，因為古時候是可以娶很多太太，三妻四妾。嗯。所以以我目前諮詢到的案例來講，有老公外遇的，真的那個對象真的都是他的先生或是他的太太類似是同為妻妾的。可是也不能因為這樣子老公就外遇啊。就是老公外遇，老實說因為我前輩子就他是以前娶過的太太，對，前輩子我跟你一樣，都是我們侍奉同一個老公，然後這個老公這一輩子娶我，我是正緣好了，結果他又去外遇。那如果查到這樣的理由說，啊，那你不能怪我啊，因為你們——就不是。對。</p>
+<p>但是我們作為人還是要遵守現在的法律的規範，是一夫一妻制。那像老婆外遇的對象，她外遇對象就是她類似曾經當過她老公的，這個也是有的。對。所以不過男女其實他外遇的對象基本上就是他類似曾經遇過的對象，是偏多。</p>
+<p>如果回到我們剛剛講的，我這輩子明明就是我自己也可以約束自己的行為，我不要去做外遇這件事情。因為下輩子我可能遇到不好的對象，是因為我這輩子外遇，或者是在感情上欺騙人家嘛。對。</p>
+<p>所以其實一般以外遇的來講，他會問我說那到底有沒有解法。對。那我會說，因為你這輩子你就是他的太太或是先生，那你跟他就是正緣。對。所以其他的出現對象來講，我們就叫做爛桃花。對，雖然類似是有緣，但是因為他這輩子已經娶了你，對，那他要對你負責。呃，對雙方要負責。對。</p>
+<p>那我會說那你就是要去斬爛桃花。嗯。斬爛桃花的方式有幾種，一個是去買桃枝。桃枝是過年那種，二三月會出現。桃枝，你說桃樹的枝？哦，桃枝。然後上面有帶花或帶葉子的這種是最好，然後要去月老廟求月老，就是幫助你斬掉你先生或是你太太的爛桃花，然後讓他可以回歸家庭。然後那個最後還就是要把桃枝摺掉去燒，去金爐燒化，然後要擲三個聖杯。</p>
+<p>但這個方法其實也有它執行的困難度，因為現在很多廟裡都不能燒金紙，或是很多廟裡都說你為什麼要燒這個桃枝，我們金爐不能燒這個。嗯。但其實神明是不在意，但是人還是有人，在這個社會上還是有廟方的規範嘛，所以這個方法是稍微有點困難。目前的聖經都是比較困難。</p>
+<p>那另外一個方式就是請他念那個月老的經，月老的叫《月老和合真經》，去斬斷另外一半的爛桃花。嗯。</p>
+<p>那我想請問 Alice，如果我今天願意去做什麼斬斷爛桃花這件事情，這本身就是我想要繼續這個婚姻，對，我去做的努力嘛。對。但這個努力對方來說，他搞不好覺得很多餘，或者覺得多此一舉，我的心已經回不來了。對。有沒有可能這樣的狀況？</p>
+<p>有。其實這個遇到的話就是說，我有遇到一個狀況是，他去斬了爛桃花，對，但是他老公心還是沒回來。那我就問他說，我說你斬了爛桃花之後，你有去跟你老公聯絡嗎？你有關心他嗎？或是你有改變態度嗎？對。他說沒有。他說我就是每天就是煮早餐給我老公吃，然後我都沒跟我老公講話。</p>
+<p>哦，我說那你都沒跟老公講話，那你老公的心怎麼可能會回來呢。呵呵呵。對。我說感情還是要你維繫，今天幫你斬了爛桃花只是減少你這個阻礙，對，讓你老公心回來的機率是偏高、是比較高。但是如果你都不聯絡感情，然後你老公覺得說我在你這邊得不到溫暖，他還是會去第三者那邊。對。</p>
+<p>那這個是一個狀況嘛。那另外一個就是太太外遇的部分。哦，是。對。那太太外遇的部分，那個先生就是比較聽家裡的話。嗯。那太太就覺得說，我在家裡我得不到對應的尊重。嗯哼，當隱形人。對。然後是不是那位先生都聽媽媽的話，或是在遇到衝突的時候，那個先生就是顧著逃避。哦，對。那女生就覺得說，我要你對老公幹嘛。嗯，確實是。對。</p>
+<p>那女生還是會想要去外面尋求她覺得會溫柔的、顧她的對象。嗯哼，對。所以這個不管男女其實交往都是相對的。</p>
+<p>嗯哼。那請問你剛剛那諮詢那個案例，那個老公後來有做什麼改變嗎？呃，目前來講已經過了八九個月，但是我知道狀況是那個老公還是跟外遇對象在一起。然後另外一對那個太太，她目前還是覺得她老公是沒辦法給予她安全感的。嗯，瞭解。</p>
+<p>對。那可是我這樣聽起來回到剛剛講的就是，她雖然是我的正緣，可是我們前輩子可能有一些瓜葛，以至於面臨現在可能對方有第三者。然後這，我如果比較宿命一點是，這會不會就是這一對夫妻她必須要經營的一些過程呢？</p>
+<p>對。然後你說其實，應該這樣講，有些其實本身太太沒有犯錯，對，或是先生沒有犯錯，但是另外一半就選擇外遇，那這個就是比較偏向是外遇的那個人他本身的個人行為，他個人的因果要當，然後再加上他自己的道德觀或是價值觀比較偏頂一些，他就沒有顧到這麼多，他就覺得說我就是想要目前這個對象。</p>
+<p>我現在我的問題是，那不管男方有第三者還是女方有第三者，他們因為過去種種的因果，以至於他們必須要一起經歷這一些。那我比較好奇的就是你剛剛講的，不管男方或女方，他試著去做一些挽回，比如說斬爛桃花等等的動作、祈求神明幫忙，這樣子的一個決定會跟因果有關係嗎？他也可以選擇不要繼續嗎？</p>
+<p>他也可以選擇不要繼續啊。對啊。那他選擇繼續會是比較好的嗎，我意思說？嗯，對。很多人問我說，那我現在的狀況，我是要繼續還是不要繼續。對。那其實我只能分析給他，就是這個利弊的關係，但最後的選擇還是要在自己選擇。神明其實沒有辦法幫你決定人生的道路。</p>
+<p>就跟我當初離婚一樣，就是我自己決定我要離婚。神明說，啊，其實你們兩個的價值觀磨合磨合，你們也可以繼續在一起啊，但我就覺得我不要啊。所以這個就是利弊，我可以分析利弊，但是最後的決定還是得要在於自己。</p>
+<p>所以神明對於你對夫妻的婚姻要不要繼續走下去，或者是說碰到問題以後這個路怎麼走，他覺得還是我們人自己要去做決定，自己要負責。對。但是可以給予你分析。例如有些人會說，好，那我跟我這個現在老公或老婆分開之後，我還可以遇得到對象嗎？哦，對。那我就可以查，查得到，哎呦，你還有對象哦，所以你才分開幾年之後你的對象就會出現了。</p>
+<p>OK，我 Alice 說，我現在這段婚姻我覺得無望了，那馬上就會比較那個現實一點，如果我還有對象，尤其我就可以多，對，有不同的選擇。這個是可以查得到的。所以那個對象來講也就是你跟你累世有緣、未來會出現的對象。對，可能就會出現。</p>
+<p>但是這個我覺得還是回到一句話，當局者迷，這個很難在當下可以這麼快的跳開啦，當你陷在一個婚姻的問題裡面的時候。對。</p>
+<p>然後另外一個就是說，例如像我現在跟我，哦，要離婚這樣，對，他們也會來諮詢說，那我現在的狀況能不能解。那再來我就會查說他們累世的緣分，例如他們累世曾經當過夫妻，或當過兄妹，累世是有心結的。所謂心結就是累世有深仇、有誤會。OK。那一輩子過世之後沒有解開、沒有處理好，對，然後再到這一輩子，我們的靈魂潛意識還是在意這個事情，就是我一定要跟他吵過以後，或者是我一定要扳回一城以後，對，或是我怎麼看老公、看我老婆就是不順眼，到一個不行，對，然後很想要離婚。</p>
+<p>我說你先不要吵鬥，我也會先查說他們兩個之間累世是不是有什麼因果關係、心結沒化解，那我就會建議他們念大悲咒或心經，先把累世的心結解掉之後，再看自己的心境是不是有放下、比較改變。其實這個對大部分人來講，有八成的人都是說有效的。OK。</p>
+<p>但是也有人念完之後覺得說，欸，我就放下了，我覺得我跟他好像了業了緣了，我要離婚了，我要分手了，這個也是有，這個還是在於自己的決定。可能更親民了。對。你念完之後都會有兩個方向，一個是和好，一個是分開。但是不管是和好或分開，彼此的誤會啊，或是各方面要談分手、談離婚，都會是比較順利的。嗯，瞭解。</p>
+<p>婚姻這一門功課真的是很深喔。那我們今天也就是淺談一下有關姻緣的這一塊喔。那我想大家對姻緣可能有更多的問題，嗯，歡迎大家加入我們的 LINE，然後你可以提問，也許我們在下一集可以做一些補充說明。</p>
+<p class="aside">（插播）那我想現在有人還沒結婚想要找到好的對象，有人現在在婚姻的這條路上可能有碰到一些問題，那你想要更進一步諮詢的話，一樣也歡迎加入我們的 LINE，那可以跟我們先公佈預約時間。對。那我知道仙姑很忙喔，也希望一月份能開放幾個名額讓我們來諮詢。好啊。</p>
+<p>好，那我們今天節目就錄到這邊喔。好，我們下次再見，謝謝大家。那我們下次可能就講一下求姻緣的一些流程跟方式這樣子。好，謝謝大家。嗯，好，拜拜。</p>
+</section>
+<section id="fixes">
+<h2>供評估</h2>
+<details>
+<summary>修字清單（34 處，7 處把握度較低）</summary>
+<div class="det">
+<table>
+<thead><tr><th>原文</th><th>改為</th><th>依據</th></tr></thead>
+<tbody>
+<tr><td>我是叔叔</td><td>我是 SuSu</td><td>固定詞表，使用者指定本頻道主持人用英文名（2 處）</td></tr>
+<tr><td>愛麗絲、愛麗是、麗莎</td><td>Alice</td><td>固定詞表，同上；「麗莎」依上下文，節目只有兩位主持人（5 處）</td></tr>
+<tr><td>先公很忙</td><td>仙姑很忙</td><td>固定詞表</td></tr>
+<tr><td>幫人家問世、她早我問是</td><td>幫人家問事、她早我問事</td><td>固定詞表（2 處）</td></tr>
+<tr><td>物件</td><td>對象</td><td>OpenCC 把「對象」轉成「物件」的副作用（36 處）</td></tr>
+<tr><td>蕾氏的業力、蕾氏的因果、蕾氏前世</td><td>累世的業力、累世的因果、累世前世</td><td>上下文，全篇他處皆作「累世」（4 處）</td></tr>
+<tr><td>姚慈金母</td><td>瑤池金母</td><td>神明名（4 處）</td></tr>
+<tr><td>四婚年年、四婚年齡</td><td>適婚年齡</td><td>上下文，前文即問「有適婚年齡」（2 處）</td></tr>
+<tr><td>那個 S 光開啟</td><td>那個 X 光開啟</td><td>上下文，比喻掃描偵測</td></tr>
+<tr><td>人生大小事，仙姑說美事</td><td>人生大小事問仙姑就沒事</td><td>同頻道前一集的開場白即作此句</td></tr>
+<tr><td>青龍的女子</td><td>青樓的女子</td><td>上下文，接著說「透過美色騙財」</td></tr>
+<tr><td>搶搶名女</td><td>強搶民女</td><td>成語</td></tr>
+<tr><td>調戲兩家婦女</td><td>調戲良家婦女</td><td>成語</td></tr>
+<tr><td>做好相夫教訓</td><td>做好相夫教子</td><td>成語</td></tr>
+<tr><td>結婚歸您</td><td>結婚歸寧</td><td>婚俗用語</td></tr>
+<tr><td>當局者名言、當局者民</td><td>當局者迷</td><td>成語，同篇另一處已作「當局者迷」（2 處）</td></tr>
+<tr><td>到一個步行</td><td>到一個不行</td><td>上下文</td></tr>
+<tr><td>他的離婚潛意識</td><td>他的靈魂潛意識</td><td>上下文，前一句即作「他靈魂潛意識知道」</td></tr>
+<tr><td>攢亂桃花、攢到亂桃花、展覽桃花</td><td>斬爛桃花</td><td>民俗用語（3 處）</td></tr>
+<tr><td>宰了爛桃花、宰爛桃花</td><td>斬了爛桃花、斬爛桃花</td><td>民俗用語（3 處）</td></tr>
+<tr><td>我們就叫做不亂桃花</td><td>我們就叫做爛桃花</td><td>上下文，後文即作「爛桃花」</td></tr>
+<tr><td>植三個聖杯</td><td>擲三個聖杯</td><td>固定詞表</td></tr>
+<tr><td>月老和和真經</td><td>《月老和合真經》</td><td>經名</td></tr>
+<tr><td>大悲咒或心境</td><td>大悲咒或心經</td><td>經名，與大悲咒並列</td></tr>
+<tr><td>妙方的規範</td><td>廟方的規範</td><td>上下文，講廟裡不准燒</td></tr>
+<tr><td>心結沒解化</td><td>心結沒化解</td><td>用字顛倒</td></tr>
+<tr><td>累世有深潮</td><td>累世有深仇</td><td>上下文，與「有誤會」並列，<span class="low">把握度較低</span></td></tr>
+<tr><td>他已經發了息病</td><td>他已經發了喜餅</td><td>上下文，講的是訂婚流程，<span class="low">把握度較低</span></td></tr>
+<tr><td>才得有這個甜蜜</td><td>才得有這個天命</td><td>上下文，接著說要幫人問事累積功德，<span class="low">把握度較低</span></td></tr>
+<tr><td>什麼六聘、聘金</td><td>什麼六禮、聘金</td><td>婚俗用語，與聘金並列，<span class="low">把握度較低</span></td></tr>
+<tr><td>正語言變過客</td><td>正緣變過客</td><td>影片標題即作「正緣」，<span class="low">把握度較低</span></td></tr>
+<tr><td>我那時候關靈樹的時候</td><td>我那時候關靈的時候</td><td>上下文，同頻道他集作「關靈」，<span class="low">把握度較低</span></td></tr>
+<tr><td>都不能燒金枝</td><td>都不能燒金紙</td><td>上下文，講廟方限制，<span class="low">把握度較低</span></td></tr>
+<tr><td>未來的對婆婆</td><td>未來的婆婆</td><td>衍字</td></tr>
+</tbody>
+</table>
+<div class="untouched"><h4>未改動的地方</h4>
+<ul class="untouched">
+<li>「我盡量不要再去履闢這些不好的姻緣」：「履闢」聽不出原意，可能是「碰」或「理會」，要動的字太多，保留。</li>
+<li>「目前的聖經都是比較困難」：前一句講執行困難度，此處疑為「情境」或「執行」，把握不足，保留。</li>
+<li>「價值觀比較偏頂一些」：依上下文應是偏低或偏頗，但音都不近，保留。</li>
+<li>「我說你先不要吵鬥」：可能是「先不要吵」，「鬥」聽不出來源，保留。</li>
+<li>「可能更親民了」：整句與前後文接不上，聽不出原意，保留。</li>
+<li>「我要你對老公幹嘛」：應是「我要這個老公幹嘛」，但「你對」與「這個」音不近，保留。</li>
+<li>「我們一定會進一個甜蜜的家庭」：疑為「經營」或「組」，音不近，保留。</li>
+<li>「有的每個三十四五十四」：數字串聽不出原意，已在合併時省去該片段的重複部分，其餘保留。</li>
+<li>「就是你是善緣，跟你討債」：原句斷裂，講者接著自己補充兩種分法，照原話保留。</li>
+<li>「他個人的因果要當」：疑為「要擔」，音近但語意仍不完整，保留。</li>
+<li>「LINE」「OK」照原樣，「三萬多塊」「六七個」「八九個月」等口語約數維持中文數字。</li>
+<li>節目結尾的入會與預約諮詢宣傳段落標為（插播）。</li>
+</ul></div>
+</div>
+</details>
+</section>
+<footer>後製於 2026-09-14 10:33</footer>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+(function(){
+  if(!window.mermaid) return;
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();
+</script>
+</body>
+</html>
