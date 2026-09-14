@@ -45,6 +45,15 @@ summary::before{content:"";width:0;height:0;border:5px solid transparent;border-
 details[open] summary::before{transform:rotate(90deg)}
 details[open] summary{border-bottom:1px solid var(--line)}
 .det{padding:18px 0 22px}
+.extra p{margin:0 0 1.2em}
+.extra ul.extra{margin:0;padding-left:0;list-style:none}
+.extra ul.extra li{position:relative;padding-left:20px;margin:0 0 12px;font-size:16px;line-height:1.85}
+.extra ul.extra li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.extra ul.extra strong{font-weight:500;color:var(--accent)}
+.extra a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
+.extra a:hover{border-bottom-color:var(--accent)}
+.extra table{margin:0 0 20px}
+.extra blockquote{margin:0 0 1.2em;padding:14px 20px;background:var(--aside);border-radius:10px;color:var(--ink2);font-size:16px}
 table{border-collapse:collapse;width:100%;font-size:14.5px;margin:0 0 20px}
 th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
 th{color:var(--ink3);font-weight:500;font-size:13px}
@@ -103,12 +112,12 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <div class="summary">
 <p class="lede">農曆七月十八是瑤池金母聖誕，這集講她是誰、跟玉皇大帝的真實關係、天界的職掌怎麼分，以及聖誕該怎麼拜；結論是她要的長生不是吃蟠桃，而是保持清淨心、圓滿人世、超脫輪迴。</p>
 <ul>
-<li><strong>王母娘娘、西王母、瑤池金母是同一位。</strong> 聖號「無極瑤池大聖西王金母天尊」把瑤池與西王合在一起；《山海經·大荒西經》說王母住西邊的山，那座山是崑崙山，山裡有瑤池。</li>
+<li><strong>瑤池金母、西王母、王母娘娘是同一位。</strong> 聖號「無極瑤池大聖西王金母天尊」把瑤池與西王合在一起；《山海經·大荒西經》說王母住西邊的山，那座山是崑崙山，山裡有瑤池。</li>
 <li><strong>蟠桃園有四座，不是一座。</strong> 三千年一熟的吃了成仙得道、體健身輕，六千年一熟的霞舉飛升，九千年一熟的與天地齊壽；第四座是信眾供奉的桃子，她吃不完就拿去種，再回饋給需要的人。</li>
 <li><strong>但上到天界本來就長生不老。</strong> 吃不吃得到蟠桃不是重點，能上九重天修行才是。</li>
 <li><strong>跟玉皇大帝不是夫妻，是姑姪。</strong> 玉皇大帝是瑤池金母堂哥的兒子；天界的位置像總統與副總統，玉皇管第八、第九重天，東華帝君管第一到第七重天。</li>
-<li><strong>成仙有固定路線，而且層層要同意。</strong> 修行得道的人先到東方拜東王公，再到西方拜西王母，飛升第九重天後還要拜三清道祖——元始天尊、靈寶天尊、道德天尊，也就是老子。</li>
-<li><strong>職掌分男女是天界的分工，不是高下。</strong> 天下得道登仙的女子歸西王母管，武將文官的男生歸玉皇大帝管；但瑤池金母也有乾兒子，而且現在性別平等，神明一視同仁。</li>
+<li><strong>成仙有固定路線，而且層層要同意。</strong> 修行得道的人先到東方拜東華帝君（東王公），再到西方拜瑤池金母（西王母），飛升第九重天後還要拜三清道祖——元始天尊、靈寶天尊、道德天尊，也就是老子。</li>
+<li><strong>職掌分男女是天界的分工，不是高下。</strong> 天下得道登仙的女子歸瑤池金母管，武將文官的男生歸玉皇大帝管；但瑤池金母也有乾兒子，而且現在性別平等，神明一視同仁。</li>
 <li><strong>聖誕是農曆七月十八，三月初三是千秋節。</strong> 千秋節是蟠桃盛會、眾仙雲集，等於神明放假，那天去拜大概隔天才會處理。</li>
 <li><strong>可以求人脈人緣、轉機轉運、臨門一腳；婚姻與求子是誤傳。</strong> 她會去給月老和註生娘娘壓力，屬於主管交辦下屬。拜的東西是水蜜桃、壽桃、綠豆糕，花最喜歡康乃馨。</li>
 </ul>
@@ -116,12 +125,12 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 </section>
 <section id="map">
 <h2>脈絡圖</h2>
-<p class="maplede">上圖是天界的職掌劃分與成仙要走的路線；下圖整理聖誕怎麼拜、能求什麼、不能求什麼。</p>
+<p class="maplede">上圖是天界的職掌劃分與成仙要走的路線；下圖整理聖誕怎麼拜、能求什麼、不能求什麼。圖上一律用主名，括號裡是別稱——節目講路線時說的是東王公與西王母，跟東華帝君、瑤池金母是同兩位，不是四位。</p>
 <div class="chart"><pre class="mermaid">flowchart TD
   A["玉皇大帝&lt;br/&gt;管第八、第九重天"] --&gt; C["兩人是姑姪不是夫妻&lt;br/&gt;玉皇是堂哥的兒子"]
-  B["瑤池金母&lt;br/&gt;管天下得道登仙的女子"] --&gt; C
-  D["東華帝君&lt;br/&gt;管第一到第七重天"] --&gt; E["修行第一站&lt;br/&gt;先到東方拜東王公"]
-  E --&gt; F["第二站&lt;br/&gt;到西方拜西王母"]
+  B["瑤池金母（西王母、王母娘娘）&lt;br/&gt;管天下得道登仙的女子"] --&gt; C
+  D["東華帝君（東王公）&lt;br/&gt;管第一到第七重天"] --&gt; E["修行第一站&lt;br/&gt;先到東方拜東華帝君"]
+  E --&gt; F["第二站&lt;br/&gt;到西方拜瑤池金母"]
   F --&gt; G["飛升到第九重天"]
   G --&gt; H["最後拜三清道祖&lt;br/&gt;元始、靈寶、道德天尊"]</pre></div>
 <div class="chart"><pre class="mermaid">mindmap
@@ -137,6 +146,37 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
       臨門一腳
     婚姻求子是誤傳
       她只會去給月老與註生娘娘壓力</pre></div>
+</section>
+<section id="extra0" class="extra">
+<h2>求什麼</h2>
+<p>這一集點到的仙佛與各自的職掌。節目沒有談到求法的，欄位就留空，不另外補。</p>
+<table>
+<thead><tr><th>仙佛</th><th>職掌</th><th>這一集談到可以求什麼</th></tr></thead>
+<tbody>
+<tr><td><strong>瑤池金母</strong>（西王母、王母娘娘）</td><td>第九重天；管天下得道登仙的女子</td><td>人脈與人緣、轉機與轉運、臨門一腳</td></tr>
+<tr><td><strong>玉皇大帝</strong></td><td>管第八、第九重天；武將與文官的男生歸他管</td><td>節目未談</td></tr>
+<tr><td><strong>東華帝君</strong>（東王公、木公、東皇公）</td><td>管第一到第七重天；丁卯日登高台觀察想修行的人</td><td>修行得道者要拜的第一站</td></tr>
+<tr><td><strong>三清道祖</strong></td><td>元始天尊、靈寶天尊、道德天尊，道德天尊即老子</td><td>飛升第九重天之後要拜的最後一關</td></tr>
+<tr><td><strong>臨水夫人</strong>、<strong>註生娘娘</strong></td><td>瑤池金母麾下，兩位送子、兩位催生</td><td>求子</td></tr>
+<tr><td><strong>九天母娘</strong></td><td>瑤池金母麾下，防瘟疫</td><td>節目未談</td></tr>
+<tr><td><strong>月老</strong></td><td>姻緣</td><td>婚姻。求瑤池金母也是轉給月老，等於繞一圈</td></tr>
+<tr><td><strong>太乙救苦天尊</strong></td><td>三清宮右側與東華帝君同祀</td><td>節目未談</td></tr>
+<tr><td><strong>關聖帝君</strong></td><td>節目只拿來對照</td><td>供品有禁忌，瑤池金母則沒有</td></tr>
+</tbody>
+</table>
+<p>兩件節目特別澄清的事：<strong>婚姻與求子直接求瑤池金母是誤傳</strong>，她只會去給月老和註生娘娘壓力； 另外<strong>武則天</strong>在這一集是以瑤池金母天界結拜姐妹的身分出現，不是祈求的對象。</p>
+</section>
+<section id="extra1" class="extra">
+<h2>經典</h2>
+<p>這一集引用到的典籍，以下是節目裡實際唸出來的段落。</p>
+<ul class="extra">
+<li><strong>《山海經·大荒西經》</strong>：「西有王母之山」。講者據此說王母娘娘住在西邊的山上，也就是崑崙山，山裡有瑤池，所以又稱瑤池金母。</li>
+<li><strong>《西遊記》</strong>：王母娘娘設宴、大開寶閣，瑤池中做蟠桃盛會。齊天大聖問此樹有多少株數，答有三千六百株——前面一千兩百株「花微果小，三千年一熟」，人吃了成仙得道、體健身輕；中間一千兩百株「層花甘實，六千年一熟」，人吃了霞舉飛升、長生不老；後面一千兩百株「紫紋緗核，九千年一熟」，人吃了與天地齊壽、日月同庚。</li>
+<li><strong>《博物志》</strong>：「瑤池有桃樹，三千年一生實。天上天下，三界內外十方，但凡女子得道登仙者，都隸屬西王母管轄。」節目白話解為：天上已飛升的、天下想修行的女子，都歸西王母管。</li>
+<li><strong><a href="../經典/普渡收圓定慧解脫真經.html">《普渡收圓定慧解脫真經》</a></strong>：瑤池金母自己的經典，仙姑說她一開始修行時幾乎每天都念。節目引到的是「太極分判。天地生物之心也。血流滿地。骨脫如山。萬物自作之孽也。爾今問此。但有不生不滅之道。而無不生不滅之理。」，後文還講到陰陽兩極分判。講者解釋「血流滿地」指的是戰爭與生老病死。</li>
+<li><strong><a href="../經典/清靜經.html">《清靜經》</a></strong>：只被提及沒有引文。講者說瑤池金母的理念跟《清靜經》的無為而治有點像，都是要人超脫輪迴。</li>
+</ul>
+<p>節目唸的「骨託如山」「爾經問此」是辨識誤聽，已依經文原句改成「骨脫如山」「爾今問此」，詳見文末的修字清單。上面兩部經另開了頁面收錄內容，點書名可以進去。</p>
 </section>
 <section id="body">
 <h2>全文</h2>
@@ -172,7 +212,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <p>瑤池金母的期許，一般話來講，她就說我們這一次呢，希望大家可以清淨，然後圓滿人世。因為我們要圓滿人的事情，在人世間沒有牽掛，我們才能真正的去得到昇仙嘛。才能超脫。對，然後超脫輪迴，然後真正的長生。</p>
 <p>她所謂的長生呢，其實並不是吃什麼蟠桃就可以長生，她是希望我們能超脫輪迴。如果你到天界去修行，那你就沒有受輪迴之苦，你就沒有生老病死。對。天界神仙就是沒有壽命的期限的啊。那才是真正的長生。才是真正的長生。</p>
 <p>對。那其實如果我們講到這個經典裡面呢，我們可以參照那個瑤池金母的《普渡收圓定慧解脫真經》。所以瑤池金母也是有一部經典喔。對。這個金母一開始修行的時候非常常念，幾乎每天都會念，它叫做《普渡收圓定慧解脫真經》。好長的一個名字啊。</p>
-<p>裡面其實就有講到呢，太極分判嘛，然後天地生物之心，血流滿地、骨託如山。其實血流滿地，指的是我們的一些戰爭啊，我們的生老病死可能會流血。對。所以她說，萬物自作之孽，爾經問此，但有不生不滅之道，而無不生不滅之理。對。然後那其中又有講到就是陰陽兩極分判。對。</p>
+<p>裡面其實就有講到呢，太極分判嘛，然後天地生物之心，血流滿地、骨脫如山。其實血流滿地，指的是我們的一些戰爭啊，我們的生老病死可能會流血。對。所以她說，萬物自作之孽，爾今問此，但有不生不滅之道，而無不生不滅之理。對。然後那其中又有講到就是陰陽兩極分判。對。</p>
 <p>她其實瑤池金母的理念呢，跟那個《清靜經》裡面講的無為而治其實有點像的，就是要我們超脫這些輪迴。她希望我們這一世能，大家就是保有這個清淨心，能超脫輪迴，才是真正的長生。所以要超脫輪迴、要保持清淨心，所以這一世就是要修持圓滿。對。很難啊。不容易啊。對。其實我修了 12 年，其實到現在也覺得還有很長的路要走。但這是瑤池金母對我們這些凡夫俗子的一個期許啦。對。那也跟大家勉勵，就是怎麼樣在這一世保持一個清淨心，然後無為，然後超脫現世的種種的困難。對。</p>
 <p>然後今天呢，我在接瑤池金母的訊息的時候呢，有接到一個很有趣的，是關於武則天。武則天？武則天跟瑤池金母有什麼關係？對。瑤池金母說呢，透過我跟大家說，武則天跟瑤池金母在天界是結拜的姐妹。你是說武則天就是往生之後她是到天界去？她是從天界下來的，她是從天界下凡成為武則天的。</p>
 <p>對。因為會講到這個是，我們曾經以前在那個神話故事的傳說裡面，不是有一次武則天呢，她要那個百花齊開，那瑤池金母不就叫所有的花仙子，要讓民間百花齊開。那這個原因就是因為她們兩個在天界是姐妹。哦。對。然後那個武則天又是帝王，所以帝王講的話呢，天界是會作為參考。對。</p>
@@ -191,7 +231,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <section id="fixes">
 <h2>供評估</h2>
 <details>
-<summary>修字清單（43 處，8 處把握度較低）</summary>
+<summary>修字清單（45 處，8 處把握度較低）</summary>
 <div class="det">
 <table>
 <thead><tr><th>原文</th><th>改為</th><th>依據</th></tr></thead>
@@ -238,6 +278,8 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <tr><td>生命都是一視同仁</td><td>神明都是一視同仁</td><td>上下文</td></tr>
 <tr><td>太乙舊古天尊</td><td>太乙救苦天尊</td><td>神明名</td></tr>
 <tr><td>花蓮的聖安宮</td><td>花蓮的勝安宮</td><td>廟名，<span class="low">把握度較低</span>（2 處）</td></tr>
+<tr><td>骨託如山</td><td>骨脫如山</td><td>經文原句，《瑤池金母普渡收圓定慧解脫真經》作「骨脫如山」</td></tr>
+<tr><td>爾經問此</td><td>爾今問此</td><td>經文原句，同上經作「爾今問此」</td></tr>
 <tr><td>臺灣、臺北、高臺</td><td>台灣、台北、高台</td><td>台灣慣用寫法（5 處）</td></tr>
 </tbody>
 </table>
@@ -246,8 +288,6 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 <li>「西有王母之山，或山海山」：後半聽不出原意，《山海經》原文作「有西王母之山」，此處只保留前半可辨識的部分，「或山海山」略去未強行還原。</li>
 <li>「得道入仙之人」「修行得道入仙的人」：可能是「得道成仙」，但音不近，保留。</li>
 <li>「三清祭你去拜三清道祖」：「三清祭」聽不出原意，最小修正為「三清就是你去拜」，仍不確定。</li>
-<li>「骨託如山」：經文原句應為另一種寫法，聽不出來源，保留。</li>
-<li>「爾經問此」：經文原句不明，保留。</li>
 <li>「一個就是轉機、轉境」：前文作「轉機跟轉運」，此處疑為「轉運」，但音不近，保留。</li>
 <li>「讓月老排基建」：聽不出原意，保留。</li>
 <li>「目前她其實就臨在中東的貴族」：語序不順，疑有漏字，但聽不出原字，保留。</li>
@@ -258,7 +298,7 @@ footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:v
 </div>
 </details>
 </section>
-<footer>後製於 2026-09-14 20:09</footer>
+<footer>後製於 2026-09-14 20:52</footer>
 </div>
 <footer id="mgbar">
   <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
