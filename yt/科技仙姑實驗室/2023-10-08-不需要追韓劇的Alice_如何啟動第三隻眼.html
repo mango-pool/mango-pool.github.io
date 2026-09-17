@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>不需要追韓劇的Alice_如何啟動第三隻眼?</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8;--mark:#faeeda}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29;--mark:#412402}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+header{margin-bottom:40px}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0}
+.meta span+span::before{content:"·";margin:0 8px;color:var(--ink3)}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:56px 0 16px;padding-top:24px;border-top:1px solid var(--line)}
+section:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px}
+.lede{font-size:18px;margin:0 0 18px;line-height:1.8}
+.summary ul{margin:0;padding-left:0;list-style:none}
+.summary li{position:relative;padding-left:20px;margin:0 0 12px;font-size:16px;line-height:1.8}
+.summary li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.summary strong{font-weight:500;color:var(--accent)}
+.maplede{color:var(--ink2);font-size:15.5px;margin:0 0 14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 16px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+h3{font-size:14px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:36px 0 14px}
+p{margin:0 0 1.35em;text-align:justify}
+.pre{background:var(--aside);border-radius:12px;padding:20px 24px;color:var(--ink2);margin-bottom:8px}
+.pre h3{margin-top:0}
+.pre p:last-child{margin-bottom:0}
+.aside{color:var(--ink2);background:var(--aside);border-radius:10px;padding:14px 18px;font-size:15.5px}
+details{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:0 22px;margin-top:8px}
+summary{cursor:pointer;padding:16px 0;font-size:15px;color:var(--ink2);list-style:none;display:flex;align-items:center;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"";width:0;height:0;border:5px solid transparent;border-left:7px solid var(--ink3);transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+details[open] summary{border-bottom:1px solid var(--line)}
+.det{padding:18px 0 22px}
+.extra p{margin:0 0 1.2em}
+.extra ul.extra{margin:0;padding-left:0;list-style:none}
+.extra ul.extra li{position:relative;padding-left:20px;margin:0 0 12px;font-size:16px;line-height:1.85}
+.extra ul.extra li::before{content:"";position:absolute;left:0;top:.75em;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.extra ul.extra strong{font-weight:500;color:var(--accent)}
+.extra a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line)}
+.extra a:hover{border-bottom-color:var(--accent)}
+.extra table{margin:0 0 20px}
+.extra blockquote{margin:0 0 1.2em;padding:14px 20px;background:var(--aside);border-radius:10px;color:var(--ink2);font-size:16px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:0 0 20px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+th{color:var(--ink3);font-weight:500;font-size:13px}
+td:nth-child(1){color:var(--ink2)}
+td:nth-child(2){font-weight:500}
+td:nth-child(3){color:var(--ink2);font-size:13.5px}
+tbody tr:last-child td{border-bottom:none}
+.low{background:var(--mark);padding:1px 6px;border-radius:4px;font-size:12.5px;margin-left:4px}
+.untouched{margin:0;padding-left:0;list-style:none;font-size:14.5px;color:var(--ink2)}
+.untouched li{padding-left:16px;position:relative;margin-bottom:8px;line-height:1.7}
+.untouched li::before{content:"–";position:absolute;left:0;color:var(--ink3)}
+.untouched h4{font-size:13px;font-weight:500;color:var(--ink3);letter-spacing:.06em;margin:22px 0 10px}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--ink3);font-size:13px}
+@media print{body{font-size:12pt}.wrap{padding:0}details{display:none}}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style>
+</head>
+<body>
+<span id="mgtopanchor" aria-hidden="true"></span>
+<div class="wrap">
+<nav class="crumb"><a href="../">首頁</a></nav>
+<header>
+<h1>不需要追韓劇的Alice_如何啟動第三隻眼?</h1>
+<p class="meta"><span>科技仙姑實驗室</span><span>2023-10-08</span><span>逐字稿來源：語音辨識</span></p>
+</header>
+<section id="summary">
+<h2>摘要</h2>
+<div class="summary">
+<p class="lede">接著上一集的高我談平行時空能不能互換，再從 Alice 最近撈到的案例講到胎記與功過簿，最後回答「第三隻眼怎麼開」。</p>
+<ul>
+<li><strong>平行時空不能互換，但可以借意念。</strong> 一般人一次只能從一個平行時空轉移三成的意念或能力，遇到生死關卡或民生社會地位動搖的關卡才可能超過。川普一次可以調三個，等於從三分之一變成 90 percent。</li>
+<li><strong>平行宇宙的數量不是每個人都七個。</strong> Alice 隨手查了幾位名人：蔡英文七個、郭台銘八個、拜登十一個、川普十三個。目前撈到的上限是十六個，但還沒看到是誰。</li>
+<li><strong>還有一條不必靠高我的路：在元辰宮裡加東西。</strong> 想學投資理財就在書房加財經的書、要考律師就加法律的書、要登山就加健身器材跟登山杖；求財就加黃水晶洞、水晶元寶。但三到六個月內沒有實際行動，加了也是白加。</li>
+<li><strong>SuSu 睡前跟高我許願，真的做了夢。</strong> 她夢見自己飛到半年前跟老公大吵的那個場景，拍拍當時的自己說「再十五天就會好了」。Alice 說那不是平行時空，是回到過去——幫她的是另一個「兩小無猜、富足安康」的平行時空，指向真正要修復的是金錢跟小孩教養上的價值觀。</li>
+<li><strong>最近最像韓劇的一個畫面：地府把人的生辰寫錯了。</strong> 一位攝影師補財運補不進去，Alice 撈他的功過簿，發現上面寫的是 64 年次乙卯年，本人是 76 年次丁卯年，差了十二年。她把瑤池金母批准的那張紅紙與桃子從地府的失物招領處拿出來，親眼看著承辦人把生辰改對，功德才寫得進去。</li>
+<li><strong>地府的失物招領處堆成一座山。</strong> 多半不是生辰被寫錯，是拜拜、迴向的時候沒講清楚對象——「迴向給家人好友」沒說是誰，功德就送不到。生日跟地址講明確的會被優先處理；戶籍地跟現居地不一樣就兩個都稟。</li>
+<li><strong>改名字地府三個月內會自己更新，神明不會。</strong> 有人改名二十幾年，天上聖母都不知道，等於白拜；小時候給神明當義子義孫的，改名要另外去稟報。另外，一般人的功過簿放在地府，對社會有影響力的名人、政治人物、明星放在天界，功過都加倍計算。</li>
+<li><strong>第三隻眼分天眼與陰陽眼，而且不是想開就能開。</strong> 陰陽眼看地府與阿飄，天眼接神佛的訊息。Alice 的陰陽眼是瑤池金母幫她開的，天眼是自己開的——先寫疏文立願行，跟玉皇大帝、三清道祖、瑤池金母稟報後燒化，加上打坐念經，訊息練到穩固花了將近十年。發願只發這一世，不要發生生世世。先開了陰陽眼的人如果不修行，天眼就不會開。</li>
+</ul>
+</div>
+</section>
+<section id="map">
+<h2>脈絡圖</h2>
+<p class="maplede">上圖是平行時空能拿來做什麼、不能做什麼；下圖是功德送不到的那條路徑，以及怎麼避免。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["高我建立的七個平行時空"] --&gt; B["不能整個互換"]
+  A --&gt; C["可以借意念與能力&lt;br/&gt;一般人一次三成"]
+  C --&gt; D["前提是連結得到高我"]
+  A --&gt; E["另一條路：在元辰宮加東西&lt;br/&gt;書、器材、水晶"]
+  D --&gt; F["三到六個月沒有行動&lt;br/&gt;兩條路都是白做"]
+  E --&gt; F</pre></div>
+<div class="chart"><pre class="mermaid">flowchart TD
+  G["拜拜、補運、迴向"] --&gt; H["資料稟得夠明確嗎"]
+  H --&gt; I["生辰、姓名、地址都清楚&lt;br/&gt;直接補進功過簿"]
+  H --&gt; J["只說迴向給家人好友&lt;br/&gt;或生辰本來就被寫錯"]
+  J --&gt; K["堆進地府的失物招領處&lt;br/&gt;光今年就一座山"]
+  K --&gt; L["還是領得到&lt;br/&gt;但要花很久"]</pre></div>
+</section>
+<section id="body">
+<h2>全文</h2>
+<h3>正片</h3>
+<p>哈囉，歡迎大家回到我們的節目，我是 SuSu。我是 Alice。人生大小事，仙姑說沒事。這一集我們要來繼續談高我。我記得就是上一次我們有講到高我、守護靈跟指導靈嘛，那我就很好奇，因為那時候 Alice 有說一個高我可以創造七個平行宇宙嘛。對，那是一般人。那這七個平行宇宙的我啊，我們可不可以自己這樣的互相對調？比如說 A 的平行宇宙去跟 B 的平行宇宙對調，過他們不同的生活呢？</p>
+<p>其實是不行的，不能隨意這樣更換。對。可是不是會，上次有講到我的例子說可以互相支援？對，它那個所謂的支援呢，一般都是轉移三成的意念或是能力到我們這一世的身上。比如說我這一世我突然很需要有爬山的基本技能，因為我可能要去參加一個什麼登山大賽還是什麼，可能我透過意念告訴我的高我說，哪一個平行世界的那個我是有登山技能，請他來幫幫我吧。這個話是有可能是可以的，但是前提是我們要有辦法跟我們的那個高我，或是平行宇宙的其他的我們連結到。</p>
+<p>所以也不是那麼容易就連結到。對。那有些像我們上次講的，有些是無形之中我們自然就連結得到的。嗯，就是有一些他的靈感力比較好，平常他有一些就是直覺，或者就是我們之前講的那個 got the feeling，等人，他自然而然就知道該怎麼做。</p>
+<p>對。那或是另外一個呢，就是我們在元辰宮裡面也可以新增這個技能。元辰宮你新增這個技能？對。例如像我今天是想要學投資理財，但或是說我今天想要考律師，但我書一直看不進去，或是想要考什麼師，那這個話我們可以新增在元辰宮的書房裡面。哦，我就可以元辰宮裡面加入理財、財經的書，或者是要考律師就加一些法律的書這樣子嗎？對。然後或是說我今天是剛才講到我今天要登山嘛，那我可能是有個空間是做一些訓練的，我可能可以加一些健身器材。哦，好有意思喔。然後是登山杖啊，然後跟一些登山的鞋子啊、衣服啊這一類的東西，在元辰宮的一個房間裡面。</p>
+<p>那就是針對我這個平行時空的元辰宮去做加強，跟我去請另外一個平行時空來幫我，這件事情是不一樣的嗎？是不一樣的，但這兩個都有效果。哦。好啊，那各位仙粉們，如果你有預約到 Alice 調元辰宮的，別忘了多多的許願，尤其在針對你未來的一個志向跟願望上面。那我想要許願變有錢，我就要元辰宮怎麼樣呢？元辰宮的話，我通常會加像是黃水晶的礦石啊、黃水晶洞啊、水晶元寶、黃水晶球這一類的。對，但也不是加了就有效嘛，你譬如說如果什麼三到六個月你沒有做任何行動的話，其實也是白加了。對。那或有些人是跟神佛有約，我們可以把神佛請進來，然後神佛請進來之後呢，神明桌都有燈嘛，我就幫他點燈、點蠟燭這些，然後放一些例如招財的書。</p>
+<p>好，我們再回到高我啊。因為我一直對於說高我可以創造七個平行宇宙，那真的只有七個嗎？有的人會不會比較厲害？有，不一樣。我剛才就是隨意查了一些名人，對，那像是我們想到我們現在總統好了，總統蔡英文呢，她目前一樣是七個。哦，OK，就是跟我們一般人一樣。對。那我就很好奇查一下郭台銘，他又多了一個，他是八個。他是八個，哇，所以他可以運用的資源就比較多了。對，他多一個。</p>
+<p>那我來問問好了，那拜登總統呢？拜登很厲害，拜登有十一個。拜登有十一個，不愧是美國的總統，所以他在那時候對政治經濟其實影響很大。那可是說到拜登，我就難免想要問看看那個川普前總統。川普我來看一下，川普有十三個。川普有十三個，哇，難怪他能呼風喚雨。對，而且他——我們剛才講到說我們一般可以一個平行時空的我們嘛，轉移三成的意念；哦，川普他可以一次調三個，所以他的能力就是從三分之一變成 90 percent 了。所以他可以運用的這些 power 就更強就是了。</p>
+<p>對，因為像一般我們都是只能大概轉移三成的意念，除非我們遇到什麼生死關卡啊，然後或是民生社會地位動搖的關卡，那那個調動的意念可能可以超越三成。所以你說就是越厲害的人，他可以創造的平行宇宙是越多的。目前我剛才撈了一下，最多是十六個。哦，十六個。但是目前我還沒看到誰是十六個，可能搞不好要看一下是誰，搞不好他就是十六個也說不定。像川普那麼厲害都也才十三個，所以不知道是誰有十六個。</p>
+<p>可是像這種看某個人的平行宇宙有幾個啊，這個也是我們最近才發現的嘛，那如果仙粉們沒有特意問 Alice，你也不會去看他的平行世界有幾個嗎？我可以看幾個，但是裡面的世界我目前試過，我最多幫人家看就是三個，剩下真的是要自己去發掘了。OK。所以你在夢境裡夢到什麼的時候，才會啟動這個跟高我的連結，你也才能看得到嘛。對。</p>
+<p>說到這個我突然想到啊，就是因為這幾個禮拜一直在錄高我、平行宇宙啊，然後我就是睡覺前也像 Alice 說的，我就跟高我說，嗯，你有什麼訊息要傳達給我的，請到我夢裡來吧。我真的這樣默默的講，結果我在上禮拜竟然做了一個夢，而且那個夢還蠻真實感的，就是我飛到另外一個不知道哪個時空的我。然後那個時空我是還蠻難過的狀況，那個場景就是我跟我的老公吵架，然後我處在一個情緒非常低落的狀態；然後我就飛過平行宇宙，到那個非常低落那個狀態的我，跟他拍拍肩說，哎呦，不要擔心啦，你們會和好的啦，再十五天就會好了啦。我就這樣跟他講，然後咻，我就飛走了。但是我那個畫面是非常清楚，因為我在那個畫面看到兩個我。</p>
+<p>然後我就想說，難不成我是飛到另外一個平行宇宙，還是說另外一個平行宇宙的人來幫我呢？我來看一下。菩薩說你是回到了半年前，應該是你們吵架的時候。哦，對對對，半年前有非常嚴重的一個吵架。然後雖然說現在和好了，但是你還是覺得好像感情上呢還是有很多需要修補的地方。對對。對，就是說你現在還在處在一個你跟你老公修復感情的這個狀況中。</p>
+<p>但是就你這個狀況呢，我有看到你的這個平行宇宙的另外一個畫面。這不是累世哦，這就是平行時空。OK。先看到是你們那時候是穿著古時候的那個結婚的那個紅袍，那那個房子的狀況呢還蠻好的，不是那種很破爛的房子，至少是木造房子，有個小庭院。那接著看到就是，那時候你現在的老公呢，在那個平行時空他是種田，但是他種田的那個，他有特定的管道可以銷售，他的米啊、稻啊是供應給就是鎮上的那個有錢人的家裡。哦。所以你們的收入還不錯。然後那時候你就在家裡就是刺繡啊、縫東西，然後看到你的畫面是懷孕。</p>
+<p>對，那那個狀況是形成什麼狀況？前線就是說，你們其實生活上蠻富足的，大家也不用為錢煩惱。對啊，就感覺好像就是一個兩小無猜、安康富足的一個畫面嘛。對。所以呢，就這個狀況來講，你們要修復的應該是有關於金錢的部分。哦，就是不要為了金錢的事情吵架。還有小孩的教養啊。對。可能像我之前瞭解到的，你會花比較多的錢在小孩身上。對，補習嘛什麼的。對。但你先生可能會覺得說，啊幹嘛花那麼多錢補習，對啊，小孩自己長大就好了。對。所以這應該就是說，你們在小孩的那個教養上的這個金錢價值的關係，應該是現在你們需要修復的地方。</p>
+<p>那我是回到過去，才是說我回到另外一個平行時空去跟他講這件事情呢？嗯，你回到的是過去。但是為什麼你會可以回到過去？因為帶到你的平行時空是，你希望你們兩個感情是很好的，然後不要為了錢煩惱、跟為了錢吵架。哦，所以我的另外一個平行時空就是剛剛講的富足安康的那個兩小無猜的，就是我另外一個平行時空。對。那我看到這個畫面，所以我回去跟他講說，欸你不要擔心，你們會和好的。對，是因為有這個平行時空在幫助你跟你先生的感情。</p>
+<p>啊，好有意思哦。可能最近真的是做這個題目之後就開始胡思亂想以後，真的。但我自己是覺得那個畫面真的是很真實的，我可以醒來記得這麼清楚，而且我看到夢裡面有兩個我。對，因為菩薩說你看高我的連結已經四成了。我記得我們上次錄節目的時候還沒有這麼深，可能一兩成而已。但你現在連結到四成，其實才花了兩三個月。對啊，那我還蠻有慧根的。對。只是說因為你現在看到的都是平行時空。對。你講了一些事情，所以我可以撈到你的這個平行時空；對，但是我後面的平行時空可能還是要你自己去發掘，我才有辦法從你的這些意象裡面去撈得到你的平行時空。</p>
+<p>那 Alice 有看完自己的平行時空嗎？有啊，上次我們有講到就是。可是你就講兩個啊，其他的啊？目前我還沒看到欸。這還沒看到？除了古時候的那個、跟一個韓國的，對，跟我在天界的這個本靈之外，其他好像沒看到。沒有啊。喔，菩薩剛剛跟我說，我沒什麼事情。哈哈哈。沒什麼事情好了。她說我的生活很單純，沒什麼事情，所以不需要那麼多平行時空來幫助我。OK。這好像也是欸，除了忙碌之外還算蠻順的。</p>
+<p>嗯，好。那其實今天錄之前呢，我就在跟 Alice 講說，欸最近有一部很紅的韓劇叫《異能》，不知道她有沒有看。然後 Alice 跟我說，什麼是異能。對。後來我發現其實這個對話常常出現在我跟 Alice 之間。我每次問她說，欸現在有一部很好看的韓劇日劇，她說我沒空看，什麼；或是有人問我說什麼，你知道這什麼明星嗎？對啊。我不知道。或什麼新聞，我都不知道。</p>
+<p>後來我今天突然就有一個念頭說，Alice 根本不需要看韓劇啊，因為她每天在撈各位仙粉的資料的時候，那個劇情都比韓劇還精彩。真的，很多畫面都出現。而且我看也看到膩了吧，你每天都有不同的人在上演不同的劇情。是，是真的。對啊。</p>
+<p>我比較好奇就是最近有沒有看到什麼特殊的畫面，或者是什麼不一樣的畫面，是可能比韓劇還精彩，或是你沒看過。這個我本來要 PO 在 FB 上面，但是最近太忙了，剛好今天來錄。就是有一個攝影師，76 年次的一個男生攝影師，他在找我諮詢的時候大概是將近快一年前，他都是調元辰宮。那他來之後我就說，你的錢有增加了一些些，但是還是沒有很好，我說就你的能力跟你的心智來講，還是不太符合。不符合。對。然後案子的——他是有自己接案嘛，那案量也沒有特別多。</p>
+<p>然後後來我就說，你是不是平時都沒去補？你有去補財運跟補運嗎？這邊撈到你都沒有去補。他說有，他一個多月前去的瑤池金母跟那個玄壇元帥那邊都補了。當下我就覺得很怪，我就去那個地府撈了他的那個功過簿。撈出來之後呢，不得了。功過簿？就是你之前講的功德——功德簿嘛。對，但是有過嘛，有功就有過，就是其實他正式名稱是功過簿。</p>
+<p>那他上面的生辰八字不一樣。是錯的喔？對。他是 76 年次丁卯年屬兔，上面變成 64 年次乙卯年屬兔。差了 12 年啊。差了 12 年。但他這個人的確是蠻成熟的沒有錯，他是一個蠻成熟穩重的人。那是誰，他媽媽記錯還是說誰弄錯的啊？是地府那邊的弄錯，在他出生的時候他的這個本子就是錯的。地府有弄錯，那這樣害一個人耶。那我看他累世的那些資料都沒有錯，就是這輩子錯而已。哦。累世的那個出生日期沒記錯就是，累世的那些功德幾乎在上面都沒有錯，就是這輩子錯了。因為記錯，以至於他要補自己的運的時候，沒有辦法正常反映到他自己的功過簿上。對。</p>
+<p>那他就很緊張，就問我說那這樣的狀況怎麼樣。我說就是不好補，花一定要靠你自己，就是在修正之前。那後來呢，我就是因為他說他去拜了瑤池金母嘛，我就去問瑤池金母。然後去瑤池金母那邊呢，我就看到一個紅色的那個紙條，有點像是我們新郎新娘結婚那個大小的那個紅紙，別在胸口那樣，別在胸口一朵花的那個。對。然後那朵花變成一個桃子，變成一個粉色的桃子，然後底下還有綠色的葉子，同意批准要他補運，因為他說他很快就擲到三個聖杯。</p>
+<p>哦。對，那那個東西呢，結果變成放在地府的一個失物招領處，因為他寫錯生辰，所以到不了他自己的功過簿就是。對，這就到不了。後來呢我就是在地府了嘛，我就把這個桃子跟這個紅紙條拿在手上，拿在手上之後我就交給這個地府的人，我就親眼看到地府人把他的資料寫正確，他把他生辰寫正確之後，然後這個桃子我交給他之後呢，他就把功德呢變成文字就寫上去了，就是運勢就補進去了。</p>
+<p>所以你看到很清楚這樣的畫面，一個桃子別在別真室。對，放在一個紅色紙條上面。那當下運勢就補進去，補進去之後這個紅紙跟桃子他就消失了，因為他已經變成實際的功德，功德跟運勢補進去在他的這個功過簿上面。其實你這樣解釋那個畫面栩栩如真的樣子。對，是真的。</p>
+<p>然後後來呢我就很好奇，我就去看了那個地府的失物招領處。對啊。地府失物招領處真的是一大座山欸，光今年就一大座山。那為什麼會有這麼多的失物招領，是大家有很多人被寫錯生辰年月日嗎？沒有，應該是說我們在可能要補運，或是我們要把我們的功德迴向給我們的親朋好友，或是給往生家屬，那個功德沒有確切送到，找不到，可能資料沒有稟正確，喔，或者是在拜的時候沒有講清楚。</p>
+<p>對，那例如像我們很常這樣，就是說一般早期我們比較不知道正確的那個迴向的過程，都說我們迴向給我們家人好友。啊你的家人好友是誰？喔對對對，迴向給我的什麼祖先親朋好友。啊你祖先是誰？對啊，都沒有去講是誰，然後就迴了迴了，然後就全部累積在地府的那個失物招領處。他可能一樣可以被招領到，但是因為花時間，所以他的資料不是立馬這麼準確的，所以地府那邊會先擱著。他會先把生日跟地址很明確的，我們就先直接補進去了，就不用等。</p>
+<p>所以這個好像我們自己講很多次，就是你去廟裡拜拜，或者是你去超度你的這些冤親債主，或者是親人朋友超度的時候呢，都一定要寫清楚。對，說清楚。那現在很常問到說，啊我的戶籍地址跟我現在在外面租房子地址不一樣，那我要稟哪一個？我說那都稟，都稟是最安全的，我們也不差講那個 20 秒，多加一個地址。對啊。</p>
+<p>哦，好有意思哦。這是你最近看到一個比較特殊的畫面，就是那個桃子咻就變成功德消失。對。後來我就跟他說你再補進去了，因為他想要換工作或是找新的接案的機會，我說你應該到 12 月應該可以比較好；如果到時候還是沒有明確改善，或是找工作不順的時候，我們再來看一下是不是有其他狀況，再來預約這樣。</p>
+<p>地府他自己出錯，寫錯那個生辰年月日。嗯。那像我們在人間，我們常常改名字，包括我自己也有改名字，Alice 也有改名字。對。那改名字的人的話，那會不會地府人會找不到我們呢？嗯。因為我們之前有講到說，我們的身後都會有那個地府的官員吧，哦，小官員在記我們的那些，對，就跟記我們的日常。對。所以改名字呢，最慢最慢三個月內一定會登入到我們地府的功過簿上面。哦，OK。所以不用特別稟告囉。</p>
+<p>嗯，但是要稟告的話有個情況，就是說如果我們從小是父母啊、爺爺奶奶啊、外公外婆有幫我們認到什麼神明，當什麼義子義孫啊。哦，契子。對，這種的。那我們就要去跟神明補。像之前有個案例是他改名字呢，改了二十幾年，但天上聖母不知道。哦，因為他不會刻意去撈這個人的名字嗎，對不對。他那時候就問我說，欸，他就是有改過名字，那這樣神明知道嗎？這應該是半年前的諮詢案例了。那我就說，我說天上聖母不知道。哦。他說那他這二十幾年真的都沒有拜到，白拜了對不對。對。後來他就是有去一個正式的流程，去跟天上聖母說他就是已經改了名字了。對。不過他本身運勢還不錯啦，他是一個小的網紅這樣。</p>
+<p>所以我們如果有去做改名這個動作，還是去跟我們有緣的神佛做一個稟告，對，會比較好嗎？這樣神明才知道。地府雖然知道，但神明不一定知道，因為我們的功過簿不是放在天界，哦，是放在地府，一般人都是放在地府。哦。那什麼樣的人，還是說所有人都放在地府？沒有。這個問題呢我來看一下，剛好我之前自己就蠻好奇的，這件事情我之前就查過。一般人是放在地府，對；那像什麼對社會啊、財經啊、政治地位有影響的，或是對我們所有民眾價值觀有影響力的人，他會放在天界的一個房間。哦，就是對社會比較有影響力的人，可能是名人、政治人物、明星。對，這些都會放在天界。對，因為他的言行會影響到我們整個可能社會的價值觀。</p>
+<p>哦。那像前陣子某個歌手跟老婆鬧離婚，就是因為外遇嘛，鬧得沸沸揚揚，像這一種某歌手的功過簿也是會在天界嗎？他本在地府。你講這個，他是早期在地府，後來因為這個事情太嚴重了，所以到天界去做列管。哦，是哦，OK。那天界的列管是怎麼樣？是說他會介入這樣的事情，還是說他會做些什麼事情改變這個結局嗎？</p>
+<p>嗯，他應該這樣講。如果他的功德力呢——假設我今天我做錯一個措施，我是扣 5 分，對，那他可能就扣了 10 分；但是他如果今天有功德來講，他做的善事本來是加 5 分，他變加 10 分。哦，他什麼樣就是別人家多兩倍就是了。對。因為他可以透過這個網路平台跟這個輿論呢，去放大他對社會的影響力。對啊，畢竟是知名人士嘛。對。那假設如果他真的發生了一些，可能他的這些行為影響到別人的意志，導致人家有什麼例如是生命上的安危的部分，或這種的，那這個話就會有天界的、地府的都會加派官員去盯著他。</p>
+<p>我突然想到我們之前有講到就是一些邪教的教主，或者是什麼很奇怪的團體的那種首領，那像這樣子的，他們比較特殊，也是有影響力的，而且是影響蠻大的，就我們之前講的那些靈性詐騙或是什麼的。嗯。那他們會是誰在列管？那個基本上都是有天界玉皇大帝那邊直接會加派很多官員。像是我們講的這個就是，我之前有 PO 在 FB 有一個詐騙的事情。你說騙一千多萬那個嗎？對。那那個就是城隍爺那邊，玉皇大帝請城隍爺加派了就是八個官員還是六個，去幫忙這個事情，那這事情可以盡快的得到平反。哦，OK。對。所以真的就是這種比較嚴重的話，天界跟地府都會有力量介入來幫助。瞭解。</p>
+<p>對，好。那還有沒有什麼其他的畫面是可以媲美韓劇的呢？嗯。講到這個功過簿嘛，那我們是天界下來的人呢，他會在天界的另外一間房間，這代表是我們下來民間還沒有回去天界的，但這個書櫃有三大櫃。哦，你是說功過簿的部分嗎？對。我們天界下來沒有回到天界，他有單獨一個房間在列布。OK，好。</p>
+<p>對。還有一個另外一個是上禮拜。上禮拜有一個女生，對，然後她來諮詢，但她因為她的身上有些胎記，就在眼睛跟手上有一些，但是不是很嚴重。對，胎記淡淡的。對。那她就問說她是不是跟那個黑白無常謝范將軍有緣。就我一撈，她真的是在有一世投胎的之前呢，她在地府當差了 141 年。那為什麼她自己知道她跟黑白將軍有緣呢？哦，她就說她就是之前有——應該是上網看還是聽人家說，有胎記的人都是跟地府那邊是有緣的。哦，因為她的胎記也很明顯嗎？她胎記有一點明顯，但她本人長得蠻漂亮的，但是就有胎記這樣子。可是現在胎記不是可以用醫美去掉嗎？還是那種去不掉的？嗯，到底可不可以去掉？好像可以對不對？花比較多錢好像可以去掉一些。嗯，對。</p>
+<p>那講到胎記呢，我就來看一下。胎記其實有分幾種，一個像是就是那種灰色、紫色、青色胎記的，像那她可能就是跟地府有緣，在地府當差。那為什麼要有這個胎記？她問我說那為什麼我要這個胎記，她就說她現在已當人了。我說如果你下一輩子呢，你不想要投胎當人，你想要回到地府的時候，你有這個胎記，他們就會幫你辦那個快速通關。哦，所以這也算不錯啊。對，因為她這輩子沒什麼業力，她的冤親債主那些早期家人都有一些法會幫她解掉了。瞭解。</p>
+<p>那她就說她現在她年紀跟我差不多大，她就說她還沒想到這麼遠。我說沒關係慢慢想，如果你以後不想要去當人的話，你覺得當人太辛苦，那你回到地府的時候，你在往生的那時候你要有這個意念，你要去地府，基本上看到這個胎記她就會放心，她就會幫她辦一些登記手續。</p>
+<p>那到底有胎記算是好事還是壞事啊？我們看一下。如果假設我們胎記是那種灰色、紫色、青色的，對，那另外一個可能業力比較重，就是說跟地府有緣之外，另外一個是有業力比較重。對。然後另外就是她需要和某個特定的人士，例如會變成夫妻，要了業了緣，累世的緣分未了。所以她永遠是被註記說，欸我在這裡來找我，這個意思嗎？這樣講也是。另外就是說她特別下來的目的，就是得要解決這些恩恩怨怨，她解決之後她才能回去天界。</p>
+<p>那我可不可以講說，如果我自己身上有特別胎記的人，可能就是有一件事情在這一世要特別去做。有可能。現在如果是我們一般是紅色胎記的話，基本上她都是有福德的人。喔。那或是說她經過會有帶貴氣。不是，她就有一個狀況是，這個前提是她本身自己也要夠努力，所以她有福德跟貴氣，但是福德貴氣的大或小，跟我們這輩子當然的努力程度，或是一些環境狀況啊，還是會有影響，因為福德的大小還是在於我們這輩子到底要做出什麼樣的付出跟努力。</p>
+<p>那我回到剛剛比較有一些暗色胎記的人，她要是今天聽到這個節目，那她可以做些什麼？因為剛剛講說可能業力比較重、可能跟地府比較有緣。因為這個因人而異，像我們剛才講的狀況就好幾種嘛，也有可能其實她沒有要幹嘛，她只是要跟特定的人遇到。OK。她們要解化她們累世的這些關係。所以抱著平常心就是喔？抱著平常心。如果除非真的是覺得自己特別不順的時候，我們可以看看有沒有緣起在需要解化。OK。</p>
+<p>講到胎記，像我自己呢，我自己身上就是會有一個紅色的一點一點的，然後有時候會出現的時候會消失。說到這個，我半年前我也發現，在我的左手臂有兩個點點，現在我給 Alice 看一下。欸真的欸。對啊，兩個紅色的點點，好像被原子筆劃的掉了的感覺。那時候也是在手臂上面，我也覺得也很像。好奇怪喔，我就覺得欸這為什麼會有紅色的點點。</p>
+<p>我來問一下菩薩。因為那時候我大概也是七八個月前我發現，然後後來一陣子就消失了，就沒去理他。然後菩薩是說，如果有任務要指派給我們，他就會出現，然後我們完成這個任務之後他就會消失。那這個意思是說我們要做這個事情是天界的重點任務，要我們去執行的？可是我們真的要做什麼任務呢？還是在夢裡會出現？</p>
+<p>目前喔，我看看那時候我出現之後到底有沒有真的特別去做了什麼事情，還是無形中，還是要特別幫某個人，可能幫了一些人，或是有一些例如像我們現在錄了 Podcast，有些觀念是要我們帶給別人的。喔，會不會我的紅點就是因為開始錄了這個 Podcast 之後？欸是欸，我們錄了到現在也要半年了。半年多了。對，的確是這樣。</p>
+<p>好。剛剛講就是說你不用追韓劇、日劇，因為你每天看到的就是比韓劇、日劇還精彩啊。對啊。那大家就會想說，那這就是所謂的第三隻眼嗎？嗯。那第三隻眼就是天眼嗎？嗯，其實分兩個，一個叫天眼，一個叫陰陽眼。對，像之前我——欸應該是某一集的時候，我有分享到瑤池金母幫我開了陰陽眼嘛。對。所以這兩三個禮拜陸續有仙粉來問我說，那可不可以請神明幫忙開眼？嗯哼。我就說其實是不行，因為我本身呢，天眼是我自己去自然開的。</p>
+<p>所以陰陽眼跟天眼是不一樣的。不一樣。天眼的話，像我這樣可以看到天界啊，然後可以看到神佛訊息，這是天眼；那陰陽眼的話是看到地府、地獄，然後看到鬼，看到無形的這個阿飄。哦。所以不是每個通靈人同時都給我陰陽眼跟天眼。對。我是自己先開了天眼。但是後來我回想說，我到底開了天眼之前做了什麼事情。嗯，對。</p>
+<p>那時候我是去宮廟問事的時候，瑤池金母講的，我每天就唸經打坐，後來就是有個發願。記得那個時候是，呃，佛堂的師姐接瑤池金母，還有師兄接濟公師父。嗯哼。他就問我說，我這個修行的這個願行或什麼的，叫我要想一下。嗯，那想一下之後我有些想法嘛，我也拿紙把它寫下來。後來到了有一次我們是——那時候佛堂一起去那個三清宮、三清道祖那邊，那那個接濟公師父的師兄，他發給我們每人一張很大的 A3 大小的黃紙，嗯哼，叫我們要寫我們的願行。就疏文就是。類似。對，類似像這樣。然後寫了之後就是要跟玉皇大帝啊、三清道祖、然後瑤池金母稟，稟了之後燒化。</p>
+<p>這兩個就是我們這輩子想要做的事情，嗯哼，就是我們要利益眾生的。但是通常我們在發這個願行的時候呢，一定要只要發這一世，不要發什麼生生世世。發生生世世，可能我們這輩子可能下輩子要去同胎堂了，修不完。修不完。對。所以我那時候我記得，我們有一個很正式的那個疏文。</p>
+<p>還是有用的，就是你做的這個稟報，而且立下這樣子的一個誓願之後，是突然開啟了，還是說慢慢的？嗯，慢慢的會越來越清楚，就是那個訊息會越來越清楚是不是。對。我記得我早期是會覺得神明在跟我講話，哦，然後嚇死了。對，第一次大概是覺得很莫名其妙，想說我自己不是幻聽，我就去擲杯。嗯哼。然後再來就是可以開始看到元辰宮啊，然後查詢、問事情啊。</p>
+<p>說實在我這樣真的是訊息很穩固的訓練，真的是將近快十年。雖然中間都是有陸續的幫人家就是問事情啊、諮詢，嗯哼，但是真的訊息它的、就是這個能力穩固之後，你要花了快十年時間了。到現在真的是——我到真的是開始這樣收諮詢費，那個是在兩年前的時候。對啊，而且我認識 Alice 這幾年來，發現她的那個技能大進啊，一樣一樣又突然跑出來了。對。對啊，像靈魂療癒是最近的嘛。</p>
+<p>所以其實你說天眼要怎麼開，其實天眼要開的，它一定是結合我們希望我們可以做什麼利益眾生的事情，嗯哼，不管是無形的那個孤魂野鬼，或是我們現在有形的人。對。你訂立這個疏文，加上你平常的修持啊、打坐啊、念經啊，對啊，這些跟我們的正能量，其實它可以讓你的天眼可能無形中它就開啟了。</p>
+<p>對啊。所以各位仙粉不要認為說，欸會有第三隻眼很酷，你也想要跟 Alice 一樣。她的責任也很多啦。對。我想跟 Alice 有一樣的能力，但在這之前可能想一想，你真的有願意像這樣子下了一個重誓，就是你要利益眾生嗎？因為那是有時候是要犧牲很多自己個人的事情的，都沒有時間。對。你看 Alice 幾乎把工作以外的時間啊都給大家來就是諮詢使用，我看她哪有什麼時間追劇喔。</p>
+<p>對。但是像有些人呢——因為那時候瑤池金母不是跟我說，我的陰陽眼可開可不開，因為不開也可以辦事。那我那時候就是抱著一個好奇，因為我從小就非常怕這個什麼鬼啊、阿飄。她問我會不會怕，當時瑤池金母就問我說，那你會不會怕。我當時說還是會。她說你想一下。後來我真的想了一下，我就說那就開吧。嗯哼。</p>
+<p>對。那像有些人會先開了陰陽眼。哦。像很多人回來找我諮詢，他就說，欸我可以看到那個阿飄啊什麼的，但是我接不到神佛的訊息。嗯哼。對，那有些人先開了陰陽眼有幾個原因，一個是他可能八字比較輕，嗯哼，對，那或是說他真的是要幫神明辦事。OK。對，所以他先開了陰陽眼，再帶到天眼的，這個也是有的。OK。</p>
+<p>對。那因為他先開了陰陽眼嘛，代表說他知道他自己是靈異體質，嗯哼，那可能他並不一定知道自己是要修行的，但大部分幾乎十個有八個都是要修行的。嗯哼。所以那就是他得要再透過他的修行去開天眼。但是有人說，那我不想要修。嗯哼。我說那如果不想要修的話，那天眼就不會開。哦。好，他就只能看到阿飄、鬼這些。</p>
+<p>天眼是接神佛的那個訊息嗎？那陰陽眼的部分啊，可以隨意開關嗎？嗯，我早期不行，我花了兩年的時間，我現在已經可以隨意開關了。哦。我應該是在四年前就差不多可以隨意開關了。對啊，那你本來就是不想看到也看到。那有時候很可怕，比如說出外旅遊的時候，那感覺很不舒服欸。會啊會啊，很多很可怕的畫面。現在完全不會，我現在平常都看不到。哦，OK。但是你想要看到的時候還是可以？我就可以看到了。OK。我就一個意念轉換就看到了。哦，好。</p>
+<p>這還蠻有意思的。好，那我們這一集就錄到這邊。剛剛主要還是從 Alice 為什麼沒有空追劇，因為她平常在追的劇都比我們還要精彩。嗯。好，那我們這集就錄到這邊了。OK 拜拜。拜拜。</p>
+</section>
+<section id="fixes">
+<h2>供評估</h2>
+<details>
+<summary>修字清單（58 處，10 處把握度較低）</summary>
+<div class="det">
+<table>
+<thead><tr><th>原文</th><th>改為</th><th>依據</th></tr></thead>
+<tbody>
+<tr><td>書書</td><td>SuSu</td><td>固定詞表：本頻道主持人一律用英文名</td></tr>
+<tr><td>愛麗詩、愛麗絲</td><td>Alice</td><td>同上</td></tr>
+<tr><td>轉移三層的意念、超越三層</td><td>轉移三成的意念、超越三成</td><td>上下文：一次調三個＝三分之一變 90 percent，算得出來是三成</td></tr>
+<tr><td>川普他可以一次掉三個</td><td>川普他可以一次調三個</td><td>上下文</td></tr>
+<tr><td>民生聖會定位動搖</td><td>民生社會地位動搖</td><td>上下文（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>God-feeling</td><td>got the feeling</td><td>同頻道上一集（高我）作 got the feeling（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>原成功、圓城宮</td><td>元辰宮</td><td>固定詞表，全篇 10 餘處</td></tr>
+<tr><td>條原成功、他都是條件成功</td><td>調元辰宮</td><td>上下文</td></tr>
+<tr><td>各位先生們、先粉、先鋒、鮮粉</td><td>仙粉</td><td>本頻道對觀眾的稱呼</td></tr>
+<tr><td>許願便有錢</td><td>許願變有錢</td><td>用字</td></tr>
+<tr><td>郭臺銘、網路平臺</td><td>郭台銘、網路平台</td><td>台灣慣用寫法</td></tr>
+<tr><td>隻能大概轉移</td><td>只能大概轉移</td><td>OpenCC 副作用</td></tr>
+<tr><td>這不是蕾絲哦</td><td>這不是累世哦</td><td>上下文</td></tr>
+<tr><td>穿著古獸的那個紅袍</td><td>穿著古時候的那個紅袍</td><td>上下文（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>我可以醒來進得這麼清楚</td><td>我可以醒來記得這麼清楚</td><td>上下文</td></tr>
+<tr><td>葡萄剛剛跟我說</td><td>菩薩剛剛跟我說</td><td>上下文</td></tr>
+<tr><td>姚慈基姆、姚慈基母、姚慈金、姚思金母、瑤池積木</td><td>瑤池金母</td><td>道教神明名，全篇 8 處</td></tr>
+<tr><td>玄潭元帥</td><td>玄壇元帥</td><td>固定詞表</td></tr>
+<tr><td>你是不是病史都沒去補</td><td>你是不是平時都沒去補</td><td>上下文</td></tr>
+<tr><td>當下我就覺得很掛</td><td>當下我就覺得很怪</td><td>上下文</td></tr>
+<tr><td>功過不、宮過部、工作部、功德部</td><td>功過簿</td><td>講者自己說「正式名稱是功過簿」，全篇 6 處</td></tr>
+<tr><td>他勝券名稱是功過簿</td><td>他正式名稱是功過簿</td><td>上下文（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>64年次伊卯年</td><td>64 年次乙卯年</td><td>干支：民國 64 年為乙卯，76 年為丁卯</td></tr>
+<tr><td>雷氏</td><td>累世</td><td>上下文，全篇 4 處</td></tr>
+<tr><td>同意批准要他補孕</td><td>同意批准要他補運</td><td>上下文</td></tr>
+<tr><td>他很快就值到三個聖杯</td><td>他很快就擲到三個聖杯</td><td>固定詞表</td></tr>
+<tr><td>食物召領處</td><td>失物招領處</td><td>上下文，全篇 4 處</td></tr>
+<tr><td>比方胸口那樣</td><td>別在胸口那樣</td><td>上下文：紅紙別在胸前（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>許許如真</td><td>栩栩如真</td><td>成語</td></tr>
+<tr><td>功德曆給我們的親朋好友</td><td>功德迴向給我們的親朋好友</td><td>同段後文作「迴向」（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>資料沒有比正確、我要比哪一個、那都比</td><td>稟正確、稟哪一個、都稟</td><td>上下文：拜拜時稟報資料</td></tr>
+<tr><td>地府那邊會先勾著</td><td>地府那邊會先擱著</td><td>上下文（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>生辰明月日、生辰圓圓日</td><td>生辰年月日</td><td>上下文（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>小官員在寄我們的那些、寄我們的日常</td><td>記我們的那些、記我們的日常</td><td>用字</td></tr>
+<tr><td>契姦</td><td>契子</td><td>台灣民間說法：給神明當契子（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>有緣的神婆</td><td>有緣的神佛</td><td>上下文</td></tr>
+<tr><td>名人、正式人物、明星</td><td>名人、政治人物、明星</td><td>上下文</td></tr>
+<tr><td>加派官員去頂著他</td><td>加派官員去盯著他</td><td>上下文</td></tr>
+<tr><td>那他們是會是誰在列官</td><td>那他們會是誰在列管</td><td>同段前文作「列管」</td></tr>
+<tr><td>黑白無常蟹販將軍</td><td>黑白無常謝范將軍</td><td>神明名：謝將軍、范將軍</td></tr>
+<tr><td>她經過會有戴貴器、福德跟貴器</td><td>帶貴氣、福德跟貴氣</td><td>用字</td></tr>
+<tr><td>解化她們類似的這些關係</td><td>解化她們累世的這些關係</td><td>上下文</td></tr>
+<tr><td>想說我自己不是換庭</td><td>想說我自己不是幻聽</td><td>上下文</td></tr>
+<tr><td>我就去紙碑</td><td>我就去擲杯</td><td>固定詞表</td></tr>
+<tr><td>宮廟問師</td><td>宮廟問事</td><td>固定詞表</td></tr>
+<tr><td>三清道主</td><td>三清道祖</td><td>道教神明名</td></tr>
+<tr><td>玉堂大帝</td><td>玉皇大帝</td><td>道教神明名</td></tr>
+<tr><td>A3 大小的簧紙</td><td>A3 大小的黃紙</td><td>用字</td></tr>
+<tr><td>書文</td><td>疏文</td><td>宮廟文書名稱，全篇 3 處</td></tr>
+<tr><td>姚慈基母秉、秉了之後韶華</td><td>瑤池金母稟、稟了之後燒化</td><td>上下文：黃紙寫完稟報後燒化</td></tr>
+<tr><td>一定要只要發這一事</td><td>一定要只發這一世</td><td>上下文：跟「生生世世」對照</td></tr>
+<tr><td>生生死死</td><td>生生世世</td><td>成語</td></tr>
+<tr><td>真的是僅僅快十年</td><td>真的是將近快十年</td><td>上下文</td></tr>
+<tr><td>你等立這個書文</td><td>你訂立這個疏文</td><td>上下文（<span class="low">把握度較低</span>）</td></tr>
+<tr><td>可能無形動它就開啟了</td><td>可能無形中它就開啟了</td><td>上下文</td></tr>
+<tr><td>下了一個重視</td><td>下了一個重誓</td><td>上下文：接著說「你要利益眾生嗎」</td></tr>
+<tr><td>先開了陰陽眼有幾個</td><td>先開了陰陽眼有幾個原因</td><td>上下文，補足被吃掉的詞</td></tr>
+<tr><td>她只是要跟特地的人遇到</td><td>她只是要跟特定的人遇到</td><td>用字</td></tr>
+</tbody>
+</table>
+<div class="untouched"><h4>未改動的地方</h4>
+<ul class="untouched">
+<li>「等人，他自然而然就知道該怎麼做」：位置上像是「等等」，但不確定。</li>
+<li>「前線就是說，你們其實生活上蠻富足的」：開頭兩字不通。</li>
+<li>「一個桃子別在別真室」：下一句自己接「放在一個紅色紙條上面」，中間三個字聽不出來。</li>
+<li>「他有單獨一個房間在列布」：講的是天界下來的人的功過簿，「列布」對不上。</li>
+<li>「假設我今天我做錯一個措施」「他什麼樣就是別人家多兩倍」：兩句都不太通，但不像同音誤聽。</li>
+<li>「可能他的這些行為影響到別人的意志」：也可能是「一生」，聽不出來。</li>
+<li>「她經過會有帶貴氣」：「經過」對不上。</li>
+<li>「下輩子要去同胎堂了」：講的是願發太大修不完，「同胎堂」查不到。</li>
+<li>「我們可以看看有沒有緣起在需要解化」：也可能是「冤親」，兩者都讀得通，保留原字。</li>
+<li>「好像被原子筆劃的掉了的感覺」：講者原話，保留。</li>
+<li><strong>另外</strong>：同頻道上一集（高我）有一句「垂直的這個類似的冤親債主」，對照這一集的「類似／累世」誤聽，那裡的「類似」很可能也是「累世」，而且「垂直」正好對應那一集講的前世今生軸。那一支我沒有動，等你決定。</li>
+</ul></div>
+</div>
+</details>
+</section>
+<footer>後製於 2026-09-17 12:52</footer>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>
+(function(){
+  if(!window.mermaid) return;
+  var dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();
+</script>
+</body>
+</html>
