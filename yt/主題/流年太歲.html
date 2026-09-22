@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>流年與太歲｜修為</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0 0 32px}
+.lede{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;
+font-size:16px;line-height:1.85;color:var(--ink2);margin:0 0 28px;text-align:justify}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:52px 0 4px;
+padding-top:24px;border-top:1px solid var(--line)}
+h2 .n{color:var(--accent);margin-right:10px}
+.stagelede{color:var(--ink3);font-size:15.5px;margin:0 0 18px}
+p.body{margin:0 0 1.35em;font-size:16.5px;line-height:1.9;text-align:justify}
+p.body .src{font-size:13px;color:var(--ink3);white-space:nowrap}
+p.body .src a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line)}
+p.body .src a:hover{color:var(--accent)}
+.eps{margin:52px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.eps h2{margin-top:0;padding-top:0;border-top:none}
+.eps ul{list-style:none;margin:0;padding:0}
+.eps li{margin:0 0 8px;font-size:15.5px}
+.eps a{color:var(--ink);text-decoration:none}
+.eps a:hover{color:var(--accent)}
+.eps .d{color:var(--ink3);font-size:13.5px;margin-right:10px;font-variant-numeric:tabular-nums}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 12px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.chartnote{color:var(--ink3);font-size:15px;margin:0 0 8px;text-align:justify}
+
+.tsec h2{margin-top:48px}
+.tsec:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style></head><body><span id="mgtopanchor" aria-hidden="true"></span><div class="wrap">
+<nav class="crumb"><a href="../修為.html">修為</a><span>·</span>流年與太歲</nav>
+<h1>流年與太歲</h1>
+<p class="meta">整理自 1 集</p>
+<p class="lede">每年的運勢是怎麼分出來的、為什麼要安太歲，以及看完流年之後自己還能做什麼。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["天干地支&lt;br/&gt;六十年一個甲子"] --&gt; B["六十位輪值的太歲星君"]
+  A --&gt; C["生肖流年&lt;br/&gt;統計出來的，八成準"]
+  B --&gt; D["安太歲&lt;br/&gt;請值年星君特別留意"]
+  D --&gt; E["安一間廟就夠&lt;br/&gt;祈求都會到天庭"]
+  C --&gt; F["知道自己今年要注意什麼"]
+  E --&gt; G["自己留意&lt;br/&gt;加上具體的化解做法"]
+  F --&gt; G
+  C -.-&gt; H["但不代表每個人都這樣&lt;br/&gt;沒安太歲也不見得就不好"]
+</pre></div>
+<p class="chartnote">左邊是曆法怎麼分出年運，右邊是知道年運之後能做什麼，兩條最後收在同一個地方——星君幫的是減少阻礙，真正要注意的還是自己。虛線那條是節目自己給的但書：流年是統計，不是判決。</p>
+<div class="tsec">
+<h2>安太歲是請值年星君多看顧，不是因為太歲不好</h2>
+<p class="body">生肖來自天干地支，六十組搭成一個甲子，對應六十位輪值的太歲星君。安太歲就是請當年輪值的那一位在今年特別留意自己，他會派底下的兵將協助趨吉避凶——安的是這份看顧，不是安一個不好的東西。</p>
+<p class="body">安一間廟就夠，不必到處安。節目說所有祈求都會到天庭真正的值年星君那邊去，沒有說一定要去哪個廟；Alice 的建議是每年都安。</p>
+<p class="body">沒安也不見得會不好。本命年那一年大部分比較不順，但也有人本命年運勢大好，真正該做的是自己留意。</p>
+</div>
+<div class="tsec">
+<h2>今年值年的皮時大將軍，能幫的是什麼</h2>
+<p class="body">癸卯年的值年太歲是皮時大將軍，北魏名將皮豹子的兒子，討伐吐谷渾、平定邊境，太和元年討伐楊文度，晚年因酒被貶、仙逝後才恢復官職。太歲星君也是考出來的：督察司筆試、關聖帝君面試、玉皇大帝批復三關；因為算武將，關聖帝君也算是他的上司。</p>
+<p class="body">他現在能幫的範圍很具體：民事刑事的訴訟糾紛，以及運勢真的很不順。拜法是帶飲料、素的下酒零食跟水果——他愛喝酒，但帶酒去拜不太適合——再擲三個聖杯。</p>
+<p class="body">為什麼範圍這麼窄，節目也給了理由：他底下 396 位幹部、共 47 萬 5200 位兵將，每位兵將每天巡守 16 到 18 小時、月休 8 天，不是輪值年的時候還要幫神佛跑腿、幫地府送檔案。</p>
+</div>
+<div class="tsec">
+<h2>生肖流年是統計，準確度大概八成</h2>
+<p class="body">流年依天干地支、流年與大環境的狀況彙整出來，性質跟星座、命盤一樣是統計資料，所以講者自己先說了：八成準，不代表每個人都一定就是這樣。</p>
+<p class="body">生肖的起源，節目請示菩薩的答案是春秋戰國時期。《詩經·小雅·吉日》的「吉日庚午，既差我馬」已經把地支的午跟生肖的馬對起來；1975 年湖北雲夢縣睡虎地十一號墓出土的秦簡《日書》裡，〈盜者〉篇更直接用生肖描述盜賊的長相。</p>
+</div>
+<div class="tsec">
+<h2>看完流年之後，自己做得到的事</h2>
+<p class="body">多數提醒指向的是生活裡的注意力：農曆九月與十一月的行車與戶外活動安全、農曆七月的水上活動、63 歲屬牛的身體檢查、67 歲屬雞的不探病不參加喪禮、54 歲屬狗的保守行事。這些不必通靈也照做得了。</p>
+<p class="body">化解方式也都是具體動作：請平安符戴在身上、念有緣神佛的經咒、念三遍《九天玄女治心消孽真經》、燒一朵壽生蓮花補運、夫妻吵架先冷靜、配偶有外遇徵兆由另一半去斬爛桃花。</p>
+<p class="body">最像修為的一條在屬猴那一段：負能量強的人運勢會加倍更差，調整心態的人運勢會好轉。講者點名的是憤世嫉俗、愛抱怨，還有存著害人之心——這一條不分生肖也成立。</p>
+</div>
+<div class="eps"><h2>來源各集</h2><ul>
+<li><span class="d">2023-09-02</span><a href="../科技仙姑實驗室/2023-09-02-2023下半年十二生肖運勢注意事項_為什麼要安太歲.html">2023下半年十二生肖運勢注意事項_為什麼要安太歲</a></li>
+</ul></div>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>(function(){
+  if(!window.mermaid) return;
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();</script>
+</body></html>

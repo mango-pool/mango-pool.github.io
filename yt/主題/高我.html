@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>高我｜修為</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0 0 32px}
+.lede{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;
+font-size:16px;line-height:1.85;color:var(--ink2);margin:0 0 28px;text-align:justify}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:52px 0 4px;
+padding-top:24px;border-top:1px solid var(--line)}
+h2 .n{color:var(--accent);margin-right:10px}
+.stagelede{color:var(--ink3);font-size:15.5px;margin:0 0 18px}
+p.body{margin:0 0 1.35em;font-size:16.5px;line-height:1.9;text-align:justify}
+p.body .src{font-size:13px;color:var(--ink3);white-space:nowrap}
+p.body .src a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line)}
+p.body .src a:hover{color:var(--accent)}
+.eps{margin:52px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.eps h2{margin-top:0;padding-top:0;border-top:none}
+.eps ul{list-style:none;margin:0;padding:0}
+.eps li{margin:0 0 8px;font-size:15.5px}
+.eps a{color:var(--ink);text-decoration:none}
+.eps a:hover{color:var(--accent)}
+.eps .d{color:var(--ink3);font-size:13.5px;margin-right:10px;font-variant-numeric:tabular-nums}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 12px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.chartnote{color:var(--ink3);font-size:15px;margin:0 0 8px;text-align:justify}
+
+.tsec h2{margin-top:48px}
+.tsec:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style></head><body><span id="mgtopanchor" aria-hidden="true"></span><div class="wrap">
+<nav class="crumb"><a href="../修為.html">修為</a><span>·</span>高我</nav>
+<h1>高我</h1>
+<p class="meta">整理自 2 集</p>
+<p class="lede">高我、守護靈、指導靈差在哪裡，平行時空怎麼給暗示，以及不必靠別人就能做的連結方法。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["高我&lt;br/&gt;就是更高次元的自己"] --&gt; B["建立最多七個平行時空"]
+  B --&gt; C["在裡面演一段&lt;br/&gt;你這一世缺的功課"]
+  C --&gt; D["用夢境或直覺&lt;br/&gt;把暗示送過來"]
+  D --&gt; E["事後覺得受用&lt;br/&gt;或突然想通卡了幾天的事"]
+  A --&gt; F["想主動連結&lt;br/&gt;就跟自己對話"]
+  F --&gt; E
+</pre></div>
+<p class="chartnote">這一集把三個常被混在一起的東西分開：守護靈是獨立個體，指導靈比較像第三方意見，只有高我就是自己。所以要連結它不必求誰、也不必花錢——跟自己對話就是方法。</p>
+<div class="tsec">
+<h2>先把三個分開</h2>
+<p class="body">高我就是 higher self，跟小我來自同一個靈魂來源，是更高次元、沒有肉體的自己；它知道你的靈魂藍圖跟這一生要學的課題，也看得到你所有的平行宇宙。</p>
+<p class="body">守護靈是獨立的個體，可能是累世在天界的朋友、家屬，或被隨機媒合過來的，會一直跟著你。指導靈則不一定每個人都有、也不固定，可能是神明、有福德的祖先、累世共修的靈、動物或天使精靈這一類。</p>
+<p class="body">分清楚有個實際的好處：守護靈跟指導靈要靠別人幫你查，高我不必——它就是你自己。</p>
+</div>
+<div class="tsec">
+<h2>平行時空補的是這一世缺的那一塊</h2>
+<p class="body">節目裡諮詢「撈到的高我」其實都是高我創造出來的平行時空，所以才會有具體人像。而每一個看起來荒謬的場景，對得上的都是那個人現在缺的功課。</p>
+<p class="body">做事容易想太多、煩躁的船務公司媳婦，平行時空是做事俐落、步調很快的政府官員——Alice 的話是「那你的平行時空有這樣的你，代表你自己其實也可以做到」。很沒自信、講話很小聲的香港女生有兩個：一個有錢太太，練的是氣度跟耐心；一個在河邊練劍讀書、很有氣勢的男子，證明她努力是做得到的。</p>
+<p class="body">反過來也會示警。一位女生夢見走垂直捷徑直達豪宅，結果整個人像自由落體一樣下墜；旁邊排隊慢慢進去的人雖然離豪宅還遠，卻躲過了這一摔。菩薩要她別太糾結錢財——感情好不容易好轉，心靈上的富足可能超過錢財的價值。</p>
+</div>
+<div class="tsec">
+<h2>怎麼分辨是高我的訊息</h2>
+<p class="body">判準在事後，不在當下。夢完自己有沒有覺得受用；突然很放鬆而心中浮起「對了，就是這樣」的強烈靈感；想了三四天想不到方法，突然就想到了、事情就解決了。</p>
+<p class="body">SuSu 自己的例子：Alice 傳菩薩的訊息要她再進修，她當下很抗拒——書都念到碩士了，工作又忙。但她把話放在心上，後來上網找了 EMBA 去聽說明會，在現場有一種很確定的既視感，「老師講什麼不重要」。</p>
+<p class="body">同一件事可以有兩個來源。菩薩的訊息透過 Alice 傳來是一回事，高我又用另一種方式出現是另一回事——指導靈跟高我有時候會暗示你去做同一件事。</p>
+</div>
+<div class="tsec">
+<h2>連結的方法：跟自己對話</h2>
+<p class="body">方法很素樸：把對自己的希望、想問的問題、想提升的地方寫下來，或在心中默唸。隨時都可以，沒有非得幾點不可；真的不會自己問自己，就寫信給自己。</p>
+<p class="body">這跟打坐、冥想不是同一件事。打坐是放空、請神佛給予指導，冥想是觀想一個場景、達到淨化身心靈，兩者都不是跟自己對話。</p>
+<p class="body">高我也會自己出現——有成就感的時候、受到極大心理創傷的時候，或是你開口請它幫忙的時候。這一集最後那句話是：靜下心來去接收一些平常沒注意到的訊息。</p>
+</div>
+<div class="tsec">
+<h2>不能互換，但可以借三成</h2>
+<p class="body">下一集把界線講清楚了：平行時空不能整個對調，能做的是把某一個平行時空的意念或能力轉移過來，而且一般人一次只有三成。生死關卡、或民生社會地位動搖的關卡才可能超過。</p>
+<p class="body">節目順手查了幾位名人的平行時空數量：蔡英文七個、郭台銘八個、拜登十一個、川普十三個，目前撈到的上限是十六個。川普能一次調三個，等於從三分之一變成 90 percent——這段當故事聽就好，重點是下面那條。</p>
+<p class="body">因為不管幾成，前提都是連結得到。連結不到的時候，下面這條路完全在自己手上。</p>
+</div>
+<div class="tsec">
+<h2>借不到就自己加：元辰宮</h2>
+<p class="body">想學投資理財，就在元辰宮的書房加財經的書；要考律師就加法律的書；要登山就加健身器材、登山杖、鞋子衣服；求財就加黃水晶洞、水晶元寶。跟神佛有約的，也可以把神佛請進來點燈。</p>
+<p class="body">但這一節真正的重點是後半句——「三到六個月你沒有做任何行動的話，其實也是白加了」。加東西是把位置留出來，走過去的還是自己。</p>
+</div>
+<div class="tsec">
+<h2>功德送不到，多半是話沒說清楚</h2>
+<p class="body">地府有一個失物招領處，光今年就堆成一座山。裡面不是別人的東西，是送不到的功德——大多不是被寫錯資料，而是拜的時候沒講清楚對象：「迴向給家人好友」沒說是誰，「迴向給祖先」沒說是哪一位。</p>
+<p class="body">生日跟地址講明確的會被直接補進功過簿，含糊的先擱著、之後還是領得到但要花很久。戶籍地跟現居地不一樣就兩個都稟——用 Alice 的話說，「我們也不差講那個 20 秒」。</p>
+<p class="body">改名字也一樣。地府最慢三個月內會自己更新，但神明不會：有人改名二十幾年，天上聖母都不知道，等於白拜。小時候被長輩給神明當契子的，改名要另外去稟報一次。</p>
+</div>
+<div class="tsec">
+<h2>第三隻眼怎麼開</h2>
+<p class="body">先分清楚兩種：陰陽眼看地府、看阿飄，天眼接神佛的訊息，兩者不必同時有。Alice 的陰陽眼是瑤池金母幫她開的，天眼是自己開的——所以「請神明幫忙開眼」這件事，她的回答是不行。</p>
+<p class="body">天眼那條路是這樣走的：在佛堂被問到自己的願行，想清楚寫在 A3 黃紙上，跟玉皇大帝、三清道祖、瑤池金母稟報後燒化，再加上每天念經打坐。訊息練到穩固花了將近十年。</p>
+<p class="body">兩句提醒。一是發願只發這一世，不要發生生世世——發太大這輩子修不完。二是想要這個能力之前先想清楚代價：那是一個「要利益眾生」的重誓，換來的是工作以外的時間幾乎都給了別人。</p>
+</div>
+<div class="eps"><h2>來源各集</h2><ul>
+<li><span class="d">2023-10-01</span><a href="../科技仙姑實驗室/2023-10-01-高我是甚麼_與守護靈跟指導靈有何不同.html">高我是甚麼_與守護靈跟指導靈有何不同</a></li>
+<li><span class="d">2023-10-08</span><a href="../科技仙姑實驗室/2023-10-08-不需要追韓劇的Alice_如何啟動第三隻眼.html">不需要追韓劇的Alice_如何啟動第三隻眼</a></li>
+</ul></div>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>(function(){
+  if(!window.mermaid) return;
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();</script>
+</body></html>

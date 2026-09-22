@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>神明｜修為</title>
+<style>
+:root{--bg:#faf9f7;--card:#fff;--ink:#1a1a19;--ink2:#5f5e5a;--ink3:#8b8a84;--line:#e3e1da;
+--accent:#0f6e56;--accent-bg:#e1f5ee;--aside:#f1efe8}
+@media (prefers-color-scheme:dark){:root{--bg:#191918;--card:#232322;--ink:#eeedea;--ink2:#a9a89f;--ink3:#7c7b74;
+--line:#343432;--accent:#5dcaa5;--accent-bg:#0d3a2e;--aside:#2b2b29}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.95 "Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:56px 24px 96px}
+.crumb{margin:0 0 22px;font-size:14px;color:var(--ink3)}
+.crumb a{color:var(--ink2);text-decoration:none}
+.crumb a:hover{color:var(--accent)}
+.crumb span{margin:0 8px;color:var(--line)}
+h1{font-size:26px;font-weight:500;line-height:1.5;margin:0 0 10px;letter-spacing:-.01em}
+.meta{color:var(--ink2);font-size:14px;margin:0 0 32px}
+.lede{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;
+font-size:16px;line-height:1.85;color:var(--ink2);margin:0 0 28px;text-align:justify}
+h2{font-size:15px;font-weight:500;color:var(--ink2);letter-spacing:.06em;margin:52px 0 4px;
+padding-top:24px;border-top:1px solid var(--line)}
+h2 .n{color:var(--accent);margin-right:10px}
+.stagelede{color:var(--ink3);font-size:15.5px;margin:0 0 18px}
+p.body{margin:0 0 1.35em;font-size:16.5px;line-height:1.9;text-align:justify}
+p.body .src{font-size:13px;color:var(--ink3);white-space:nowrap}
+p.body .src a{color:var(--ink2);text-decoration:none;border-bottom:1px solid var(--line)}
+p.body .src a:hover{color:var(--accent)}
+.eps{margin:52px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.eps h2{margin-top:0;padding-top:0;border-top:none}
+.eps ul{list-style:none;margin:0;padding:0}
+.eps li{margin:0 0 8px;font-size:15.5px}
+.eps a{color:var(--ink);text-decoration:none}
+.eps a:hover{color:var(--accent)}
+.eps .d{color:var(--ink3);font-size:13.5px;margin-right:10px;font-variant-numeric:tabular-nums}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;margin:0 0 12px;overflow-x:auto}
+.chart pre.mermaid{margin:0;font:13px/1.5 ui-monospace,Consolas,monospace;color:var(--ink2);white-space:pre}
+.chart svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.chartnote{color:var(--ink3);font-size:15px;margin:0 0 8px;text-align:justify}
+
+.tsec h2{margin-top:48px}
+.tsec:first-of-type h2{margin-top:0;padding-top:0;border-top:none}
+
+@keyframes mgIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+#mgbar{position:fixed;left:0;right:0;bottom:0;z-index:60;margin:0;padding:11px 56px 11px 16px;
+  background:#fdf7ec;border-top:1px solid rgba(0,0,0,.10);box-shadow:0 -2px 12px rgba(0,0,0,.07);
+  text-align:center;font-family:'Noto Sans TC','Microsoft JhengHei',sans-serif;
+  animation:mgIn .6s cubic-bezier(.22,1.15,.36,1) .12s both}
+#mgbar img{vertical-align:middle;display:inline-block}
+#mgcredit{vertical-align:middle;margin-left:10px;font-size:13px;color:#8a7a5f;letter-spacing:.03em}
+#mgcredit b{color:#a8791c;font-weight:600}
+#mgcredit a{color:#8a7a5f;text-decoration:none}
+#mgtop{position:absolute;right:14px;top:50%;width:34px;height:34px;display:flex;
+  align-items:center;justify-content:center;border:1px solid #e2d5ba;border-radius:50%;
+  background:#fff;color:#a8791c;font-size:15px;text-decoration:none;
+  transform:translateY(-50%) scale(1);opacity:1;
+  transition:transform .42s cubic-bezier(.34,1.56,.64,1),opacity .3s ease,
+    background .25s ease,color .25s ease,border-color .25s ease}
+#mgtop:hover{background:#a8791c;color:#fff;border-color:#a8791c;transform:translateY(-50%) scale(1.15)}
+#mgtop:active{transform:translateY(-50%) scale(.88)}
+#mgbar.mghide #mgtop{opacity:0;pointer-events:none;transform:translateY(-50%) scale(.55)}
+@media(prefers-color-scheme:dark){
+  #mgbar{background:#221f1a;border-top-color:rgba(255,255,255,.10);box-shadow:0 -2px 12px rgba(0,0,0,.35)}
+  #mgcredit{color:#a2947c}
+  #mgcredit b{color:#d9a441}
+  #mgcredit a{color:#a2947c}
+  #mgtop{background:#2e2a22;border-color:#4a4234;color:#d9a441}
+  #mgtop:hover{background:#d9a441;color:#221f1a;border-color:#d9a441}
+}
+@media(prefers-reduced-motion:reduce){#mgbar{animation:none}#mgtop{transition:none}}
+@media print{#mgbar{display:none}}
+</style></head><body><span id="mgtopanchor" aria-hidden="true"></span><div class="wrap">
+<nav class="crumb"><a href="../修為.html">修為</a><span>·</span>神明</nav>
+<h1>神明</h1>
+<p class="meta">整理自 2 集</p>
+<p class="lede">誰是誰、誰管什麼、該找誰求——把天界的職掌跟拜拜的對象對起來。</p>
+<div class="chart"><pre class="mermaid">flowchart TD
+  A["玉皇大帝&lt;br/&gt;管第八、第九重天"] --&gt; C["兩人是姑姪不是夫妻&lt;br/&gt;玉皇是堂哥的兒子"]
+  B["瑤池金母（西王母、王母娘娘）&lt;br/&gt;管天下得道登仙的女子"] --&gt; C
+  D["東華帝君（東王公）&lt;br/&gt;管第一到第七重天"] --&gt; E["修行第一站&lt;br/&gt;先到東方拜東華帝君"]
+  E --&gt; F["第二站&lt;br/&gt;到西方拜瑤池金母"]
+  F --&gt; G["飛升到第九重天"]
+  G --&gt; H["最後拜三清道祖&lt;br/&gt;元始、靈寶、道德天尊"]
+</pre></div>
+<p class="chartnote">上半是職掌怎麼分，下半是成仙要走的路線；每一關都要該位神明同意，不是修滿年份就自動昇上去。括號裡是同一位神明的別稱——節目裡講路線時用的是東王公與西王母，圖上統一成東華帝君與瑤池金母，免得看起來像四位。</p>
+<div class="tsec">
+<h2>王母娘娘、西王母、瑤池金母是同一位</h2>
+<p class="body">聖號「無極瑤池大聖西王金母天尊」把瑤池與西王合在一起。《山海經·大荒西經》說王母住在西邊的山上，那座山是崑崙山，山裡有瑤池，所以又稱瑤池金母。</p>
+<p class="body">她的蟠桃園有四座，不是一座。三千年一熟的吃了成仙得道、體健身輕，六千年一熟的霞舉飛升，九千年一熟的與天地齊壽；第四座是信眾供奉的桃子，她吃不完就拿去種，再回饋給需要的人——所以拜拜拜桃子是有來由的。不過節目也說清楚：上到天界本來就長生不老，吃不吃得到蟠桃不是重點。</p>
+</div>
+<div class="tsec">
+<h2>天界的職掌怎麼分</h2>
+<p class="body">跟玉皇大帝不是夫妻也不是母子，是姑姪——玉皇大帝是瑤池金母堂哥的兒子。位置上像總統與副總統：玉皇大帝管第八、第九重天，東華帝君（又稱東王公、木公、東皇公）管第一到第七重天。</p>
+<p class="body">分工上，天下得道登仙的女子歸西王母管，武將文官的男生歸玉皇大帝管。但這是天界因為職掌太大而做的區分，不是高下；瑤池金母也有乾兒子，而且現在性別平等，女生去找玉皇大帝、男生去找瑤池金母，神明都一視同仁。</p>
+<p class="body">成仙有固定路線，而且層層要同意：先到東方拜東王公（東華帝君），再到西方拜西王母（瑤池金母），飛升第九重天之後還要拜三清道祖——元始天尊、靈寶天尊、道德天尊，也就是老子。每一關都會出考題。</p>
+</div>
+<div class="tsec">
+<h2>怎麼拜、求什麼</h2>
+<p class="body">聖誕是農曆七月十八。三月初三是千秋節，那天開蟠桃盛會、眾仙雲集，等於神明放假，去拜大概隔天才會處理；把三月初三當成生日是誤傳。</p>
+<p class="body">供品方面，她喜歡桃類：水蜜桃、豆沙壽桃、綠豆糕、冰糕都可以，餅乾水果也行，沒有像關聖帝君那樣的禁忌。花最喜歡康乃馨，因為她就像大家的母親一樣；其次是百合、桔梗、蘭花、文心蘭。</p>
+<p class="body">可以求的是人脈與人緣、轉機與轉運，以及臨門一腳——業績談到七成、房子價錢就差一點點，這種「再推一把就成」的事。婚姻與求子則是誤傳：她會去給月老和註生娘娘壓力，屬於主管交辦下屬，等於繞了一圈。</p>
+</div>
+<div class="tsec">
+<h2>她真正要的長生</h2>
+<p class="body">節目最後問她對人間眾生有什麼期許。答案是：希望大家保持清淨心、圓滿人世，在人世間沒有牽掛才能超脫。她所謂的長生並不是吃蟠桃就能長生，而是超脫輪迴——到天界修行就沒有輪迴之苦、沒有生老病死，那才是真正的長生。</p>
+<p class="body">她的經典是《普渡收圓定慧解脫真經》，理念跟《清靜經》的無為而治接近。仙姑說自己修了十二年，到現在也覺得還有很長的路要走。</p>
+</div>
+<div class="tsec">
+<h2>天界是有職掌、有輪班、也有考績的</h2>
+<p class="body">中秋節那一集把天界的日常拆得很細。后羿射下來的不是太陽，是十位互為兄弟的太陽神——他們本來輪流排班，因為誰都不想落人於後才一起出來；被射下的那位現在掌管日出，另外九位成了他的麾下。</p>
+<p class="body">日出日落是發射出去的能量。太陽神住在冰宮，上面有草地、瞭望台跟一座砲台，實際裝填發射的是「到天界修行的人」，倉庫裡的存量夠再用三百年。玉兔搗的藥也不是自己吃的，是佈施給人間、以及阿修羅打仗受傷時用的，現在改由專門的藥理師與藥膳師負責。</p>
+<p class="body">吳剛那一段最像考績。他被玉皇大帝派去伐木，不是因為犯了大錯，而是修行上比較懶、不精進、沒什麼力氣——那棵樹砍不斷會癒合，砍滿五百年，現在刑期結束，改成在月宮的森林巡守。缺什麼就被派去練什麼。</p>
+<p class="body">天界人本來就沒有壽命問題，唯一會真正結束生命的是被阿修羅殺死。所以那包不死藥不是長生藥，是免死金牌——保的是不被貶為凡人。</p>
+</div>
+<div class="eps"><h2>來源各集</h2><ul>
+<li><span class="d">2023-09-02</span><a href="../科技仙姑實驗室/2023-09-02-【長生不老女神】王母娘娘瑤池金母聖誕.html">【長生不老女神】王母娘娘瑤池金母聖誕</a></li>
+<li><span class="d">2023-09-24</span><a href="../科技仙姑實驗室/2023-09-24-嫦娥奔月是真是假月亮上真的有玉兔嗎.html">嫦娥奔月是真是假月亮上真的有玉兔嗎</a></li>
+</ul></div>
+</div>
+<footer id="mgbar">
+  <img src="data:image/png;base64,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" alt="芒果鋪" width="30" height="30">
+  <span id="mgcredit">頁面維護由 <b>【芒果鋪】</b><a class="mgmail" href="#">&#8230;</a></span>
+  <a id="mgtop" href="#mgtopanchor" aria-label="回到頂端" title="回到頂端">&#8593;</a>
+</footer>
+<script>(function(){
+  var u="niesa1491",d=["gmail","com"].join("."),e=u+String.fromCharCode(64)+d;
+  var n=document.querySelectorAll("a.mgmail");
+  for(var i=0;i<n.length;i++){n[i].href="mailto:"+e;n[i].textContent=e;}
+  var bar=document.getElementById("mgbar");
+  if(!bar) return;
+  function pad(){
+    var h=bar.offsetHeight;
+    document.documentElement.style.setProperty("--mgh",h+"px");
+    document.body.style.paddingBottom=(h+16)+"px";
+  }
+  pad(); addEventListener("resize",pad);
+  /* 捲過一屏才浮出回頂鈕；JS 失效時鈕仍是可見可點的 */
+  function toggle(){
+    var y=window.pageYOffset||document.documentElement.scrollTop||0;
+    bar.classList.toggle("mghide",y<240);
+  }
+  toggle(); addEventListener("scroll",toggle,{passive:true});
+})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.1/mermaid.min.js"></script>
+<script>(function(){
+  if(!window.mermaid) return;
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches;
+  mermaid.initialize({startOnLoad:true, theme: dark ? 'dark' : 'neutral', securityLevel:'loose',
+    flowchart:{htmlLabels:true, curve:'basis'}});
+})();</script>
+</body></html>
