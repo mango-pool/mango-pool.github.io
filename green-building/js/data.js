@@ -36,7 +36,7 @@ const PARTS = [
   {
     id: 'floor', name: '地板', en: 'Flooring',
     menu: 'Choose flooring 選擇地板',
-    gate: true, layer: 2,
+    layer: 2,
     materials: [
       { id: 'screed', name: '水泥平舖', en: 'Cement Screed (30mm)',
         img: 'img/floor/screed.webp', tokens: ['DUR+', 'CST+', 'COM-'],
@@ -128,21 +128,21 @@ const PARTS = [
     materials: [
       { id: 'solar', name: '太陽能板', en: 'Solar Panel',
         img: 'img/extra/solar_panel.webp', tokens: ['SUS+', 'CST-', 'OPS+'],
-        co2: null, unit: '', life: null, price: null,   // 試算表未提供（差異報告 §10-2）
+        co2: null, unit: '', life: null, price: null,   // 試算表未提供 → 遊戲端顯示「未提供」
         needs: 'roof',
         desc: '由光伏電池與封裝玻璃、背板組成的模組，可把日照轉換成電力；發電表現受日照、朝向、遮蔭與系統配置影響。' },
       { id: 'skyvent', name: '採光井及通風扇', en: 'Skylight & Ventilation Fan',
         img: 'img/extra/sky_vent.webp', tokens: ['COM+', 'CST-'],
-        co2: null, unit: '', life: null, price: null,   // 試算表未提供（差異報告 §10-2）
+        co2: null, unit: '', life: null, price: null,   // 試算表未提供 → 遊戲端顯示「未提供」
         needs: 'roof',
         desc: '由屋頂採光開口與機械通風設備組成，可引入自然光並排出熱氣、濕氣與室內污濁空氣；需重視防水、氣密與噪音控制。' },
       { id: 'window', name: '落地窗及隔熱貼', en: 'Floor-to-ceiling Window & Insulation Film',
         img: 'img/extra/floor_window.webp', tokens: ['COM+', 'SUS+', 'CST-'],
-        co2: null, unit: '', life: null, price: null,   // 試算表未提供（差異報告 §10-2）
+        co2: null, unit: '', life: null, price: null,   // 試算表未提供 → 遊戲端顯示「未提供」
         desc: '以大面積玻璃擴大採光與視野，隔熱貼可調節部分日射與熱傳；玻璃規格、氣密、遮陽及防撞安全會影響實際表現。' },
       { id: 'microgrid', name: '微型電網系統', en: 'Microgrid System',
         img: 'img/extra/microgrid.webp', tokens: ['SUS+', 'CST-', 'OPS+'],
-        co2: null, unit: '', life: null, price: null,   // 試算表未提供（差異報告 §10-2）
+        co2: null, unit: '', life: null, price: null,   // 試算表未提供 → 遊戲端顯示「未提供」
         desc: '整合在地發電、儲能、用電設備與控制系統的小型能源網路，可協調供需並提升備援能力；需完善保護、通訊與能源管理。' },
     ]
   },

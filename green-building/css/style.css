@@ -3,6 +3,11 @@
   --pro:#5CB85C; --con:#D9534F; --muted:#777;
 }
 *{box-sizing:border-box;}
+
+/* ★ 三個 <main> 靠 hidden 屬性切換，但 .intro 與 .stage 都宣告了 display:flex，
+   類別選擇器的特異性高過瀏覽器對 [hidden] 的預設 display:none ——
+   不補這一條，hidden 的頁面照樣佔版面高度（intro 實測殘留 724px）。 */
+[hidden]{display:none !important;}
 body{margin:0; background:var(--bg); color:var(--ink);
   font-family:"Helvetica Neue",Helvetica,Arial,"Microsoft JhengHei","Noto Sans TC",sans-serif;}
 
@@ -13,6 +18,33 @@ body{margin:0; background:var(--bg); color:var(--ink);
 
 .stage{display:flex; gap:16px; align-items:flex-start;
   padding:16px; max-width:1220px; margin:0 auto;}
+
+/* ── 開場故事（客戶需求 c）────────────────────────────
+   一張置中的卡片，不搶遊戲本身的視覺重量。
+   高度用 min-height 而不是固定值，故事九段在窄螢幕才不會被切掉。 */
+.intro{display:flex; align-items:center; justify-content:center;
+  min-height:calc(100vh - 44px); padding:24px 16px;}
+.intro-card{background:#fff; border:1px solid var(--line); border-radius:14px;
+  max-width:620px; width:100%; padding:34px 38px;
+  box-shadow:0 4px 18px rgba(0,30,60,.08);}
+.intro-eyebrow{margin:0 0 20px; text-align:center; color:var(--brand);
+  font-size:1.45em; font-weight:700; letter-spacing:.06em;}
+.intro-story p{margin:0 0 13px; line-height:1.95; font-size:1.02em; color:#3a4450;}
+.intro-story p:last-child{margin-bottom:0;}
+/* 轉折的那句 —— 整段故事的重心，給它顏色與重量 */
+.intro-shout{color:var(--brand); font-weight:700; font-size:1.1em !important;}
+.intro-actions{display:flex; flex-direction:column; align-items:center; gap:12px;
+  margin-top:26px;}
+.intro-actions .btn-primary{width:62%; margin-top:0;}
+.btn-skip{background:none; border:0; color:var(--muted); font-family:inherit;
+  font-size:.86em; cursor:pointer; padding:4px 10px; text-decoration:underline;}
+.btn-skip:hover{color:var(--brand);}
+
+@media(max-width:560px){
+  .intro-card{padding:24px 20px;}
+  .intro-story p{font-size:.97em; line-height:1.85;}
+  .intro-actions .btn-primary{width:100%;}
+}
 
 /* ── 選單 ───────────────────────────── */
 /* 左欄：六個部位的選單 ＋ 送出設計。
@@ -93,6 +125,14 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .info-name{font-weight:700; color:#13395c; font-size:1.02em; margin-bottom:7px;}
 .tok{display:inline-block; color:#fff; font-weight:700; font-size:.78em;
   padding:2px 9px; border-radius:11px; margin:2px 4px 2px 0;}
+
+/* 碳排係數，排在 Token 右側（客戶需求 a）。
+   刻意用外框＋中性底色，與實心色塊的 Token 區隔開 ——
+   它是參考數值，不是第四種 Token。 */
+.tok-co2{display:inline-block; color:#13395c; font-weight:700; font-size:.78em;
+  padding:1px 9px; border:1px solid #c7d6e4; border-radius:11px;
+  margin:2px 4px 2px 0; background:#f1f6fb;}
+.tok-co2.none{color:#9aa39c; font-weight:400; background:#f5f5f5; border-color:var(--line);}
 .tok.pro{background:var(--pro);} .tok.con{background:var(--con);}
 .muted{color:var(--muted); font-size:.86em;}
 /* 試算表附的材質特性說明 */
@@ -233,7 +273,7 @@ main.result{max-width:1000px; margin:0 auto; padding:18px 16px 60px;}
 .penta-dot{fill:var(--green);}
 .penta-label{font-size:11.5px; fill:#4a5a50;
   font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;}
-.penta-note{margin:4px 0 0; font-size:.76em; color:#9aa39c; text-align:center;}
+/* .penta-note 已隨客戶需求 d 移除 —— 五芒星下方不再有說明文字 */
 
 /* ── 成就：不顯示解鎖條件，排成多欄省版面 ─────── */
 .achv-grid{display:grid; gap:0 14px; grid-template-columns:repeat(auto-fill,minmax(215px,1fr));}

@@ -96,7 +96,10 @@ async function init() {
   buildMenus();
   buildLayers();
   resetSelection();
-  showPage('build');
+  // 開場故事（客戶需求 c）。不記狀態，所以每次載入都從這裡開始；
+  // 「開始改建」與「跳過」做的事一樣，只是給猶豫的人兩個出口。
+  // 「再蓋一棟」回的是 build，不會重播故事。
+  showPage('intro');
 }
 
 // 把所有部位清成「未選擇」
@@ -250,12 +253,15 @@ function select(partId, matId, doRender) {
 }
 
 // ── 頁面切換 ───────────────────────────────────────────
-//   兩個 <main> 切 hidden 即可，不需要路由
+//   三個 <main> 切 hidden 即可，不需要路由
+//   intro 只是純文字，沒有要重繪的東西
 function showPage(which) {
+  document.getElementById('page-intro').hidden  = which !== 'intro';
   document.getElementById('page-build').hidden  = which !== 'build';
   document.getElementById('page-result').hidden = which !== 'result';
   scrollTo(0, 0);
-  if (which === 'build') renderBuild(); else renderResult();
+  if (which === 'build') renderBuild();
+  else if (which === 'result') renderResult();
 }
 
 // 送出設計 → 結算
@@ -362,10 +368,13 @@ function renderInfo() {
   const gate = gatePart();
 
   // 有提醒時優先顯示（紅字）
+  // ★ gate 移除後（客戶要求「預設是草地」），唯一會擋人的只剩 needs ——
+  //   太陽能板與採光井要先有屋頂。提示文字跟著改成講前置條件，
+  //   不要再寫「○○是房子的主體，請先選定」。
   if (warning) {
     nameEl.textContent = '⚠️ ' + warning;
     nameEl.classList.add('warn');
-    box.innerHTML = `<span class="muted">${gate ? gate.name : '承重牆'}是房子的主體，請先選定後再挑其他部位。</span>`;
+    box.innerHTML = '<span class="muted">這項設備要裝在屋頂上，屋頂選定後才能加。</span>';
     return;
   }
   nameEl.classList.remove('warn');
@@ -373,7 +382,9 @@ function renderInfo() {
   const m = lastPicked;
   if (!m) {                       // 開場：還沒點過任何東西
     nameEl.textContent = '—';
-    box.innerHTML = `<span class="muted">從左側選單開始，先選${gate ? gate.name : '承重牆'}</span>`;
+    box.innerHTML = gate
+      ? `<span class="muted">從左側選單開始，先選${gate.name}</span>`
+      : '<span class="muted">從左側選單開始 —— 任何部位都可以先選，沒選地板就是一片草地。</span>';
     return;
   }
   nameEl.textContent =
@@ -389,6 +400,7 @@ function renderInfo() {
     const t = TOKENS[code];
     if (t) box.appendChild(chip(t.text, t.kind));
   }
+  box.appendChild(co2Chip(m));
   if (m.desc) {
     const d = document.createElement('p');
     d.className = 'info-desc';
@@ -401,6 +413,19 @@ function chip(text, kind) {
   const s = document.createElement('span');
   s.className = 'tok ' + kind;
   s.textContent = text;
+  return s;
+}
+
+// 碳排係數，接在 Token 右側（客戶 2026-10 需求 a）
+//   數值由 gen_data.py 讀試算表「17項材料參考數值」頁籤寫進 data.js。
+//   加裝設備系統四項客戶沒給數值（co2 為 null），寫「未提供」而不是留白 ——
+//   留白看起來像程式漏掉，講明白才知道是資料還沒到。
+//   樣式刻意用外框中性色，不要讓它被誤認成第四種 Token。
+function co2Chip(m) {
+  const s = document.createElement('span');
+  const has = m.co2 !== null && m.co2 !== undefined;
+  s.className = 'tok-co2' + (has ? '' : ' none');
+  s.textContent = has ? `碳排 ${m.co2} ${m.unit}` : '碳排 未提供';
   return s;
 }
 
@@ -659,9 +684,10 @@ function renderPenta() {
     ? axisValues()
     : AXES.map(ax => ({ label: ax.label, value: null })));
 
-  document.getElementById('penta-note').textContent = anyPicked
-    ? '環境影響為同類別碳排名次；正式版改查 126 組合表（§5-2）'
-    : '這一棟什麼都沒選 —— 一塊空地';
+  // ★ 客戶 2026-10 需求 d：五芒星下方那行說明整行移除（含「一塊空地」那句）。
+  //   原本寫的是「環境影響為同類別碳排名次；正式版改查 126 組合表（§5-2）」——
+  //   §5-2 是內部差異報告的章節編號，本來就不該出現在對客戶的畫面上。
+  //   這個限制本身還在（環境影響仍是同類別名次），只是不再寫在畫面上。
 }
 
 // ── 成就（只在結算時判定，且不顯示解鎖條件）────────────────
@@ -800,6 +826,10 @@ function initLens() {
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-submit').addEventListener('click', submitDesign);
   document.getElementById('btn-restart').addEventListener('click', restart);
+  // 開場故事的兩個出口（客戶需求 c）
+  const enter = () => showPage('build');
+  document.getElementById('btn-start').addEventListener('click', enter);
+  document.getElementById('btn-skip').addEventListener('click', enter);
   init();
   initLens();
 });
