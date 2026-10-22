@@ -126,13 +126,31 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .tok{display:inline-block; color:#fff; font-weight:700; font-size:.78em;
   padding:2px 9px; border-radius:11px; margin:2px 4px 2px 0;}
 
-/* 碳排係數，排在 Token 右側（客戶需求 a）。
-   刻意用外框＋中性底色，與實心色塊的 Token 區隔開 ——
-   它是參考數值，不是第四種 Token。 */
-.tok-co2{display:inline-block; color:#13395c; font-weight:700; font-size:.78em;
-  padding:1px 9px; border:1px solid #c7d6e4; border-radius:11px;
-  margin:2px 4px 2px 0; background:#f1f6fb;}
-.tok-co2.none{color:#9aa39c; font-weight:400; background:#f5f5f5; border-color:var(--line);}
+/* 註：Token 右側的碳排標籤（.tok-co2）已移除 ——
+   下方的「已選部位的碳排」表格做出來之後就重複了。 */
+
+/* ── 已選部位的碳排一覽 ─────────────────────────────
+   跟資訊框同寬的獨立卡片。數值靠右並用等寬字，
+   位數不同時小數點才會對齊，方便一眼比大小。 */
+.co2-table{width:100%; background:#fff; border:1px solid var(--line);
+  border-radius:10px; padding:11px 15px;}
+.co2-head{font-weight:700; color:#13395c; font-size:.9em; margin-bottom:7px;}
+.co2-row{display:flex; align-items:baseline; gap:10px;
+  padding:4px 0; border-top:1px solid #eef2f6; font-size:.86em;}
+.co2-row:first-of-type{border-top:0;}
+.co2-part{flex:0 0 72px; color:var(--muted);}
+.co2-mat{flex:1; min-width:0; color:#3a4450;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.co2-val{flex:0 0 auto; font-weight:700; color:#13395c; text-align:right;
+  font-family:Consolas,Monaco,monospace;}
+.co2-val small{font-weight:400; color:var(--muted); font-size:.88em;}
+.co2-val.none{font-weight:400; color:#9aa39c; font-family:inherit;}
+.co2-foot{margin:8px 0 0; font-size:.74em; color:var(--muted); line-height:1.5;}
+
+@media(max-width:560px){
+  .co2-part{flex-basis:56px;}
+  .co2-row{font-size:.8em;}
+}
 .tok.pro{background:var(--pro);} .tok.con{background:var(--con);}
 .muted{color:var(--muted); font-size:.86em;}
 /* 試算表附的材質特性說明 */

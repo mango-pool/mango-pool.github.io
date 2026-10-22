@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>老屋改建</title>
-<link rel="stylesheet" href="css/style.css?v=892ff995">
+<link rel="stylesheet" href="css/style.css?v=b8351faa">
 </head>
 <body>
 
@@ -89,6 +89,11 @@
       <div class="info-name" id="info-name">—</div>
       <div class="info-tokens" id="info-tokens"></div>
     </div>
+
+    <!-- 已選部位的碳排一覽。
+         刻意放在 .info 外面：renderInfo() 遇到提醒訊息會整個清空重寫並提前 return，
+         放進去的話，點到「太陽能板但還沒選屋頂」時整張表會跟著消失。 -->
+    <div class="co2-table" id="co2-table" hidden></div>
 
     <!-- 簡版即時評估：只給「還有幾個部位沒選」與「大致好壞」。
          完整的分項標籤與五芒星留到第二頁，才有結算的意義。 -->
@@ -212,6 +217,6 @@
 <script src="js/combos.js?v=fcf3232f"></script>
 <script src="js/achievements.js?v=d617ce08"></script>
 <script src="js/penta.js?v=a51a0de8"></script>
-<script src="js/game.js?v=de5bcb80"></script>
+<script src="js/game.js?v=e1487708"></script>
 </body>
 </html>

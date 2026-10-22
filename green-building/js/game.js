@@ -284,8 +284,44 @@ function renderBuild() {
   renderHouse();
   renderMenuHighlight();
   renderInfo();
+  renderCo2Table();
   renderProgress();
   renderLiveAchievements();
+}
+
+// ── 已選部位的碳排一覽 ──────────────────────────────────
+//   資訊框只講「最近點的那一個」，這裡把目前選到的全部並排，
+//   讓玩家能比較各部位的碳排份量。選幾個就幾列，一個都沒選就整塊收起來。
+//
+//   ⚠️ 絕對不要在這裡加總 —— 單位是 kgCO2e/m2、/m3、/件 三種，
+//      數字相加沒有物理意義。真正的總碳排在第二頁，走 combos.js 的
+//      126 組查表，那才是把各部位換算成同一基準後的結果。
+function renderCo2Table() {
+  const host = document.getElementById('co2-table');
+  if (!host) return;
+
+  const rows = [];
+  for (const part of PARTS) {
+    for (const m of pickedMats(part.id)) {
+      rows.push({ part: part.name, name: m.name, co2: m.co2, unit: m.unit });
+    }
+  }
+
+  host.hidden = rows.length === 0;
+  if (!rows.length) { host.innerHTML = ''; return; }
+
+  host.innerHTML =
+    '<div class="co2-head">已選部位的碳排</div>' +
+    rows.map(r => {
+      const has = r.co2 !== null && r.co2 !== undefined;
+      return '<div class="co2-row">'
+        + `<span class="co2-part">${r.part}</span>`
+        + `<span class="co2-mat">${r.name}</span>`
+        + `<span class="co2-val${has ? '' : ' none'}">`
+        + (has ? `${r.co2} <small>${r.unit}</small>` : '未提供')
+        + '</span></div>';
+    }).join('') +
+    '<p class="co2-foot">單位不同不能相加，加總後的碳足跡在送出設計後的結算頁。</p>';
 }
 
 // 有沒有擬真圖可用？（img/site.webp 存在就切到圖片模式）
@@ -400,7 +436,6 @@ function renderInfo() {
     const t = TOKENS[code];
     if (t) box.appendChild(chip(t.text, t.kind));
   }
-  box.appendChild(co2Chip(m));
   if (m.desc) {
     const d = document.createElement('p');
     d.className = 'info-desc';
@@ -416,18 +451,9 @@ function chip(text, kind) {
   return s;
 }
 
-// 碳排係數，接在 Token 右側（客戶 2026-10 需求 a）
-//   數值由 gen_data.py 讀試算表「17項材料參考數值」頁籤寫進 data.js。
-//   加裝設備系統四項客戶沒給數值（co2 為 null），寫「未提供」而不是留白 ——
-//   留白看起來像程式漏掉，講明白才知道是資料還沒到。
-//   樣式刻意用外框中性色，不要讓它被誤認成第四種 Token。
-function co2Chip(m) {
-  const s = document.createElement('span');
-  const has = m.co2 !== null && m.co2 !== undefined;
-  s.className = 'tok-co2' + (has ? '' : ' none');
-  s.textContent = has ? `碳排 ${m.co2} ${m.unit}` : '碳排 未提供';
-  return s;
-}
+// 註：Token 右側原本還掛一個碳排標籤（需求 a 的第一版），
+//     下方的「已選部位的碳排」表格做出來之後就重複了，已移除。
+//     碳排係數現在只在那張表裡呈現。
 
 // ── 好處／壞處統計（兩頁共用）───────────────────────────
 //   Token 依 data.js 的 TOKENS 分成 pro / con 兩堆，各自用「顯示文字」計數。
