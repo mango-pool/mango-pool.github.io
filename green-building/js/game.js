@@ -33,7 +33,7 @@ const SAVE_KEY = 'greenhouse.achievements';
 //   z-index 與該部位同層，但 DOM 順序排在後面 → 疊在該層之上、下一層之下
 //   （沙發＝地板 z2 之上、隔間牆 z3 之下，被牆擋住是正確的遮蔽關係）
 const DECOR = [
-  { id: 'sofa', part: 'floor', img: 'img/floor/sofa.webp' },
+  { id: 'sofa', part: 'floor', img: 'img/floor/sofa.webp?v=8bb5964d' },
 ];
 
 // 快速查表
@@ -333,7 +333,7 @@ function renderCo2Table() {
     '<p class="co2-foot">單位不同不能相加，加總後的碳足跡在送出設計後的結算頁。</p>';
 }
 
-// 有沒有擬真圖可用？（img/site.webp 存在就切到圖片模式）
+// 有沒有擬真圖可用？（img/site.webp?v=35de698c 存在就切到圖片模式）
 let PHOTO_MODE = false;
 
 function detectPhotoMode() {
@@ -341,7 +341,7 @@ function detectPhotoMode() {
     const probe = new Image();
     probe.onload  = () => resolve(true);
     probe.onerror = () => resolve(false);
-    probe.src = 'img/site.webp';   // 基地背景圖存在 → 進擬真模式
+    probe.src = 'img/site.webp?v=35de698c';   // 基地背景圖存在 → 進擬真模式
   });
 }
 
