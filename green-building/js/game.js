@@ -296,12 +296,21 @@ function renderBuild() {
 //   ⚠️ 絕對不要在這裡加總 —— 單位是 kgCO2e/m2、/m3、/件 三種，
 //      數字相加沒有物理意義。真正的總碳排在第二頁，走 combos.js 的
 //      126 組查表，那才是把各部位換算成同一基準後的結果。
+
+// 不列入碳排表的部位（客戶 2026-10 指示）。
+//   加裝設備系統的四項在試算表裡沒有碳排係數，整排「未提供」佔四列卻
+//   沒有任何資訊價值。這裡用部位 id 明確排除，而不是「沒數值就不列」——
+//   客戶指名的是部位，日後就算補上數值也不該自己冒回來。
+//   真要讓它回到表上，把這個集合清空即可。
+const CO2_TABLE_SKIP = new Set(['extra']);
+
 function renderCo2Table() {
   const host = document.getElementById('co2-table');
   if (!host) return;
 
   const rows = [];
   for (const part of PARTS) {
+    if (CO2_TABLE_SKIP.has(part.id)) continue;
     for (const m of pickedMats(part.id)) {
       rows.push({ part: part.name, name: m.name, co2: m.co2, unit: m.unit });
     }

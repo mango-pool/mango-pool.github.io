@@ -14,7 +14,7 @@ body{margin:0; background:var(--bg); color:var(--ink);
 .topbar{background:var(--brand); color:#fff; padding:10px 20px;
   display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
 .topbar span:first-child{font-weight:700; font-size:1.05em;}
-.topbar .sub{font-size:.82em; opacity:.85;}
+/* 註：副標（.sub）已移除，樣式一併刪除 —— 全站沒有其他地方用它 */
 
 .stage{display:flex; gap:16px; align-items:flex-start;
   padding:16px; max-width:1220px; margin:0 auto;}
